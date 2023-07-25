@@ -25,4 +25,9 @@ public class MemberController {
 	public String header() {
 		return "default/header";
 	}
+	
+	@RequestMapping("index")
+	public String index() {
+		return "member/index";
+	}
 }
