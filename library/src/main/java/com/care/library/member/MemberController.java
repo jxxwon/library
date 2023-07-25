@@ -16,8 +16,13 @@ public class MemberController {
 	@Autowired private MemberService service;
 	@Autowired private HttpSession session;
 	
-	@RequestMapping("index")
-	public String index() {
-		return "default/index";
+	@RequestMapping("main")
+	public String main() {
+		return "default/main";
+	}
+	
+	@RequestMapping("footer")
+	public String footer() {
+		return "default/footer";
 	}
 }
