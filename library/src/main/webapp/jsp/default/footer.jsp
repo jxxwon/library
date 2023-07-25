@@ -1,20 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link href="/css/main.css" rel="stylesheet" type="text/css">
-<style>
-	#wrap {padding:40px 0; background-color:#dddddd; text-align:center;}
-</style>
+<link href="/css/footer.css" rel="stylesheet" type="text/css">
 <div id = "wrap">
 	<div class = "inner">
-		<div align = "left">
+		<div class = "left">
 			<a href = "main"><img src = "/image/LOGO.png"></a>
 		</div>
-		<div>
-			<div>
-				<ul>
-					<li><a href = "#">개인정보처리방침</a></li>
-					<li>ㅣ</li>
-				</ul>
+		<div class = "ri">
+			<ul>
+				<li><a href = "#">개인정보처리방침</a></li>
+				<li>ㅣ</li>
+				<li><a href = "#">이메일수집거부</a></li>
+				<li>ㅣ</li>
+				<li><a href = "#">도서관 찾아오기</a></li>
+				<li>ㅣ</li>
+				<li><a href = "#">도서관 둘러보기</a></li>
+			</ul>
+			<div class = "etc">
+				<p>우 04101 서울특별시 마포구 백범로3 4층 ㅣ TEL.02-714-0008</p>
+				<p>Copyright ⓒ2023 by 하이미디어도서관, All rights reserved.</p>
 			</div>
 		</div>
 	</div>
