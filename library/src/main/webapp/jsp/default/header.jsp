@@ -12,7 +12,7 @@
     <div class="container">
         <div class="header-container">
             <div class="logo">
-                <a href="#"><img src="/image/Hi_library.png"></a>
+                <a href="${context}main"><img src="/image/LOGO.png"></a>
             </div>
             <div class="main_search">
                 <form action="${context}search" method="post">
