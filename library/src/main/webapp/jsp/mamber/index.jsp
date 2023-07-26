@@ -5,15 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>index</title>
+<title>하이미디어도서관</title>
 </head>
 <body>
-	
 	<c:import url="/header"/>
 	<c:import url="/main"/>
-	<div align="center">
-		${msg }
-	</div>
 	<c:import url="/footer"/>
 </body>
 </html>
