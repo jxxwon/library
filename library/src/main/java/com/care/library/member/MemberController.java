@@ -20,4 +20,15 @@ public class MemberController {
 	public String index() {
 		return "default/index";
 	}
+	
+	@RequestMapping("login")
+	public String login() {
+		return "member/login";
+	}
+	
+	@RequestMapping("register")
+	public String register() {
+		return "member/register";
+	}
+	
 }
