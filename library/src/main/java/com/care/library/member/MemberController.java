@@ -29,5 +29,15 @@ public class MemberController {
 	@RequestMapping("subMenu")
 	public String subMenu() {
 		return "default/subMenu";
+
+	@RequestMapping("header")
+	public String header() {
+		return "default/header";
+	}
+	
+	@RequestMapping("index")
+	public String index() {
+		return "member/index";
+
 	}
 }
