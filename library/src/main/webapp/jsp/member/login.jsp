@@ -27,7 +27,7 @@
 					</div>
 					<input type="submit" value="로그인" class="loginButton" onclick="loginCheck()">
 				</form>
-				<input type="checkbox"/>
+				<input type="checkbox" class="saveId"/>
 				<label>아이디 저장</label>
 				<div class="kakao">
 					<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&
