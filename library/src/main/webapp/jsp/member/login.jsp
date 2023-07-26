@@ -3,7 +3,6 @@
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <link href="/css/main.css" rel="stylesheet" type="text/css">
     <link href="/css/login.css" rel="stylesheet" type="text/css">
-    
 <c:import url = "/header"/>
 <div class="loginContainer inner mb_30" >
 	<c:import url = "/subMenuLogin"/>
@@ -26,7 +25,7 @@
 						<label>비밀번호 </label>
 						<input type="password" name="pw" placeholder="비밀번호" id="pw"><br>
 					</div>
-					<input type="button" value="로그인" class="loginButton" onclick="loginCheck()">
+					<input type="submit" value="로그인" class="loginButton" onclick="loginCheck()">
 				</form>
 				<input type="checkbox"/>
 				<label>아이디 저장</label>
