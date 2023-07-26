@@ -36,9 +36,20 @@ public class MemberController {
 		return "default/main";
 	}
 	
-	@PostMapping("login")
+	@GetMapping("login")
 	public String login() {
 		return "member/login";
+	}
+	
+	@PostMapping("loginProc")
+	public String loginProc(String id){
+		MemberDTO result = service.loginProc(id);
+		if(result == null) {
+			return "redirect:login";
+		}
+		session.setAttribute("id", result.getId());
+		session.setAttribute("name", result.getName());
+		return "redirect:main";
 	}
 	
 	@RequestMapping("register")

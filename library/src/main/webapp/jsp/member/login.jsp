@@ -25,7 +25,7 @@
 						<label>비밀번호 </label>
 						<input type="password" name="pw" placeholder="비밀번호" id="pw"><br>
 					</div>
-					<input type="button" value="로그인" class="loginButton" onclick="loginCheck()">
+					<input type="submit" value="로그인" class="loginButton" onclick="loginCheck()">
 				</form>
 				<input type="checkbox"/>
 				<label>아이디 저장</label>
