@@ -24,7 +24,7 @@
             </div>
             <div class="main_nav">
                 <ul>
-                    <li><a href="${context}index">메인</a></li>
+                    <li><a href="${context}main">메인</a></li>
                     <li><a href="${context}login">로그인</a></li>
                     <%-- <li><a href="${context}logout">로그아웃</a></li> --%>
                     <li><a href="${context}libraryForm">마이 라이브러리</a></li>
