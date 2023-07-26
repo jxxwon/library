@@ -20,7 +20,16 @@ public class MemberController {
 	public String main() {
 		return "default/main";
 	}
+	@RequestMapping("footer")
+	public String footer() {
+		return "default/footer";
+	}
 	
+	@RequestMapping("subMenu")
+	public String subMenu() {
+		return "default/subMenu";
+	}
+
 	@RequestMapping("header")
 	public String header() {
 		return "default/header";
@@ -30,4 +39,15 @@ public class MemberController {
 	public String index() {
 		return "member/index";
 	}
+	
+	@RequestMapping("login")
+	public String login() {
+		return "member/login";
+	}
+	
+	@RequestMapping("register")
+	public String register() {
+		return "member/register";
+	}
+	
 }
