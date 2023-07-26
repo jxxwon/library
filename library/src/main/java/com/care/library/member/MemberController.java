@@ -26,7 +26,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("subMenuLogin")
-	public String subMenuLogin() {
+	public String subMenu() {
 		return "default/subMenuLogin";
 	}
 
