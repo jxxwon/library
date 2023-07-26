@@ -15,7 +15,9 @@ color:white; border-color: transparent; font-size: 17px; cursor: pointer;}
 .saveId{cursor: pointer;}
 
 .kakao{width: 100%; height:55px; display : flex; justify-content: center;align-items: center;
-background: #FEE500; border-radius: 5px;margin-top: 10px; cursor: pointer;}
+background: #FEE500; 
+border-radius: 12px; -moz-border-radius:12px;
+margin-top: 10px; cursor: pointer;}
 
 .bottomButtonBox{display:flex;justify-content: space-between;}
 .registerButton, .findButton{

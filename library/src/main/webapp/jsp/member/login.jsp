@@ -4,6 +4,10 @@
     <link href="/css/main.css" rel="stylesheet" type="text/css">
     <link href="/css/login.css" rel="stylesheet" type="text/css">
 <c:import url = "/header"/>
+<% 
+String RESTAPIKEY = "3f70e9cb27d96ef5a414516587c2cb5c";
+String redirectURI = "http://localhost/kakaoLogin";
+%>
 <div class="loginContainer inner mb_30" >
 	<c:import url = "/subMenuLogin"/>
 	<div class="loginContent">
@@ -31,8 +35,8 @@
 				<label>아이디 저장</label>
 				<div class="kakao">
 					<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&
-					client_id=4e44c398b323055c3d41ede548ed454d&
-					redirect_uri=http://localhost/kakaoLogin">
+					client_id=<%=RESTAPIKEY%>&
+					redirect_uri=<%=redirectURI%>">
 						<img class="kakaoLoginBox" src = "https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" />
 					</a>
 				</div>

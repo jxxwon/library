@@ -57,4 +57,18 @@ public class MemberController {
 		return "member/register";
 	}
 	
+	@Autowired private KakaoService kakao;
+	@GetMapping("kakaoLogin")
+	public String kakaoLogin(String code) {
+		System.out.println("code : " + code);
+		kakao.getAccessToken(code);
+		kakao.getUserInfo();
+		return "redirect:login";
+	}
+	
+	@GetMapping("kakaoLogout")
+	public String kakaoLogout() {
+		kakao.unLink();
+		return "redirect:index";
+	}
 }
