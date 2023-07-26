@@ -28,7 +28,12 @@
                     <li><a href="${context}login">로그인</a></li>
                     <%-- <li><a href="${context}logout">로그아웃</a></li> --%>
                     <li><a href="${context}libraryForm">마이 라이브러리</a></li>
-                    <li><a href="${context}icon">아이콘</a></li>
+                    <li>
+                    	<a href="#"><img src="/image/blog.jpg"></a>
+                    	<a href="#"><img src="/image/facebook.jpg"></a>
+                    	<a href="#"><img src="/image/twitter.jpg"></a>
+                    	<a href="#"><img src="/image/youtube.jpg"></a>
+                    </li>
                 </ul>
             </div>
         </div>
