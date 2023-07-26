@@ -21,13 +21,8 @@ public class MemberController {
 		return "default/main";
 	}
 	
-	@RequestMapping("footer")
-	public String footer() {
-		return "default/footer";
-	}
-	
-	@RequestMapping("subMenu")
-	public String subMenu() {
-		return "default/subMenu";
+	@RequestMapping("header")
+	public String header() {
+		return "default/header";
 	}
 }

@@ -8,8 +8,6 @@
 <title>하이미디어 도서관</title>
 </head>
 <body>
-
+<c:import url = "/header"/>
 <c:import url = "/subMenu"/>
 <c:import url="/footer"/>
-</body>
-</html>
