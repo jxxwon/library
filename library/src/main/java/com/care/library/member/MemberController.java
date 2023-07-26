@@ -16,31 +16,27 @@ public class MemberController {
 	@Autowired private MemberService service;
 	@Autowired private HttpSession session;
 	
-	@RequestMapping("main")
-	public String main() {
-		return "default/main";
+	@RequestMapping("header")
+	public String header() {
+		return "default/header";
 	}
-	@RequestMapping("footer")
-	public String footer() {
-		return "default/footer";
-	}
-	
+
 	@RequestMapping("subMenuLogin")
 	public String subMenu() {
 		return "default/subMenuLogin";
 	}
 
-	@RequestMapping("header")
-	public String header() {
-		return "default/header";
+	@RequestMapping("footer")
+	public String footer() {
+		return "default/footer";
+	}
+
+	@RequestMapping("main")
+	public String main() {
+		return "default/main";
 	}
 	
-	@RequestMapping("index")
-	public String index() {
-		return "member/index";
-	}
-	
-	@RequestMapping("login")
+	@PostMapping("login")
 	public String login() {
 		return "member/login";
 	}
