@@ -16,33 +16,40 @@ public class MemberController {
 	@Autowired private MemberService service;
 	@Autowired private HttpSession session;
 	
-	@RequestMapping("main")
-	public String main() {
-		return "default/main";
-	}
-	@RequestMapping("footer")
-	public String footer() {
-		return "default/footer";
-	}
-	
-	@RequestMapping("subMenuLogin")
-	public String subMenuLogin() {
-		return "default/subMenuLogin";
-	}
-
 	@RequestMapping("header")
 	public String header() {
 		return "default/header";
 	}
-	
-	@RequestMapping("index")
-	public String index() {
-		return "member/index";
+
+	@RequestMapping("subMenuLogin")
+	public String subMenu() {
+		return "default/subMenuLogin";
+	}
+
+	@RequestMapping("footer")
+	public String footer() {
+		return "default/footer";
+	}
+
+	@RequestMapping("main")
+	public String main() {
+		return "default/main";
 	}
 	
-	@RequestMapping("login")
+	@GetMapping("login")
 	public String login() {
 		return "member/login";
+	}
+	
+	@PostMapping("loginProc")
+	public String loginProc(String id){
+		MemberDTO result = service.loginProc(id);
+		if(result == null) {
+			return "redirect:login";
+		}
+		session.setAttribute("id", result.getId());
+		session.setAttribute("name", result.getName());
+		return "redirect:main";
 	}
 	
 	@RequestMapping("register")
