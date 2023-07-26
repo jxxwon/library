@@ -9,7 +9,7 @@
 </head>
 <body>
 <c:import url = "/header"/>
-<c:import url = "/subMenu"/>
+<c:import url = "/subMenuLogin"/>
 <c:import url="/footer"/>
 </body>
 </html>
