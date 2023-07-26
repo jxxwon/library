@@ -5,7 +5,8 @@
 <head>
     <title>header</title>
     <link href="/css/header.css" rel="stylesheet" type="text/css">
-    <script src="dbLibray.js"></script>
+    <c:url var="context" value="/"/>
+   <!--  <script src="dbLibray.js"></script> -->
 </head>
 <body>
     <div class="container">
@@ -32,16 +33,16 @@
             </div>
         </div>
     </div>
-    <c:url var="context" value="/"/>
+    
     <div class="header_nav">
         <hr>
         <ul>
             <li><a href="${context}index">도서관 소개</a></li>
-            <li><a href="${context}a">추천자료</a></li>
-            <li><a href="${context}b">자료검색</a></li>
-            <li><a href="${context}c">좌석예약</a></li>
-            <li><a href="${context}d">문화행사</a></li>
-            <li><a href="${context}f">정보광장</a></li>
+            <li><a href="${context}recom">추천자료</a></li>
+            <li><a href="${context}datasearch">자료검색</a></li>
+            <li><a href="${context}reservation">좌석예약</a></li>
+            <li><a href="${context}cultural">문화행사</a></li>
+            <li><a href="${context}info">정보광장</a></li>
         </ul>
         <hr>
     </div>
