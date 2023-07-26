@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <link href="/css/main.css" rel="stylesheet" type="text/css">
 <link href="/css/footer.css" rel="stylesheet" type="text/css">
-<div id = "wrap">
+<div id = "wrap" class = "footer">
 	<div class = "inner">
 		<div class = "left">
 			<a href = "main"><img src = "/image/LOGO.png"></a>
