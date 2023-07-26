@@ -3,10 +3,9 @@
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <link href="/css/main.css" rel="stylesheet" type="text/css">
     <link href="/css/login.css" rel="stylesheet" type="text/css">
-    
 <c:import url = "/header"/>
 <div class="loginContainer inner mb_30" >
-	<c:import url = "/subMenu"/>
+	<c:import url = "/subMenuLogin"/>
 	<div class="loginContent">
 		<h1>로그인</h1>
 		<div class="mb_30 mt_20">
