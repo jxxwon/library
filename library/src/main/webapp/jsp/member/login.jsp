@@ -6,7 +6,7 @@
     
 <c:import url = "/header"/>
 <div class="loginContainer inner mb_30" >
-	<c:import url = "/subMenu"/>
+	<c:import url = "/subMenuLogin"/>
 	<div class="loginContent">
 		<h1>로그인</h1>
 		<div class="mb_30 mt_20">
