@@ -12,6 +12,22 @@
 	<select id="loginProc" resultMap="memberDto">
 		SELECT * FROM member WHERE id = #{id}
 	</select>
+	
+	<select id="kakaoIDCheck" resultMap="memberDto">
+		SELECT * FROM member WHERE kakaoID = #{id}
+	</select>
+	
+	<select id="emailCheck" resultMap="memberDto">
+		SELECT * FROM member WHERE email = #{email}
+	</select>
+	
+	<insert id="kakaoRegisterProc" parameterType="com.care.library.member.MemberDTO">
+		INSERT INTO member (id, pw, name, birth, address, mobile, status, kakaoid)
+		VALUES (#{id}, #{pw}, #{name}, #{birth}, #{address}, #{mobile}, #{status}, #{kakaoid})
+	</insert>
+	
+	
+	
 
 </mapper>
 
