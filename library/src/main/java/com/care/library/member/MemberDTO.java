@@ -11,6 +11,7 @@ public class MemberDTO {
 	private String proName;
 	private String regDate;
 	private String status;
+	private String kakaoid;
 	
 	public String getId() {
 		return id;
@@ -71,5 +72,11 @@ public class MemberDTO {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getKakaoid() {
+		return kakaoid;
+	}
+	public void setKakaoid(String kakaoid) {
+		this.kakaoid = kakaoid;
 	}
 }

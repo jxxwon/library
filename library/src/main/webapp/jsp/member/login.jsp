@@ -2,15 +2,19 @@
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <link href="/css/main.css" rel="stylesheet" type="text/css">
-    <link href="/css/login.css" rel="stylesheet" type="text/css">
+    <link href="/css/container.css" rel="stylesheet" type="text/css">
 <c:import url = "/header"/>
+<% 
+String RESTAPIKEY = "3f70e9cb27d96ef5a414516587c2cb5c";
+String redirectURI = "http://localhost/kakaoLogin";
+%>
 <div class="loginContainer inner mb_30" >
 	<c:import url = "/subMenuLogin"/>
 	<div class="loginContent">
 		<h1>로그인</h1>
 		<div class="mb_30 mt_20">
-			<a href="/index">HOME</a> > 
-			<a href="/register">회원가입</a> >
+			<a href="/main">HOME</a> > 
+			<a href="/register">회원정보</a> >
 			<a class="checked" href="/login">로그인</a>
 		</div>
 		<div class="contentBox">
@@ -27,12 +31,12 @@
 					</div>
 					<input type="submit" value="로그인" class="loginButton" onclick="loginCheck()">
 				</form>
-				<input type="checkbox"/>
+				<input type="checkbox" class="saveId"/>
 				<label>아이디 저장</label>
 				<div class="kakao">
 					<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&
-					client_id=4e44c398b323055c3d41ede548ed454d&
-					redirect_uri=http://localhost/kakaoLogin">
+					client_id=<%=RESTAPIKEY%>&
+					redirect_uri=<%=redirectURI%>">
 						<img class="kakaoLoginBox" src = "https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" />
 					</a>
 				</div>

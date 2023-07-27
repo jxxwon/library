@@ -3,7 +3,7 @@
 <link href="/css/subMenu.css" rel="stylesheet" type="text/css">
 
 <div class = "subMenu">
-	<h2>회원가입</h2>
+	<h2>회원정보</h2>
 	<ul>
 		<li ><a href="/login" class="button" id="login">로그인</a></li>
 		<li><a href="#" class="button">아이디/패스워드 찾기</a></li>
