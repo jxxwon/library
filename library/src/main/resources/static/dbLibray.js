@@ -1,3 +1,22 @@
+function agreementCheck(){
+    var chk1=document.form.chk1.checked;
+    var chk2=document.form.chk2.checked;
+    var chk3=document.form.chk3.checked;
+	if(!chk1)
+	{
+		alert("약관에 동의 해주세요");
+	}
+	if(!chk2)
+	{
+		alert("약관에 동의 해주세요");
+	}
+	if(!chk3)
+	{
+		alert("약관에 동의 해주세요");
+	}
+	alert('약관 동의 체크 완료');
+}
+
 function allCheck(){
 	let id = document.getElementById('id');
 	let pw = document.getElementById('pw');
