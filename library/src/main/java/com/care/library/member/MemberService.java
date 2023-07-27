@@ -11,6 +11,8 @@ public class MemberService {
 	public MemberDTO loginProc(String id) {
 		return mapper.loginProc(id);
 	}
+	
+
 
 }
 

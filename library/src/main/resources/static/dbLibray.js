@@ -2,7 +2,7 @@ function allCheck(){
 	let id = document.getElementById('id');
 	let pw = document.getElementById('pw');
 	confirm = document.getElementById('confirm');
-	userName = document.getElementById('userName');
+	userName = document.getElementById('name');
 	
 	if(id.value == ""){
 		alert('아이디는 필수 항목입니다.');

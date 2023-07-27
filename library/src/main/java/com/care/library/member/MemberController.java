@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class MemberController {
 	@Autowired private MemberService service;
+	@Autowired private KakaoService kakaoService;
 	@Autowired private HttpSession session;
 	
 	@RequestMapping("header")
@@ -57,18 +58,36 @@ public class MemberController {
 		return "member/register";
 	}
 	
+	//카카오 로그인
 	@Autowired private KakaoService kakao;
+	
+	@GetMapping("kakaoRegister")
+	public String kakaoRegister() {
+		return "member/kakaoRegister";
+	}
+	
+	@PostMapping("kakaoRegisterProc")
+	public String kakaoRegisterProc(MemberDTO member, String confirm) {
+		String result = kakaoService.kakaoRegisterProc(member, confirm);
+		if(result.equals("회원 등록 완료")) {
+			return "redirect:main";
+		}
+		return "member/kakaoRegister";
+	}
+	
 	@GetMapping("kakaoLogin")
 	public String kakaoLogin(String code) {
 		System.out.println("code : " + code);
 		kakao.getAccessToken(code);
-		kakao.getUserInfo();
-		return "redirect:login";
+		String res = kakao.getUserInfo();
+		if(res.equals("카카오 연동 회원가입"))
+			return "redirect:kakaoRegister";
+		return "redirect:main";
 	}
 	
 	@GetMapping("kakaoLogout")
 	public String kakaoLogout() {
 		kakao.unLink();
-		return "redirect:index";
+		return "redirect:main";
 	}
 }

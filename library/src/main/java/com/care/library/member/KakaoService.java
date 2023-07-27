@@ -8,11 +8,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.servlet.http.HttpSession;
 
 @Service
 public class KakaoService {
@@ -20,7 +23,10 @@ public class KakaoService {
 	private String scope;
 	private String RESTAPIKEY = "3f70e9cb27d96ef5a414516587c2cb5c";
 	private String redirectURI = "http://localhost/kakaoLogin";
-
+	
+	@Autowired MemberMapper memberMapper;
+	@Autowired private HttpSession session;
+	
 	public void getAccessToken(String code) {
 		/*
 		 * # 액세스 토큰 가져오기 #
@@ -56,7 +62,7 @@ public class KakaoService {
 			map = om.readValue(isr, new TypeReference<Map<String, String>>() {
 			});
 			accessToken = map.get("access_token");
-			scope = map.get("scope");
+			scope = map.get("scope"); // client의 정보 공개 선택 사항.
 			
 			//setNeedsAgreement();
 //			System.out.println("access_token : " + map.get("access_token"));
@@ -106,7 +112,7 @@ public class KakaoService {
 		}
 	}
 
-	public void getUserInfo() {
+	public String getUserInfo() {
 		/*
 		 * 사용자 정보 가져오기
 		 * https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#req-user-info
@@ -123,31 +129,75 @@ public class KakaoService {
 			conn.setRequestProperty("Authorization", "Bearer " + accessToken); // Authorization: Bearer ${ACCESS_TOKEN}
 
 			int responseCode = conn.getResponseCode(); // 결과 코드가 200이라면 성공
-//			System.out.println("responseCode : " + responseCode);
+			System.out.println("responseCode : " + responseCode);
 
 			ObjectMapper om = new ObjectMapper();
 			JsonNode jsonTree = om.readTree(conn.getInputStream());
 
-			System.out.println("jsonTree : " + jsonTree);
-			System.out.println("kakao_account : " + jsonTree.get("kakao_account"));
-
 			JsonNode kakaoAccount = jsonTree.get("kakao_account");
-			System.out.println("profile : " + kakaoAccount.get("profile"));
-			System.out.println("email : " + kakaoAccount.get("email"));
-			System.out.println("age_range : " + kakaoAccount.get("age_range"));
-			System.out.println("gender : " + kakaoAccount.get("gender"));
-
-			System.out.println("profile : " + kakaoAccount.get("profile"));
-			System.out.println("nickname : " + kakaoAccount.get("profile").get("nickname"));
-			System.out.println(kakaoAccount.get("profile").get("nickname").textValue());
-
-			/*
-			 {"id":2916902118,"connected_at":"2023-07-18T02:28:09Z","properties":{"nickname":"김연수","profile_image":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg","thumbnail_image":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg"},"kakao_account":{"profile_nickname_needs_agreement":false,"profile_image_needs_agreement":false,"profile":{"nickname":"김연수","thumbnail_image_url":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg","profile_image_url":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg","is_default_image":true},"has_email":true,"email_needs_agreement":false,"is_email_valid":true,"is_email_verified":true,"email":"kyes0222@gmail.com","has_age_range":true,"age_range_needs_agreement":false,"age_range":"30~39","has_gender":true,"gender_needs_agreement":false,"gender":"male"}}
-			 {"id":2916902118,"connected_at":"2023-07-18T02:28:09Z","properties":{"nickname":"김연수","profile_image":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg","thumbnail_image":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg"},"kakao_account":{"profile_nickname_needs_agreement":false,"profile_image_needs_agreement":false,"profile":{"nickname":"김연수","thumbnail_image_url":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg","profile_image_url":"http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg","is_default_image":true},"has_email":true,"email_needs_agreement":false,"is_email_valid":true,"is_email_verified":true,"email":"kyes0222@gmail.com","has_age_range":true,"age_range_needs_agreement":false,"age_range":"30~39","has_gender":true,"gender_needs_agreement":false,"gender":"male"}}
-			 */
+			
+			String kakaoEmail = kakaoAccount.get("email").toString();
+			//System.out.println("email : " + kakaoAccount.get("email"));
+			
+			//카카오 회원가입시 정보를 추가 입력하도록하여 일반 도서관 회원으로 가입시킬 예정.
+			//String kakaoID = email.replace("\"", "").split("@")[0];
+			String kakaoID = jsonTree.get("id").toString();
+			System.out.println("kakaoID : " + kakaoID);
+			
+			// 카카오 회원 연동 여부 확인하기.(카카오에서 주는 kakaoID로 중복 확인)
+				MemberDTO kakaoIDCheck = memberMapper.kakaoIDCheck(kakaoID);
+				// 카카오 회원 X (= 카카오 회원가입 X), 
+				if(kakaoIDCheck == null) {
+					// 일반 회원 여부 확인(이메일 중복 여부로 확인 - 명확한 것은 아님. 이메일 수정 가능하니까)
+					MemberDTO emailCheck = memberMapper.emailCheck(kakaoEmail);
+					
+					// 이메일 중복 X => 회원가입 진행(회원 db에 넣기)
+					if(emailCheck == null) {
+						//카카오 연동 회원가입 페이지로 이동.(이름, 생년월일, 주소, 전화번호)
+						session.setAttribute("kakaoID", kakaoID);
+						session.setAttribute("kakaoEmail", kakaoEmail);
+						return "카카오 연동 회원가입";
+					}
+					// 이메일 중복 O => 
+					else {
+						// 이미 '하이미디어 라이브러리'회원입니다. 연동할까요? 물어보기.
+						// 연동 동의 O => 연동 진행
+						// 연동 페이지로 넘어가게함 => 도서관 아이디, 비밀번호 받아서 로그인 하듯이
+						
+						// 연동 동의 X => 
+						// 기존 db에 있는 아이디로 로그인하기 버튼 누르게하기.
+						return "기존 아이디로 로그인하기";
+					}
+				}
+				// 카카오 회원 O => 로그인 진행
+				else {
+					memberMapper.loginProc(kakaoID);
+					System.out.println("카카오 로그인 성공");
+					return "로그인 성공";
+				}
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("4");
+		return null;
+	}
+	
+	public String kakaoRegisterProc(MemberDTO member, String confirm) {
+		
+		MemberDTO result = memberMapper.loginProc(member.getId());
+		if(result == null) {
+			String kakaoID = (String)session.getAttribute("kakaoID");
+			String kakaoEmail = (String)session.getAttribute("kakaoEmail");
+			
+			member.setEmail(kakaoEmail);
+			member.setKakaoid(kakaoID);
+			member.setStatus("D");
+			memberMapper.kakaoRegisterProc(member);
+			return "회원 등록 완료";
+		}
+		
+		return "이미 가입된 아이디 입니다.";
 	}
 	
 	public void unLink() {
