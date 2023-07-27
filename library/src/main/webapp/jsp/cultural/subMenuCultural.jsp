@@ -3,12 +3,12 @@
 <link href="/css/subMenu.css" rel="stylesheet" type="text/css">
 <c:url var="context" value="/"/>
 
-<div class = "subMenuCultural">
+<div class = "subMenu">
 	<h2>문화행사</h2>
 	<ul>
-		<li ><a href="/#" class="button" id="cultural">문화 행사 안내</a></li>
+		<li><a href="${context}cultural" class="button" id="cultural">문화 행사 안내</a></li>
 		<li><a href="#" class="button">문화 행사 신청</a></li>
-		<li><a href="/#" class="button" >문화 행사 결과</a></li>
+		<li><a href="#" class="button" >문화 행사 결과</a></li>
 		<li><a href="#" class="button">한 주제 함께 읽기</a></li>
 	</ul>
 </div>
