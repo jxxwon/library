@@ -16,6 +16,7 @@
 input[type="button"] {width:399.85px; height:45px; border:1px solid #ddd; cursor:pointer;}
 </style>
 
+
 <div class="RegisterContainer inner mb_30" >
 	<c:import url = "/subMenuLogin"/>
 	<div class="loginContent">
@@ -35,14 +36,17 @@ input[type="button"] {width:399.85px; height:45px; border:1px solid #ddd; cursor
 			</div>
 		</div>
 		<div class="auth">
-			<div class="auth_email">
-				<h2>이메일 인증</h2>
-				<p><img src = "/image/email.png"></p>
-				<input type = "text" placeholder = "이메일을 입력해주세요." id = "authEmail" onchange="emailCheck()"><br><br>
-				<label id = "label"></label><br><br>
-				<input type = "button" value = "인증 메일 발송" name = "sendEmail" onclick = "sendEmail()"><br>
-				<input type = "text" placeholder = "인증번호를 입력해주세요." id = "authNum">
-			</div>
+			<form>
+				<div class="auth_email">
+					<h2>이메일 인증</h2>
+					<p><img src = "/image/email.png"></p>
+						<input type = "text" placeholder = "이메일을 입력해주세요." id = "authEmail"><br><br>
+						<label id = "label"></label><br><br>
+						<input type = "button" value = "인증 메일 발송" name = "sendEmail" onclick = "sendEmail()"><br><br><br>
+						<input type = "text" placeholder = "인증번호를 입력해주세요." id = "authNum" style = "display:none"><br><br>
+						<input type = "button" value = "이메일 인증 완료" id = "confirmEmail" style = "display:none"><br>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

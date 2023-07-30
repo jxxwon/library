@@ -1,33 +1,20 @@
-/*회원가입 시 동의*/
 function agreementCheck(){
     var chk1=document.form.chk1.checked;
     var chk2=document.form.chk2.checked;
     var chk3=document.form.chk3.checked;
 	if(!chk1)
 	{
-		alert("이용약관에 동의 해주세요");
-	} else if(!chk2)
-	{
-		alert("개인정보 수집ㆍ이용안내에 동의 해주세요");
-	}else if(!chk3)
-	{
-		alert("제3자 정보 제공에 대한 안내에 동의 해주세요");
-	} else {
-		location.href = "/register2";
+		alert("약관에 동의 해주세요");
 	}
-}
-
-/* 회원가입 - 이메일 인증 */
-function sendEmail(){
-	var email = document.getElementById('email');
-	label = document.getElementById('label');
-	if(email.value == ""){
-		label.innerHTML = '이메일을 입력해주세요.';
-	} else {
-		label.innerHTML = '인증 메일이 발송되었습니다.';
-		document.getElementById('authNum').style.display = 'block';
-		document.getElementById('confirmEmail').style.display = 'block';
+	if(!chk2)
+	{
+		alert("약관에 동의 해주세요");
 	}
+	if(!chk3)
+	{
+		alert("약관에 동의 해주세요");
+	}
+	alert('약관 동의 체크 완료');
 }
 
 function allCheck(){
