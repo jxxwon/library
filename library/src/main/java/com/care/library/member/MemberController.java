@@ -53,6 +53,12 @@ public class MemberController {
 		return "redirect:main";
 	}
 	
+	@RequestMapping("logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:main";
+	}
+	
 	@RequestMapping("register")
 	public String register() {
 		return "member/register";

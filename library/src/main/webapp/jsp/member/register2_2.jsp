@@ -4,6 +4,7 @@
 
 <link href="/css/main.css" rel="stylesheet" type="text/css">
 <link href="/css/container.css" rel="stylesheet" type="text/css">
+<script src = "/dbLibrary.js"/>
 
 <title>하이디미어 도서관 - 회원가입</title>
 <c:import url = "/header"/>
