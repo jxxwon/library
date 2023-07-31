@@ -64,7 +64,7 @@
 				<input type="text" name="mobile" id="mobile" placeholder="전화번호" >
 				<input type="button" id="authBtn" onclick="sendAuth()" value="인증번호 받기"><br>
 				
-				<input type="checkbox" onclick="SMS()" value="SMS수신">
+				<input type="checkbox" class="SMSBtn" onclick="SMS()" value="SMS수신">
 				<label>SMS 수신</label><br>
 				<span>* 도서의 반납예정일, 예약도서, 일반열람실 대기자 호출, 행사 등 안내</span><br>
 				<input type="button" class="registerBtn" value="회원가입" onclick="allCheck()">
