@@ -1,4 +1,4 @@
-
+/*로그인 화면*/
 .loginContainer{display: flex;}
 h1{margin-bottom:50px;}
 .checked{font-weight: 600;}
@@ -10,7 +10,7 @@ h1{margin-bottom:50px;}
 .loginImgBox  > img { width:100%; padding-top: 35px; padding-left: 10px;}
 label{display:inline-block; width:80px; margin-bottom:15px;}
 #id, #pw{width:230px; }
-form{display: flex;}
+.loginForm{display: flex;}
 .loginButton{background-color: skyblue; width:80px; 
 color:white; border-color: transparent; font-size: 17px;}
 
@@ -155,3 +155,23 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 .auth_email > div{width:188px; height:40px; line-height:40px; border:1px solid #bbb; position:absolute; left:27%;}
 .auth_email label{width:100%;}
 .auth_email input[type="text"]{width:399.85px;}
+
+/*회원가입 - 정보입력*/
+.RIContainer{
+	width: 700px; 
+	margin:50px auto; padding: 50px 100px;
+	background-color:#F5F6F7;}
+.logo{width: 240px; margin:0 auto 20px auto;}
+.RIContainer input{margin: 10px 0 10px; }
+.RIContainer .caution{color:red; font-size: 14px;}
+
+.RIContainer button, #postcodeBtn, #authBtn, .bottomBtn{padding:10px; cursor: pointer;}
+.SMSBtn{cursor: pointer;}
+
+#id, #pw, #confirm, #name, #mobile, 
+#proName, #birth, #postcode, #email {width: 300px;}
+
+#address, #detailAddress{width: 450px; margin-left:84px;}
+.registerBtn, .cancelBtn{width: 270px; padding:18px; cursor: pointer;}
+.registerBtn{margin-right: 50px !important;}
+

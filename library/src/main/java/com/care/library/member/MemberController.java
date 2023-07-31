@@ -80,6 +80,11 @@ public class MemberController {
 		return "member/register3";
 	}
 	
+	@RequestMapping("register3")
+	public String register3() {
+		return "member/register3";
+	}
+	
 	//카카오 로그인
 	@Autowired private KakaoService kakao;
 	
