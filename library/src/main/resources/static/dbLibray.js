@@ -19,14 +19,28 @@ function agreementCheck(){
 
 /* 회원가입 - 이메일 인증 */
 function sendEmail(){
-	var email = document.getElementById('email');
+	var email = document.getElementById('authEmail');
 	label = document.getElementById('label');
+	
 	if(email.value == ""){
 		label.innerHTML = '이메일을 입력해주세요.';
+		document.getElementById('authNum').style.display = 'none';
+		document.getElementById('confirmEmail').style.display = 'none';
 	} else {
 		label.innerHTML = '인증 메일이 발송되었습니다.';
 		document.getElementById('authNum').style.display = 'block';
 		document.getElementById('confirmEmail').style.display = 'block';
+	}
+}
+
+function auth(){
+	var authNum = document.getElementById('authNum');
+	label = document.getElementById('label2');
+	
+	if(authNum.value == ""){
+		label.innerHTML = '인증번호를 입력해주세요.';
+	} else{
+		f.submit();
 	}
 }
 

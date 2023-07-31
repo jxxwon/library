@@ -74,6 +74,12 @@ public class MemberController {
 		return "member/register2_2";
 	}
 	
+	// 이메일 인증 프로세스
+	@PostMapping("authProc")
+	public String authProc() {
+		return "member/register3";
+	}
+	
 	//카카오 로그인
 	@Autowired private KakaoService kakao;
 	
