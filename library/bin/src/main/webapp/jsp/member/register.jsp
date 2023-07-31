@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <link href="/css/main.css" rel="stylesheet" type="text/css">
+    <link href="/css/login.css" rel="stylesheet" type="text/css">
 <title>하이디미어 도서관 - 회원가입</title>
 <link href="/css/main.css" rel="stylesheet" type="text/css">
 <link href="/css/container.css" rel="stylesheet" type="text/css">
@@ -18,27 +20,35 @@
 			<a class="checked" href="/register">회원가입</a>
 		</div>
 		<div class="register">
+			<div>
+				※ 회원 유형에 따라 회원 가입 절차가 다르며,<br>
+				실제 정보와 가입 정보가 차이가 있을 경우 인증이 되지 않을 수 있습니다.
+			</div>
 			<div class="regProcess">
-				<span>회원유형</span> <p>></p>
+				<span class="active">회원유형</span> <p>></p>
 				<span>약관동의</span> <p>></p>
-				<span class="active">본인확인</span> <p>></p>
+				<span>본인확인</span> <p>></p>
 				<span>정보입력</span> <p>></p>
 				<span>가입완료</span>
 			</div>
 		</div>
 		
-		<div class="auth">
-			<div class="auth_mobile">
-				<h2>휴대폰 인증</h2>
-				<p><img src = "/image/mobile.png"></p>
-				<div><a href = "/register1">휴대폰 인증</a></div>
+		<div class="age">
+			<div class="age_adult">
+				<h2>만 14세 이상</h2>
+				<p>일반회원</p>
+				<p><img src = "/image/mem_adult.png"></p>
+				<div><a href = "/register1">가입하기</a></div>
 			</div>
-			<div class="auth_email">
-				<h2>이메일 인증</h2>
-				<p><img src = "/image/email.png"></p>
-				<div><a href = "/register2_2">이메일 인증</a></div>
+			<div class="age_child">
+				<h2>만 14세 미만</h2>
+				<p>어린이, 학생회원</p>
+				<p><img src = "/image/mem_child.png"></p>
+				<div><a href = "/register1">가입하기</a></div>
 			</div>
 		</div>
+		
+		
 	</div>
 </div>
 <c:import url="/footer"/>

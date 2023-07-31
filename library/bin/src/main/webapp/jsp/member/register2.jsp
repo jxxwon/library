@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <link href="/css/main.css" rel="stylesheet" type="text/css">
+    <link href="/css/login.css" rel="stylesheet" type="text/css">
 <title>하이디미어 도서관 - 회원가입</title>
 <link href="/css/main.css" rel="stylesheet" type="text/css">
 <link href="/css/container.css" rel="stylesheet" type="text/css">
@@ -36,7 +38,7 @@
 			<div class="auth_email">
 				<h2>이메일 인증</h2>
 				<p><img src = "/image/email.png"></p>
-				<div><a href = "/register2_2">이메일 인증</a></div>
+				<div><a href = "/register1">이메일 인증</a></div>
 			</div>
 		</div>
 	</div>
