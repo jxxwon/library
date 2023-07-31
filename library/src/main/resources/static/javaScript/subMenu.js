@@ -15,6 +15,12 @@
       } else if (currentURL.includes("register")) {
         document.getElementById("register").classList.add("active");
         document.getElementById("login").classList.remove("active");
+      } else if (currentURL.includes("cultural")) {
+        document.getElementById("cultural").classList.add("active");
+        document.getElementById("cullist").classList.remove("active");
+      } else if (currentURL.includes("cullist")) {
+        document.getElementById("cullist").classList.add("active");
+        document.getElementById("cultural").classList.remove("active");
       } else {
         // 기본적으로 어떤 패턴에도 해당하지 않을 경우 버튼 색상을 초기화합니다.
         document.getElementById("redButton").classList.remove("red-button");
