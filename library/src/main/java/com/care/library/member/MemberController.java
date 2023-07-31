@@ -82,6 +82,12 @@ public class MemberController {
 	public String register2() {
 		return "member/register2";
 	}
+
+	// 이메일 인증 화면
+	@RequestMapping("register2_2")
+	public String register2_2() {
+		return "member/register2_2";
+	}
 	
 	//카카오 로그인
 	@Autowired private KakaoService kakao;

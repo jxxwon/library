@@ -153,3 +153,4 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 .auth_email{float:right;}
 .auth_email p {margin:20px 0;}
 .auth_email > div{width:188px; height:40px; line-height:40px; border:1px solid #bbb; position:absolute; left:27%;}
+.auth_email label{width:100%;}
