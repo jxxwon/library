@@ -37,9 +37,9 @@ public class MemberController {
 		return "cultural/cultural";
 	}
 	
-	@RequestMapping("cultural2")
-	public String cultural2() {
-		return "cultural/cultural2";
+	@RequestMapping("cullist")
+	public String cullist() {
+		return "cultural/cullist";
 	}
 	
 	@RequestMapping("subMenuCultural")

@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:url var="context" value="/"/>
 <link href="/css/cultural.css" rel="stylesheet" type="text/css">
 
 <c:import url = "/header"/>
 
-<div class="inner" style="display: flex">
+<div class="inner">
 	<div class="sub-menu">
         <c:import url="/subMenuCultural" />
     </div>
@@ -69,8 +69,10 @@
 	    </div>
     
 	    <div class="cul-list">
-	    	<a href="#"><button>문화행사 목록보기</button></a>
+	    	<a href="${context}cullist"><button>문화행사 목록보기</button></a>
 	    </div>
 	</div>	    
 </div>
 <c:import url = "/footer"/>
+
+<script src="/javaScript/subCulTop.js"></script>
