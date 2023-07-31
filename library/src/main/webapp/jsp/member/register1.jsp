@@ -3,11 +3,12 @@
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <link href="/css/main.css" rel="stylesheet" type="text/css">
 	<link href="/css/container.css" rel="stylesheet" type="text/css">
+	<c:import url = "/header"/>
+	<script src = "/dbLibrary.js"></script>
 <title>하이디미어 도서관 - 회원가입</title>
 <style>
 .regProcess span.active {background-color:#338cfa; color:#fff;}
 </style>
-<c:import url = "/header"/>
 <div class="RegisterContainer inner mb_30" >
 	<c:import url = "/subMenuLogin"/>
 	<div class="loginContent">
@@ -271,7 +272,7 @@
 					</div>
 				<div class="reg_button">
 					<script src="/dbLibrary.js"></script>
-					<input type = "button" value = "확인" onclick="agreementCheck();">
+					<input type = "button" value = "확인" onclick="agreementCheck()">
 					<input type = "button" value = "취소" onclick="location.href='main'">
 				</div>
 		</form>
