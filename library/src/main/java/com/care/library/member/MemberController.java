@@ -75,9 +75,18 @@ public class MemberController {
 	}
 	
 	// 이메일 인증 프로세스
-	@PostMapping("authProc")
-	public String authProc() {
-		return "member/register3";
+	
+	@ResponseBody
+	@PostMapping(value="sendEmail", produces = "text/plain; charset=utf-8")
+	public String sendEmail(@RequestBody(required = false) String email) {
+		return service.sendEmail(email);
+	}
+	
+	@ResponseBody
+	@PostMapping(value="sendAuth", produces = "text/plain; charset=utf-8")
+	public String sendAuth(@RequestBody(required = false) String authNum) {
+		String result = service.sendAuth(authNum);
+		return result;
 	}
 	
 	@RequestMapping("register3")
