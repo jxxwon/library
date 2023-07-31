@@ -67,6 +67,12 @@ public class MemberController {
 	public String register2() {
 		return "member/register2";
 	}
+
+	// 이메일 인증 화면
+	@RequestMapping("register2_2")
+	public String register2_2() {
+		return "member/register2_2";
+	}
 	
 	@RequestMapping("register3")
 	public String register3() {

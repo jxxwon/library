@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.care.library.member.MemberMapper">
+	<resultMap type="com.care.library.member.MemberDTO" id="memberDto"> <!-- id는 식별자일뿐 -->
+  		<result column = "pro_name" property = "proName"/>
+  		<result column = "reg_date" property = "regDate"/>
+  	</resultMap>
+	
+	<select id="loginProc" resultMap="memberDto">
+		SELECT * FROM member WHERE id = #{id}
+	</select>
+	
+	<select id="kakaoIDCheck" resultMap="memberDto">
+		SELECT * FROM member WHERE kakaoID = #{id}
+	</select>
+	
+	<select id="emailCheck" resultMap="memberDto">
+		SELECT * FROM member WHERE email = #{email}
+	</select>
+	
+	<insert id="kakaoRegisterProc" parameterType="com.care.library.member.MemberDTO">
+		INSERT INTO member (id, pw, name, birth, address, mobile, status, kakaoid)
+		VALUES (#{id}, #{pw}, #{name}, #{birth}, #{address}, #{mobile}, #{status}, #{kakaoid})
+	</insert>
+	
+	
+	
+
+</mapper>
+
+
+
+
+
+
+
+  

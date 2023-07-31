@@ -6,7 +6,7 @@
     <title>header</title>
     <link href="/css/header.css" rel="stylesheet" type="text/css">
     <c:url var="context" value="/"/>
-   <script src="/dbLibray.js"></script>
+   <script src="/static/dbLibray.js"></script>
 </head>
 <body>
     <div class="container">
@@ -38,6 +38,7 @@
             </div>
         </div>
     </div>
+    
     <div class="header_nav">
         <hr>
         <ul>

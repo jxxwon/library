@@ -26,7 +26,7 @@
 				<span>가입완료</span>
 			</div>
 		</div>
-		<form class="form" method="post" id ="f" name="form">
+		<form class="form" action = "register2" method="post" id ="f" name="form">
 			<h3>이용약관</h3>
 			<div class="agreement">
 				<div>
@@ -205,7 +205,7 @@
 			</div>
 				<div class="checks noline">
 					<div>
-						<input type="checkbox" id="chk1" name="chk1" value="true">
+						<input type="checkbox" id="chk1" name="chk1" value="true" required onclick="agreementCheck()">
 						<label for="chk1"><strong>(*필수)</strong> 이용약관에 동의합니다.</label>
 					</div>
 				</div>
@@ -246,7 +246,7 @@
 				</div>
 					<div class="checks noline">
 						<div>
-							<input type="checkbox" id="chk2" name="chk2" value="true">
+							<input type="checkbox" id="chk2" name="chk2" value="true" required onclick="agreementCheck()">
 							<label for="chk2"><strong>(*필수)</strong> 개인정보 수집ㆍ이용에 동의합니다.</label>
 						</div>
 					</div>
@@ -265,13 +265,13 @@
 				</div>
 					<div class="checks noline">
 						<div>
-							<input type="checkbox" id="chk3" name="chk3" value="true">
+							<input type="checkbox" id="chk3" name="chk3" value="true" required onclick="agreementCheck()">
 							<label for="chk3"><strong>(*필수)</strong> 제3자 정보 제공에 대한 안내에 동의합니다.</label>
 						</div>
 					</div>
 				<div class="reg_button">
 					<script src="/dbLibrary.js"></script>
-					<input type = "button" value = "확인" onclick="agreementCheck();">
+					<input type = "submit" value = "확인" onclick="agreementCheck();">
 					<input type = "button" value = "취소" onclick="location.href='main'">
 				</div>
 		</form>

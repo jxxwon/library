@@ -38,7 +38,7 @@
 			<div class="auth_email">
 				<h2>이메일 인증</h2>
 				<p><img src = "/image/email.png"></p>
-				<div><a href = "/register2_2">이메일 인증</a></div>
+				<div><a href = "/register1">이메일 인증</a></div>
 			</div>
 		</div>
 	</div>
