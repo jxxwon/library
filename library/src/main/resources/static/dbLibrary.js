@@ -44,6 +44,7 @@ function auth(){
 	}
 }
 
+/* 도서관 일반 회원 가입 */
 function allCheck(){
 	let id = document.getElementById('id');
 	let pw = document.getElementById('pw');
@@ -64,16 +65,29 @@ function allCheck(){
 	}
 }
 
-function idCheck(){
+function nameCheck(){
 	let name = document.getElementById('name');
 	nameLabel = document.getElementById('nameLabel');
-	 if(name.value == ""){
-		 label.innerHTML = '이름은 필수 항목입니다.'
+	 if(!name.value){
+		 nameLabel.innerHTML = '*이름은 필수 항목입니다.'
 	 }else{
-		 label.innerHTML = ''
+		 nameLabel.innerHTML = ''
 	 }
 	// window.alert('pwCheck 호출')
 }
+
+function emailCheck(){
+	let email = document.getElementById('email');
+	emailLabel = document.getElementById('emailLabel');
+	 if(!email.value){
+		 emailLabel.innerHTML = '*이메일은 필수 항목입니다.'
+	 }else{
+		 emailLabel.innerHTML = ''
+	 }
+	// window.alert('pwCheck 호출')
+}
+
+
 
 function pwCheck(){
 	let pw = document.getElementById('pw');
@@ -104,6 +118,6 @@ function loginCheck(){
 	}
 }
 
-// 도서관 일반 회원 가입
+
 
 

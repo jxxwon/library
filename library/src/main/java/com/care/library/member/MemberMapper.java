@@ -11,4 +11,7 @@ public interface MemberMapper {
 	//카카오 로그인 시도시, 카카오 회원가입 여부 확인을 위해.
 	MemberDTO kakaoIDCheck(String kakaoID); 
 	void kakaoRegisterProc(MemberDTO member);
+	
+	MemberDTO idCheck(String id); //일반 회원가입 시 아이디 중복체크
+	void registerProc(MemberDTO member);
 }

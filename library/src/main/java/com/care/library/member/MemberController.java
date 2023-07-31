@@ -80,10 +80,30 @@ public class MemberController {
 		return "member/register3";
 	}
 	
-	@RequestMapping("register3")
+	//회원가입(정보입력)
+	@GetMapping("register3")
 	public String register3() {
 		return "member/register3";
 	}
+	
+	@PostMapping("registerProc")
+	public String registerProc(MemberDTO member, String confirm) {
+		String result = service.registerProc(member, confirm);
+		if(result.equals("회원 등록 완료")) {
+			System.out.println("회원 등록 완료 된듯");
+			return "redirect:login";
+		}
+		System.out.println("회원 등록 안됨");
+		return "member/register";
+	}
+	
+	@ResponseBody //return을 jsp가 아닌 응답 데이터를 주는 것이다.
+	@PostMapping(value="exist", produces = "text/plain; charset=UTF-8")
+	public String idCheck(@RequestBody(required = false) String id) {
+		//System.out.println("입력한 아이디 : " + id);
+		return service.exists(id);
+	}
+	
 	
 	//카카오 로그인
 	@Autowired private KakaoService kakao;

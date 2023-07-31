@@ -6,7 +6,9 @@ public class MemberDTO {
 	private String name;
 	private String birth;
 	private String email;
+	private String postCode;
 	private String address;
+	private String detailAddress;
 	private String mobile;
 	private String proName;
 	private String regDate;
@@ -43,11 +45,23 @@ public class MemberDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getPostCode() {
+		return postCode;
+	}
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
 	public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getDetailAddress() {
+		return detailAddress;
+	}
+	public void setDetailAddress(String detailAddress) {
+		this.detailAddress = detailAddress;
 	}
 	public String getMobile() {
 		return mobile;
