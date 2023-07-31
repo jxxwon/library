@@ -154,6 +154,7 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 .auth_email p {margin:20px 0;}
 .auth_email > div{width:188px; height:40px; line-height:40px; border:1px solid #bbb; position:absolute; left:27%;}
 .auth_email label{width:100%;}
+
 /*회원가입 - 정보입력*/
 .RIContainer{
 	width: 700px; 
@@ -161,6 +162,7 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 	background-color:#F5F6F7;}
 .logo{width: 240px; margin:0 auto 20px auto;}
 .RIContainer input{margin: 10px 0 10px; }
+.RIContainer .caution{color:red; font-size: 14px;}
 
 .RIContainer button, #postcodeBtn, #authBtn, .bottomBtn{padding:10px; cursor: pointer;}
 .SMSBtn{cursor: pointer;}

@@ -19,8 +19,10 @@ function agreementCheck(){
 
 /* 회원가입 - 이메일 인증 */
 function sendEmail(){
-	var email = document.getElementById('email');
+	var email = document.getElementById('authEmail');
+	console.log("email" , email);
 	label = document.getElementById('label');
+	console.log("label" , label);
 	if(email.value == ""){
 		label.innerHTML = '이메일을 입력해주세요.';
 	} else {
@@ -28,6 +30,7 @@ function sendEmail(){
 		document.getElementById('authNum').style.display = 'block';
 		document.getElementById('confirmEmail').style.display = 'block';
 	}
+
 }
 
 function allCheck(){
@@ -50,15 +53,29 @@ function allCheck(){
 	}
 }
 
+function idCheck(){
+	let name = document.getElementById('name');
+	nameLabel = document.getElementById('nameLabel');
+	 if(name.value == ""){
+		 label.innerHTML = '이름은 필수 항목입니다.'
+	 }else{
+		 label.innerHTML = ''
+	 }
+	// window.alert('pwCheck 호출')
+}
+
 function pwCheck(){
 	let pw = document.getElementById('pw');
-	confirm = document.getElementById('confirm');
-	label = document.getElementById('label');
-	 if(pw.value == confirm.value){
-		 label.innerHTML = '일치'
-	 }else{
-		 label.innerHTML = '불일치'
-	 }
+ 	let confirm = document.getElementById('confirm');
+  	let label = document.getElementById('label');
+  
+  if (pw.value == confirm.value) {
+    label.style.color = 'blue';
+    label.innerHTML = '일치';
+  } else {
+    label.style.color = 'red';
+    label.innerHTML = '불일치';
+  }
 	// window.alert('pwCheck 호출')
 }
 
@@ -75,5 +92,7 @@ function loginCheck(){
 		f.submit();
 	}
 }
+
+// 도서관 일반 회원 가입
 
 
