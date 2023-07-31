@@ -95,4 +95,8 @@
 		</div>
 	</div>	    
 </div>
+<<<<<<< HEAD
 <c:import url = "/footer"/>
+=======
+<c:import url = "/footer"/>
+>>>>>>> branch 'jaemin' of git@github.com:jmkwak1/Himedia_Library.git
