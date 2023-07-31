@@ -6,9 +6,18 @@
     <title>header</title>
     <link href="/css/header.css" rel="stylesheet" type="text/css">
     <c:url var="context" value="/"/>
-   <script src="/dbLibray.js"></script>
+    
+    <script>
+    	function header(){
+  			var id = "${sessionScope.id}";
+  			if(id != ''){
+  				document.getElementById('login').style.display = 'none';
+  				document.getElementById('logout').style.display = 'block';
+  			}
+  		}
+    </script>
 </head>
-<body>
+<body onload="header()">
     <div class="container">
         <div class="header-container">
             <div class="logo">
@@ -23,17 +32,17 @@
                 </form>
             </div>
             <div class="main_nav">
-                <ul>
+                <ul class="left">
                     <li><a href="${context}main">메인</a></li>
-                    <li><a href="${context}login">로그인</a></li>
-                    <%-- <li><a href="${context}logout">로그아웃</a></li> --%>
-                    <li><a href="${context}libraryForm">마이 라이브러리</a></li>
-                    <li>
-                    	<a href="#"><img src="/image/blog.jpg"></a>
-                    	<a href="#"><img src="/image/facebook.jpg"></a>
-                    	<a href="#"><img src="/image/twitter.jpg"></a>
-                    	<a href="#"><img src="/image/youtube.jpg"></a>
-                    </li>
+                    <li id="login"><a href="${context}login">로그인</a></li>
+                    <li id="logout" style = "display:none"><a href="${context}logout">로그아웃</a></li>
+                    <li><a href="${context}libraryForm">마이라이브러리</a></li>
+                </ul>
+                <ul class="right">
+                    <li><a href="#"><img src="/image/blog.jpg"></a></li>
+                    <li><a href="#"><img src="/image/facebook.jpg"></a></li>
+                    <li><a href="#"><img src="/image/twitter.jpg"></a></li>
+                    <li><a href="#"><img src="/image/youtube.jpg"></a></li>
                 </ul>
             </div>
         </div>

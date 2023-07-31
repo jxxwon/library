@@ -93,6 +93,11 @@ public class MemberController {
 	public String register3() {
 		return "member/register3";
 	}
+
+	@RequestMapping("register4")
+	public String register4() {
+		return "member/register4";
+	}
 	
 	//카카오 로그인
 	@Autowired private KakaoService kakao;
