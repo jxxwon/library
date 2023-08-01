@@ -4,11 +4,10 @@
 
 <link href="/css/main.css" rel="stylesheet" type="text/css">
 <link href="/css/container.css" rel="stylesheet" type="text/css">
-
-
-<c:import url = "/header"/>
+<script src = "/dbLibrary.js"/>
 
 <title>하이디미어 도서관 - 회원가입</title>
+<c:import url = "/header"/>
 
 <style>
 .regProcess span .active{background-color:#338cfa; color:#fff;}
@@ -39,7 +38,7 @@ input[type="button"] {width:399.85px; height:45px; border:1px solid #ddd; cursor
 		<div class="auth">
 			<div class="auth_email">
 					<h2>이메일 인증</h2>
-					<form class="form" method="post" id ="f" action = "authProc">
+					<form class="form" method="post" id ="emailForm">
 						<p><img src = "/image/email.png"></p>
 						<input type = "text" placeholder = "이메일을 입력해주세요." id = "authEmail" name = "authEmail" class="authEmail"><br><br>
 						<label id = "label"></label><br><br>
@@ -47,7 +46,7 @@ input[type="button"] {width:399.85px; height:45px; border:1px solid #ddd; cursor
 						<br><br><br>
 						<input type = "text" placeholder = "인증번호를 입력해주세요." id = "authNum" name = "authNum" style = "display:none"><br><br>
 						<label id = "label2"></label><br><br>
-						<input type = "button" value = "이메일 인증 완료" id = "confirmEmail" name = "authNum" style = "display:none" onclick = "auth()"><br>
+						<input type = "button" value = "이메일 인증 완료" id = "confirmEmail" style = "display:none" onclick = "auth()"><br>
 					</form>
 			</div>
 		</div>

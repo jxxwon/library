@@ -32,6 +32,21 @@ public class MemberController {
 		return "default/footer";
 	}
 
+	@RequestMapping("cultural")
+	public String cultural() {
+		return "cultural/cultural";
+	}
+	
+	@RequestMapping("cullist")
+	public String cullist() {
+		return "cultural/cullist";
+	}
+	
+	@RequestMapping("subMenuCultural")
+	public String subMenuCultural() {
+		return "cultural/subMenuCultural";
+	}
+	
 	@RequestMapping("main")
 	public String main() {
 		return "default/main";
@@ -50,6 +65,12 @@ public class MemberController {
 		}
 		session.setAttribute("id", result.getId());
 		session.setAttribute("name", result.getName());
+		return "redirect:main";
+	}
+	
+	@RequestMapping("logout")
+	public String logout() {
+		session.invalidate();
 		return "redirect:main";
 	}
 	
@@ -75,15 +96,29 @@ public class MemberController {
 	}
 	
 	// 이메일 인증 프로세스
-	@PostMapping("authProc")
-	public String authProc() {
-		return "member/register3";
+	
+	@ResponseBody
+	@PostMapping(value="sendEmail", produces = "text/plain; charset=utf-8")
+	public String sendEmail(@RequestBody(required = false) String email) {
+		return service.sendEmail(email);
+	}
+	
+	@ResponseBody
+	@PostMapping(value="sendAuth", produces = "text/plain; charset=utf-8")
+	public String sendAuth(@RequestBody(required = false) String authNum) {
+		String result = service.sendAuth(authNum);
+		return result;
 	}
 	
 	//회원가입(정보입력)
 	@GetMapping("register3")
 	public String register3() {
 		return "member/register3";
+	}
+
+	@RequestMapping("register4")
+	public String register4() {
+		return "member/register4";
 	}
 	
 	@PostMapping("registerProc")
