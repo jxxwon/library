@@ -22,6 +22,7 @@
 		SELECT id FROM member WHERE id=#{id}
 	</select>
 	
+	<!-- 카카오 로그인시, 기존 회원의 이메일과 비교 -->
 	<select id="emailCheck" resultMap="memberDto">
 		SELECT * FROM member WHERE email = #{email}
 	</select>
@@ -34,7 +35,7 @@
 	
 	<!-- 일반 회원 가입 -->
 	<insert id="registerProc" parameterType="com.care.library.member.MemberDTO">
-		INSERT INTO member (id, pw, name, birth, email, address, mobile, pro_name, status, detailAddress, post_code)
+		INSERT INTO member (id, pw, name, birth, email, address, mobile, pro_name, status, detail_address, post_code)
 		VALUES(#{id}, #{pw}, #{name}, #{birth}, #{email}, #{address}, #{mobile}, #{proName}, #{status}, #{detailAddress}, #{postCode})
 	</insert>
 	

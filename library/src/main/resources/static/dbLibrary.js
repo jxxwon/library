@@ -59,7 +59,7 @@ function resProc(){
 }
 
 /* 도서관 일반 회원 가입 */
-function allCheck(){
+/*function allCheck(){
 	let id = document.getElementById('id');
 	let pw = document.getElementById('pw');
 	confirm = document.getElementById('confirm');
@@ -128,7 +128,7 @@ function loginCheck(){
 		var f = document.getElementById('f');
 		f.submit();
 	}
-}
+}*/
 
 /*아이디/비밀번호 찾기 이메일 인증*/
 function auth(){

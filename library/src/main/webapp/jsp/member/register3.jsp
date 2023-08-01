@@ -5,7 +5,6 @@
 <title>하이디미어 도서관 - 회원가입</title>
 <link href="/css/main.css" rel="stylesheet" type="text/css">
 <link href="/css/container.css" rel="stylesheet" type="text/css">
-
 <c:import url = "/header"/>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -27,7 +26,7 @@
     }
     
 	var xhr;
-	function send() {
+	function idCheckSend() {
 		// Ajax 요청을 초기화합니다
 		
 		xhr = new XMLHttpRequest();
@@ -52,6 +51,76 @@
 			console.log('에러: ' + xhr.status); // 요청 도중 에러 발생
 		} 
 	}
+			/*function allCheck(){
+			let id = document.getElementById('id');
+			let pw = document.getElementById('pw');
+			confirm = document.getElementById('confirm');
+			userName = document.getElementById('name');
+			
+			if(id.value == ""){
+				alert('아이디는 필수 항목입니다.');
+			}else if(pw.value == ""){
+				alert('비밀번호는 필수 항목입니다.');
+			}else if(confirm.value == ""){
+				alert('비밀번호 확인은 필수 항목입니다.');
+			}else if(userName.value == ""){
+				alert('이름은 필수 항목입니다.');
+			}else{
+				var f = document.getElementById('f');
+				f.submit();
+			}
+		}*/
+
+		function nameCheck(){
+			let name = document.getElementById('name');
+			nameLabel = document.getElementById('nameLabel');
+			 if(!name.value){
+				 nameLabel.innerHTML = '*이름은 필수 항목입니다.'
+			 }else{
+				 nameLabel.innerHTML = ''
+			 }
+			// window.alert('pwCheck 호출')
+		}
+
+		function emailCheck(){
+			let email = document.getElementById('email');
+			emailLabel = document.getElementById('emailLabel');
+			 if(!email.value){
+				 emailLabel.innerHTML = '*이메일은 필수 항목입니다.'
+			 }else{
+				 emailLabel.innerHTML = ''
+			 }
+			// window.alert('pwCheck 호출')
+		}
+
+		function pwCheck(){
+			let pw = document.getElementById('pw');
+		 	let confirm = document.getElementById('confirm');
+		  	let label = document.getElementById('label');
+		  
+		  if (pw.value == confirm.value) {
+		    label.style.color = 'blue';
+		    label.innerHTML = '일치';
+		  } else {
+		    label.style.color = 'red';
+		    label.innerHTML = '불일치';
+		  }
+			// window.alert('pwCheck 호출')
+		}
+
+		function loginCheck(){
+			let id = document.getElementById('id');
+			let pw = document.getElementById('pw');
+			
+			if(id.value == ""){
+				alert('아이디는 필수 항목입니다.');
+			}else if(pw.value == ""){
+				alert('비밀번호는 필수 항목입니다.');
+			}else{
+				var f = document.getElementById('f');
+				f.submit();
+			}
+		}
 </script> 
 
 <div class="RegisterContainer inner mb_30" >
@@ -89,7 +158,7 @@
 					<span class="caution">*</span>	
 				</label>
 				<input type="text" name="id" id="id" placeholder="아이디" >
-				<button type="button" onclick="send()">중복확인</button>
+				<button type="button" onclick="idCheckSend()">중복확인</button>
 				<div id="idCheckLabel" class="alert"></div>
 				<span id="idCondition" class="essential">*5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.</span><br>
 				
@@ -128,14 +197,13 @@
 				<input type="checkbox" class="SMSBtn" onclick="SMS()" value="SMS수신">
 				<label>SMS 수신</label><br>
 				<span class="caution">* 도서의 반납예정일, 예약도서, 일반열람실 대기자 호출, 행사 등 안내</span><br>
-				<input type="button" class="registerBtn" value="회원가입" onclick="allCheck()">
+				<input type="submit" class="registerBtn" value="회원가입" onclick="allCheck()">
 				<input type="button" class="cancelBtn" value="취소" onclick="location.href='register2'"><br>
 			</form>
 		</div>
 		
 		
 	</div>
-<script src = "/dbLibrary.js"></script>
 </div>
 <c:import url="/footer"/>
 

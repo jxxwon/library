@@ -131,13 +131,47 @@
 }
 
 .list_area {
+	text-align: left;
 	
 }
 
 .list_area .title_area{
-	
+	word-break: break-all;	/*긴 단어가 줄바꿈 없이 오른쪽 끝까지 채워지고, 공백이 없이 다음 줄로 변경*/
+	line-height: 1.2;
+	margin:20px 10px 20px 10px;
+	font-size: 18px;
 }
 
 .list_area .con2{
-	text-align: left;
+	line-height: 1.4;
+}
+
+.list_area .con2 li {
+  position: relative;
+  padding-left: 10px; /* 마커와 텍스트 사이의 간격을 조절하기 위한 패딩 값 */
+  margin-bottom: 10px;
+}
+
+.list_area .con2 li:first-child::before{	/*첫번째 li만 적용(2줄짜리 텍스트라 따로 함)*/
+	content: "•"; /* 임의의 원형 마커를 생성 */
+  	color: #999999; /* 마커 색상 */
+  	font-size: 16px; /* 마커 크기 */
+ 	position: absolute;
+  	left: 0;
+  	top: 22%;
+  	transform: translateY(-50%);	/*세로 중앙을 기준으로 위쪽으로 50%만큼 이동*/
+}
+
+.list_area .con2 li::before {		/*::before > 선택한 요소의 시작 부분에 콘텐츠를 생성*/
+  content: "•"; /* 임의의 원형 마커를 생성 */
+  color: #999999; /* 마커 색상 */
+  font-size: 16px; /* 마커 크기 */
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);	/*세로 중앙을 기준으로 위쪽으로 50%만큼 이동*/
+}
+
+.list_area .con2 li span{
+	margin-right: 20px;
 }
