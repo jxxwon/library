@@ -42,6 +42,11 @@ public class MemberController {
 		return "cultural/cullist";
 	}
 	
+	@RequestMapping("culResult")
+	public String culResult() {
+		return "cultural/culResult";
+	}
+	
 	@RequestMapping("subMenuCultural")
 	public String subMenuCultural() {
 		return "cultural/subMenuCultural";

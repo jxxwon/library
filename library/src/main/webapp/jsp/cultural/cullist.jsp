@@ -5,6 +5,18 @@
 <c:url var="context" value="/" />
 <link href="/css/cultural.css" rel="stylesheet" type="text/css">
 
+<script>
+   	function cullist(){
+		var id = "${sessionScope.id}";
+		if(id != ''){
+			document.getElementById('apply').style.display = 'none';
+			if(id == 'admin'){
+				document.getElementById('apply').style.display = 'table-cell';
+			}
+		}
+	}
+</script>
+
 <c:import url="/header" />
 
 <div class="inner">
@@ -29,13 +41,19 @@
 				</ul>
 			</div>
 		</div>
-
+		
  		<div class="top-menu">
 			<ul>
 				<li class="menu-item" id="menu1"><a href="#" keyvalue1="15" keyvalue2=""><span>접수중 / 예정행사</span></a></li>
-				<li class="menu-item" id="menu2"><a href="#" keyvalue1="15" keyvalue2="9"><span>문화행사 신청</span></a></li>
+				<!-- <li class="menu-item" id="menu2"><a href="#" keyvalue1="15" keyvalue2="9"><span>문화행사 신청</span></a></li> -->
 				<li class="menu-item" id="menu3"><a href="#" keyvalue1="15" keyvalue2="10"><span>접수마감된 행사</span></a></li>
 				<li class="menu-item" id="menu4"><a href="#" keyvalue1="15" keyvalue2="11"><span>나의신청내역보기</span></a></li>
+			</ul>
+		</div>
+	
+		<div class="apply" id="apply">
+			<ul>
+				<li><a href="#">신청하기</a></li>
 			</ul>
 		</div>
 		
@@ -131,6 +149,10 @@
 		</div>
 	</div>
 </div>
+
+
+
+
 <c:import url="/footer" />
 
 <script src="/javaScript/subCulTop.js"></script>
