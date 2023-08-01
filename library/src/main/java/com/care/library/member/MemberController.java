@@ -137,4 +137,35 @@ public class MemberController {
 		kakao.unLink();
 		return "redirect:main";
 	}
+	
+	// 아이디 찾기
+	@RequestMapping("findMemberId")
+	public String findMemberId() {
+		return "member/findMemberId";
+	}
+
+	// 비밀번호 찾기
+	@RequestMapping("findMemberPw")
+	public String findMemberPw() {
+		return "member/findMemberPw";
+	}
+	
+	// 아이디 찾기 - 이메일 인증
+	@RequestMapping("findMemberIdMail")
+	public String findMemberIdMail() {
+		return "member/findMemberIdMail";
+	}
+	
+	// 아이디 찾기 - 이메일 인증 : 메인 화면
+	@GetMapping("findMemberIdMailResult")
+	public String findMemberIdMailProc() {
+		return "member/findMemberIdMailProc";
+	}
+
+	// 아이디 찾기 - 이메일 인증 : 결과
+	@PostMapping("findMemberIdMailResult")
+	public String findMemberIdMailResult() {
+		return "member/findMemberIdMailResult";
+	}
+	
 }
