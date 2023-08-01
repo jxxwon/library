@@ -12,10 +12,10 @@
       if (currentURL.includes("login")) {
 		 console.log("왜")
         document.getElementById("subLogin").classList.add("active");
-        document.getElementById("register").classList.remove("active");
+        document.getElementById("subRegister").classList.remove("active");
         console.log("")
       } else if (currentURL.includes("register")) {
-        document.getElementById("register").classList.add("active");
+        document.getElementById("subRegister").classList.add("active");
         document.getElementById("subLogin").classList.remove("active");
       } else if (currentURL.includes("cultural")) {
         document.getElementById("cultural").classList.add("active");
