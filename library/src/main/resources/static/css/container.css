@@ -163,7 +163,7 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 	width: 700px; 
 	margin:50px auto; padding: 50px 100px;
 	background-color:#F5F6F7;}
-.logo{width: 240px; margin:0 auto 20px auto;}
+.RIContainer .logo{width: 240px; margin:0 auto 20px auto;}
 .RIContainer input{margin: 10px 0 10px; }
 
 .RIContainer .caution{color:red; font-size: 14px;}
@@ -171,9 +171,9 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 .RIContainer .alert{color:blue;}
 
 .RIContainer button, #postcodeBtn, #authBtn, .bottomBtn{padding:10px; cursor: pointer;}
-.SMSBtn{cursor: pointer;}
+.RIContainer .SMSBtn{cursor: pointer;}
 
-#id, #pw, #confirm, #name, #mobile, 
+.RIContainer #id, .RIContainer #pw, #confirm, #name, #mobile, 
 #proName, #birth, #postcode, #email, 
 #nameLabel, #emailLabel {width: 300px;}
 

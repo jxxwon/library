@@ -101,8 +101,6 @@ function emailCheck(){
 	// window.alert('pwCheck 호출')
 }
 
-
-
 function pwCheck(){
 	let pw = document.getElementById('pw');
  	let confirm = document.getElementById('confirm');
@@ -131,7 +129,5 @@ function loginCheck(){
 		f.submit();
 	}
 }
-
-
 
 
