@@ -130,4 +130,25 @@ function loginCheck(){
 	}
 }
 
-
+/*아이디/비밀번호 찾기 이메일 인증*/
+function auth(){
+	var authNum = document.getElementById('authNum');
+	label = document.getElementById('label2');
+	if(authNum.value == ""){
+		label.innerHTML = '인증번호를 입력해주세요.';
+	} else{
+		xhr.open('post', 'sendAuth');
+    	xhr.send(document.getElementById('authNum').value);
+    	xhr.onreadystatechange = resProcId
+	}
+}
+    
+function resProcId(){
+	if(xhr.readyState === 4 && xhr.status === 200){
+		document.getElementById('label2').innerHTML = xhr.responseText;
+		if(document.getElementById('label2').innerHTML === "인증 성공"){
+			xhr.open('post', 'findMemberIdMailReslt');
+			location.href='/findMemberIdMailResult';
+		}
+	}
+}

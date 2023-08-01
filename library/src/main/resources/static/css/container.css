@@ -50,6 +50,7 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 	box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 	-moz-box-sizing:border-box;}
+.regProcess span.active{background-color:#338cfa; color:#fff;}
 	
 /*회원가입 연령별*/
 .age {overflow:hidden; width:100%; text-align:center;}
@@ -184,3 +185,11 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 { cursor: pointer;}
 
 .RIContainer input::placeholder{font-size: 15px;}
+
+/* 아이디/비밀번호 찾기 */
+.find {overflow:hidden; width:100%; height:40px; border:1px solid #ddd; margin-bottom:20px; text-align:center;}
+
+.find .findId {float:left; width:49%; height:40px; border-right:1px solid #ddd; line-height:40px;}
+.find .findPw {float:right; width:49%; line-height:40px;}
+
+.find .findId a, .find .findPw a {font-weight:800px; display:block;}

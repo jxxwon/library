@@ -5,10 +5,6 @@
 <title>하이디미어 도서관 - 회원가입</title>
 <link href="/css/main.css" rel="stylesheet" type="text/css">
 <link href="/css/container.css" rel="stylesheet" type="text/css">
-<style>
-.regProcess span .active{background-color:#338cfa; color:#fff;}
-</style>
-<script src = "/dbLibrary.js"></script>
 
 <c:import url = "/header"/>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -57,7 +53,6 @@
 		} 
 	}
 </script> 
-
 
 <div class="RegisterContainer inner mb_30" >
 	<c:import url = "/subMenuLogin"/>
@@ -140,6 +135,7 @@
 		
 		
 	</div>
+<script src = "/dbLibrary.js"></script>
 </div>
 <c:import url="/footer"/>
 
