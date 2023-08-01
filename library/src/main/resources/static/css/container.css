@@ -8,6 +8,8 @@ h1{margin-bottom:50px;}
 .contentBox{display: flex; }
 .loginImgBox { width : 180px; margin-right:50px;}
 .loginImgBox  > img { width:100%; padding-top: 35px; padding-left: 10px;}
+.loginFormContainer{width:405px;}
+
 label{display:inline-block; width:80px; margin-bottom:15px;}
 #id, #pw{width:230px; }
 .loginForm{display: flex;}
@@ -161,17 +163,24 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 	width: 700px; 
 	margin:50px auto; padding: 50px 100px;
 	background-color:#F5F6F7;}
-.logo{width: 240px; margin:0 auto 20px auto;}
+.RIContainer .logo{width: 240px; margin:0 auto 20px auto;}
 .RIContainer input{margin: 10px 0 10px; }
+
 .RIContainer .caution{color:red; font-size: 14px;}
+.RIContainer .essential{font-weight: 400; }
+.RIContainer .alert{color:blue;}
 
 .RIContainer button, #postcodeBtn, #authBtn, .bottomBtn{padding:10px; cursor: pointer;}
-.SMSBtn{cursor: pointer;}
+.RIContainer .SMSBtn{cursor: pointer;}
 
-#id, #pw, #confirm, #name, #mobile, 
-#proName, #birth, #postcode, #email {width: 300px;}
+.RIContainer #id, .RIContainer #pw, #confirm, #name, #mobile, 
+#proName, #birth, #postcode, #email, 
+#nameLabel, #emailLabel {width: 300px;}
+
+#idCheckLabel{margin-bottom: 5px;}
 
 #address, #detailAddress{width: 450px; margin-left:84px;}
 .registerBtn, .cancelBtn{width: 270px; padding:18px; cursor: pointer;}
 .registerBtn{margin-right: 50px !important;}
 
+.RIContainer input::placeholder{font-size: 15px;}

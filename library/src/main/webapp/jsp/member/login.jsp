@@ -21,7 +21,7 @@ String redirectURI = "http://localhost/kakaoLogin";
 			<div class="loginImgBox">
 				<img src="/image/loginImg.png" alt="yanolja-logo-gray"> 
 			</div>
-			<div>
+			<div class="loginFormContainer">
 				<form action="loginProc" method="post" class="loginForm mb_10" id="f">
 					<div class="mr_10">
 						<label>아이디 </label>

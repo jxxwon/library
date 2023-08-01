@@ -6,15 +6,17 @@
     // URL에 따라 버튼 색상을 변경하는 JavaScript 함수
     function setButtonColorByURL() {
       var currentURL = getCurrentURL();
-      console.log(document.getElementById("login"))
+      console.log(document.getElementById("subLogin"))
       
       // 원하는 URL 패턴에 따라 버튼 색상을 변경합니다.
       if (currentURL.includes("login")) {
-        document.getElementById("login").classList.add("active");
+		 console.log("왜")
+        document.getElementById("subLogin").classList.add("active");
         document.getElementById("register").classList.remove("active");
+        console.log("")
       } else if (currentURL.includes("register")) {
         document.getElementById("register").classList.add("active");
-        document.getElementById("login").classList.remove("active");
+        document.getElementById("subLogin").classList.remove("active");
       } else if (currentURL.includes("cultural")) {
         document.getElementById("cultural").classList.add("active");
         document.getElementById("cullist").classList.remove("active");
