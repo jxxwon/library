@@ -10,14 +10,18 @@
       
       // 원하는 URL 패턴에 따라 버튼 색상을 변경합니다.
       if (currentURL.includes("login")) {
-		 console.log("왜")
         document.getElementById("subLogin").classList.add("active");
         document.getElementById("subRegister").classList.remove("active");
-        console.log("")
+        document.getElementById("subFindMemberId").classList.remove("active");
       } else if (currentURL.includes("register")) {
         document.getElementById("subRegister").classList.add("active");
         document.getElementById("subLogin").classList.remove("active");
-      } else if (currentURL.includes("cultural")) {
+        document.getElementById("subFindMemberId").classList.remove("active");
+      } else if (currentURL.includes("findMemberId")) {
+        document.getElementById("subFindMemberId").classList.add("active");
+        document.getElementById("subLogin").classList.remove("active");
+        document.getElementById("subRegister").classList.remove("active");
+      }  else if (currentURL.includes("cultural")) {
         document.getElementById("cultural").classList.add("active");
         document.getElementById("cullist").classList.remove("active");
       } else if (currentURL.includes("cullist")) {
