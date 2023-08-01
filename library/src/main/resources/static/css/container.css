@@ -17,7 +17,7 @@ label{display:inline-block; width:80px; margin-bottom:15px;}
 color:white; border-color: transparent; font-size: 17px;}
 
 .kakao{width: 100%; height:55px; display : flex; justify-content: center;align-items: center;
-background: #FEE500; border-radius: 5px;margin-top: 10px;}
+background: #FEE500; border-radius: 5px;margin-top: 10px; cursor: pointer;}
 
 .bottomButtonBox{display:flex;justify-content: space-between;}
 .registerButton, .findButton{
@@ -171,7 +171,7 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 .RIContainer .essential{font-weight: 400; }
 .RIContainer .alert{color:blue;}
 
-.RIContainer button, #postcodeBtn, #authBtn{padding:10px; cursor: pointer;}
+.RIContainer button, #postcodeBtn, #authBtn{padding:12px; cursor: pointer;}
 .RIContainer .SMSBtn, .loginButton, .saveId{cursor: pointer;}
 
 .RIContainer #id, .RIContainer #pw, #confirm, #name, #mobile, 
@@ -181,9 +181,8 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 #idCheckLabel{margin-bottom: 5px;}
 
 #address, #detailAddress{width: 450px; margin-left:84px;}
-.bottomButtonBox .registerButton, .bottomButtonBox .findButton
-{ cursor: pointer;}
-
+.registerBtn, .cancelBtn{width:175px; height:60px; padding:10px; cursor: pointer;}
+.RIContainer .registerBtn{margin-right: 20px;}
 .RIContainer input::placeholder{font-size: 15px;}
 
 /* 아이디/비밀번호 찾기 */

@@ -49,8 +49,7 @@ public class MemberService {
 	public String exists(String id) {
 		if(id == null || id.isEmpty())
 			return "아이디를 입력하세요.";
-		
-		Pattern pattern = Pattern.compile("^[a-z0-9]{1}[a-z0-9_-]{4,19}$");
+		Pattern pattern = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,12}$");
 		Matcher matcher = pattern.matcher(id);
 		if(matcher.matches() == false)
 			return "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";

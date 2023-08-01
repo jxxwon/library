@@ -28,7 +28,7 @@ String redirectURI = "http://localhost/kakaoLogin";
 				<form action="loginProc" method="post" class="loginForm mb_10" id="f">
 					<div class="mr_10">
 						<label>아이디 </label>
-						<input type="text" name="id" placeholder="아이디" class="mb_10" id="id"><br>
+						<input type="text" name="id" placeholder="아이디" class="mb_10" id="id" autofocus="autofocus"><br>
 						<label>비밀번호 </label>
 						<input type="password" name="pw" placeholder="비밀번호" id="pw"><br>
 					</div>
