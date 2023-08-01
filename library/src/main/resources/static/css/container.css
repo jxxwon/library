@@ -183,4 +183,14 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 .registerBtn, .cancelBtn{width: 270px; padding:18px; cursor: pointer;}
 .registerBtn{margin-right: 50px !important;}
 
+<<<<<<< HEAD
 .RIContainer input::placeholder{font-size: 15px;}
+=======
+/* 아이디/비밀번호 찾기 */
+.find {overflow:hidden; width:100%; height:40px; border:1px solid #ddd; margin-bottom:20px; text-align:center;}
+
+.find .findId {float:left; width:49%; height:40px; border-right:1px solid #ddd; line-height:40px;}
+.find .findPw {float:right; width:49%; line-height:40px;}
+
+.find .findId a, .find .findPw a {font-weight:800px; display:block;}
+>>>>>>> refs/heads/jiiwon
