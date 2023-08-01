@@ -52,7 +52,7 @@ public class MemberService {
 		Pattern pattern = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,12}$");
 		Matcher matcher = pattern.matcher(id);
 		if(matcher.matches() == false)
-			return "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
+			return "아이디는 6~12자리의 영문 또는 숫자 혼용, 특수 문자 제외";
 		
 		MemberDTO result = mapper.idCheck(id);
 		if(result == null)

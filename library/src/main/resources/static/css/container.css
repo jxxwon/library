@@ -10,7 +10,7 @@ h1{margin-bottom:50px;}
 .loginImgBox  > img { width:100%; padding-top: 35px; padding-left: 10px;}
 .loginFormContainer{width:405px;}
 
-label{display:inline-block; width:80px; margin-bottom:15px;}
+.loginContainer label{display:inline-block; width:80px; margin-bottom:15px;}
 #id, #pw{width:230px; }
 .loginForm{display: flex;}
 .loginButton{background-color: skyblue; width:80px; 
@@ -162,12 +162,13 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 /*회원가입 - 정보입력*/
 .RIContainer{
 	width: 700px; 
-	margin:50px auto; padding: 50px 100px;
+	margin:50px auto; padding: 50px 0 50px 100px;
 	background-color:#F5F6F7;}
 .RIContainer .logo{width: 240px; margin:0 auto 20px auto;}
 .RIContainer input{margin: 10px 0 10px; }
+.RIContainer label{display:inline-block; width:90px; margin-bottom:15px;}
 
-.RIContainer .caution{color:red; font-size: 14px;}
+.RIContainer .caution{color:red; font-size: 16px;}
 .RIContainer .essential{font-weight: 400; }
 .RIContainer .alert{color:blue;}
 
@@ -180,11 +181,22 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 
 #idCheckLabel{margin-bottom: 5px;}
 
-#address, #detailAddress{width: 450px; margin-left:84px;}
-.registerBtn, .cancelBtn{width:175px; height:60px; padding:10px; cursor: pointer;}
+#idCondition, #passwordCondition{display:inline-block; margin-bottom: 7px;}
+
+#address, #detailAddress{width: 450px; margin-left:94px;}
+.RIContainer .registerBtn, .RIContainer .cancelBtn{width:175px; height:60px; padding:10px; cursor: pointer;}
 .RIContainer .registerBtn{margin-right: 20px;}
 .RIContainer input::placeholder{font-size: 15px;}
 
+.daterangepicker .drp-buttons .btn {
+    width: 60px;
+    cursor: pointer;
+}
+.daterangepicker .drp-buttons .applyBtn{
+	background-color: #338CFA;
+	color: white;
+}
+  
 /* 아이디/비밀번호 찾기 */
 .find {overflow:hidden; width:100%; height:40px; border:1px solid #ddd; margin-bottom:20px; text-align:center;}
 

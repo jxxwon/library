@@ -35,8 +35,8 @@
 	
 	<!-- 일반 회원 가입 -->
 	<insert id="registerProc" parameterType="com.care.library.member.MemberDTO">
-		INSERT INTO member (id, pw, name, birth, email, address, mobile, pro_name, status, detail_address, post_code)
-		VALUES(#{id}, #{pw}, #{name}, #{birth}, #{email}, #{address}, #{mobile}, #{proName}, #{status}, #{detailAddress}, #{postCode})
+		INSERT INTO member (id, pw, name, birth, email, address, mobile, pro_name, status, detail_address, post_code, reg_date)
+		VALUES(#{id}, #{pw}, #{name}, #{birth}, #{email}, #{address}, #{mobile}, #{proName}, #{status}, #{detailAddress}, #{postCode}, #{regDate})
 	</insert>
 	
 	

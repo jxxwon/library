@@ -32,12 +32,15 @@
     }
     
 	var xhr;
+	var idCheckBtnClicked = false;
 	function idCheckSend() {
 		// Ajax 요청을 초기화합니다
 		
 		xhr = new XMLHttpRequest();
 		xhr.open('post', 'exist');
 		var idCheck = document.getElementById('id');
+		var button = document.getElementById('idCheckBtn');
+		console.dir(button);
 		xhr.send(idCheck.value); 
 		
  		xhr.onreadystatechange = idCheckResProc;
@@ -56,6 +59,7 @@
 		
 		//idMessage.style.diplay = "none";
 			if(xhr.responseText === "사용 가능한 아이디 입니다."){
+				idCheckBtnClicked = true;
 				idMessage.style.color = "blue";
 			}else{
 				idMessage.style.color = "red";
@@ -65,25 +69,35 @@
 			console.log('에러: ' + xhr.status); // 요청 도중 에러 발생
 		} 
 	}
+	
 	function allCheck(){
-		let id = document.getElementById('id');
-		let pw = document.getElementById('pw');
-		confirm = document.getElementById('confirm');
-		userName = document.getElementById('name');
+		const id = document.getElementById('id');
+		const pw = document.getElementById('pw');
+		const confirm = document.getElementById('confirm');
+		const userName = document.getElementById('name');
+		const email = document.getElementById('email');
 		
-		if(id.value == ""){
-			alert('아이디는 필수 항목입니다.');
+		if(userName.value == ""){
+			alert('이름 필수 항목입니다.');
+		}else if(id.value == ""){
+			alert('아이디 필수 항목입니다.');
+		}else if(idCheckBtnClicked === false){
+			alert('아이디 중복 체크가 필요합니다.');
 		}else if(pw.value == ""){
 			alert('비밀번호는 필수 항목입니다.');
 		}else if(confirm.value == ""){
 			alert('비밀번호 확인은 필수 항목입니다.');
-		}else if(userName.value == ""){
-			alert('이름은 필수 항목입니다.');
+		}else if(email.value == ""){
+			alert('이메일은 필수 항목입니다.');
+		}else if(postCode.value == ""){
+			alert('주소 필수 항목입니다.');
 		}else{
 			// 등록일자 입력란에 현재 시간을 설정
 		    const regDateInput = document.getElementById('regDate');
 		    const currentDate = new Date();
+		   	console.log(currentDate);
 		    const formattedDate = currentDate.toISOString().slice(0, 10);
+		   	console.log(currentDate);
 		    regDateInput.value = formattedDate;
 		    
 		    console.log("formattedDate : ", formattedDate);
@@ -96,9 +110,10 @@
 		let name = document.getElementById('name');
 		nameLabel = document.getElementById('nameLabel');
 		 if(!name.value){
-			 nameLabel.innerHTML = '*이름은 필수 항목입니다.'
+			 nameLabel.innerHTML = '*이름은 필수 항목입니다.';
+			 nameLabel.style.fontWeight = '400'; 
 		 }else{
-			 nameLabel.innerHTML = ''
+			 nameLabel.innerHTML = '';
 		 }
 	}
 
@@ -130,23 +145,22 @@
 		
 	function pwRegCheck() {
 		  const passwordInput = document.getElementById("pw");
-		  const confirmInput = document.getElementById("confirm");
 		  const password = passwordInput.value;
+		  const confirmInput = document.getElementById("confirm");
 		  const passwordMessage = document.getElementById("passwordCondition");
 		  
 		  if(passwordInput.value == ""){
 			  confirmInput.disabled = true;
-		  }else{
-			  confirmInput.disabled = false;
 		  }
 		  // 비밀번호는 8 ~ 12자리이며, 반드시 영문자와 숫자를 혼합하여 입력하시기 바랍니다. (특수문자 제외)
 		  const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,12}$/;
-		  if (regex.test(password)) {
-			  passwordMessage.textContent = "유효한 비밀번호 입니다.";
-			  passwordMessage.style.color = "green";
+			if (regex.test(password)) {
+			  	confirmInput.disabled = false;
+			  	passwordMessage.textContent = "유효한 비밀번호 입니다.";
+			  	passwordMessage.style.color = "green";
 		  } else {
-		    passwordMessage.textContent = "비밀번호는 8 ~ 12자리이며, 반드시 영문자와 숫자를 혼합하여 입력하세요. (특수문자 제외)";
-		    passwordMessage.style.color = "red";
+				passwordMessage.textContent = "비밀번호는 8 ~ 12자리이며, 반드시 영문자와 숫자를 혼합하여 입력하세요. (특수문자 제외)";
+		    	passwordMessage.style.color = "red";
 		  }
 	}
 		
@@ -190,17 +204,15 @@
 	$(function() {
 	  $('input[name="birth"]').daterangepicker({
 	    singleDatePicker: true,
+	    autoApply: true,
 	    showDropdowns: true,
-	    startDate: 07/26/1993,
+	    startDate: '1993-12-10',
 	    minYear: 1940,
 	    maxYear: parseInt(moment().format('YYYY'), 10),
 	    locale: {
 	      format: 'YYYY-MM-DD'
 	    }
 	  }, function(start, end, label) {
-	console.log(document.getElementById('birth').value);
-	    // Update the input value with the selected date in "yyyy-mm-dd" format
-	    console.log(start)
 	    $('input[name="birth"]').val(start.format('YYYY-MM-DD'));
 	  });
 	});
@@ -241,7 +253,7 @@
 					<span class="caution">*</span>	
 				</label>
 				<input type="text" name="id" id="id" placeholder="아이디" onkeyup="idRegCheck()">
-				<button type="button" onclick="idCheckSend()">중복확인</button><br>
+				<button type="button" id="idCheckBtn" onclick="idCheckSend()">중복확인</button><br>
 				<div id="idCheckLabel" class="alert"></div>
 				<span id="idCondition" class="essential">*아이디는 6~12자리의 영문 또는 숫자 혼용, 특수 문자 제외</span><br>
 				
@@ -251,7 +263,9 @@
 				<input type="password" name="pw" placeholder="비밀번호" id="pw" onkeyup="pwRegCheck()"><br>
 				<span id="passwordCondition" class="essential">*비밀번호는 8 ~ 12자리이며, 반드시 영문자, 숫자를 혼합하여
 				입력하시기 바랍니다.(특수문자 제외)</span><br>
-				<label>비밀번호 확인*</label>
+				<label>비밀번호 확인
+					<span class="caution">*</span>	
+				</label>
 				<input type="password" name="confirm" placeholder="비밀번호 확인 " id="confirm" disabled="disabled"
 				onkeyup="pwConfirmCheck()">
 				<span id="pwConfirmCaution" class="caution">* 비밀번호를 한번 더 입력해주세요.</span><br>
@@ -260,14 +274,14 @@
 				<label>이메일
 					<span class="caution">*</span>	
 				</label>
-				<input type="text" name="email" id="email" placeholder="이메일" onblur="emailCheck()" >
+				<input type="text" name="email" id="email" placeholder="이메일" onkeyup="emailCheck()">
 				<label id="emailLabel" class="alert"></label><br>
 				
 				<label>주소
 					<span class="caution">*</span>	
 				</label>
 				<input type="text" id="postCode" name="postCode" placeholder="우편번호">
-				<input type="button" id="postcodeBtn" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="button" id="postcodeBtn" onclick="execDaumPostcode()" value ="우편번호 찾기"><br>
 				<input type="text" id="address" name="address" placeholder="주소"><br>
 				<input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소"><br>
 				
