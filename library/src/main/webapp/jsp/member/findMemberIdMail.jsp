@@ -38,7 +38,7 @@
 		<div class="auth">
 			<div class="auth_email">
 					<h2>이메일 인증</h2>
-					<form class="form" method="post" id ="emailForm">
+					<form class="form" method="post" id ="emailForm" action="findMemberIdMailResult">
 						<p><img src = "/image/email.png"></p>
 						<input type = "text" placeholder = "이메일을 입력해주세요." id = "authEmail" name = "authEmail" class="authEmail"><br><br>
 						<label id = "label"></label><br><br>

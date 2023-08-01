@@ -36,8 +36,8 @@
 		<div>
 			<h2 align = "center">아이디 찾기</h2>
 			<div class="info" style = "text-align:center">
-				${sessionScope.name}님의 아이디는 ${sessionScope.id}입니다.<br>
-				이메일은 ${sessionScope.email}입니다.
+				${name}님의 아이디는 ${id}입니다.<br>
+				이메일은 ${email}입니다.
 			</div>
 			<input type = "button" value = "확인" onclick = "location.href='/login'">
 		</div>

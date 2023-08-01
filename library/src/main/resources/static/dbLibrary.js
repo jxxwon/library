@@ -147,8 +147,9 @@ function resProcId(){
 	if(xhr.readyState === 4 && xhr.status === 200){
 		document.getElementById('label2').innerHTML = xhr.responseText;
 		if(document.getElementById('label2').innerHTML === "인증 성공"){
-			xhr.open('post', 'findMemberIdMailReslt');
-			location.href='/findMemberIdMailResult';
+			xhr.open('post', 'findMemberIdMailResult');
+			var f = document.getElementById('emailForm');
+			f.submit();
 		}
 	}
 }

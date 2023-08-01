@@ -77,16 +77,7 @@ public class MemberService {
 		if(member.getName() == null || member.getName().isEmpty()) {
 			return "이름을 입력하세요.";
 		}
-		/*
-		System.out.println("암호화된 비밀번호 : " + cryptPassword);
-		System.out.println("암호화된 비밀번호 길이 : " + cryptPassword.length());
-		System.out.println("평문 비밀번호 : " + member.getPw());
-		
-		 암호화된 비밀번호 : $2a$10$.EOushkIDT8Gnb33i6NOSuS32ymKWipIvLCKeVlwGR20UWJYRYWEm
-		 암호화된 비밀번호 길이 : 60
-		 평문 비밀번호 : 1111
-		 ALTER TABLE session_quiz MODIFY pw varchar2(60);
-		 */
+
 		MemberDTO result = mapper.loginProc(member.getId());
 		if(result == null) {
 			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
@@ -98,6 +89,10 @@ public class MemberService {
 		}
 		
 		return "이미 가입된 아이디 입니다.";
+	}
+
+	public MemberDTO findMember(String authEmail) {
+		return mapper.emailCheck(authEmail);
 	}
 
 	

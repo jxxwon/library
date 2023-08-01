@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 @Controller
 public class MemberController {
@@ -191,15 +192,20 @@ public class MemberController {
 		return "member/findMemberIdMail";
 	}
 	
-	// 아이디 찾기 - 이메일 인증 : 메인 화면
-	@GetMapping("findMemberIdMailResult")
-	public String findMemberIdMailProc() {
-		return "member/findMemberIdMailProc";
-	}
-
-	// 아이디 찾기 - 이메일 인증 : 결과
+	// 아이디 찾기 - 이메일 인증
 	@PostMapping("findMemberIdMailResult")
-	public String findMemberIdMailResult() {
+	public String findMemberIdMailResult(String authEmail, Model model) {
+		MemberDTO result = service.findMember(authEmail);
+		if(result != null) {
+			String name = result.getName();
+			String id = result.getId();
+			String email = result.getEmail();
+			model.addAttribute("name", name);
+			model.addAttribute("id", id);
+			model.addAttribute("email", email);
+		} else {
+			System.out.println("응 없어");
+		}
 		return "member/findMemberIdMailResult";
 	}
 	
