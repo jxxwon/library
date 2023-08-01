@@ -141,3 +141,11 @@
 .list_area .con2{
 	text-align: left;
 }
+
+.list_area .con2 li {
+	margin-bottom: 10px;
+}
+
+.list_area .con2 li span{
+	margin-right: 10px;
+}
