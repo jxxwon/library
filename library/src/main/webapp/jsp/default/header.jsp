@@ -40,12 +40,8 @@
             	<div id="welcome" style = "display:none" align="right" >${sessionScope.id }님 환영합니다.</div>
                 <ul class="left">
                     <li><a href="${context}main">메인</a></li>
-<<<<<<< HEAD
-                    <li id="login" ><a href="${context}login">로그인</a></li>
-=======
                     <li id="login" style = "background-color:#fff"><a href="${context}login">로그인</a></li>
                     <li id="register" style = "background-color:#fff"><a href="${context}register">회원가입</a></li>
->>>>>>> refs/heads/jiiwon
                     <li id="logout" style = "display:none"><a href="${context}logout">로그아웃</a></li>
                     <li id = "myLibrary"><a href="${context}libraryForm">마이라이브러리</a></li>
                     <li id = "adminForm" style = "display:none"><a href="${context}libraryForm">관리자페이지</a></li>

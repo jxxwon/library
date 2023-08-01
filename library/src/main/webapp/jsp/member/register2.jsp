@@ -4,9 +4,6 @@
 <title>하이디미어 도서관 - 회원가입</title>
 <link href="/css/main.css" rel="stylesheet" type="text/css">
 <link href="/css/container.css" rel="stylesheet" type="text/css">
-<style>
-.regProcess span .active{background-color:#338cfa; color:#fff;}
-</style>
 <c:import url = "/header"/>
 <div class="RegisterContainer inner mb_30" >
 	<c:import url = "/subMenuLogin"/>

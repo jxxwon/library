@@ -50,6 +50,7 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 	box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 	-moz-box-sizing:border-box;}
+.regProcess span.active{background-color:#338cfa; color:#fff;}
 	
 /*회원가입 연령별*/
 .age {overflow:hidden; width:100%; text-align:center;}
