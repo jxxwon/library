@@ -6,35 +6,35 @@
 <link href="/css/main.css" rel="stylesheet" type="text/css">
 <link href="/css/container.css" rel="stylesheet" type="text/css">
 
-<title>하이디미어 도서관 - 회원가입</title>
+<title>하이디미어 도서관 - 아이디/비밀번호 찾기</title>
 <c:import url = "/header"/>
 
 <style>
-.regProcess span .active{background-color:#338cfa; color:#fff;}
-.auth {display:flex; justify-content: center; height:auto;}
-.auth_email {height:auto;}
-input[type="button"] {width:399.85px; height:45px; border:1px solid #ddd; cursor:pointer;}
+	.find .active{background-color:#338cfa;}
+	.find .active a{color:#fff;}
+	.auth {display:flex; justify-content: center; height:auto;}
+	.auth_email {height:auto;}
+	input[type="button"] {width:399.85px; height:45px; border:1px solid #ddd; cursor:pointer;}
 </style>
 
 
 <div class="RegisterContainer inner mb_30" >
 	<c:import url = "/subMenuLogin"/>
 	<div class="loginContent">
-		<h1>회원가입</h1>
+		<h1>아이디/비밀번호 찾기</h1>
 		<div class="mb_30 mt_20">
 			<a href="/main">HOME</a> > 
 			<a href="/register">회원정보</a> >
-			<a class="checked" href="/register">회원가입</a>
+			<a class="checked" href="/findMemberId">아이디/비밀번호 찾기</a>
 		</div>
-		<div class="register">
-			<div class="regProcess">
-				<span>회원유형</span> <p>></p>
-				<span>약관동의</span> <p>></p>
-				<span class="active">본인확인</span> <p>></p>
-				<span>정보입력</span> <p>></p>
-				<span>가입완료</span>
+		<div class="find">
+			<div class = "findId active">
+				<a href = "/findMemberId">아이디 찾기</a>
 			</div>
-		</div>
+			<div class="findPw">
+				<a href = "/findMemberPw">비밀번호 찾기</a>
+			</div>
+		</div>		
 		<div class="auth">
 			<div class="auth_email">
 					<h2>이메일 인증</h2>

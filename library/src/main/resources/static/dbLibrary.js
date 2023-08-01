@@ -18,6 +18,7 @@ function agreementCheck(){
 }
 
 /* 회원가입 - 이메일 인증 */
+var xhr;
 function sendEmail(){
 	var email = document.getElementById('authEmail');
 	label = document.getElementById('label');
@@ -29,21 +30,35 @@ function sendEmail(){
 		label.innerHTML = '인증 메일이 발송되었습니다.';
 		document.getElementById('authNum').style.display = 'block';
 		document.getElementById('confirmEmail').style.display = 'block';
+		xhr = new XMLHttpRequest();
+    	xhr.open('post', 'sendEmail')
+    	xhr.send(document.getElementById('authEmail').value)
 	}
-
 }
 
 function auth(){
 	var authNum = document.getElementById('authNum');
 	label = document.getElementById('label2');
-	
 	if(authNum.value == ""){
 		label.innerHTML = '인증번호를 입력해주세요.';
 	} else{
-		f.submit();
+		xhr.open('post', 'sendAuth');
+    	xhr.send(document.getElementById('authNum').value);
+    	xhr.onreadystatechange = resProc
+	}
+}
+    
+function resProc(){
+	if(xhr.readyState === 4 && xhr.status === 200){
+		document.getElementById('label2').innerHTML = xhr.responseText;
+		if(document.getElementById('label2').innerHTML === "인증 성공"){
+			xhr.open('post', 'auth');
+			location.href='/register3';
+		}
 	}
 }
 
+/* 도서관 일반 회원 가입 */
 function allCheck(){
 	let id = document.getElementById('id');
 	let pw = document.getElementById('pw');
@@ -64,13 +79,24 @@ function allCheck(){
 	}
 }
 
-function idCheck(){
+function nameCheck(){
 	let name = document.getElementById('name');
 	nameLabel = document.getElementById('nameLabel');
-	 if(name.value == ""){
-		 label.innerHTML = '이름은 필수 항목입니다.'
+	 if(!name.value){
+		 nameLabel.innerHTML = '*이름은 필수 항목입니다.'
 	 }else{
-		 label.innerHTML = ''
+		 nameLabel.innerHTML = ''
+	 }
+	// window.alert('pwCheck 호출')
+}
+
+function emailCheck(){
+	let email = document.getElementById('email');
+	emailLabel = document.getElementById('emailLabel');
+	 if(!email.value){
+		 emailLabel.innerHTML = '*이메일은 필수 항목입니다.'
+	 }else{
+		 emailLabel.innerHTML = ''
 	 }
 	// window.alert('pwCheck 호출')
 }
@@ -104,6 +130,25 @@ function loginCheck(){
 	}
 }
 
-// 도서관 일반 회원 가입
-
-
+/*아이디/비밀번호 찾기 이메일 인증*/
+function auth(){
+	var authNum = document.getElementById('authNum');
+	label = document.getElementById('label2');
+	if(authNum.value == ""){
+		label.innerHTML = '인증번호를 입력해주세요.';
+	} else{
+		xhr.open('post', 'sendAuth');
+    	xhr.send(document.getElementById('authNum').value);
+    	xhr.onreadystatechange = resProcId
+	}
+}
+    
+function resProcId(){
+	if(xhr.readyState === 4 && xhr.status === 200){
+		document.getElementById('label2').innerHTML = xhr.responseText;
+		if(document.getElementById('label2').innerHTML === "인증 성공"){
+			xhr.open('post', 'findMemberIdMailReslt');
+			location.href='/findMemberIdMailResult';
+		}
+	}
+}

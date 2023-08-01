@@ -68,6 +68,12 @@ public class MemberController {
 		return "redirect:main";
 	}
 	
+	@RequestMapping("logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:main";
+	}
+	
 	@RequestMapping("register")
 	public String register() {
 		return "member/register";
@@ -90,15 +96,49 @@ public class MemberController {
 	}
 	
 	// 이메일 인증 프로세스
-	@PostMapping("authProc")
-	public String authProc() {
-		return "member/register3";
+	
+	@ResponseBody
+	@PostMapping(value="sendEmail", produces = "text/plain; charset=utf-8")
+	public String sendEmail(@RequestBody(required = false) String email) {
+		return service.sendEmail(email);
 	}
 	
-	@RequestMapping("register3")
+	@ResponseBody
+	@PostMapping(value="sendAuth", produces = "text/plain; charset=utf-8")
+	public String sendAuth(@RequestBody(required = false) String authNum) {
+		String result = service.sendAuth(authNum);
+		return result;
+	}
+	
+	//회원가입(정보입력)
+	@GetMapping("register3")
 	public String register3() {
 		return "member/register3";
 	}
+
+	@RequestMapping("register4")
+	public String register4() {
+		return "member/register4";
+	}
+	
+	@PostMapping("registerProc")
+	public String registerProc(MemberDTO member, String confirm) {
+		String result = service.registerProc(member, confirm);
+		if(result.equals("회원 등록 완료")) {
+			System.out.println("회원 등록 완료 된듯");
+			return "redirect:login";
+		}
+		System.out.println("회원 등록 안됨");
+		return "member/register";
+	}
+	
+	@ResponseBody //return을 jsp가 아닌 응답 데이터를 주는 것이다.
+	@PostMapping(value="exist", produces = "text/plain; charset=UTF-8")
+	public String idCheck(@RequestBody(required = false) String id) {
+		//System.out.println("입력한 아이디 : " + id);
+		return service.exists(id);
+	}
+	
 	
 	//카카오 로그인
 	@Autowired private KakaoService kakao;
@@ -132,4 +172,35 @@ public class MemberController {
 		kakao.unLink();
 		return "redirect:main";
 	}
+	
+	// 아이디 찾기
+	@RequestMapping("findMemberId")
+	public String findMemberId() {
+		return "member/findMemberId";
+	}
+
+	// 비밀번호 찾기
+	@RequestMapping("findMemberPw")
+	public String findMemberPw() {
+		return "member/findMemberPw";
+	}
+	
+	// 아이디 찾기 - 이메일 인증
+	@RequestMapping("findMemberIdMail")
+	public String findMemberIdMail() {
+		return "member/findMemberIdMail";
+	}
+	
+	// 아이디 찾기 - 이메일 인증 : 메인 화면
+	@GetMapping("findMemberIdMailResult")
+	public String findMemberIdMailProc() {
+		return "member/findMemberIdMailProc";
+	}
+
+	// 아이디 찾기 - 이메일 인증 : 결과
+	@PostMapping("findMemberIdMailResult")
+	public String findMemberIdMailResult() {
+		return "member/findMemberIdMailResult";
+	}
+	
 }
