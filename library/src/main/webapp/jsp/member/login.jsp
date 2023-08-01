@@ -41,7 +41,7 @@ String redirectURI = "http://localhost/kakaoLogin";
 					</a>
 				</div>
 				<div class="bottomButtonBox">
-					<button class="registerButton">회원가입</button>
+					<button class="registerButton" onclick="location.href='register'">회원가입</button>
 					<button class="findButton">아이디/비밀번호 찾기</button>
 				</div>
 			</div>

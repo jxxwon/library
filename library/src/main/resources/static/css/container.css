@@ -171,8 +171,8 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 .RIContainer .essential{font-weight: 400; }
 .RIContainer .alert{color:blue;}
 
-.RIContainer button, #postcodeBtn, #authBtn, .bottomBtn{padding:10px; cursor: pointer;}
-.RIContainer .SMSBtn{cursor: pointer;}
+.RIContainer button, #postcodeBtn, #authBtn{padding:10px; cursor: pointer;}
+.RIContainer .SMSBtn, .loginButton, .saveId{cursor: pointer;}
 
 .RIContainer #id, .RIContainer #pw, #confirm, #name, #mobile, 
 #proName, #birth, #postcode, #email, 
@@ -181,8 +181,8 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 #idCheckLabel{margin-bottom: 5px;}
 
 #address, #detailAddress{width: 450px; margin-left:84px;}
-.registerBtn, .cancelBtn{width: 270px; padding:18px; cursor: pointer;}
-.registerBtn{margin-right: 50px !important;}
+.bottomButtonBox .registerButton, .bottomButtonBox .findButton
+{ cursor: pointer;}
 
 .RIContainer input::placeholder{font-size: 15px;}
 
