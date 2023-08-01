@@ -130,9 +130,6 @@ function loginCheck(){
 	}
 }
 
-<<<<<<< HEAD
-
-=======
 /*아이디/비밀번호 찾기 이메일 인증*/
 function auth(){
 	var authNum = document.getElementById('authNum');
@@ -155,4 +152,3 @@ function resProcId(){
 		}
 	}
 }
->>>>>>> refs/heads/jiiwon
