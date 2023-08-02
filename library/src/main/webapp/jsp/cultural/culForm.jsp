@@ -1,9 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <title>하이디미어 도서관 - 문화행사</title>
 <c:url var="context" value="/" />
 <link href="/css/cultural.css" rel="stylesheet" type="text/css">
+
+<script>
+  	document.addEventListener('DOMContentLoaded', function() {	
+  		//JavaScript 코드가 DOM이 로드되기 전에 실행되면 해당 요소를 찾을 수 없기 때문에 오류가 발생할 수 있음
+  		//DOMContentLoaded 이벤트가 발생할 때까지 스크립트가 실행되지 않고, DOM이 완전히 로드된 이후에 실행
+    var id = "${sessionScope.id}"; // 세션에 저장된 id 값을 가져와서 id 변수에 할당
+    if (id === 'admin') {
+      document.getElementById('apply').style.display = 'block';
+    } else {
+      document.getElementById('apply').style.display = 'block';/* 
+      document.getElementById('apply').style.display = 'none'; */
+    }
+  });
+</script>
 
 <c:import url="/header" />
 
@@ -29,14 +42,20 @@
 				</ul>
 			</div>
 		</div>
-
+		
  		<div class="top-menu">
 			<ul>
 				<li class="menu-item" id="menu1"><a href="#" keyvalue1="15" keyvalue2=""><span>접수중 / 예정행사</span></a></li>
-				<li class="menu-item" id="menu2"><a href="#" keyvalue1="15" keyvalue2="9"><span>문화행사 신청</span></a></li>
+				<!-- <li class="menu-item" id="menu2"><a href="#" keyvalue1="15" keyvalue2="9"><span>문화행사 신청</span></a></li> -->
 				<li class="menu-item" id="menu3"><a href="#" keyvalue1="15" keyvalue2="10"><span>접수마감된 행사</span></a></li>
 				<li class="menu-item" id="menu4"><a href="#" keyvalue1="15" keyvalue2="11"><span>나의신청내역보기</span></a></li>
 			</ul>
+		</div>
+	
+		<div class="apply" id="apply" style="display:none">
+		    <ul>
+		        <li><a href="${context}culSubmit">신청하기</a></li>
+		    </ul>
 		</div>
 		
 		<div class="cul-list">
@@ -131,6 +150,10 @@
 		</div>
 	</div>
 </div>
+
+
+
+
 <c:import url="/footer" />
 
 <script src="/javaScript/subCulTop.js"></script>
