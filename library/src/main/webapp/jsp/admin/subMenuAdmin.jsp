@@ -14,5 +14,4 @@
 	</ul>
 </div>
 
-<script src="/javaScript/admin.js"></script>
 

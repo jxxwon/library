@@ -7,10 +7,13 @@
 
 <title>하이미디어 도서관 - 관리자 페이지 : 회원관리</title>
 
-<body onload="condition()">
-	<c:import url = "/header"/>
+<c:import url = "/header"/>
+
+
+<body>
 	<div class = "adminContainer inner">
 		<c:import url = "/subMenuAdmin"/>
+		<script src = "/javaScript/admin.js"></script>
 		<div class = "adminContent">
 			<div class = "admin header">
 				<h1>회원관리</h1>
@@ -20,7 +23,7 @@
 					<a class="checked" href="/adminMember">회원관리</a>
 				</div>
 				<div class = "subMenu_member">
-					<ul>
+					<ul onload="condition()">
 						<li id = "activeLi" class = "active"><a href = "#">인증 승인/반려</a></li>
 						<li><a href = "#">회원 제재</a></li>
 						<li><a href = "#">회원 목록 조회</a></li>
@@ -44,6 +47,7 @@
 						<input type = "text" placeholder="검색어를 입력하세요." id="memberSearch">
 						<input type = "button" value = "조회" id="searchBtn">
 					</div>
+					
 				</form>
 			</div>
 		</div>
