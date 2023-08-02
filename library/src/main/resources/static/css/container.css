@@ -203,3 +203,14 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 .info .changePw table tr td input[type="button"]{width:60px; height:30px; font-size:17px; line-height:17px;}
 .info .changePw table tr td input[type="submit"]{width:60px; height:30px; font-size:17px; line-height:17px;}
 .info .changePw table tr td label{width:auto;}
+
+/* 회원탈퇴 */
+.delete_info {margin-top:40px; padding:20px; border:1px solid #ddd; line-height:145%; text-align:left;}
+
+.deleteMember {margin-top:40px;}
+.deleteMember table tr td {padding:10px;}
+.deleteMember table tr td label {width:308.89px; text-align:center;}
+.deleteMember table tr td input[type="text"] {width:200px; height:30px;}
+.deleteMember table tr td input[type="password"] {width:200px; height:30px;}
+.deleteMember table tr td input[type="submit"]{width:60px; height:30px; font-size:17px; line-height:17px;}
+.deleteMember table tr td input[type="button"]{width:60px; height:30px; font-size:17px; line-height:17px;}

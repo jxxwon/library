@@ -118,6 +118,32 @@ public class MemberService {
 		return "등록되지 않은 아이디입니다.";
 	}
 
+	public String deleteMember(String id, String pw) {
+		if(pw == null || pw.equals("")) {
+			return "비밀번호를 입력하세요.";
+		}
+
+		MemberDTO check = mapper.loginProc(id);
+		if(check == null) {
+			return "등록되지 않은 회원입니다.";
+		}
+		BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+		if(bpe.matches(pw, check.getPw())) {
+			Random r = new Random();
+			String delId = String.format("%06d", r.nextInt(1000000));
+			MemberDTO delChk = mapper.loginProc(delId);
+			if(delChk != null) {
+				return "탈퇴 중 오류가 발생하였습니다. 관리자에게 문의하세요.";
+			} else {
+				int result = mapper.updateId(id, delId);
+				if(result != 1) {
+					return "탈퇴 중 오류가 발생하였습니다. 관리자에게 문의하세요.";
+				}
+			}
+		}
+		return "회원 탈퇴가 완료되었습니다.";
+	}
+
 }
 
 
