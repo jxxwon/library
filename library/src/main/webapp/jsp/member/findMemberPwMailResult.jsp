@@ -36,19 +36,19 @@
 		<div>
 			<h2 align = "center">비밀번호 찾기</h2>
 			<div class = "info" align = "center">
-				<form class = "changePw" action="changePw" method="post" onload="changePwId()">
+				<form  action="changePw" class = "changePw" method="post">
 					<table>
 						<tr>
 							<th>아이디</th>
-							<td>${authId }</td>
+							<td><input type = "text" name = "authId" value = "${authId }" readonly="readonly"></td>
 						</tr>
 						<tr>
 							<th>변경할 비밀번호</th>
-							<td><input type = "password" id = "changePw" autocomplete="new-password" onchange = "changePwCheck()"></td>
+							<td><input type = "password" id = "changePw" name = "changePw" autocomplete="new-password" onchange = "changePwCheck()"></td>
 						</tr>
 						<tr>
 							<th>변경할 비밀번호 확인</th>
-							<td><input type = "password" id = "confirmChangePw" autocomplete="new-password"
+							<td><input type = "password" id = "confirmChangePw" name = "confirmChangePw" autocomplete="new-password"
 								onchange="changePwCheck()"></td>
 						</tr>
 						<tr>

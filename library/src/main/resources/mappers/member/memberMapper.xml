@@ -39,6 +39,10 @@
 		VALUES(#{id}, #{pw}, #{name}, #{birth}, #{email}, #{address}, #{mobile}, #{proName}, #{status}, #{detailAddress}, #{postCode})
 	</insert>
 	
+	<!-- 비밀번호 변경 -->
+	<update id="changePw">
+		UPDATE member SET pw = #{cryptPassword} WHERE id = #{authId}
+	</update>
 	
 
 </mapper>

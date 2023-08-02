@@ -227,8 +227,12 @@ public class MemberController {
 	}
 	
 	@PostMapping("changePw")
-	public String changePw() {
-		return "redirect:login";
+	public String changePw(String authId, String changePw, String confirmChangePw) {
+		String result = service.changePw(authId, changePw);
+		if(result.equals("비밀번호 변경이 완료되었습니다.")) {
+			return "redirect:login";
+		}
+		return "member/findMemberPwMailResult";
 	}
 }
 

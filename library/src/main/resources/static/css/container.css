@@ -199,6 +199,7 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 
 .info .changePw table tr td {padding:10px;}
 .info .changePw table tr td input[type="password"]{width:200px; height:30px;}
+.info .changePw table tr td input[type="text"]{width:200px; height:30px;}
 .info .changePw table tr td input[type="button"]{width:60px; height:30px; font-size:17px; line-height:17px;}
 .info .changePw table tr td input[type="submit"]{width:60px; height:30px; font-size:17px; line-height:17px;}
 .info .changePw table tr td label{width:auto;}

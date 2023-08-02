@@ -103,6 +103,21 @@ public class MemberService {
 		return "등록되지 않은 아이디입니다.";
 	}
 
+	public String changePw(String authId, String changePw) {
+		MemberDTO check = mapper.loginProc(authId);
+		if(check != null) {
+			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+			String cryptPassword = bpe.encode(changePw);
+			int result = mapper.changePw(authId, cryptPassword);
+			if(result == 1) {
+				return "비밀번호 변경이 완료되었습니다.";
+			} else {
+				return "비밀번호 변경에 실패하였습니다.";
+			}
+		}
+		return "등록되지 않은 아이디입니다.";
+	}
+
 }
 
 
