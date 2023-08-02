@@ -112,7 +112,7 @@ public class KakaoService {
 		}
 	}
 
-	public String getUserInfo() {
+	public MemberDTO getUserInfo() {
 		/*
 		 * 사용자 정보 가져오기
 		 * https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#req-user-info
@@ -144,54 +144,77 @@ public class KakaoService {
 			String kakaoID = jsonTree.get("id").toString();
 			System.out.println("kakaoID : " + kakaoID);
 			
-			// 카카오 회원 연동 여부 확인하기.(카카오에서 주는 kakaoID로 중복 확인)
-				MemberDTO kakaoIDCheck = memberMapper.kakaoIDCheck(kakaoID);
-				// 카카오 회원 X (= 카카오 회원가입 X), 
-				if(kakaoIDCheck == null) {
-					// 일반 회원 여부 확인(이메일 중복 여부로 확인 - 명확한 것은 아님. 이메일 수정 가능하니까)
-					MemberDTO emailCheck = memberMapper.emailCheck(kakaoEmail);
-					
-					// 이메일 중복 X => 회원가입 진행(회원 db에 넣기)
-					if(emailCheck == null) {
-						//카카오 연동 회원가입 페이지로 이동.(이름, 생년월일, 주소, 전화번호)
-						session.setAttribute("kakaoID", kakaoID);
-						session.setAttribute("kakaoEmail", kakaoEmail);
-						return "카카오 연동 회원가입";
-					}
-					// 이메일 중복 O => 
-					else {
-						// 이미 '하이미디어 라이브러리'회원입니다. 연동할까요? 물어보기.
-						// 연동 동의 O => 연동 진행
-						// 연동 페이지로 넘어가게함 => 도서관 아이디, 비밀번호 받아서 로그인 하듯이
-						
-						// 연동 동의 X => 
-						// 기존 db에 있는 아이디로 로그인하기 버튼 누르게하기.
-						return "기존 아이디로 로그인하기";
-					}
-				}
-				// 카카오 회원 O => 로그인 진행
-				else {
-					memberMapper.loginProc(kakaoID);
-					System.out.println("카카오 로그인 성공");
-					return "로그인 성공";
-				}
+			MemberDTO kakaoUserInfo = new MemberDTO(); //사실상 이메일과, 카카오아이디만 받을 수 있음.
+			kakaoUserInfo.setEmail(kakaoEmail);
+			kakaoUserInfo.setKakaoid(kakaoID);
+			return kakaoUserInfo;
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("4");
+		return null;
+	}
+	
+	public MemberDTO kakaoExist() {
+		MemberDTO kakaoUserInfo = getUserInfo();
+		
+		// 카카오 회원 연동 여부 확인하기.(카카오에서 주는 kakaoID로 중복 확인)
+		MemberDTO kakaoMember = memberMapper.kakaoIDCheck(kakaoUserInfo.getKakaoid());
+		// 카카오 회원 O => 로그인 진행
+		if(kakaoMember != null) {
+			session.setAttribute("kakaoEmail", kakaoUserInfo.getEmail()); //일반회원 여부 알기위해서 필요함
+			return kakaoMember;
+		}
+		// 카카오 회원 X (= 카카오 회원가입 X), 
 		return null;
 	}
 	
 	public String kakaoRegisterProc(MemberDTO member, String confirm) {
-		
-		MemberDTO result = memberMapper.loginProc(member.getId());
-		if(result == null) {
-			String kakaoID = (String)session.getAttribute("kakaoID");
-			String kakaoEmail = (String)session.getAttribute("kakaoEmail");
-			
-			member.setEmail(kakaoEmail);
-			member.setKakaoid(kakaoID);
+		MemberDTO kakaoUserInfo = getUserInfo();
+		System.out.println(kakaoUserInfo.getKakaoid());
+		// 카카오 회원 연동 여부 확인하기.(카카오에서 주는 kakaoID로 중복 확인)
+		MemberDTO kakaoIDCheck = memberMapper.kakaoIDCheck(kakaoUserInfo.getKakaoid());
+//		// 카카오 회원 X (= 카카오 회원가입 X), 
+//		if(kakaoUserExist.equals("카카오 회원이 아닙니다.")) {
+//			// 일반 회원 여부 확인(이메일 중복 여부로 확인 - 명확한 것은 아님. 이메일 수정 가능하니까)
+//			MemberDTO emailCheck = memberMapper.emailCheck(kakaoEmail);
+//			
+//			// 이메일 중복 X => 회원가입 진행(회원 db에 넣기)
+//			if(emailCheck == null) {
+//				//카카오 연동 회원가입 페이지로 이동.(이름, 생년월일, 주소, 전화번호)
+//				session.setAttribute("kakaoID", kakaoID);
+//				session.setAttribute("kakaoEmail", kakaoEmail);
+//				return "카카오 연동 회원가입";
+//			}
+//			// 이메일 중복 O => 
+//			else {
+//				// 이미 '하이미디어 라이브러리'회원입니다. 연동할까요? 물어보기.
+//				// 연동 동의 O => 연동 진행
+//				// 연동 페이지로 넘어가게함 => 도서관 아이디, 비밀번호 받아서 로그인 하듯이
+//				
+//				// 연동 동의 X => 
+//				// 기존 db에 있는 아이디로 로그인하기 버튼 누르게하기.
+//				return "기존 아이디로 로그인하기";
+//			}
+//		}
+//		// 카카오 회원 O => 로그인 진행
+//		else {
+//			memberMapper.loginProc(kakaoID);
+//			
+//			System.out.println("카카오 로그인 성공");
+//			return "로그인 성공";
+//		}
+//		
+//		
+//		
+		//MemberDTO result = memberMapper.loginProc(member.getId());
+		if(kakaoIDCheck == null) {
+			//String kakaoID = (String)session.getAttribute("kakaoID");
+			//String kakaoEmail = (String)session.getAttribute("kakaoEmail");
+			System.out.println("이메일"+kakaoUserInfo.getEmail());
+			System.out.println(kakaoUserInfo.getEmail().getClass().getSimpleName());
+			member.setEmail(kakaoUserInfo.getEmail());
+			member.setKakaoid(kakaoUserInfo.getKakaoid());
 			member.setStatus("D");
 			memberMapper.kakaoRegisterProc(member);
 			return "회원 등록 완료";

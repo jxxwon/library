@@ -35,10 +35,20 @@
 		</div>		
 		<div>
 			<h2 align = "center">아이디 찾기</h2>
-			<div class="info" style = "text-align:center">
-				${sessionScope.name}님의 아이디는 ${sessionScope.id}입니다.<br>
-				이메일은 ${sessionScope.email}입니다.
-			</div>
+			<c:choose>
+				<c:when test = "${empty id}">
+					<div class="info" style = "text-align:center; height:200px; line-height:200px;">
+						등록된 회원 정보가 아닙니다.
+					</div> 
+				</c:when>
+				<c:otherwise>
+					<div class="info" style = "text-align:center">
+						${name}님의 아이디는 ${id}입니다.<br>
+						이메일은 ${email}입니다.
+					</div>
+				</c:otherwise>
+			</c:choose>
+			
 			<input type = "button" value = "확인" onclick = "location.href='/login'">
 		</div>
 	</div>

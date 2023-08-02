@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <link href="/css/main.css" rel="stylesheet" type="text/css">
-    <link href="/css/container.css" rel="stylesheet" type="text/css">
+<title>하이디미어 도서관 - 로그인</title>
+<link href="/css/main.css" rel="stylesheet" type="text/css">
+<link href="/css/container.css" rel="stylesheet" type="text/css">
+
 <c:import url = "/header"/>
+<script src = "/dbLibrary.js"></script>
 <% 
 String RESTAPIKEY = "3f70e9cb27d96ef5a414516587c2cb5c";
 String redirectURI = "http://localhost/kakaoLogin";
@@ -25,7 +28,7 @@ String redirectURI = "http://localhost/kakaoLogin";
 				<form action="loginProc" method="post" class="loginForm mb_10" id="f">
 					<div class="mr_10">
 						<label>아이디 </label>
-						<input type="text" name="id" placeholder="아이디" class="mb_10" id="id"><br>
+						<input type="text" name="id" placeholder="아이디" class="mb_10" id="id" autofocus="autofocus"><br>
 						<label>비밀번호 </label>
 						<input type="password" name="pw" placeholder="비밀번호" id="pw"><br>
 					</div>

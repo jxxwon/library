@@ -50,10 +50,10 @@ public class MemberService {
 		if(id == null || id.isEmpty())
 			return "아이디를 입력하세요.";
 		
-		Pattern pattern = Pattern.compile("^[a-z0-9]{1}[a-z0-9_-]{4,19}$");
+		Pattern pattern = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,12}$");
 		Matcher matcher = pattern.matcher(id);
 		if(matcher.matches() == false)
-			return "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
+			return "아이디는 6~12자리의 영문 또는 숫자 혼용, 특수 문자 제외";
 		
 		MemberDTO result = mapper.idCheck(id);
 		if(result == null)
@@ -77,16 +77,7 @@ public class MemberService {
 		if(member.getName() == null || member.getName().isEmpty()) {
 			return "이름을 입력하세요.";
 		}
-		/*
-		System.out.println("암호화된 비밀번호 : " + cryptPassword);
-		System.out.println("암호화된 비밀번호 길이 : " + cryptPassword.length());
-		System.out.println("평문 비밀번호 : " + member.getPw());
-		
-		 암호화된 비밀번호 : $2a$10$.EOushkIDT8Gnb33i6NOSuS32ymKWipIvLCKeVlwGR20UWJYRYWEm
-		 암호화된 비밀번호 길이 : 60
-		 평문 비밀번호 : 1111
-		 ALTER TABLE session_quiz MODIFY pw varchar2(60);
-		 */
+
 		MemberDTO result = mapper.loginProc(member.getId());
 		if(result == null) {
 			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
@@ -100,6 +91,61 @@ public class MemberService {
 		return "이미 가입된 아이디 입니다.";
 	}
 
+	public MemberDTO findMember(String authEmail) {
+		return mapper.emailCheck(authEmail);
+	}
+
+	public String findPw(String id) {
+		MemberDTO result = mapper.idCheck(id);
+		if(result != null) {
+			return "아이디가 확인되었습니다.";
+		}
+		return "등록되지 않은 아이디입니다.";
+	}
+
+	public String changePw(String authId, String changePw) {
+		MemberDTO check = mapper.loginProc(authId);
+		if(check != null) {
+			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+			String cryptPassword = bpe.encode(changePw);
+			int result = mapper.changePw(authId, cryptPassword);
+			if(result == 1) {
+				return "비밀번호 변경이 완료되었습니다.";
+			} else {
+				return "비밀번호 변경에 실패하였습니다.";
+			}
+		}
+		return "등록되지 않은 아이디입니다.";
+	}
+
+	public String deleteMember(String id, String pw) {
+		if(pw == null || pw.equals("")) {
+			return "비밀번호를 입력하세요.";
+		}
+
+		MemberDTO check = mapper.loginProc(id);
+		if(check == null) {
+			return "등록되지 않은 회원입니다.";
+		}
+		BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+		if(bpe.matches(pw, check.getPw())) {
+			Random r = new Random();
+			String delId = String.format("%06d", r.nextInt(1000000));
+			MemberDTO delChk = mapper.loginProc(delId);
+			if(delChk != null) {
+				return "탈퇴 중 오류가 발생하였습니다. 관리자에게 문의하세요.";
+			} else {
+				int result = mapper.updateId(id, delId);
+				if(result != 1) {
+					return "탈퇴 중 오류가 발생하였습니다. 관리자에게 문의하세요.";
+				}
+			}
+		}
+		return "회원 탈퇴가 완료되었습니다.";
+	}
+	public MemberDTO emailExists(String kakaoEmail) {
+		return mapper.emailCheck(kakaoEmail);
+	}
 	
 
 }

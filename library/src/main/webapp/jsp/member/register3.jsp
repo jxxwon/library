@@ -5,54 +5,14 @@
 <title>하이디미어 도서관 - 회원가입</title>
 <link href="/css/main.css" rel="stylesheet" type="text/css">
 <link href="/css/container.css" rel="stylesheet" type="text/css">
-
-<c:import url = "/header"/>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-    function execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-				if(data.userSelectedType === 'R'){
-					document.getElementById('address').value= data.roadAddress;
-					console.log(typeof data.roadAddress)
-				}else{
-					document.getElementById('address').value= data.jibunAddress;
-				}
-				var postCode = document.getElementById('postCode').value= data.zonecode;
-				console.log("postCode" ,data.zonecode)
-				console.log(postCode)
-				console.log(typeof data.zonecode)
-            }
-        }).open();
-    }
-    
-	var xhr;
-	function send() {
-		// Ajax 요청을 초기화합니다
-		
-		xhr = new XMLHttpRequest();
-		xhr.open('post', 'exist');
-		var idCheck = document.getElementById('id');
-		xhr.send(idCheck.value); 
-		
- 		xhr.onreadystatechange = resProc;
-	}
-			function resProc(){
-		
-		// readyState 4: 완료(성공 여부 상관X)
-		if(xhr.readyState !== 4)  
-			return; 
-		
-		if(xhr.status === 200) { //응답의 성공 여부를 알 수 있음.
-		 // status 200: 성공
-		console.log(xhr.responseText); // '반환된 텍스트'
-		var idCheckLabel = document.getElementById('idCheckLabel');
-		idCheckLabel.innerHTML = xhr.responseText;
-		} else {
-			console.log('에러: ' + xhr.status); // 요청 도중 에러 발생
-		} 
-	}
-</script> 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+<script src = "/javaScript/registerInputInfo.js"></script>
+<c:import url = "/header"/>
 
 <div class="RegisterContainer inner mb_30" >
 	<c:import url = "/subMenuLogin"/>
@@ -83,39 +43,41 @@
 				<label>보호자 이름</label>
 				<input type="text" name="proName" id="proName" placeholder="보호자 이름" ><br>
 				<label>생년월일</label>
-				<input type="text" name="birth" id="birth" placeholder="생년월일 2000-08-25" ><br>
+				<input type="text" name="birth" id="birth" placeholder="생년월일 2000-08-25"  ><br>
 				
 				<label>아이디
 					<span class="caution">*</span>	
 				</label>
-				<input type="text" name="id" id="id" placeholder="아이디" >
-				<button type="button" onclick="send()">중복확인</button>
+				<input type="text" name="id" id="id" placeholder="아이디" onkeyup="idRegCheck()">
+				<button type="button" id="idCheckBtn" onclick="idCheckSend()">중복확인</button><br>
 				<div id="idCheckLabel" class="alert"></div>
-				<span id="idCondition" class="essential">*5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.</span><br>
+				<span id="idCondition" class="essential">*아이디는 6~12자리의 영문 또는 숫자 혼용, 특수 문자 제외</span><br>
 				
 				<label>비밀번호
 					<span class="caution">*</span>	
 				</label>
-				<input type="password" name="pw" placeholder="비밀번호" id="pw"><br>
-				<span class="essential">*비밀번호는 10 ~ 12자리이며, 반드시 영문자, 숫자를 혼합하여
+				<input type="password" name="pw" placeholder="비밀번호" id="pw" onkeyup="pwRegCheck()"><br>
+				<span id="passwordCondition" class="essential">*비밀번호는 8 ~ 12자리이며, 반드시 영문자, 숫자를 혼합하여
 				입력하시기 바랍니다.(특수문자 제외)</span><br>
-				<label>비밀번호 확인*</label>
-				<input type="password" name="confirm" placeholder="비밀번호 확인 " id="confirm"
-				onchange="pwCheck()">
-				<span class="caution">* 비밀번호를 한번 더 입력해주세요.</span><br>
-				<label id="label"></label><br>
+				<label>비밀번호 확인
+					<span class="caution">*</span>	
+				</label>
+				<input type="password" name="confirm" placeholder="비밀번호 확인 " id="confirm" disabled="disabled"
+				onkeyup="pwConfirmCheck()">
+				<span id="pwConfirmCaution" class="caution">* 비밀번호를 한번 더 입력해주세요.</span><br>
+				<label id="pwConfirmMatch"></label><br>
 				
 				<label>이메일
 					<span class="caution">*</span>	
 				</label>
-				<input type="text" name="email" id="email" placeholder="이메일" onblur="emailCheck()" >
+				<input type="text" name="email" id="email" placeholder="이메일" onkeyup="emailCheck()">
 				<label id="emailLabel" class="alert"></label><br>
 				
 				<label>주소
 					<span class="caution">*</span>	
 				</label>
 				<input type="text" id="postCode" name="postCode" placeholder="우편번호">
-				<input type="button" id="postcodeBtn" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="button" id="postcodeBtn" onclick="execDaumPostcode()" value ="우편번호 찾기"><br>
 				<input type="text" id="address" name="address" placeholder="주소"><br>
 				<input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소"><br>
 				
@@ -128,6 +90,9 @@
 				<input type="checkbox" class="SMSBtn" onclick="SMS()" value="SMS수신">
 				<label>SMS 수신</label><br>
 				<span class="caution">* 도서의 반납예정일, 예약도서, 일반열람실 대기자 호출, 행사 등 안내</span><br>
+				
+				<input type="text" id="regDate" name="regDate" style="display: none;"><br>
+				
 				<input type="button" class="registerBtn" value="회원가입" onclick="allCheck()">
 				<input type="button" class="cancelBtn" value="취소" onclick="location.href='register2'"><br>
 			</form>
@@ -135,8 +100,6 @@
 		
 		
 	</div>
-<script src = "/dbLibrary.js"></script>
 </div>
 <c:import url="/footer"/>
-
 

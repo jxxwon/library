@@ -10,14 +10,14 @@ h1{margin-bottom:50px;}
 .loginImgBox  > img { width:100%; padding-top: 35px; padding-left: 10px;}
 .loginFormContainer{width:405px;}
 
-label{display:inline-block; width:80px; margin-bottom:15px;}
+.loginContainer label{display:inline-block; width:80px; margin-bottom:15px;}
 #id, #pw{width:230px; }
 .loginForm{display: flex;}
 .loginButton{background-color: skyblue; width:80px; 
 color:white; border-color: transparent; font-size: 17px;}
 
 .kakao{width: 100%; height:55px; display : flex; justify-content: center;align-items: center;
-background: #FEE500; border-radius: 5px;margin-top: 10px;}
+background: #FEE500; border-radius: 5px;margin-top: 10px; cursor: pointer;}
 
 .bottomButtonBox{display:flex;justify-content: space-between;}
 .registerButton, .findButton{
@@ -157,21 +157,23 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 .auth_email p {margin:20px 0;}
 .auth_email > div{width:188px; height:40px; line-height:40px; border:1px solid #bbb; position:absolute; left:27%;}
 .auth_email label{width:100%;}
-.auth_email input[type="text"]{width:399.85px;}
+.auth_email input[type="text"]{width:405px;}
+.auth_email input[type="button"]{width:405px; margin-left:10px;}
 
 /*회원가입 - 정보입력*/
 .RIContainer{
 	width: 700px; 
-	margin:50px auto; padding: 50px 100px;
+	margin:50px auto; padding: 50px 0 50px 100px;
 	background-color:#F5F6F7;}
 .RIContainer .logo{width: 240px; margin:0 auto 20px auto;}
 .RIContainer input{margin: 10px 0 10px; }
+.RIContainer label{display:inline-block; width:90px; margin-bottom:15px;}
 
-.RIContainer .caution{color:red; font-size: 14px;}
+.RIContainer .caution{color:red; font-size: 16px;}
 .RIContainer .essential{font-weight: 400; }
 .RIContainer .alert{color:blue;}
 
-.RIContainer button, #postcodeBtn, #authBtn{padding:10px; cursor: pointer;}
+.RIContainer button, #postcodeBtn, #authBtn{padding:12px; cursor: pointer;}
 .RIContainer .SMSBtn, .loginButton, .saveId{cursor: pointer;}
 
 .RIContainer #id, .RIContainer #pw, #confirm, #name, #mobile, 
@@ -180,16 +182,46 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 
 #idCheckLabel{margin-bottom: 5px;}
 
-#address, #detailAddress{width: 450px; margin-left:84px;}
-.bottomButtonBox .registerButton, .bottomButtonBox .findButton
-{ cursor: pointer;}
+#idCondition, #passwordCondition{display:inline-block; margin-bottom: 7px;}
 
+#address, #detailAddress{width: 450px; margin-left:94px;}
+.RIContainer .registerBtn, .RIContainer .cancelBtn{width:175px; height:60px; padding:10px; cursor: pointer;}
+.RIContainer .registerBtn{margin-right: 20px;}
 .RIContainer input::placeholder{font-size: 15px;}
+
+.daterangepicker .drp-buttons .btn {
+    width: 60px;
+    cursor: pointer;
+}
+.daterangepicker .drp-buttons .applyBtn{
+	background-color: #338CFA;
+	color: white;
+}
 
 /* 아이디/비밀번호 찾기 */
 .find {overflow:hidden; width:100%; height:40px; border:1px solid #ddd; margin-bottom:20px; text-align:center;}
 
-.find .findId {float:left; width:49%; height:40px; border-right:1px solid #ddd; line-height:40px;}
-.find .findPw {float:right; width:49%; line-height:40px;}
+.find a{display:block;}
+
+.find .findId {float:left; width:50%; height:40px; border-right:1px solid #ddd; line-height:40px; box-sizing: border-box; -webkit-box-sizing:border-box; -moz-box-sizing: border-box;}
+.find .findPw {float:right; width:50%; line-height:40px; margin-left:0; box-sizing: border-box; -webkit-box-sizing:border-box; -moz-box-sizing: border-box;}
 
 .find .findId a, .find .findPw a {font-weight:800px; display:block;}
+
+.info .changePw table tr td {padding:10px;}
+.info .changePw table tr td input[type="password"]{width:200px; height:30px;}
+.info .changePw table tr td input[type="text"]{width:200px; height:30px;}
+.info .changePw table tr td input[type="button"]{width:60px; height:30px; font-size:17px; line-height:17px;}
+.info .changePw table tr td input[type="submit"]{width:60px; height:30px; font-size:17px; line-height:17px;}
+.info .changePw table tr td label{width:auto;}
+
+/* 회원탈퇴 */
+.delete_info {margin-top:40px; padding:20px; border:1px solid #ddd; line-height:145%; text-align:left;}
+
+.deleteMember {margin-top:40px;}
+.deleteMember table tr td {padding:10px;}
+.deleteMember table tr td label {width:308.89px; text-align:center;}
+.deleteMember table tr td input[type="text"] {width:200px; height:30px;}
+.deleteMember table tr td input[type="password"] {width:200px; height:30px;}
+.deleteMember table tr td input[type="submit"]{width:60px; height:30px; font-size:17px; line-height:17px;}
+.deleteMember table tr td input[type="button"]{width:60px; height:30px; font-size:17px; line-height:17px;}
