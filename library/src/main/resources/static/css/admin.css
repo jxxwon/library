@@ -4,6 +4,9 @@
 h1{margin-bottom:50px;}
 .checked{font-weight: 600;}
 
+/*관리자페이지 왼쪽 subMenu*/
+
+
 .adminContent{padding:50px 0 0 50px; width:1000px;}
 
 .subMenu_member{border-bottom:2px solid #ddd; margin-top:45px;}
