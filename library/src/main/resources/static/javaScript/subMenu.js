@@ -13,15 +13,24 @@
         document.getElementById("subLogin").classList.add("active");
         document.getElementById("subRegister").classList.remove("active");
         document.getElementById("subFindMemberId").classList.remove("active");
+        document.getElementById("subDeleteMember").classList.remove("active");
       } else if (currentURL.includes("register")) {
         document.getElementById("subRegister").classList.add("active");
         document.getElementById("subLogin").classList.remove("active");
         document.getElementById("subFindMemberId").classList.remove("active");
+        document.getElementById("subDeleteMember").classList.remove("active");
       } else if (currentURL.includes("findMemberId")) {
         document.getElementById("subFindMemberId").classList.add("active");
         document.getElementById("subLogin").classList.remove("active");
         document.getElementById("subRegister").classList.remove("active");
-      }  else if (currentURL.includes("cultural")) {
+        document.getElementById("subDeleteMember").classList.remove("active");
+      } else if (currentURL.includes("deleteMember")){
+		document.getElementById("subDeleteMember").classList.add("active");
+        document.getElementById("subLogin").classList.remove("active");
+        document.getElementById("subRegister").classList.remove("active");
+        document.getElementById("subFindMemberId").classList.remove("active");
+	  }
+        else if (currentURL.includes("cultural")) {
         document.getElementById("cultural").classList.add("active");
         document.getElementById("cullist").classList.remove("active");
       } else if (currentURL.includes("cullist")) {
