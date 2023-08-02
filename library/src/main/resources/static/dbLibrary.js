@@ -140,6 +140,7 @@ function auth(){
 		xhr.open('post', 'sendAuth');
     	xhr.send(document.getElementById('authNum').value);
     	xhr.onreadystatechange = resProcId
+    	xhr.onreadystatechange = resProcId
 	}
 }
     
@@ -152,4 +153,45 @@ function resProcId(){
 			f.submit();
 		}
 	}
+}
+
+function findPwIdChk(){
+	var authId = document.getElementById('authId').value;
+	label = document.getElementById('label3');
+	if(authId == ""){
+		label.innerHTML = '아이디를 입력해주세요.';
+	} else {
+		xhr = new XMLHttpRequest();
+		xhr.open('post', 'findPw');
+		xhr.send(document.getElementById('authId').value);
+		xhr.onreadystatechange = resProcIdChk;
+	}
+}
+
+function resProcIdChk(){
+	if(xhr.readyState === 4 && xhr.status === 200){
+		var label3 = document.getElementById('label3');
+		label3.innerHTML = xhr.responseText;
+		if(document.getElementById('label3').innerHTML === "아이디가 확인되었습니다."){
+			findId = document.getElementById('authId').value;
+			document.getElementById('authEmailBtn').style.display = 'block';
+			document.getElementById('authEmail').style.display = 'block';
+		}
+	}
+}
+
+function changePwCheck(){
+	let regExp = /^[a-z0-9]{1}[a-z0-9_-]{4,19}$/;
+	var changePw = document.getElementById('changePw');
+ 	var confirmChangePw = document.getElementById('confirmChangePw');
+  	label = document.getElementById('confirmResult');
+  	if(regExp.test(changePw.value)==false){
+		label.innerHTML = '5~20자의&nbsp;영문&nbsp;소문자,&nbsp;숫자와&nbsp;특수기호(_),(-)만&nbsp;사용&nbsp;가능합니다.';
+	  } else {
+			if (changePw.value == confirmChangePw.value) {
+				label.innerHTML = '두 비밀번호가 일치합니다.';
+			} else {
+				label.innerHTML = '두 비밀번호를 같게 입력하세요.';
+	  }
+  }
 }

@@ -157,7 +157,8 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 .auth_email p {margin:20px 0;}
 .auth_email > div{width:188px; height:40px; line-height:40px; border:1px solid #bbb; position:absolute; left:27%;}
 .auth_email label{width:100%;}
-.auth_email input[type="text"]{width:399.85px;}
+.auth_email input[type="text"]{width:405px;}
+.auth_email input[type="button"]{width:405px; margin-left:10px;}
 
 /*회원가입 - 정보입력*/
 .RIContainer{
@@ -189,7 +190,15 @@ border-color: transparent; margin-top:10px; height:50px; font-size:15px}
 /* 아이디/비밀번호 찾기 */
 .find {overflow:hidden; width:100%; height:40px; border:1px solid #ddd; margin-bottom:20px; text-align:center;}
 
-.find .findId {float:left; width:49%; height:40px; border-right:1px solid #ddd; line-height:40px;}
-.find .findPw {float:right; width:49%; line-height:40px;}
+.find a{display:block;}
+
+.find .findId {float:left; width:50%; height:40px; border-right:1px solid #ddd; line-height:40px; box-sizing: border-box; -webkit-box-sizing:border-box; -moz-box-sizing: border-box;}
+.find .findPw {float:right; width:50%; line-height:40px; margin-left:0; box-sizing: border-box; -webkit-box-sizing:border-box; -moz-box-sizing: border-box;}
 
 .find .findId a, .find .findPw a {font-weight:800px; display:block;}
+
+.info .changePw table tr td {padding:10px;}
+.info .changePw table tr td input[type="password"]{width:200px; height:30px;}
+.info .changePw table tr td input[type="button"]{width:60px; height:30px; font-size:17px; line-height:17px;}
+.info .changePw table tr td input[type="submit"]{width:60px; height:30px; font-size:17px; line-height:17px;}
+.info .changePw table tr td label{width:auto;}

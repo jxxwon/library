@@ -179,20 +179,14 @@ public class MemberController {
 	public String findMemberId() {
 		return "member/findMemberId";
 	}
-
-	// 비밀번호 찾기
-	@RequestMapping("findMemberPw")
-	public String findMemberPw() {
-		return "member/findMemberPw";
-	}
 	
 	// 아이디 찾기 - 이메일 인증
-	@RequestMapping("findMemberIdMail")
+	@GetMapping("findMemberIdMail")
 	public String findMemberIdMail() {
 		return "member/findMemberIdMail";
 	}
 	
-	// 아이디 찾기 - 이메일 인증
+	// 아이디 찾기 - 이메일 인증 결과
 	@PostMapping("findMemberIdMailResult")
 	public String findMemberIdMailResult(String authEmail, Model model) {
 		MemberDTO result = service.findMember(authEmail);
@@ -203,10 +197,38 @@ public class MemberController {
 			model.addAttribute("name", name);
 			model.addAttribute("id", id);
 			model.addAttribute("email", email);
-		} else {
-			System.out.println("응 없어");
 		}
 		return "member/findMemberIdMailResult";
 	}
 	
+	// 비밀번호 찾기
+	@RequestMapping("findMemberPw")
+	public String findMemberPw() {
+		return "member/findMemberPw";
+	}
+	
+	@RequestMapping("findMemberPwMail")
+	public String findMemberPwMail() {
+		return "member/findMemberPwMail";
+	}
+	
+	// 비밀번호 찾기 - 아이디 여부 체크
+	@ResponseBody 
+	@PostMapping(value="findPw", produces = "text/plain; charset=UTF-8")
+	public String findPw(@RequestBody(required = false) String authId) {
+		return service.findPw(authId);
+	}
+
+	// 비밀번호 찾기 - 이메일 인증 결과
+	@PostMapping("findMemberPwMailResult")
+	public String findMemberPwMailResult(String authId, String authEmail, Model model) {
+		model.addAttribute("authId", authId);
+		return "member/findMemberPwMailResult";
+	}
+	
+	@PostMapping("changePw")
+	public String changePw() {
+		return "redirect:login";
+	}
 }
+

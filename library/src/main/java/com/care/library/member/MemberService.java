@@ -95,7 +95,13 @@ public class MemberService {
 		return mapper.emailCheck(authEmail);
 	}
 
-	
+	public String findPw(String id) {
+		MemberDTO result = mapper.idCheck(id);
+		if(result != null) {
+			return "아이디가 확인되었습니다.";
+		}
+		return "등록되지 않은 아이디입니다.";
+	}
 
 }
 
