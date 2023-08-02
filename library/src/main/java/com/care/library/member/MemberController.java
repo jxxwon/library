@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 @Controller
 public class MemberController {
@@ -196,29 +197,81 @@ public class MemberController {
 	public String findMemberId() {
 		return "member/findMemberId";
 	}
-
+	
+	// 아이디 찾기 - 이메일 인증
+	@GetMapping("findMemberIdMail")
+	public String findMemberIdMail() {
+		return "member/findMemberIdMail";
+	}
+	
+	// 아이디 찾기 - 이메일 인증 결과
+	@PostMapping("findMemberIdMailResult")
+	public String findMemberIdMailResult(String authEmail, Model model) {
+		MemberDTO result = service.findMember(authEmail);
+		if(result != null) {
+			String name = result.getName();
+			String id = result.getId();
+			String email = result.getEmail();
+			model.addAttribute("name", name);
+			model.addAttribute("id", id);
+			model.addAttribute("email", email);
+		}
+		return "member/findMemberIdMailResult";
+	}
+	
 	// 비밀번호 찾기
 	@RequestMapping("findMemberPw")
 	public String findMemberPw() {
 		return "member/findMemberPw";
 	}
 	
-	// 아이디 찾기 - 이메일 인증
-	@RequestMapping("findMemberIdMail")
-	public String findMemberIdMail() {
-		return "member/findMemberIdMail";
+	@RequestMapping("findMemberPwMail")
+	public String findMemberPwMail() {
+		return "member/findMemberPwMail";
 	}
 	
-	// 아이디 찾기 - 이메일 인증 : 메인 화면
-	@GetMapping("findMemberIdMailResult")
-	public String findMemberIdMailProc() {
-		return "member/findMemberIdMailProc";
+	// 비밀번호 찾기 - 아이디 여부 체크
+	@ResponseBody 
+	@PostMapping(value="findPw", produces = "text/plain; charset=UTF-8")
+	public String findPw(@RequestBody(required = false) String authId) {
+		return service.findPw(authId);
 	}
 
-	// 아이디 찾기 - 이메일 인증 : 결과
-	@PostMapping("findMemberIdMailResult")
-	public String findMemberIdMailResult() {
-		return "member/findMemberIdMailResult";
+	// 비밀번호 찾기 - 이메일 인증 결과
+	@PostMapping("findMemberPwMailResult")
+	public String findMemberPwMailResult(String authId, String authEmail, Model model) {
+		model.addAttribute("authId", authId);
+		return "member/findMemberPwMailResult";
 	}
 	
+	@PostMapping("changePw")
+	public String changePw(String authId, String changePw, String confirmChangePw) {
+		String result = service.changePw(authId, changePw);
+		if(result.equals("비밀번호 변경이 완료되었습니다.")) {
+			return "redirect:login";
+		}
+		return "member/findMemberPwMailResult";
+	}
+	
+	// 회원탈퇴
+	@GetMapping("deleteMember")
+	public String deleteMember() {
+		String id = (String)session.getAttribute("id");
+		if(id == null) {
+			return "redirect:login";
+		}
+		return "member/deleteMember";
+	}
+	
+	@PostMapping("deleteMemberProc")
+	public String deleteMemberProc(String pw) {
+		String id = (String)session.getAttribute("id");
+		String result = service.deleteMember(id, pw);
+		if(result.equals("회원 탈퇴가 완료되었습니다.")) {
+			session.invalidate();
+			return "redirect:main";
+		}
+		return "member/deleteMember";
+	}
 }
+

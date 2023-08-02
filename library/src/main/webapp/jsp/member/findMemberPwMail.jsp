@@ -28,23 +28,29 @@
 			<a class="checked" href="/findMemberId">아이디/비밀번호 찾기</a>
 		</div>
 		<div class="find">
-			<div class = "findId active">
+			<div class = "findId">
 				<a href = "/findMemberId">아이디 찾기</a>
 			</div>
-			<div class="findPw">
+			<div class="findPw active">
 				<a href = "/findMemberPw">비밀번호 찾기</a>
 			</div>
 		</div>		
 		<div class="auth">
-			<div class="auth_email">
+			<div class="auth_email" align="center">
 					<h2>이메일 인증</h2>
-					<form class="form" method="post" id ="emailForm" action="findMemberIdMailResult">
+					<form class="form" method="post" id ="emailForm" action="findMemberPwMailResult" align="center">
 						<p><img src = "/image/email.png"></p>
-						<input type = "text" placeholder = "가입 시 등록한 이메일을 입력해주세요." id = "authEmail" name = "authEmail" class="authEmail"><br><br>
+						<div>
+							<input type = "text" placeholder = "아이디를 입력해주세요." id = "authId" name = "authId" class="authId" style = "width:55%">
+							<input type = "button" value = "확인" style = "width:40%; margin-left:0px;" onclick = "findPwIdChk()">
+						</div>
+						<br><br>
+						<label id = "label3"></label><br><br>
+						<input type = "text" placeholder = "이메일을 입력해주세요." id = "authEmail" name = "authEmail" class="authEmail" style="display:none; margin-left:10px"><br><br>
 						<label id = "label"></label><br><br>
-						<input type = "button" value = "인증 메일 발송" onclick = "sendEmail()"/>
+						<input type = "button" id = "authEmailBtn" value = "인증 메일 발송" onclick = "sendEmail()" style = "display:none"/>
 						<br><br><br>
-						<input type = "text" placeholder = "인증번호를 입력해주세요." id = "authNum" name = "authNum" style = "display:none"><br><br>
+						<input type = "text" placeholder = "인증번호를 입력해주세요." id = "authNum" name = "authNum" style = "display:none; margin-left:10px"><br><br>
 						<label id = "label2"></label><br><br>
 						<input type = "button" value = "이메일 인증 완료" id = "confirmEmail" style = "display:none" onclick = "auth()"><br>
 					</form>

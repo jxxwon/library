@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.adminContainer {display:flex;}
+h1{margin-bottom:50px;}
+.checked{font-weight: 600;}
+
+.adminContent{padding:50px 0 0 50px; width:1000px;}
+
+.subMenu_member{border-bottom:2px solid #ddd; margin-top:45px;}
+.subMenu_member ul{display:table; border:1px solid #ddd; border-bottom:none;}
+.subMenu_member ul li{display:table-cell; width:150px; height:40px; line-height:40px; text-align:center; border-right:1px solid #ddd;}
+.subMenu_member ul li:last-child{border-right:none;}
+
+.subMenu_member ul li a{display:block;}
+
+.subMenu_member ul li.active{background-color:#338cfa;}
+.subMenu_member ul li.active a{color:#fff;}
+
+.subMenu_member ul li:hover{background-color:#338cfa;}
+.subMenu_member ul li:hover a{color:#fff;}
+
+/*회원관리 - 인증 승인/반려*/

@@ -14,4 +14,6 @@ public interface MemberMapper {
 	
 	MemberDTO idCheck(String id); //일반 회원가입 시 아이디 중복체크
 	void registerProc(MemberDTO member);
+	int changePw(String authId, String cryptPassword);
+	int updateId(String id, String delId);
 }
