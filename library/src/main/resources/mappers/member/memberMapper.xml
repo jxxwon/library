@@ -29,8 +29,8 @@
 	
 	<!-- 카카오 연동 회원가입 -->
 	<insert id="kakaoRegisterProc" parameterType="com.care.library.member.MemberDTO">
-		INSERT INTO member (id, pw, name, birth, address, mobile, status, kakaoid)
-		VALUES (#{id}, #{pw}, #{name}, #{birth}, #{address}, #{mobile}, #{status}, #{kakaoid})
+		INSERT INTO member (id, pw, name, birth, email, address, mobile, pro_name, status, detail_address, post_code, kakaoid, reg_date)
+		VALUES (#{id}, #{pw}, #{name}, #{birth}, #{email}, #{address}, #{mobile}, #{proName}, #{status}, #{detailAddress}, #{postCode}, #{kakaoid}, #{regDate})
 	</insert>
 	
 	<!-- 일반 회원 가입 -->

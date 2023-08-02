@@ -145,6 +145,18 @@ public class MemberController {
 	
 	@GetMapping("kakaoRegister")
 	public String kakaoRegister() {
+		// 일반 회원 여부 확인(이메일 중복 여부로 확인)
+		//String kakaoEmail = (String)session.getAttribute("kakaoEmail");
+		//MemberDTO existedMember = service.emailExists(kakaoEmail);
+//		if(existedMember != null) { //일반 회원
+//			//일반 회원이면 카카오 연동할꺼냐고 물어봐야지
+//			 //String alertScript = "<script>confirm('이미 일반 회원으로 등록되어 있습니다.');</script>";
+//			 //System.out.println(alertScript);
+//			 //카카오 연동한다. =>
+//			 //카카오 연동 안한다.
+//			return "redirect:main";
+//		}
+		 //일반 회원 아니다. => 회원가입 진행시켜!
 		return "member/kakaoRegister";
 	}
 	
@@ -160,10 +172,16 @@ public class MemberController {
 	@GetMapping("kakaoLogin")
 	public String kakaoLogin(String code) {
 		System.out.println("code : " + code);
-		kakao.getAccessToken(code);
-		String res = kakao.getUserInfo();
-		if(res.equals("카카오 연동 회원가입"))
+		kakao.getAccessToken(code); //AccessToken으로 접근 권한 받기
+		MemberDTO kakaoMember = kakao.kakaoExist();
+		if(kakaoMember == null) 
 			return "redirect:kakaoRegister";
+		
+		System.out.println(kakaoMember.getKakaoid());
+		//카카오 아이디로 로그인을 해야죠?
+		session.setAttribute("kakaoID", kakaoMember.getKakaoid());
+		session.setAttribute("id", kakaoMember.getId());
+		session.setAttribute("name", kakaoMember.getName());
 		return "redirect:main";
 	}
 	

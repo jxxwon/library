@@ -98,7 +98,10 @@ public class MemberService {
 		
 		return "이미 가입된 아이디 입니다.";
 	}
-
+	
+	public MemberDTO emailExists(String kakaoEmail) {
+		return mapper.emailCheck(kakaoEmail);
+	}
 	
 
 }
