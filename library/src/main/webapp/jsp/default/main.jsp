@@ -6,9 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>하이미디어 도서관</title>
+<script>
+        // 메세지 변수를 JavaScript 변수로 변환
+        var message = "${msg}";
+        if(message !== "")
+        // alert로 메세지 출력
+        	alert(message);
+    </script>
 </head>
 <body>
-	<c:import url = "/header"/>
+	<c:import url = "/header"/> 
 	<c:import url="/footer"/>
 </body>
 </html>

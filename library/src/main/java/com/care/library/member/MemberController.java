@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -162,16 +163,18 @@ public class MemberController {
 	}
 	
 	@PostMapping("kakaoRegisterProc")
-	public String kakaoRegisterProc(MemberDTO member, String confirm) {
+	public String kakaoRegisterProc(MemberDTO member, String confirm,  RedirectAttributes ra) {
 		String result = kakaoService.kakaoRegisterProc(member, confirm);
+		
 		if(result.equals("회원 등록 완료")) {
+			ra.addFlashAttribute("msg", result);
 			return "redirect:main";
 		}
 		return "member/kakaoRegister";
 	}
 	
 	@GetMapping("kakaoLogin")
-	public String kakaoLogin(String code) {
+	public String kakaoLogin(String code,  RedirectAttributes ra) {
 		System.out.println("code : " + code);
 		kakao.getAccessToken(code); //AccessToken으로 접근 권한 받기
 		MemberDTO kakaoMember = kakao.kakaoExist();
@@ -180,6 +183,7 @@ public class MemberController {
 		
 		System.out.println(kakaoMember.getKakaoid());
 		//카카오 아이디로 로그인을 해야죠?
+		ra.addFlashAttribute("msg", "카카오 로그인 완료");
 		session.setAttribute("kakaoID", kakaoMember.getKakaoid());
 		session.setAttribute("id", kakaoMember.getId());
 		session.setAttribute("name", kakaoMember.getName());
@@ -187,7 +191,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("kakaoLogout")
-	public String kakaoLogout() {
+	public String kakaoLogout(RedirectAttributes ra) {
 		kakao.unLink();
 		return "redirect:main";
 	}
