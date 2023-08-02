@@ -136,7 +136,7 @@ public class KakaoService {
 
 			JsonNode kakaoAccount = jsonTree.get("kakao_account");
 			
-			String kakaoEmail = kakaoAccount.get("email").toString();
+			String kakaoEmail = kakaoAccount.get("email").toString().replace("\"", "");
 			//System.out.println("email : " + kakaoAccount.get("email"));
 			
 			//카카오 회원가입시 정보를 추가 입력하도록하여 일반 도서관 회원으로 가입시킬 예정.
