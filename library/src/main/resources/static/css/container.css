@@ -21,7 +21,7 @@ background: #FEE500; border-radius: 5px;margin-top: 10px; cursor: pointer;}
 
 .bottomButtonBox{display:flex;justify-content: space-between;}
 .registerButton, .findButton{
-border-color: transparent; margin-top:10px; height:50px; font-size:15px}
+border-color: transparent; margin-top:10px; height:50px; font-size:15px; cursor: pointer;}
 .registerButton{ padding: 0 65px 0 65px; margin-right:10px; }
 .findButton{padding:0 30px 0 30px;}
 
