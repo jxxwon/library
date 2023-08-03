@@ -14,7 +14,7 @@ public class AdminService {
 
 	public void selectMember(Model model) {
 		ArrayList<MemberDTO> members = mapper.selectMember();
-		model.addAttribute(members);
+		model.addAttribute("members", members);
 	}
 
 }

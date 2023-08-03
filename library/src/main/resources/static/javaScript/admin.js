@@ -23,8 +23,8 @@ window.onpopstate = function () {
 
 
 // 회원관리 - 조회조건
+
 function condition(){
-	console.log('ㅠㅠ')
 	var li = document.getElementById('activeLi').textContent;
 	if(li == '인증 승인/반려'){
 		document.getElementById('idLbl').style.display="none";

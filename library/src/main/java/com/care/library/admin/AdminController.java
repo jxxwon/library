@@ -20,7 +20,7 @@ public class AdminController {
 	@RequestMapping("adminMember")
 	public String adminMember(Model model) {
 		String id = (String)session.getAttribute("id");
-		if(id.equals("admin") == false) {
+		if(id == null || id.equals("")||id.equals("admin") == false) {
 			return "redirect:main";
 		}
 		service.selectMember(model);
