@@ -3,11 +3,14 @@ package com.care.library.user;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.care.library.member.MailService;
 import com.care.library.member.MemberMapper;
@@ -62,6 +65,13 @@ public class UserService {
 		inquiry.setReply("N");
 		
 		userMapper.myInquiryWrite(inquiry);
+	}
+
+
+	public void selectInquiry(String id, Model model) {
+		ArrayList<InquiryDTO> inquiries = userMapper.selectInqiry(id);
+		
+		model.addAttribute("inquiries", inquiries);
 	}
 	
 }

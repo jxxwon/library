@@ -1,12 +1,20 @@
 package com.care.library.user;
 
 public class InquiryDTO {
+	private int rn;
 	private int no;
 	private String title;
 	private String content;
 	private String id;
 	private String writeDate;
 	private String reply;
+
+	public int getRn() {
+		return rn;
+	}
+	public void setRn(int rn) {
+		this.rn = rn;
+	}
 	
 	public int getNo() {
 		return no;

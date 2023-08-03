@@ -25,7 +25,12 @@ public class UserController {
 	
 	// 1:1문의 - 목록
 	@RequestMapping("/myLibrary/myInquiry")
-	public String myInquiry() {
+	public String myInquiry(Model model) {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.equals("")) {
+			return "redirect:main";
+		}
+		service.selectInquiry(id, model);
 		return "user/myInquiry";
 	}
 	
