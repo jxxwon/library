@@ -6,6 +6,7 @@ public class CulturalDTO {
     private String content;
     private String imagePath; // 이미지 파일의 경로를 저장하는 필드
 	/* private byte[] image; */
+    private String count;
     
 	public String getId() {
 		return id;
@@ -31,7 +32,11 @@ public class CulturalDTO {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
-    
-	
+	public String getCount() {
+		return count;
+	}
+	public void setCount(String count) {
+		this.count = count;
+	}
     
 }

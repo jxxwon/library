@@ -38,11 +38,6 @@ public class MemberController {
 		return "cultural/cultural";
 	}
 	
-	@RequestMapping("culForm")
-	public String culForm() {
-		return "cultural/culForm";
-	}
-	
 	@RequestMapping("culResult")
 	public String culResult() {
 		return "cultural/culResult";
