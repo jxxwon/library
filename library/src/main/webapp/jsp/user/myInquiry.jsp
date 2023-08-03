@@ -53,6 +53,9 @@
 						<input type = "button" value = "글쓰기" onclick="location.href='myInquiryWriteForm'">
 					</div>
 				</form>
+				<div class="inquiryPage">
+					${result }
+				</div>
 			</div>
 		</div>
 	</div>

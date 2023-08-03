@@ -39,6 +39,11 @@
   	<select id = "selectInqiry" resultMap="inquiryDto">
   		SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry WHERE id = #{id} ORDER BY write_date DESC)AAA
   	</select>
+  	
+  	<select id = "count">
+  		SELECT count(no) FROM inquiry
+  	</select>
+  	
 </mapper>
 
 

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.care.library.common.PageService;
 import com.care.library.member.MailService;
 import com.care.library.member.MemberMapper;
 
@@ -68,10 +69,26 @@ public class UserService {
 	}
 
 
-	public void selectInquiry(String id, Model model) {
-		ArrayList<InquiryDTO> inquiries = userMapper.selectInqiry(id);
+	public void selectInquiry(String cp, String id, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<InquiryDTO> inquiries = userMapper.selectInqiry(id, begin, end);
+		int totalCount = userMapper.count();
+		String url = "myInquery?currentPage=";
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		
 		model.addAttribute("inquiries", inquiries);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
 	}
 	
 }

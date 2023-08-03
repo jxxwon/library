@@ -6,10 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.care.library.member.MemberDTO;
-import com.care.library.member.MemberService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -25,12 +24,12 @@ public class UserController {
 	
 	// 1:1문의 - 목록
 	@RequestMapping("/myLibrary/myInquiry")
-	public String myInquiry(Model model) {
+	public String myInquiry(@RequestParam(value="currentPage", required = false)String cp, Model model) {
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.equals("")) {
 			return "redirect:main";
 		}
-		service.selectInquiry(id, model);
+		service.selectInquiry(cp, id, model);
 		return "user/myInquiry";
 	}
 	

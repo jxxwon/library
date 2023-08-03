@@ -15,5 +15,7 @@ public interface UserMapper {
 
 	int myInquiryWrite(InquiryDTO inquiry);
 
-	ArrayList<InquiryDTO> selectInqiry(String id);
+	ArrayList<InquiryDTO> selectInqiry(String id, int begin, int end);
+
+	int count();
 }
