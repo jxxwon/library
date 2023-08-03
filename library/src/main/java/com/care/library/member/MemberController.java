@@ -173,7 +173,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("kakaoRegisterProc")
-	public String kakaoRegisterProc(MemberDTO member, String confirm,  RedirectAttributes ra) {
+	public String kakaoRegisterProc(MemberDTO member, String confirm, RedirectAttributes ra) {
 		String result = kakaoService.kakaoRegisterProc(member, confirm);
 		
 		if(result.equals("회원 등록 완료")) {

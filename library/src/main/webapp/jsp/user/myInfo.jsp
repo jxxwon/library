@@ -4,9 +4,14 @@
 
 <link href = "/css/main.css" rel = "stylesheet" type = "text/css">
 <link href = "/css/myLibrary.css" rel = "stylesheet" type = "text/css">
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script src = "/javaScript/myInfoUpate.js"></script>
 
 <title>하이미디어 도서관 - 관리자 페이지 : 회원관리</title>
-
 <body>
 	<c:import url = "/header"/>
 	<div class = "adminContainer inner">
@@ -29,7 +34,7 @@
 				</div>
 			</div>
 			<div class="RIContainer">
-				<form action="registerProc" method="post" id="f">
+				<form action="changeMyInfoProc" method="post" id="f">
 					<label>아이디</label>
 					<span class="myInfoId">${sessionScope.id}</span><br>
 					
@@ -37,12 +42,12 @@
 					<span class="myInfoName">${sessionScope.name}</span><br>
 					
 					<label>생년월일</label>
-					<span class="myInfoBirth">${sessionScope.birth}</span><br>
+					<input type="text" name="birth" id="birth" value="${birth}"><br>
 					
 					<label>연락처
 						<span class="caution">*</span>	
 					</label>
-					<input type="text" name="mobile" id="mobile" placeholder="전화번호" >
+					<input type="text" name="mobile" id="mobile" value="${mobile}" >
 					<input type="button" id="authBtn" onclick="sendAuth()"  value="휴대폰 인증">
 					
 					<input type="checkbox" class="SMSBtn" onclick="SMS()" value="SMS수신">
@@ -51,20 +56,20 @@
 					<label>이메일
 						<span class="caution">*</span>	
 					</label>
-					<input type="text" name="email" id="email" placeholder="이메일" onkeyup="emailCheck()">
+					<input type="text" name="email" id="email" value="${email}" onkeyup="emailCheck()">
 					<label id="emailLabel" class="alert"></label><br>
 					
 					<label>주소
 						<span class="caution">*</span>	
 					</label>
-					<input type="text" id="postCode" name="postCode" placeholder="우편번호">
+					<input type="text" id="postCode" name="postCode" value="${postCode}">
 					<input type="button" id="postcodeBtn" onclick="execDaumPostcode()" value ="우편번호 찾기"><br>
-					<input type="text" id="address" name="address" placeholder="주소"><br>
-					<input type="text" id="detailAddress" name="detailAddress" placeholder="상세주소"><br>
+					<input type="text" id="address" name="address" value="${address}"><br>
+					<input type="text" id="detailAddress" name="detailAddress" value="${detailAddress}"><br>
 					
 					
-					<input type="button" class="registerBtn" value="수정" onclick="allCheck()">
-					<input type="button" class="cancelBtn" value="취소" onclick="location.href='register2'"><br>
+					<input type="submit" class="registerBtn" value="수정">
+					<input type="button" class="cancelBtn" value="취소" onclick="location.href='/main'"><br>
 				</form>
 			</div>
 		</div>

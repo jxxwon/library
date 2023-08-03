@@ -50,7 +50,7 @@
 	</update>
 	
 	<!--  마이 라이브러리 회원정보 수정  -->
-	<select id="getMyInfoById" resultMap="memberDto">
+	<select id="getMyInfo" resultMap="memberDto">
 		SELECT * FROM member WHERE id = #{id}
 	</select>
 	

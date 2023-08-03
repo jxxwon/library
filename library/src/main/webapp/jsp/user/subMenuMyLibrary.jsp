@@ -14,7 +14,7 @@
 		<li><a href="#" class="button">문화행사 현황</a></li>
 		<li><a href="#" class="button">결제 관리</a></li>
 		<li><a href="#" class="button">문의 관리</a></li>
-		<li><a href="${context}/myLibrary/myInfo" id="subMyInfo" class="button">회원정보</a></li>
+		<li><a href="${context}myLibrary/myInfo" id="subMyInfo" class="button">회원정보</a></li>
 	</ul>
 </div>
 
