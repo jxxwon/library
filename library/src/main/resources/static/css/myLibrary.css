@@ -67,3 +67,21 @@ h1{margin-bottom:50px;}
 	background-color: #338CFA;
 	color: white;
 }
+
+
+/* 1:1문의 - 목록*/
+.inquiryContainer{text-align:center; border-top:1px solid #ddd;}
+.inquiryContainer .inquiryBtn{float:right; margin-top:20px; margin-bottom:40px;}
+
+.inquiry {overflow:hidden; width:100%;}
+.inquiry tr:first-child{border-bottom:2px solid #555;}
+.inquiry tr th{padding:5px;}
+.inquiry tr td{padding:5px; text-align:center; border-bottom:1px solid #ddd;}
+
+/*1:1문의 - 작성*/
+.inquiryInfo {width:100%-10px; border:1px solid #ddd; margin:40px 0; padding:15px; line-height:145%; text-align:left;}
+.inquiryContainer .inquiryWriteForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
+.inquiryContainer .inquiryWriteForm tr{border-bottom:1px solid #ddd;}
+.inquiryContainer .inquiryWriteForm th{padding:10px; border-right:1px solid #ddd;}
+.inquiryContainer .inquiryWriteForm td{padding:10px;}
+.inquiryContainer .inquiryWriteForm input[type="text"]{height:30px;}

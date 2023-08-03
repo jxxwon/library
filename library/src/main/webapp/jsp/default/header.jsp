@@ -44,7 +44,7 @@
                     <li id="register" style = "background-color:#fff"><a href="${context}register">회원가입</a></li>
                     <li id="logout" style = "display:none"><a href="${context}logout">로그아웃</a></li>
                     <li id = "myLibrary"><a href="${context}myLibrary/myInfo">마이라이브러리</a></li>
-                    <li id = "adminForm" style = "display:none"><a href="${context}adminMember">관리자페이지</a></li>
+                    <li id = "adminForm" style = "display:none"><a href="${context}adminForm/member">관리자페이지</a></li>
                 </ul>
                 <ul class="right">
                     <li><a href="#"><img src="/image/blog.jpg"></a></li>
