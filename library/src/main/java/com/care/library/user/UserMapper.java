@@ -8,4 +8,8 @@ public interface UserMapper {
 	UserDTO getMyInfo(String id);
 	
 	int changeMyInfoProc(UserDTO myInfo);
+
+	int findMaxNum();
+
+	int myInquiryWrite(InquiryDTO inquiry);
 }
