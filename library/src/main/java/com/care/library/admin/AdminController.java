@@ -17,13 +17,13 @@ public class AdminController {
 		return "admin/subMenuAdmin";
 	}
 	
-	@RequestMapping("adminMember")
+	@RequestMapping("/adminForm/member")
 	public String adminMember(Model model) {
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.equals("")||id.equals("admin") == false) {
 			return "redirect:main";
 		}
 		service.selectMember(model);
-		return "admin/adminMember";
+		return "admin/member";
 	}
 }

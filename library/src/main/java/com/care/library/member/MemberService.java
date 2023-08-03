@@ -146,6 +146,11 @@ public class MemberService {
 	public MemberDTO emailExists(String kakaoEmail) {
 		return mapper.emailCheck(kakaoEmail);
 	}
+
+	public void myInquiryWriteProc(String id, String title, String content2) {
+		int no;
+		
+	}
 	
 
 }

@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -136,7 +137,7 @@ public class KakaoService {
 
 			JsonNode kakaoAccount = jsonTree.get("kakao_account");
 			
-			String kakaoEmail = kakaoAccount.get("email").toString();
+			String kakaoEmail = kakaoAccount.get("email").toString().replace("\"", "");
 			//System.out.println("email : " + kakaoAccount.get("email"));
 			
 			//카카오 회원가입시 정보를 추가 입력하도록하여 일반 도서관 회원으로 가입시킬 예정.
@@ -211,8 +212,9 @@ public class KakaoService {
 		if(kakaoIDCheck == null) {
 			//String kakaoID = (String)session.getAttribute("kakaoID");
 			//String kakaoEmail = (String)session.getAttribute("kakaoEmail");
-			System.out.println("이메일"+kakaoUserInfo.getEmail());
-			System.out.println(kakaoUserInfo.getEmail().getClass().getSimpleName());
+			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+			String cryptPassword = bpe.encode(member.getPw());
+			member.setPw(cryptPassword);
 			member.setEmail(kakaoUserInfo.getEmail());
 			member.setKakaoid(kakaoUserInfo.getKakaoid());
 			member.setStatus("D");
