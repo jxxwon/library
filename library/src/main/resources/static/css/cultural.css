@@ -86,7 +86,25 @@
 	color: white;
 }
 
-/*****************************cultural2********************************/
+/*****************************cullist********************************/
+/*신청하기*/
+.apply ul{
+	display: flex;
+	justify-content: right;
+	margin-right: 30px;
+	margin-top: -35px;
+}
+
+.apply ul li{
+	padding: 8px 10px 8px 10px;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	background-color: cornflowerblue;
+}
+
+.apply ul li a{
+	color: white;
+}
+/**************************************************/
 
 .top-menu{
 	margin-top: 30px;
@@ -132,7 +150,6 @@
 
 .list_area {
 	text-align: left;
-	
 }
 
 .list_area .title_area{
@@ -175,3 +192,30 @@
 .list_area .con2 li span{
 	margin-right: 20px;
 }
+
+
+/*****************************culResult********************************/
+.resultMenu{
+	margin-top: 30px;
+	margin-bottom: 00px;	
+}
+
+.resultMenu ul{
+	display: flex;
+	font-size: 22px;
+}
+.resultMenu ul li{	/*상단 메뉴칸*/
+	padding:15px 70px 15px 70px;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+/*상단 바 선택시 색 변경*/
+.resultMenu ul li.active {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+.resultMenu ul li.active a{
+	color: white;
+  }
+
+
+

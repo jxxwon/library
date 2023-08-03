@@ -39,9 +39,19 @@ public class MemberController {
 		return "cultural/cultural";
 	}
 	
-	@RequestMapping("cullist")
-	public String cullist() {
-		return "cultural/cullist";
+	@RequestMapping("culForm")
+	public String culForm() {
+		return "cultural/culForm";
+	}
+	
+	@RequestMapping("culResult")
+	public String culResult() {
+		return "cultural/culResult";
+	}
+	
+	@RequestMapping("culSubmit")
+	public String culSubmit() {
+		return "cultural/culSubmit";
 	}
 	
 	@RequestMapping("subMenuCultural")
