@@ -14,6 +14,7 @@
   				document.getElementById('login').style.display = 'none';
   				document.getElementById('register').style.display = 'none';
   				document.getElementById('logout').style.display = 'inline-block';
+  				document.getElementById('myLibrary').style.display = 'table-cell';
   				if(id == 'admin'){
 	  				document.getElementById('myLibrary').style.display = 'none';
 	  				document.getElementById('adminForm').style.display = 'table-cell';
@@ -43,7 +44,7 @@
                     <li id="login" style = "background-color:#fff"><a href="${context}login">로그인</a></li>
                     <li id="register" style = "background-color:#fff"><a href="${context}register">회원가입</a></li>
                     <li id="logout" style = "display:none"><a href="${context}logout">로그아웃</a></li>
-                    <li id = "myLibrary"><a href="${context}myLibrary/myInfo">마이라이브러리</a></li>
+                    <li id = "myLibrary" style = "display:none"><a href="${context}myLibrary/myInfo">마이라이브러리</a></li>
                     <li id = "adminForm" style = "display:none"><a href="${context}adminForm/member">관리자페이지</a></li>
                 </ul>
                 <ul class="right">
