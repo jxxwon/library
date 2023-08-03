@@ -27,3 +27,43 @@ h1{margin-bottom:50px;}
 .condition select{width:100px; height:30px; margin-right:30px;}
 .condition input[type="text"]{width:150px; height:30px; margin-right:30px;}
 .condition input[type="button"]{width:50px; height:27px; line-height:27px; font-size:15px;}
+
+.RIContainer{
+	width: 700px; 
+	padding: 50px 0 50px;
+	}
+.RIContainer .logo{width: 240px; margin:0 auto 20px auto;}
+.RIContainer input{margin: 10px 0 10px; }
+.RIContainer label{display:inline-block; width:90px; margin-bottom:15px;}
+
+.RIContainer .myInfoId, .RIContainer .myInfoName, .RIContainer .myInfoBirth
+{display: inline-block; height: 45px; line-height: 45px;}
+    
+.RIContainer .caution{color:red; font-size: 16px;}
+.RIContainer .essential{font-weight: 400; }
+.RIContainer .alert{color:blue;}
+
+.RIContainer button, #postcodeBtn, #authBtn{padding:12px; cursor: pointer;}
+.RIContainer .SMSBtn, .loginButton, .saveId{cursor: pointer;}
+
+.RIContainer #id, .RIContainer #pw, #confirm, #name, #mobile, 
+#proName, #birth, #postcode, #email, 
+#nameLabel, #emailLabel {width: 300px;}
+
+#idCheckLabel{margin-bottom: 5px;}
+
+#idCondition, #passwordCondition{display:inline-block; margin-bottom: 7px;}
+
+#address, #detailAddress{width: 450px; margin-left:94px;}
+.RIContainer .registerBtn, .RIContainer .cancelBtn{width:175px; height:60px; padding:10px; cursor: pointer;}
+.RIContainer .registerBtn{margin-right: 20px;}
+.RIContainer input::placeholder{font-size: 15px;}
+
+.daterangepicker .drp-buttons .btn {
+    width: 60px;
+    cursor: pointer;
+}
+.daterangepicker .drp-buttons .applyBtn{
+	background-color: #338CFA;
+	color: white;
+}

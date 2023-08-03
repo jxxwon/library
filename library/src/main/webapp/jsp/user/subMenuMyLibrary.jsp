@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <link href="/css/subMenu.css" rel="stylesheet" type="text/css">
 <c:url var="context" value="/"/>
 <div class = "subMenu">
@@ -11,7 +13,7 @@
 		<li><a href="#" class="button">희망도서신청</a></li>
 		<li><a href="#" class="button">문화행사 현황</a></li>
 		<li><a href="#" class="button">결제 관리</a></li>
-		<li><a href="#" class="button">문화 관리</a></li>
+		<li><a href="#" class="button">문의 관리</a></li>
 		<li><a href="${context}/myLibrary/myInfo" id="subMyInfo" class="button">회원정보</a></li>
 	</ul>
 </div>

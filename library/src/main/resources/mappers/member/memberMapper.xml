@@ -49,6 +49,16 @@
 		UPDATE member SET id = #{delId}, name = '', pro_name = '', birth = '', email = '', post_code = '', address = '', detail_address = '', mobile = '', reg_date='', status = 'W', kakaoid='' WHERE id = #{id}
 	</update>
 	
+	<!--  마이 라이브러리 회원정보 수정  -->
+	<select id="getMyInfoById" resultMap="memberDto">
+		SELECT * FROM member WHERE id = #{id}
+	</select>
+	
+	<update id="changeMyInfo">
+		UPDATE member SET pw = #{cryptPassword} WHERE id = #{authId}
+	</update>
+	
+	
 </mapper>
 
 
