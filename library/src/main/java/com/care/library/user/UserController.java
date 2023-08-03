@@ -17,7 +17,8 @@ import jakarta.servlet.http.HttpSession;
 public class UserController {
 	@Autowired HttpSession session;
 	@Autowired private MemberService service;
-
+	@Autowired private UserService userService;
+	
 	@RequestMapping("subMenuMyLibrary")
 	public String subMenuMyLibrary() {
 		return "user/subMenuMyLibrary";
@@ -39,16 +40,8 @@ public class UserController {
 		return "user/myInquiryWriteForm";
 	}
 	
-	@PostMapping("/myLibrary/myInquiryWriteProc")
-	public String myInquiryWriteProc(String title, String content) {
-		String id = (String)session.getAttribute("id");
-		service.myInquiryWriteProc(id, title, content);
-		return "redirect:myInquiry";
-	}
-	@Autowired private UserService userService;
-	
-	@GetMapping("/myLibrary/myInfo")
-	public String myInfo(Model model) {
+	@GetMapping("/myLibrary/updateInfo")
+	public String updateInfo(Model model) {
 		String id = (String)session.getAttribute("id");
 		UserDTO myInfo = userService.getMyInfo(id);
 		
@@ -60,6 +53,26 @@ public class UserController {
 			  model.addAttribute("postCode", myInfo.getPostCode()); 
 			  model.addAttribute("detailAddress", myInfo.getDetailAddress());
 		  }
+		return "user/updateInfo";
+	}
+	
+	@GetMapping("/myLibrary/updatePW")
+	public String updatePW() {
+		
+		return "user/updatePW";
+	}
+	
+	
+	@PostMapping("/myLibrary/myInquiryWriteProc")
+	public String myInquiryWriteProc(String title, String content) {
+		String id = (String)session.getAttribute("id");
+		service.myInquiryWriteProc(id, title, content);
+		return "redirect:myInquiry";
+	}
+	
+	@GetMapping("/myLibrary/myInfo")
+	public String myInfo() {
+		
 		 
 		return "user/myInfo";
 	}
