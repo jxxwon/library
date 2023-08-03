@@ -39,11 +39,6 @@ public class MemberController {
 		return "cultural/cultural";
 	}
 	
-	@RequestMapping("culForm")
-	public String culForm() {
-		return "cultural/culForm";
-	}
-	
 	@RequestMapping("culResult")
 	public String culResult() {
 		return "cultural/culResult";
@@ -173,7 +168,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("kakaoRegisterProc")
-	public String kakaoRegisterProc(MemberDTO member, String confirm,  RedirectAttributes ra) {
+	public String kakaoRegisterProc(MemberDTO member, String confirm, RedirectAttributes ra) {
 		String result = kakaoService.kakaoRegisterProc(member, confirm);
 		
 		if(result.equals("회원 등록 완료")) {

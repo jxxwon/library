@@ -9,9 +9,15 @@
 <script>
         // 메세지 변수를 JavaScript 변수로 변환
         var message = "${msg}";
+        var updateMsg = "${updateMsg}";
+        
         if(message !== "")
         // alert로 메세지 출력
         	alert(message);
+        if(updateMsg !== "")
+        // alert로 메세지 출력
+        	alert(updateMsg);
+        
     </script>
 </head>
 <body>

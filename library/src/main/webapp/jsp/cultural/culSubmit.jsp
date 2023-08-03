@@ -38,7 +38,7 @@
         background-color: #338cfa;
         color: white;
         border: none;
-        cursor: pointer;
+        cursor: pointer;	/*hover시 마우스 손모양*/
     }
 
     input[type="submit"]:hover, input[type="button"]:hover {
