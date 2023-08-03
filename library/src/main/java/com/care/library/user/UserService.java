@@ -24,7 +24,6 @@ public class UserService {
 	
 
 	public String changeMyInfoProc(UserDTO myInfo) {
-		System.out.println("4");
 		int check = userMapper.changeMyInfoProc(myInfo);
 //		MemberDTO check = mapper.loginProc(authId);
 //		if(check != null) {
@@ -39,7 +38,6 @@ public class UserService {
 //		}
 		if(check == 1)
 			return "정보가 수정되었습니다.";
-		System.out.println("5");
 		return "수정에 실패했습니다.";
 	}
 

@@ -37,18 +37,15 @@ public class UserController {
 	
 	@PostMapping("/myLibrary/changeMyInfoProc")
 	public String changeMyInfoProc(UserDTO myInfo, RedirectAttributes ra) {
-		System.out.println("문데");
 		String id = (String)session.getAttribute("id");
 		myInfo.setId(id);
 		
 		String result = userService.changeMyInfoProc(myInfo);
-		System.out.println("1");
 		if(result.equals("정보가 수정되었습니다.")) {
 			ra.addFlashAttribute("updateMsg", result);
-			System.out.println("2");
 			return "redirect:/main";
 		}
-		System.out.println("3");
+		ra.addFlashAttribute("updateMsg", result);
 		return "user/myInfo";
 	}
 	
