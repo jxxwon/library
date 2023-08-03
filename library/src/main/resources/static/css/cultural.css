@@ -86,7 +86,7 @@
 	color: white;
 }
 
-/*****************************cullist********************************/
+/*****************************culForm********************************/
 /*신청하기*/
 .apply ul{
 	display: flex;
@@ -133,7 +133,7 @@
  	justify-content: center;
  	/*text-align: center;*/
  	margin-top: 30px;
-  	margin-bottom: 100px;
+  	margin-bottom: 20px;
 }
 
 .teach_list {

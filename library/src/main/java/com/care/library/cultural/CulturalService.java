@@ -24,8 +24,8 @@ public class CulturalService {
             currentPage = 1;
         }
 
-        int pagePerBlock = 3; // 한 페이지에 보일 데이터의 수
-        int pageBlock = 5; // 한 번에 보여줄 페이지 번호들의 그룹 개수
+        int pagePerBlock = 10; // 한 페이지에 보일 데이터의 수
+        int pageBlock = 3; // 한 번에 보여줄 페이지 번호들의 그룹 개수
         int end = pagePerBlock * currentPage; // 테이블에서 가져올 마지막 행번호
         int begin = end - pagePerBlock + 1; // 테이블에서 가져올 시작 행번호
 

@@ -18,6 +18,14 @@
     }
   });
 </script>
+	
+<style>
+  	.paging{
+  		display: flex;
+    	justify-content: center;
+    	margin-bottom: 50px;
+  	}
+</style>
 
 <c:import url="/header" />
 
@@ -61,6 +69,7 @@
 		
 		<div class="cul-list">
 			<ul class="teach_list">
+			
 				<li class="ever_one">
 					<a href="" keyvalue1="12" keyvalue2="0" keyvalue3="" class="detail-btn">
 						<div class="thumb">
