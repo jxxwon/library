@@ -44,7 +44,7 @@ public class UserController {
 	public String updateInfo(Model model) {
 		String id = (String)session.getAttribute("id");
 		UserDTO myInfo = userService.getMyInfo(id);
-		
+		System.out.println("updateInfo : "+ id);
 		  if(myInfo != null) { 
 			  model.addAttribute("email", myInfo.getEmail()); 
 			  model.addAttribute("mobile", myInfo.getMobile()); 
@@ -58,7 +58,8 @@ public class UserController {
 	
 	@GetMapping("/myLibrary/updatePW")
 	public String updatePW() {
-		
+		String id = (String)session.getAttribute("id");
+		System.out.println("updatePW : "+ id);
 		return "user/updatePW";
 	}
 	
@@ -72,8 +73,8 @@ public class UserController {
 	
 	@GetMapping("/myLibrary/myInfo")
 	public String myInfo() {
-		
-		 
+		String id = (String)session.getAttribute("id");
+		System.out.println("myInfo : "+ id);
 		return "user/myInfo";
 	}
 	

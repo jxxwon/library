@@ -6,7 +6,6 @@
 <link href = "/css/myLibrary.css" rel = "stylesheet" type = "text/css">
 
 
-<title>하이미디어 도서관 - 관리자 페이지 : 회원관리</title>
 <body>
 	<form action="changeMyInfoProc" method="post" id="f">
 		<label>아이디</label>

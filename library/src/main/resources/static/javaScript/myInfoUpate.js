@@ -11,21 +11,6 @@
             }
         }).open();
     }
-    
-	var xhr;
-	var idCheckBtnClicked = false;
-	function idCheckSend() {
-		// Ajax 요청을 초기화합니다
-		
-		xhr = new XMLHttpRequest();
-		xhr.open('post', 'exist');
-		var idCheck = document.getElementById('id');
-		var button = document.getElementById('idCheckBtn');
-		console.dir(button);
-		xhr.send(idCheck.value); 
-		
- 		xhr.onreadystatechange = idCheckResProc;
-	}
 				
 	$(function() {
 	  var placeholderDate = $('input[name="birth"]').attr('value');
@@ -63,21 +48,21 @@
 	// 클릭한 메뉴 항목에 '활성' 클래스 추가
 	menuItems.forEach(item => item.addEventListener('click', activateMenuItem));
 
-	function showInfo(menu) {
-			const url = "/myLibrary/"+ menu;
-			  const myInfoContainer = document.getElementById('myInfoContainer');
-			  const xhr = new XMLHttpRequest();
-			  xhr.open('GET', url, true);
-			  xhr.onreadystatechange = function () {
-			    if (xhr.readyState === 4 && xhr.status === 200) {
-			      myInfoContainer.innerHTML = xhr.responseText;
-			    }
-			  };
-			  xhr.send();
-		}
-	
-	  // 페이지가 로드되면 초기 메뉴 선택 설정을 수행합니다.
-	  window.onload = function () {
-	    showInfo('updateInfo'); // 해당 메뉴에 대한 정보를 로드하여 표시합니다.
-	  };
-		  
+function showInfo(menu) {
+		const url = "/myLibrary/"+ menu;
+		  const myInfoContainer = document.getElementById('myInfoContainer');
+		  const xhr = new XMLHttpRequest();
+		  xhr.open('GET', url, true);
+		  xhr.onreadystatechange = function () {
+		    if (xhr.readyState === 4 && xhr.status === 200) {
+		      myInfoContainer.innerHTML = xhr.responseText;
+		    }
+		  };
+		  xhr.send();
+	}
+
+  // 페이지가 로드되면 초기 메뉴 선택 설정을 수행합니다.
+  window.onload = function () {
+    showInfo('updateInfo'); // 해당 메뉴에 대한 정보를 로드하여 표시합니다.
+  };
+		 
