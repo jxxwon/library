@@ -5,6 +5,7 @@
 
 <mapper namespace="com.care.library.cultural.CulturalMapper">
 	
+	<!-- resultType 대신 resultMap을 사용하여 resultType을 지정 -->
 	<resultMap type="com.care.library.cultural.CulturalDTO" id="culturalDto">
 		<id column="id" property="id"/>
 		<result column="title" property="title"/>
@@ -13,10 +14,12 @@
 		<result column="count" property="count"/>
 	</resultMap>
 	
+	<!-- 결과가 단일 값을 반환하는 경우 resultType으로 직접 지정 -->
 	<select id="count" resultType="int">
 		SELECT COUNT(id) FROM cultural
 	</select>
   
+	<!-- resultMap을 사용하여 결과를 매핑 -->
 	<select id="culForm" resultMap="culturalDto">
 		SELECT id, title, content, imagePath, count FROM (
 			SELECT CCC.*, ROWNUM as rn FROM (
