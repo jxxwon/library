@@ -3,6 +3,7 @@ package com.care.library.user;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserMapper {
@@ -15,7 +16,9 @@ public interface UserMapper {
 
 	int myInquiryWrite(InquiryDTO inquiry);
 
-	ArrayList<InquiryDTO> selectInqiry(String id, int begin, int end);
-
 	int count();
+
+	ArrayList<InquiryDTO> selectInqiry(@Param("id")String id, @Param("begin")int begin, @Param("end")int end);
+
+	ArrayList<InquiryDTO> selectInqiry(@Param("id")String id, @Param("search")String search, @Param("begin")int begin, @Param("end")int end);
 }

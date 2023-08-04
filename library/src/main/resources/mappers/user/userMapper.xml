@@ -37,7 +37,14 @@
   	</insert>
   	
   	<select id = "selectInqiry" resultMap="inquiryDto">
-  		SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry WHERE id = #{id} ORDER BY write_date DESC)AAA
+  		<choose>
+  			<when test = "search != null">
+			  	SELECT BBB.* FROM(SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry WHERE id = #{id} ORDER BY write_date DESC)AAA)BBB
+  			</when>
+  			<otherwise>
+			  	SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry WHERE id = #{id} ORDER BY write_date DESC)AAA
+  			</otherwise>
+  		</choose>
   	</select>
   	
   	<select id = "count">

@@ -11,9 +11,12 @@
       if (currentURL.includes("myInfo")) {
 		  console.dir(document.getElementById("subMyInfo"));
         document.getElementById("subMyInfo").classList.add("active");
-      } else {
-        // 기본적으로 어떤 패턴에도 해당하지 않을 경우 버튼 색상을 초기화합니다.
-      }
+      } else if(currentURL.includes("myInquiry")){
+	      document.getElementById("subMyInquiry").classList.add("active");
+	  } else {   // 기본적으로 어떤 패턴에도 해당하지 않을 경우 버튼 색상을 초기화합니다.
+		  
+	  }
+		  
     }
 
     // 페이지 로드 시 버튼 색상을 설정합니다.
@@ -23,3 +26,4 @@
     window.onpopstate = function () {
       setButtonColorByURL();
     };
+    

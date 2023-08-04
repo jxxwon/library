@@ -21,7 +21,7 @@
 				</div>
 			</div>
 			<div class="inquiryContainer">
-				<form action="" method="post" id="f">
+				<form action="" id="f">
 					<table class="inquiry">
 						<tr>
 							<th>번호</th>
@@ -42,7 +42,14 @@
 									<tr>
 										<td>${inquiry.rn}</td>
 										<td>${inquiry.title }</td>
-										<td>${inquiry.reply }</td>
+										<td>
+											<c:if test = "${inquiry.reply == 'N' }">
+												미답변
+											</c:if>
+											<c:if test = "${inquiry.reply == 'Y' }">
+												답변완료
+											</c:if>
+										</td>
 										<td>${inquiry.writeDate }</td>
 									</tr>
 								</c:forEach>
@@ -55,9 +62,52 @@
 					<div class="inquiryPage">
 						${result }
 					</div>
+					<div class="inquirySearch">
+						<select class="inqSelect" name = "select" id="inqSelect" onchange="searchChange()">
+							<option value="title">제목</option>
+							<option value="reply">처리상태</option>
+						</select>
+						<input type = "text" name = "search" id = "search" placeholder ="검색어를 입력하세요">
+						<select class = "replySelect" name = "replySelect" id = "replySelect" style = "display:none">
+							<option value = "N">미답변</option>
+							<option value = "Y">답변완료</option>
+						</select>
+						<input type = "button" value = "검색" onclick = "inquirySearch()">
+					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 	<c:import url="/footer"/>
 </body>
+
+<script>
+	function searchChange(){
+		var inqSelect = document.getElementById('inqSelect');
+		var select = document.getElementById('inqSelect').options.selectedIndex;
+		var option = inqSelect.options[select].value;
+		if(option == "reply"){
+			document.getElementById('search').style.display='none';
+			document.getElementById('replySelect').style.display='inline-block';
+		} else {
+			document.getElementById('search').style.display='inline-block';
+			document.getElementById('replySelect').style.display='none';
+		}
+	}
+	
+	/*submit 시 parameter 안 넘어가게 조절함(disabled)*/
+	function inquirySearch(){ 
+		var inqSelect = document.getElementById('inqSelect');
+		var select = document.getElementById('inqSelect').options.selectedIndex;
+		var option = inqSelect.options[select].value;
+		
+		var replySelect = document.getElementById('replySelect');
+		console.log(option)
+		if(option == 'title'){
+			document.getElementById('replySelect').disabled = true;
+		} else {
+			document.getElementById('search').disabled=true;
+		}
+			f.submit();
+	}
+</script>
