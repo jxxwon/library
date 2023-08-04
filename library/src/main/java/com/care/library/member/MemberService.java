@@ -6,16 +6,42 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class MemberService {
 	
 	@Autowired MemberMapper mapper;
-
-	public MemberDTO loginProc(String id) {
-		return mapper.loginProc(id);
+	@Autowired private HttpSession session;
+	/*
+	 * public MemberDTO loginProc(String id) { return mapper.loginProc(id); }
+	 */
+	
+	public String loginProc(String id, String pw) {
+		if(id == null || id.isEmpty()) {
+			return "아이디를 입력하세요.";
+		}
+		
+		if(pw == null || pw.isEmpty()) {
+			return "비밀번호를 입력하세요.";
+		}
+		
+		MemberDTO result = mapper.loginProc(id);
+		if(result != null) {
+			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+			if(bpe.matches(pw, result.getPw())) {
+				session.setAttribute("id", result.getId());
+				session.setAttribute("name", result.getName());
+				return "로그인 성공";
+			}
+		}
+		
+		return "아이디/비밀번호를 확인 후 다시 시도하세요.";
 	}
+	
 	
 	@Autowired private MailService mailService;
 	public String sendEmail(String email) {

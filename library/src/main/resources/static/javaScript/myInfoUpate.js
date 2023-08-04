@@ -31,7 +31,7 @@
 	  });
 	});
 	
-	const menuItems = document.querySelectorAll('.menu-item');
+	const menuItems = document.querySelectorAll('.myInfo_menu');
 	console.log(menuItems);
 	
 	function activateMenuItem() {

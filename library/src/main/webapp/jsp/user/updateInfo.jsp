@@ -4,7 +4,7 @@
 
 <link href = "/css/main.css" rel = "stylesheet" type = "text/css">
 <link href = "/css/myLibrary.css" rel = "stylesheet" type = "text/css">
-
+<title>하이미디어 도서관 - 마이라이브러리 : 회원정보</title>
 
 <body>
 	<form action="changeMyInfoProc" method="post" id="f">

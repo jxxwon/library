@@ -8,4 +8,7 @@ public interface UserMapper {
 	UserDTO getMyInfo(String id);
 	
 	int changeMyInfoProc(UserDTO myInfo);
+	
+	String getMyPw(String id);
+	
 }

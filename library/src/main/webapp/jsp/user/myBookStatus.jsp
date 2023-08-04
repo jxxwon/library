@@ -22,21 +22,13 @@
 			<h1>회원정보</h1>
 			<div class="mb_30 mt_20">
 				<a href="/main">HOME</a> > 
-				<a href="/myLibrary/myBookStatus">마이라이브러리</a> >
-				<a class="checked" href="/myLibrary/myInfo">회원정보</a>
-			</div>
-			<div class = "subMenu_myInfo">
-				<ul>
-				    <li class="myInfo_menu" onclick="showInfo('updateInfo')">회원정보 수정</li>
-				    <li class="myInfo_menu" onclick="showInfo('updatePW')">비밀번호 수정</li>
-				    <li class="myInfo_menu" onclick="showInfo('authentication')">회원 인증</li>
-				    <li class="myInfo_menu" onclick="showInfo('withdraw')">회원 탈퇴</li>
-				  </ul>
+				<a href="/adminMember">마이라이브러리</a> >
+				<a class="checked" href="/adminMember">대출/예약/연장 현황</a>
 			</div>
 		</div>
 		<div class="RIContainer">
 			<div id="myInfoContainer">
-				<c:import url="/myLibrary/updateInfo"/>
+			테스트용
 			</div>
 		</div>
 	</div>

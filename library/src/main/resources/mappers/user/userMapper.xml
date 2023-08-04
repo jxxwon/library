@@ -20,6 +20,10 @@
 		UPDATE member SET birth = #{birth}, email = #{email}, address = #{address}, mobile = #{mobile}, detail_address = #{detailAddress}, 
 		post_code = #{postCode} WHERE id = #{id}
 	</update>
+	
+	<select id="getMyPw">
+		SELECT pw FROM member WHERE id = #{id}
+	</select>
 
 </mapper>
 

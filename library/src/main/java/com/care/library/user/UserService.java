@@ -25,17 +25,20 @@ public class UserService {
 
 	public String changeMyInfoProc(UserDTO myInfo) {
 		int check = userMapper.changeMyInfoProc(myInfo);
-//		MemberDTO check = mapper.loginProc(authId);
-//		if(check != null) {
-//			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
-//			String cryptPassword = bpe.encode(changePw);
-//			int result = mapper.changePw(authId, cryptPassword);
-//			if(result == 1) {
-//				return "비밀번호 변경이 완료되었습니다.";
-//			} else {
-//				return "비밀번호 변경에 실패하였습니다.";
-//			}
-//		}
+		if(check == 1)
+			return "정보가 수정되었습니다.";
+		return "수정에 실패했습니다.";
+	}
+	
+	public String updatePwProc(UserDTO myInfo, String newConfirmPW) {
+		// 기존 비밀번호랑 적은 비밀번호가 맞는지 확인하기
+		int currentPw = userMapper.updatePwProc(myInfo);
+			// O => 적은 비밀번호랑 confirmPW가 같은지 확인
+				// O => "비밀번호가 변경되었습니다."
+				// X => "비밀번호 변경에 실패했습니다."
+			// X => "비밀번호를 확인해주세요."
+		
+		
 		if(check == 1)
 			return "정보가 수정되었습니다.";
 		return "수정에 실패했습니다.";

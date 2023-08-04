@@ -24,6 +24,12 @@ public class UserController {
 		return "user/subMenuMyLibrary";
 	}
 	
+	//대출/예약/연장 현황
+	@RequestMapping("myLibrary/myBookStatus")
+	public String myBookStatus() {
+		return "user/myBookStatus";
+	}
+	
 	// 1:1문의 - 목록
 	@RequestMapping("/myLibrary/myInquiry")
 	public String myInquiry() {
@@ -58,11 +64,18 @@ public class UserController {
 	
 	@GetMapping("/myLibrary/updatePW")
 	public String updatePW() {
-		String id = (String)session.getAttribute("id");
-		System.out.println("updatePW : "+ id);
 		return "user/updatePW";
 	}
 	
+	@PostMapping("/myLibrary/updatePwProc")
+	public String updatePwProc(UserDTO pwInfo, String newConfirmPW) {
+		String id = (String)session.getAttribute("id");
+		pwInfo.setId(id);
+		String result = userService.updatePwProc(pwInfo, newConfirmPW);
+		if(result.equals("비밀번호가 변경되었습니다."))
+			return "redirect:main";
+		return "user/myInfo";
+	}
 	
 	@PostMapping("/myLibrary/myInquiryWriteProc")
 	public String myInquiryWriteProc(String title, String content) {

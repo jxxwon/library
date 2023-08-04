@@ -65,14 +65,15 @@ public class MemberController {
 	}
 	
 	@PostMapping("loginProc")
-	public String loginProc(String id){
-		MemberDTO result = service.loginProc(id);
-		if(result == null) {
-			return "redirect:login";
+	public String loginProc(String id, String pw, RedirectAttributes ra, Model model){
+		String result = service.loginProc(id, pw);
+		if(result.equals("로그인 성공")) {
+			ra.addFlashAttribute("msg", result);
+			return "redirect:main";
 		}
-		session.setAttribute("id", result.getId());
-		session.setAttribute("name", result.getName());
-		return "redirect:main";
+		model.addAttribute("msg", result);
+		System.out.println(result);
+		return "member/login";
 	}
 	
 	@RequestMapping("logout")

@@ -7,6 +7,13 @@
 
 <c:import url = "/header"/>
 <script src = "/dbLibrary.js"></script>
+<script>
+        var message = "${msg}";
+        
+        if(message !== "")
+        	alert(message);
+        
+    </script>
 <% 
 String RESTAPIKEY = "3f70e9cb27d96ef5a414516587c2cb5c";
 String redirectURI = "http://localhost/kakaoLogin";
