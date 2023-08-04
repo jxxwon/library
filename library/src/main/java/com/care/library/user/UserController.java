@@ -51,7 +51,6 @@ public class UserController {
 	public String updateInfo(Model model) {
 		String id = (String)session.getAttribute("id");
 		UserDTO myInfo = userService.getMyInfo(id);
-		System.out.println("updateInfo : "+ id);
 		  if(myInfo != null) { 
 			  model.addAttribute("email", myInfo.getEmail()); 
 			  model.addAttribute("mobile", myInfo.getMobile()); 
@@ -75,15 +74,10 @@ public class UserController {
 		return "user/updateAuth";
 	}
 	
-	@PostMapping("/myLibrary/updatePwProc")
-	public String updatePwProc(String currentPW, String newPW, String newConfirmPW) {
-		String id = (String)session.getAttribute("id");
-		System.out.println("id : "+id);
-		String result = userService.updatePwProc(currentPW, newPW, newConfirmPW, id);
-		System.out.println(result);
-		if(result.equals("비밀번호가 변경되었습니다."))
-			return "redirect:/main";
-		return "user/myInfo";
+	// 회원탈퇴
+	@GetMapping("/myLibrary/withdraw")
+	public String withdraw() {
+		return "user/withdraw";
 	}
 	
 	@PostMapping("/myLibrary/myInquiryWriteProc")
@@ -96,7 +90,6 @@ public class UserController {
 	@GetMapping("/myLibrary/myInfo")
 	public String myInfo() {
 		String id = (String)session.getAttribute("id");
-		System.out.println("myInfo : "+ id);
 		return "user/myInfo";
 	}
 	
@@ -111,6 +104,24 @@ public class UserController {
 			return "redirect:/main";
 		}
 		ra.addFlashAttribute("updateMsg", result);
+		return "user/myInfo";
+	}
+	
+	@PostMapping("/myLibrary/updatePwProc")
+	public String updatePwProc(String currentPW, String newPW, String newConfirmPW) {
+		String id = (String)session.getAttribute("id");
+		String result = userService.updatePwProc(currentPW, newPW, newConfirmPW, id);
+		if(result.equals("비밀번호가 변경되었습니다."))
+			return "redirect:/main";
+		return "user/myInfo";
+	}
+	
+	@PostMapping("/myLibrary/updateAuthProc")
+	public String updateAuthProc(String pw) {
+		String id = (String)session.getAttribute("id");
+		String result = userService.updateAuthProc(pw, id);
+		if(result.equals("신청이 완료 되었습니다."))
+			return "redirect:/main";
 		return "user/myInfo";
 	}
 	

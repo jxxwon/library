@@ -13,4 +13,6 @@ public interface UserMapper {
 	
 	int updatePw(String newPW, String id);
 	
+	int updateAuth(String id);
+	
 }

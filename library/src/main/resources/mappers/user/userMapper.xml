@@ -28,6 +28,10 @@
 	<update id="updatePw">
 		UPDATE member SET pw = #{newPW} WHERE id = #{id}
 	</update>
+	
+	<update id="updateAuth">
+		UPDATE member SET status = 'R' WHERE id = #{id}
+	</update>
 
 </mapper>
 

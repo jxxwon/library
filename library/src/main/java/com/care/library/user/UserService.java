@@ -32,7 +32,6 @@ public class UserService {
 	
 	public String updatePwProc(String currentPW, String newPW, String newConfirmPW, String id) {
 		// 기존 비밀번호랑 currentPW가 맞는지 확인하기
-		
 		String dataCurrentPw = userMapper.currentPwCheck(id);
 		if(dataCurrentPw != null) {
 			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
@@ -52,6 +51,19 @@ public class UserService {
 		}
 		// X => "비밀번호 변경에 실패했습니다."
 		return "비밀번호 변경에 실패했습니다.";
+	}
+	
+	public String updateAuthProc(String pw, String id) {
+		String dataPw = userMapper.currentPwCheck(id);
+		if(dataPw != null) {
+			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+			if(bpe.matches(pw, dataPw)) {
+				int result = userMapper.updateAuth(id);
+				if(result == 1 )
+					return "신청이 완료 되었습니다.";
+			}
+		}
+		return "요청을 실패했습니다.";
 	}
 
 }
