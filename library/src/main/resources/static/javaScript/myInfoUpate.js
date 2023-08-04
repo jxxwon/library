@@ -62,7 +62,7 @@ function showInfo(menu) {
 	}
 
   // 페이지가 로드되면 초기 메뉴 선택 설정을 수행합니다.
-  window.onload = function () {
+ /* window.onload = function () {
     showInfo('updateInfo'); // 해당 메뉴에 대한 정보를 로드하여 표시합니다.
-  };
+  };*/
 		 

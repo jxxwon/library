@@ -12,25 +12,8 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-  <script>
-  function showInfo(menu) {
-		const url = "/myLibrary/"+ menu;
-		  const myInfoContainer = document.getElementById('myInfoContainer');
-		  const xhr = new XMLHttpRequest();
-		  xhr.open('GET', url, true);
-		  xhr.onreadystatechange = function () {
-		    if (xhr.readyState === 4 && xhr.status === 200) {
-		      myInfoContainer.innerHTML = xhr.responseText;
-		    }
-		  };
-		  xhr.send();
-	}
-  function myInfo() {
-	    showInfo('updateInfo'); // 해당 메뉴에 대한 정보를 로드하여 표시합니다.
-	  };
-    </script>
  </head>   
-<body onload="myInfo()">
+<body>
 <c:import url = "/header"/>
 <div class = "adminContainer inner">
 	<c:import url = "/subMenuMyLibrary"/>
@@ -52,7 +35,9 @@
 			</div>
 		</div>
 		<div class="RIContainer">
-			<div id="myInfoContainer"></div>
+			<div id="myInfoContainer">
+				<c:import url="/myLibrary/updateInfo"/>
+			</div>
 		</div>
 	</div>
 </div>
