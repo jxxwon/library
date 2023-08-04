@@ -75,6 +75,9 @@ padding: 30px 0 30px 20px; margin-bottom: 30px; line-height: 180%;}
 .updateAuthContent label {width: 100px;}
 .updateAuthForm #pw {width: 280px;}
 
+/*회원 탈퇴*/
+
+
 /* 1:1문의 - 목록*/
 .inquiryContainer{text-align:center; border-top:1px solid #ddd;}
 .inquiryContainer .inquiryBtn{float:right; margin-top:20px; margin-bottom:40px;}

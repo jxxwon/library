@@ -6,7 +6,7 @@
 <link href = "/css/myLibrary.css" rel = "stylesheet" type = "text/css">
 
 
-<title>하이미디어 도서관 - 마이라이브러리 : 회원정보</title>
+<title>하이미디어 도서관 - 마이라이브러리 : 비밀번호 수정</title>
 <body>
 	<form class="updatePwContainer" action="updatePwProc" method="post" id="f">
 	
