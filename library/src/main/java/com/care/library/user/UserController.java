@@ -29,7 +29,6 @@ public class UserController {
 		if(id == null || id.equals("")) {
 			return "redirect:main";
 		}
-		System.out.println(cp);
 		service.selectInquiry(cp, id, model);
 		return "user/myInquiry";
 	}
