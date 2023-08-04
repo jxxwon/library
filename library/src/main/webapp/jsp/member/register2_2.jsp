@@ -46,7 +46,7 @@ input[type="button"] {width:399.85px; height:45px; border:1px solid #ddd; cursor
 						<br><br><br>
 						<input type = "text" placeholder = "인증번호를 입력해주세요." id = "authNum" name = "authNum" style = "display:none"><br><br>
 						<label id = "label2"></label><br><br>
-						<input type = "button" value = "이메일 인증 완료" id = "confirmEmail" style = "display:none" onclick = "auth()"><br>
+						<input type = "button" value = "이메일 인증 완료" id = "confirmEmail" style = "display:none" onclick = "resAuth()"><br>
 					</form>
 			</div>
 		</div>

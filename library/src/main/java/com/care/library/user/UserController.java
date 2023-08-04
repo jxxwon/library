@@ -24,11 +24,12 @@ public class UserController {
 	
 	// 1:1문의 - 목록
 	@RequestMapping("/myLibrary/myInquiry")
-	public String myInquiry(@RequestParam(value="currentPage", required = false)String cp, Model model) {
+	public String myInquiry(@RequestParam(value="currentPage", required = false, defaultValue = "1")String cp, Model model) {
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.equals("")) {
 			return "redirect:main";
 		}
+		System.out.println(cp);
 		service.selectInquiry(cp, id, model);
 		return "user/myInquiry";
 	}
@@ -65,7 +66,7 @@ public class UserController {
 			  model.addAttribute("detailAddress", myInfo.getDetailAddress());
 		  }
 		 
-		return "user/myInfo";
+		return "/user/myInfo";
 	}
 	
 	@PostMapping("/myLibrary/changeMyInfoProc")
