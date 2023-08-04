@@ -68,6 +68,13 @@ h1{margin-bottom:50px;}
 /*패스워드 수정*/
 #currentPW, #newPW, #newConfirmPW {width: 280px;}
 .updatePwContainer label{width: 136px;}
+
+/* 회원 인증 */
+.updateAuthContent{width: 700px; border: 1px solid black; 
+padding: 30px 0 30px 20px; margin-bottom: 30px; line-height: 180%;}
+.updateAuthContent label {width: 100px;}
+.updateAuthForm #pw {width: 280px;}
+
 /* 1:1문의 - 목록*/
 .inquiryContainer{text-align:center; border-top:1px solid #ddd;}
 .inquiryContainer .inquiryBtn{float:right; margin-top:20px; margin-bottom:40px;}

@@ -29,7 +29,7 @@
 				<ul>
 				    <li class="myInfo_menu" onclick="showInfo('updateInfo')">회원정보 수정</li>
 				    <li class="myInfo_menu" onclick="showInfo('updatePW')">비밀번호 수정</li>
-				    <li class="myInfo_menu" onclick="showInfo('authentication')">회원 인증</li>
+				    <li class="myInfo_menu" onclick="showInfo('updateAuth')">회원 인증</li>
 				    <li class="myInfo_menu" onclick="showInfo('withdraw')">회원 탈퇴</li>
 				  </ul>
 			</div>

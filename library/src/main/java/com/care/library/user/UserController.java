@@ -46,6 +46,7 @@ public class UserController {
 		return "user/myInquiryWriteForm";
 	}
 	
+	// 회원정보 수정
 	@GetMapping("/myLibrary/updateInfo")
 	public String updateInfo(Model model) {
 		String id = (String)session.getAttribute("id");
@@ -62,9 +63,16 @@ public class UserController {
 		return "user/updateInfo";
 	}
 	
+	// 비밀번호 수정
 	@GetMapping("/myLibrary/updatePW")
 	public String updatePW() {
 		return "user/updatePW";
+	}
+	
+	// 회원인증
+	@GetMapping("/myLibrary/updateAuth")
+	public String updateAuth() {
+		return "user/updateAuth";
 	}
 	
 	@PostMapping("/myLibrary/updatePwProc")
