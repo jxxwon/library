@@ -21,9 +21,13 @@
 		post_code = #{postCode} WHERE id = #{id}
 	</update>
 	
-	<select id="getMyPw">
+	<select id="currentPwCheck">
 		SELECT pw FROM member WHERE id = #{id}
 	</select>
+	
+	<update id="updatePw">
+		UPDATE member SET pw = #{newPW} WHERE id = #{id}
+	</update>
 
 </mapper>
 

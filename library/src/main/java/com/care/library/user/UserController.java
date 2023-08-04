@@ -68,12 +68,13 @@ public class UserController {
 	}
 	
 	@PostMapping("/myLibrary/updatePwProc")
-	public String updatePwProc(UserDTO pwInfo, String newConfirmPW) {
+	public String updatePwProc(String currentPW, String newPW, String newConfirmPW) {
 		String id = (String)session.getAttribute("id");
-		pwInfo.setId(id);
-		String result = userService.updatePwProc(pwInfo, newConfirmPW);
+		System.out.println("id : "+id);
+		String result = userService.updatePwProc(currentPW, newPW, newConfirmPW, id);
+		System.out.println(result);
 		if(result.equals("비밀번호가 변경되었습니다."))
-			return "redirect:main";
+			return "redirect:/main";
 		return "user/myInfo";
 	}
 	

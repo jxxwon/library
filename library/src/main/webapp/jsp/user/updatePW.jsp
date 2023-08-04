@@ -11,13 +11,13 @@
 	<form class="updatePwContainer" action="updatePwProc" method="post" id="f">
 	
 		<label>기존 비밀번호<span class="caution">*</span></label>
-		<input type="text" name="currentPW" id="currentPW" ><br>
+		<input type="password" name="currentPW" id="currentPW" ><br>
 		
 		<label>신규 비밀번호<span class="caution">*</span></label>
-		<input type="text" name="newPW" id="newPW" ><br>
+		<input type="password" name="newPW" id="newPW" ><br>
 		
 		<label>신규 비밀번호 확인<span class="caution">*</span></label>
-		<input type="text" name="newConfirmPW" id="newConfirmPW" ><br>
+		<input type="password" name="newConfirmPW" id="newConfirmPW" ><br>
 		
 		<input type="submit" class="registerBtn" value="비밀번호 변경">
 		<input type="button" class="cancelBtn" value="취소" onclick="location.href='/myLibrary/myBookStatus'"><br>

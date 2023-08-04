@@ -4,16 +4,22 @@
 <title>하이디미어 도서관 - 로그인</title>
 <link href="/css/main.css" rel="stylesheet" type="text/css">
 <link href="/css/container.css" rel="stylesheet" type="text/css">
+<script>
+        // 메세지 변수를 JavaScript 변수로 변환
+        var message = "${msg}";
+        var updateMsg = "${updateMsg}";
+        
+        if(message !== "")
+        // alert로 메세지 출력
+        	alert(message);
+        if(updateMsg !== "")
+        // alert로 메세지 출력
+        	alert(updateMsg);
+        
+    </script>
 
 <c:import url = "/header"/>
 <script src = "/dbLibrary.js"></script>
-<script>
-        var message = "${msg}";
-        
-        if(message !== "")
-        	alert(message);
-        
-    </script>
 <% 
 String RESTAPIKEY = "3f70e9cb27d96ef5a414516587c2cb5c";
 String redirectURI = "http://localhost/kakaoLogin";
@@ -39,7 +45,7 @@ String redirectURI = "http://localhost/kakaoLogin";
 						<label>비밀번호 </label>
 						<input type="password" name="pw" placeholder="비밀번호" id="pw"><br>
 					</div>
-					<input type="submit" value="로그인" class="loginButton" onclick="loginCheck()">
+					<input type="submit" value="로그인" class="loginButton">
 				</form>
 				<input type="checkbox" class="saveId"/>
 				<label>아이디 저장</label>

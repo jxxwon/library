@@ -9,6 +9,8 @@ public interface UserMapper {
 	
 	int changeMyInfoProc(UserDTO myInfo);
 	
-	String getMyPw(String id);
+	String currentPwCheck(String id);
+	
+	int updatePw(String newPW, String id);
 	
 }

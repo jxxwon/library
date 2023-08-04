@@ -30,18 +30,28 @@ public class UserService {
 		return "수정에 실패했습니다.";
 	}
 	
-	public String updatePwProc(UserDTO myInfo, String newConfirmPW) {
-		// 기존 비밀번호랑 적은 비밀번호가 맞는지 확인하기
-		int currentPw = userMapper.updatePwProc(myInfo);
-			// O => 적은 비밀번호랑 confirmPW가 같은지 확인
-				// O => "비밀번호가 변경되었습니다."
-				// X => "비밀번호 변경에 실패했습니다."
-			// X => "비밀번호를 확인해주세요."
+	public String updatePwProc(String currentPW, String newPW, String newConfirmPW, String id) {
+		// 기존 비밀번호랑 currentPW가 맞는지 확인하기
 		
-		
-		if(check == 1)
-			return "정보가 수정되었습니다.";
-		return "수정에 실패했습니다.";
+		String dataCurrentPw = userMapper.currentPwCheck(id);
+		if(dataCurrentPw != null) {
+			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+			if(bpe.matches(currentPW, dataCurrentPw)) {
+				// O => newPW랑 newConfirmPW가 같은지 확인
+				if(newPW.equals(newConfirmPW)) {
+					// O => "비밀번호가 변경되었습니다."
+					String cryptPassword = bpe.encode(newPW);
+					int result = userMapper.updatePw(cryptPassword, id);
+					if(result == 1 )
+						return "비밀번호가 변경되었습니다.";
+					return "비밀번호 변경에 실패했습니다.";
+				}
+				// X => "비밀번호를 확인해주세요."
+				return "비밀번호를 확인해주세요.";
+			}
+		}
+		// X => "비밀번호 변경에 실패했습니다."
+		return "비밀번호 변경에 실패했습니다.";
 	}
 
 }
