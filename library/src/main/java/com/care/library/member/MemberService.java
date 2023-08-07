@@ -16,9 +16,10 @@ public class MemberService {
 	
 	@Autowired MemberMapper mapper;
 	@Autowired private HttpSession session;
-	/*
-	 * public MemberDTO loginProc(String id) { return mapper.loginProc(id); }
-	 */
+	
+	public String getNameById(String id) {
+		return mapper.getNameById(id); 
+	}
 	
 	public String loginProc(String id, String pw) {
 		if(id == null || id.isEmpty()) {

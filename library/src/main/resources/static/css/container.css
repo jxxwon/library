@@ -16,8 +16,11 @@ h1{margin-bottom:50px;}
 .loginButton{background-color: skyblue; width:80px; 
 color:white; border-color: transparent; font-size: 17px;}
 
+.loginFormContainer .saveIdBox{margin-top: 15px;}
+.loginFormContainer .saveIdBox label{margin:0;}
 .kakao{width: 100%; height:55px; display : flex; justify-content: center;align-items: center;
 background: #FEE500; border-radius: 5px;margin-top: 10px; cursor: pointer;}
+.kakao a{display: inline-block; width: 100%; text-align: center;}
 
 .bottomButtonBox{display:flex;justify-content: space-between;}
 .registerButton, .findButton{

@@ -10,6 +10,10 @@
   		<result column = "post_code" property = "postCode"/>
   	</resultMap>
 	
+	<select id="getNameById">
+		SELECT name FROM member WHERE id = #{id}
+	</select>
+	
 	<select id="loginProc" resultMap="memberDto">
 		SELECT * FROM member WHERE id = #{id}
 	</select>

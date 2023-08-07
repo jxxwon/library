@@ -38,17 +38,21 @@ String redirectURI = "http://localhost/kakaoLogin";
 				<img src="/image/loginImg.png" alt="yanolja-logo-gray"> 
 			</div>
 			<div class="loginFormContainer">
-				<form action="loginProc" method="post" class="loginForm mb_10" id="f">
-					<div class="mr_10">
-						<label>아이디 </label>
-						<input type="text" name="id" placeholder="아이디" class="mb_10" id="id" autofocus="autofocus"><br>
-						<label>비밀번호 </label>
-						<input type="password" name="pw" placeholder="비밀번호" id="pw"><br>
+				<form action="loginProc" method="post" class="mb_10" id="f">
+					<div class="loginForm">
+						<div class="mr_10">
+							<label>아이디 </label>
+							<input type="text" name="id" placeholder="아이디" class="mb_10" id="id" autofocus="autofocus" value="${sessionScope.saveId}"><br>
+							<label>비밀번호 </label>
+							<input type="password" name="pw" placeholder="비밀번호" id="pw"><br>
+						</div>
+						<input type="submit" value="로그인" class="loginButton">
 					</div>
-					<input type="submit" value="로그인" class="loginButton">
+					<div class="saveIdBox">
+						<input type="checkbox" name="checkbox" class="saveId"/>
+						<label>아이디 저장</label>
+					</div>
 				</form>
-				<input type="checkbox" class="saveId"/>
-				<label>아이디 저장</label>
 				<div class="kakao">
 					<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&
 					client_id=<%=RESTAPIKEY%>&

@@ -65,10 +65,18 @@ public class MemberController {
 	}
 	
 	@PostMapping("loginProc")
-	public String loginProc(String id, String pw, RedirectAttributes ra, Model model){
+	public String loginProc(String id, String pw, @RequestBody(required = false)String checkbox, RedirectAttributes ra, Model model){
+		System.out.println("checkbox"+ checkbox);
 		String result = service.loginProc(id, pw);
 		if(result.equals("로그인 성공")) {
+			String name = service.getNameById(id);
+			if(checkbox.equals("on")) {
+				System.out.println(id);
+				session.setAttribute("saveId", id);
+			}
 			ra.addFlashAttribute("msg", result);
+			session.setAttribute("id", id);
+			session.setAttribute("name", name);
 			return "redirect:main";
 		}
 		model.addAttribute("msg", result);
