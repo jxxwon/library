@@ -66,13 +66,13 @@ public class MemberController {
 	
 	@PostMapping("loginProc")
 	public String loginProc(String id, String pw, @RequestBody(required = false)String checkbox, RedirectAttributes ra, Model model){
-		System.out.println("checkbox"+ checkbox);
 		String result = service.loginProc(id, pw);
 		if(result.equals("로그인 성공")) {
 			String name = service.getNameById(id);
-			if(checkbox.equals("on")) {
-				System.out.println(id);
-				session.setAttribute("saveId", id);
+			if(checkbox.contains("on")) { // 아이디 저장에 체크하면, checkbox가 "on"으로 넘어옴.(하지만 다른 파라미터 같이옴.)
+				session.setAttribute("savedId", id);
+			}else {
+				session.removeAttribute("savedId");
 			}
 			ra.addFlashAttribute("msg", result);
 			session.setAttribute("id", id);
@@ -86,7 +86,12 @@ public class MemberController {
 	
 	@RequestMapping("logout")
 	public String logout() {
-		session.invalidate();
+		//session.invalidate();
+		if(session.getAttribute("savedId") == null || session.getAttribute("savedId").equals(""))
+			session.removeAttribute("savedId");
+		session.removeAttribute("id");
+		session.removeAttribute("name");
+		session.removeAttribute("kakaoID");
 		return "redirect:main";
 	}
 	

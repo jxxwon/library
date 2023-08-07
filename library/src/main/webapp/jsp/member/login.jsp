@@ -15,15 +15,13 @@
         if(updateMsg !== "")
         // alert로 메세지 출력
         	alert(updateMsg);
-        
     </script>
 
 <c:import url = "/header"/>
 <script src = "/dbLibrary.js"></script>
-<% 
-String RESTAPIKEY = "3f70e9cb27d96ef5a414516587c2cb5c";
-String redirectURI = "http://localhost/kakaoLogin";
-%>
+<c:set var="RESTAPIKEY" value="3f70e9cb27d96ef5a414516587c2cb5c"/>
+<c:set var="redirectURI" value="http://localhost/kakaoLogin"/>
+
 <div class="loginContainer inner mb_30" >
 	<c:import url = "/subMenuLogin"/>
 	<div class="loginContent">
@@ -42,21 +40,28 @@ String redirectURI = "http://localhost/kakaoLogin";
 					<div class="loginForm">
 						<div class="mr_10">
 							<label>아이디 </label>
-							<input type="text" name="id" placeholder="아이디" class="mb_10" id="id" autofocus="autofocus" value="${sessionScope.saveId}"><br>
+							<input type="text" name="id" placeholder="아이디" class="mb_10" id="id" autofocus="autofocus" value="${sessionScope.savedId}"><br>
 							<label>비밀번호 </label>
 							<input type="password" name="pw" placeholder="비밀번호" id="pw"><br>
 						</div>
 						<input type="submit" value="로그인" class="loginButton">
 					</div>
 					<div class="saveIdBox">
-						<input type="checkbox" name="checkbox" class="saveId"/>
+						<c:choose>
+							<c:when test="${not empty sessionScope.savedId }">
+								<input type="checkbox" name="checkbox" id="saveIdBox" checked class="saveId"/>
+							</c:when>
+							<c:otherwise>
+								<input type="checkbox" name="checkbox" id="saveIdBox" class="saveId"/>
+							</c:otherwise>
+						</c:choose>
 						<label>아이디 저장</label>
 					</div>
 				</form>
 				<div class="kakao">
 					<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&
-					client_id=<%=RESTAPIKEY%>&
-					redirect_uri=<%=redirectURI%>">
+					client_id=<c:out value="${RESTAPIKEY}"/>&
+					redirect_uri=<c:out value="${redirectURI}"/>">
 						<img class="kakaoLoginBox" src = "https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" />
 					</a>
 				</div>
@@ -69,5 +74,6 @@ String redirectURI = "http://localhost/kakaoLogin";
 	</div>
 </div>
 <c:import url="/footer"/>
+
 
 
