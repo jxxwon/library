@@ -11,8 +11,9 @@ background-image:url(../image/tit_bg.jpg);
 
 .subMenu ul li a.active {background:#338cfa; color:#fff;}
 
-.subMenu ul li.active a{background:#338cfa; color:#fff;}
-.subMenu ul li{width:240px; font-size:18px;display:block; padding:20px 0; 
+/*마이라이브러리 - subMenu*/
+.subMyLibrary ul li.active a{background:#338cfa; color:#fff;}
+.subMyLibrary ul li{width:240px; font-size:18px;display:block; padding:20px 0; 
 text-align:center; border:1px solid #ddd; border-top:0; color:#000; }
-.subMenu ul li:hover{background:#338cfa; color:#fff; text-decoration: none;}
-.subMenu ul li.active {background:#338cfa; color:#fff;}
+.subMyLibrary ul li:hover{background:#338cfa; color:#fff; text-decoration: none;}
+.subMyLibrary ul li.active {background:#338cfa; color:#fff;}

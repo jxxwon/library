@@ -4,7 +4,7 @@
     
 <link href="/css/subMenu.css" rel="stylesheet" type="text/css">
 <c:url var="context" value="/"/>
-<div class = "subMenu">
+<div class = "subMenu subMyLibrary">
 	<h2>마이라이브러리</h2>
 	<ul>
 		<li class="submyLibrary_menu" onclick="showMyLibSub('myBookStatus')">대출/예약/연장 현황</li>
