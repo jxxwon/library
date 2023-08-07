@@ -16,7 +16,7 @@
 			&nbsp;※ 탈퇴 시 도서대출이력 및 개인정보 완전 삭제<br>
 		</p>
 	</div>
-	<form class="updateAuthForm" action="updateAuthProc" method="post" id="f">
+	<form class="withdrawForm" action="updateAuthProc" method="post" id="f">
 		<label for = "name">이름</label>
 		<span class="myInfoName">${sessionScope.name}</span><br>
 		

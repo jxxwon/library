@@ -19,6 +19,12 @@ public class UserController {
 	@Autowired private MemberService service;
 	@Autowired private UserService userService;
 	
+	//마이 라이브러리(첫페이지) - container
+	@GetMapping("/myLibrary")
+	public String myLibrayMain() {
+		return "user/myLibraryMain";
+	}
+	
 	@RequestMapping("subMenuMyLibrary")
 	public String subMenuMyLibrary() {
 		return "user/subMenuMyLibrary";
@@ -46,7 +52,21 @@ public class UserController {
 		return "user/myInquiryWriteForm";
 	}
 	
-	// 회원정보 수정
+	@PostMapping("/myLibrary/myInquiryWriteProc")
+	public String myInquiryWriteProc(String title, String content) {
+		String id = (String)session.getAttribute("id");
+		service.myInquiryWriteProc(id, title, content);
+		return "redirect:myInquiry";
+	}
+	
+	// 회원정보 - container
+	@GetMapping("/myLibrary/myInfo")
+	public String myInfo() {
+		String id = (String)session.getAttribute("id");
+		return "user/myInfo";
+	}
+	
+	// 회원정보 - 회원정보 수정
 	@GetMapping("/myLibrary/updateInfo")
 	public String updateInfo(Model model) {
 		String id = (String)session.getAttribute("id");
@@ -60,37 +80,6 @@ public class UserController {
 			  model.addAttribute("detailAddress", myInfo.getDetailAddress());
 		  }
 		return "user/updateInfo";
-	}
-	
-	// 비밀번호 수정
-	@GetMapping("/myLibrary/updatePW")
-	public String updatePW() {
-		return "user/updatePW";
-	}
-	
-	// 회원인증
-	@GetMapping("/myLibrary/updateAuth")
-	public String updateAuth() {
-		return "user/updateAuth";
-	}
-	
-	// 회원탈퇴
-	@GetMapping("/myLibrary/withdraw")
-	public String withdraw() {
-		return "user/withdraw";
-	}
-	
-	@PostMapping("/myLibrary/myInquiryWriteProc")
-	public String myInquiryWriteProc(String title, String content) {
-		String id = (String)session.getAttribute("id");
-		service.myInquiryWriteProc(id, title, content);
-		return "redirect:myInquiry";
-	}
-	
-	@GetMapping("/myLibrary/myInfo")
-	public String myInfo() {
-		String id = (String)session.getAttribute("id");
-		return "user/myInfo";
 	}
 	
 	@PostMapping("/myLibrary/changeMyInfoProc")
@@ -107,6 +96,12 @@ public class UserController {
 		return "user/myInfo";
 	}
 	
+	// 회원정보 - 비밀번호 수정
+	@GetMapping("/myLibrary/updatePW")
+	public String updatePW() {
+		return "user/updatePW";
+	}
+	
 	@PostMapping("/myLibrary/updatePwProc")
 	public String updatePwProc(String currentPW, String newPW, String newConfirmPW) {
 		String id = (String)session.getAttribute("id");
@@ -114,6 +109,12 @@ public class UserController {
 		if(result.equals("비밀번호가 변경되었습니다."))
 			return "redirect:/main";
 		return "user/myInfo";
+	}
+	
+	// 회원정보 - 회원인증
+	@GetMapping("/myLibrary/updateAuth")
+	public String updateAuth() {
+		return "user/updateAuth";
 	}
 	
 	@PostMapping("/myLibrary/updateAuthProc")
@@ -124,5 +125,22 @@ public class UserController {
 			return "redirect:/main";
 		return "user/myInfo";
 	}
+	
+	// 회원정보 -  회원탈퇴
+	@GetMapping("/myLibrary/withdraw")
+	public String withdraw() {
+		return "user/withdraw";
+	}
+	
+//	@PostMapping("deleteMemberProc")
+//	public String deleteMemberProc(String pw) {
+//		String id = (String)session.getAttribute("id");
+//		String result = service.deleteMember(id, pw);
+//		if(result.equals("회원 탈퇴가 완료되었습니다.")) {
+//			session.invalidate();
+//			return "redirect:main";
+//		}
+//		return "member/deleteMember";
+//	}
 	
 }

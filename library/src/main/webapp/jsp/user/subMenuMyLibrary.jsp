@@ -7,16 +7,15 @@
 <div class = "subMenu">
 	<h2>마이라이브러리</h2>
 	<ul>
-		<li class="submyLibrary_menu"><a href="${context }myLibrary/myBookStatus" id="subMyBookStatus" class="button">대출/예약/연장 현황</a></li>
-		<li class="submyLibrary_menu"><a href="#" class="button">대출이력조회</a></li>
-		<li class="submyLibrary_menu"><a href="#" class="button">대출예약 확인</a></li>
-		<li class="submyLibrary_menu"><a href="#" class="button">희망도서신청</a></li>
-		<li class="submyLibrary_menu"><a href="#" class="button">문화행사 현황</a></li>
-		<li class="submyLibrary_menu"><a href="#" class="button">결제 관리</a></li>
-		<li class="submyLibrary_menu"><a href="${context }myLibrary/myInquiry" class="button">1:1문의</a></li>
-		<li class="submyLibrary_menu"><a href="${context }myLibrary/myInfo" id="subMyInfo" class="button">회원정보</a></li>
+		<li class="submyLibrary_menu" onclick="showMyLibSub('myBookStatus')">대출/예약/연장 현황</li>
+		<li class="submyLibrary_menu" onclick="showMyLibSub('#')">대출이력조회</li>
+		<li class="submyLibrary_menu" onclick="showMyLibSub('#')">대출예약 확인</li>
+		<li class="submyLibrary_menu" onclick="showMyLibSub('#')">희망도서신청</li>
+		<li class="submyLibrary_menu" onclick="showMyLibSub('#')">문화행사 현황</li>
+		<li class="submyLibrary_menu" onclick="showMyLibSub('#')">결제 관리</li>
+		<li class="submyLibrary_menu" onclick="showMyLibSub('myInquiry')">1:1문의</li>
+		<li class="submyLibrary_menu" onclick="showMyLibSub('myInfo')">회원정보</li>
 	</ul>
 </div>
-
 <script src="/javaScript/subMyLibrary.js"></script>
 

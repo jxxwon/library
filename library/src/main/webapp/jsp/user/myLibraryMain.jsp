@@ -11,28 +11,30 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-</head>   
+<script>
+function showInfo(menu) {
+	const url = "/myLibrary/"+ menu;
+	  const myInfoContainer = document.getElementById('myInfoContainer');
+	  const xhr = new XMLHttpRequest();
+	  xhr.open('GET', url, true);
+	  xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	      myInfoContainer.innerHTML = xhr.responseText;
+	    }
+	  };
+	  xhr.send();
+}
+</script>
+
+ </head>   
 <body>
-		<div>
-			<h1 id = "myInfo_menu">회원정보</h1>
-			<div class="mb_30 mt_20">
-				<a href="/main">HOME</a> > 
-				<a href="/myLibrary/myBookStatus">마이라이브러리</a> >
-				<a class="checked" href="/myLibrary/myInfo">회원정보</a>
-			</div>
-			<div class = "subMenu_myInfo">
-				<ul>
-				    <li class="myInfo_menu" onclick="showInfo('updateInfo')">회원정보 수정</li>
-				    <li class="myInfo_menu" onclick="showInfo('updatePW')">비밀번호 수정</li>
-				    <li class="myInfo_menu" onclick="showInfo('updateAuth')">회원 인증</li>
-				    <li class="myInfo_menu" onclick="showInfo('withdraw')">회원 탈퇴</li>
-				  </ul>
-			</div>
+	<c:import url = "/header"/>
+	<div class = "myLibraryContainer inner">
+		<c:import url = "/subMenuMyLibrary"/>
+		<div class = "myLibraryContent">
+			<c:import url="/myLibrary/myBookStatus"/>
+			<c:import url="/myLibrary/myInfo"/>
 		</div>
-		<div class="RIContainer">
-			<div id="myInfoContainer">
-				<c:import url="/myLibrary/updateInfo"/>
-			</div>
-		</div>
-<script src = "/javaScript/myInfoUpate.js"></script>
+	</div>
+	<c:import url="/footer"/>
 </body>

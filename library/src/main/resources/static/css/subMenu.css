@@ -6,7 +6,13 @@ text-align:center; border:1px solid #ddd;
 background-image:url(../image/tit_bg.jpg);
 }
 .subMenu ul li{width:240px; font-size:18px;}
-.subMenu ul li a{display:block; padding:20px 0; text-align:center; border:1px solid #ddd; border-top:0; color:#000}
+.subMenu ul li a{display:block; padding:20px 0; text-align:center; border:1px solid #ddd; border-top:0; color:#000;}
 .subMenu ul li a:hover{background:#338cfa; color:#fff; text-decoration: none;}
 
 .subMenu ul li a.active {background:#338cfa; color:#fff;}
+
+.subMenu ul li.active a{background:#338cfa; color:#fff;}
+.subMenu ul li{width:240px; font-size:18px;display:block; padding:20px 0; 
+text-align:center; border:1px solid #ddd; border-top:0; color:#000; }
+.subMenu ul li:hover{background:#338cfa; color:#fff; text-decoration: none;}
+.subMenu ul li.active {background:#338cfa; color:#fff;}

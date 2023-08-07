@@ -14,26 +14,17 @@
 
  </head>   
 <body>
-<c:import url = "/header"/>
-<div class = "myLibraryContainer inner">
-	<c:import url = "/subMenuMyLibrary"/>
-	<div class = "myLibraryContent">
-		<div>
-			<h1>회원정보</h1>
-			<div class="mb_30 mt_20">
-				<a href="/main">HOME</a> > 
-				<a href="/adminMember">마이라이브러리</a> >
-				<a class="checked" href="/adminMember">대출/예약/연장 현황</a>
-			</div>
-		</div>
-		<div class="RIContainer">
-			<div id="myInfoContainer">
-			테스트용
-			</div>
+	<div>
+		<h1>회원정보</h1>
+		<div class="mb_30 mt_20">
+			<a href="/main">HOME</a> > 
+			<a href="/adminMember">마이라이브러리</a> >
+			<a class="checked" href="/adminMember">대출/예약/연장 현황</a>
 		</div>
 	</div>
-</div>
-<c:import url="/footer"/>
-
-<script src = "/javaScript/myInfoUpate.js"></script>
+	<div class="RIContainer">
+		<div id="myInfoContainer">
+		테스트용
+		</div>
+	</div>
 </body>

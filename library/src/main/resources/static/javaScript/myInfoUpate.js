@@ -31,6 +31,7 @@
 	  });
 	});
 	
+	//const menuItems = document.getElementById('myInfo_menu');
 	const menuItems = document.querySelectorAll('.myInfo_menu');
 	console.log(menuItems);
 	
@@ -48,7 +49,7 @@
 	// 클릭한 메뉴 항목에 '활성' 클래스 추가
 	menuItems.forEach(item => item.addEventListener('click', activateMenuItem));
 
-function showInfo(menu) {
+/*function showInfo(menu) {
 		const url = "/myLibrary/"+ menu;
 		  const myInfoContainer = document.getElementById('myInfoContainer');
 		  const xhr = new XMLHttpRequest();
@@ -59,7 +60,7 @@ function showInfo(menu) {
 		    }
 		  };
 		  xhr.send();
-	}
+	}*/
 
   // 페이지가 로드되면 초기 메뉴 선택 설정을 수행합니다.
  /* window.onload = function () {
