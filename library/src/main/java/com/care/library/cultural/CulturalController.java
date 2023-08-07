@@ -20,4 +20,19 @@ public class CulturalController {
         culturalService.culturalForm(cp, model);
         return "cultural/culForm";
     }
+    
+    @RequestMapping("cultural")
+	public String cultural() {
+		return "cultural/cultural";
+	}
+	
+	@RequestMapping("culResult")
+	public String culResult() {
+		return "cultural/culResult";
+	}
+	
+    @RequestMapping("culSubmit")
+	public String culSubmit() {
+		return "cultural/culSubmit";
+	}
 }

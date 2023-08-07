@@ -34,21 +34,6 @@ public class MemberController {
 		return "default/footer";
 	}
 
-	@RequestMapping("cultural")
-	public String cultural() {
-		return "cultural/cultural";
-	}
-	
-	@RequestMapping("culResult")
-	public String culResult() {
-		return "cultural/culResult";
-	}
-	
-	@RequestMapping("culSubmit")
-	public String culSubmit() {
-		return "cultural/culSubmit";
-	}
-	
 	@RequestMapping("subMenuCultural")
 	public String subMenuCultural() {
 		return "cultural/subMenuCultural";
