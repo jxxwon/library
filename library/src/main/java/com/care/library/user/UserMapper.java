@@ -15,4 +15,5 @@ public interface UserMapper {
 	
 	int updateAuth(String id);
 	
+	int updateId(String id, String delId);
 }

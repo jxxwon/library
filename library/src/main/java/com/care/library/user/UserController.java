@@ -132,15 +132,15 @@ public class UserController {
 		return "user/withdraw";
 	}
 	
-//	@PostMapping("deleteMemberProc")
-//	public String deleteMemberProc(String pw) {
-//		String id = (String)session.getAttribute("id");
-//		String result = service.deleteMember(id, pw);
-//		if(result.equals("회원 탈퇴가 완료되었습니다.")) {
-//			session.invalidate();
-//			return "redirect:main";
-//		}
-//		return "member/deleteMember";
-//	}
+	@PostMapping("withdrawProc")
+	public String withdrawProc(String pw) {
+		String id = (String)session.getAttribute("id");
+		String result = userService.deleteMember(id, pw);
+		if(result.equals("회원 탈퇴가 완료되었습니다.")) {
+			session.invalidate();
+			return "redirect:main";
+		}
+		return "user/withdraw";
+	}
 	
 }
