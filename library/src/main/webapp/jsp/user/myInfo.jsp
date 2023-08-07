@@ -34,5 +34,7 @@
 				<c:import url="/myLibrary/updateInfo"/>
 			</div>
 		</div>
-<script src = "/javaScript/myInfoUpate.js"></script>
+		
+<!--  <script src = "/javaScript/myInfoUpate.js"></script>-->
 </body>
+

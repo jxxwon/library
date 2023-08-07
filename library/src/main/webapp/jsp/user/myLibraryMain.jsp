@@ -11,20 +11,8 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<script>
-function showInfo(menu) {
-	const url = "/myLibrary/"+ menu;
-	  const myInfoContainer = document.getElementById('myInfoContainer');
-	  const xhr = new XMLHttpRequest();
-	  xhr.open('GET', url, true);
-	  xhr.onreadystatechange = function () {
-	    if (xhr.readyState === 4 && xhr.status === 200) {
-	      myInfoContainer.innerHTML = xhr.responseText;
-	    }
-	  };
-	  xhr.send();
-}
-</script>
+
+<script src = "/javaScript/myInfoUpate.js"></script>
 
  </head>   
 <body>
@@ -33,7 +21,6 @@ function showInfo(menu) {
 		<c:import url = "/subMenuMyLibrary"/>
 		<div class = "myLibraryContent">
 			<c:import url="/myLibrary/myBookStatus"/>
-			<c:import url="/myLibrary/myInfo"/>
 		</div>
 	</div>
 	<c:import url="/footer"/>
