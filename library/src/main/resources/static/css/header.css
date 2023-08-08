@@ -98,6 +98,9 @@ body {
 	margin-top: 50px;
 	max-width: 1200px;
 	border: 1px solid black;
+	background-color: rgba(0,0,0,0.4);
+	
+	
 }
 
 .header_nav ul {
@@ -121,20 +124,31 @@ body {
 .header_nav li a {
 	display: inline-block;
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
 	text-decoration: none;
 	/* 링크의 밑줄을 없앰 */
 	color: black;
 }
 
 .header_nav .toggleBox {
-	display: none;
+	display: flex;
 	flex-direction: column;
-	background-color: white;
+	justify-content: flex-start;
+	background-color: rgba(0,0,0,0.4);
 	width: 100%;
-	height: 250px;
+	height: 295px;
+	margin-top: 30px;
+	padding-top: 25px;
+	opacity: 0; /* 초기 상태 */
+    visibility: hidden; /* 초기 상태 */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* 전환 속성 */
 }
 
 .header_nav .toggleBox li{
-	margin-bottom:20px;
+	margin-bottom: 30px;
+}
+
+.header_nav .toggleBox.show {
+    opacity: 1; /* 최종 상태 */
+    visibility: visible; /* 최종 상태 */
 }

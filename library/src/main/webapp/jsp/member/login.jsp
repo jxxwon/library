@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <head>
+    
 <title>하이디미어 도서관 - 로그인</title>
 <link href="/css/main.css" rel="stylesheet" type="text/css">
 <link href="/css/container.css" rel="stylesheet" type="text/css">
-<script>
+	<script>
         // 메세지 변수를 JavaScript 변수로 변환
         var message = "${msg}";
         var updateMsg = "${updateMsg}";
@@ -21,7 +23,8 @@
 <script src = "/dbLibrary.js"></script>
 <c:set var="RESTAPIKEY" value="3f70e9cb27d96ef5a414516587c2cb5c"/>
 <c:set var="redirectURI" value="http://localhost/kakaoLogin"/>
-
+</head>
+<body>
 <div class="loginContainer inner mb_30" >
 	<c:import url = "/subMenuLogin"/>
 	<div class="loginContent">
@@ -74,6 +77,6 @@
 	</div>
 </div>
 <c:import url="/footer"/>
-
+</body>
 
 
