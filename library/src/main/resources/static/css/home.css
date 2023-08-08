@@ -1,0 +1,15 @@
+.homeContainer{border: 1px solid black;}
+.homeContainer .visual, 
+.homeContainer .condition{display: flex; justify-content: space-between}
+.homeContainer .visual{margin-top:90px;}
+
+.homeContainer .visual .content.left, 
+.homeContainer .visual .content.right{width: 48%; height: 400px; margin:0; border: 1px solid red;}
+
+.homeContainer .condition {
+	border: 1px solid blue;
+    padding: 56px 0 80px 0;
+}
+.condition .announcement,
+.condition .schedule,
+.condition .readingRoom{width: 30%; height: 300px; border: 1px solid green;}
