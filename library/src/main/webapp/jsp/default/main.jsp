@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="/css/home.css" rel="stylesheet" type="text/css">
+
 <title>하이미디어 도서관</title>
 
 <script>
