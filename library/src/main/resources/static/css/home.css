@@ -1,7 +1,8 @@
 .homeContainer{border: 1px solid black;}
 .homeContainer .visual, 
 .homeContainer .condition{display: flex; justify-content: space-between}
-.homeContainer .visual{margin-top:90px;}
+.homeContainer .visual{margin-top:90px;position: relative;
+    z-index: 1;}
 
 .homeContainer .visual .content.left, 
 .homeContainer .visual .content.right{width: 48%; height: 400px; margin:0; border: 1px solid red;}
