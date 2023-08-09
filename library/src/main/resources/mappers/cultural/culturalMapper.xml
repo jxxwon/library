@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.care.library.cultural.CulturalMapper">
-	
-	<!-- resultType 대신 resultMap을 사용하여 resultType을 지정 -->
+
+	<!-- CulturalDTO 객체와 매핑되는 resultMap 설정 -->
 	<resultMap type="com.care.library.cultural.CulturalDTO" id="culturalDto">
 		<id column="id" property="id"/>
 		<result column="title" property="title"/>
-		<result column="content" property="content"/>
+		<result column="lecture_start" property="lecture_start"/>
+		<result column="lecture_end" property="lecture_end"/>
+		<result column="registration_start" property="registration_start"/>
+		<result column="registration_end" property="registration_end"/>
+		<result column="target" property="target"/>
 		<result column="imagePath" property="imagePath"/>
 		<result column="count" property="count"/>
 	</resultMap>
 	
-	<!-- 결과가 단일 값을 반환하는 경우 resultType으로 직접 지정 -->
-	<select id="count" resultType="int">
-		SELECT COUNT(id) FROM cultural
-	</select>
-  
-	<!-- resultMap을 사용하여 결과를 매핑 -->
+	<!-- cultural 테이블에서 데이터를 가져오는 SQL과 resultMap 설정 -->
 	<select id="culForm" resultMap="culturalDto">
-		SELECT id, title, content, imagePath, count FROM (
+		SELECT id, title, lecture_start, lecture_end, registration_start,
+		registration_end, target, imagePath, count FROM (
 			SELECT CCC.*, ROWNUM as rn FROM (
-				SELECT id, title, content, imagePath, count FROM cultural ORDER BY id DESC
+				SELECT id, title, lecture_start, lecture_end, registration_start,
+				registration_end, target, imagePath, count FROM cultural ORDER BY id DESC
 			) CCC
 		) WHERE rn BETWEEN #{begin} AND #{end}
 	</select>
 	
+	<!-- cultural 테이블에 데이터를 삽입하는 SQL -->
 	<insert id="insertCultural" parameterType="com.care.library.cultural.CulturalDTO">
-		INSERT INTO cultural (id, title, content, imagePath, count)
-		VALUES (#{id}, #{title}, #{content}, #{imagePath}, #{count})
+		INSERT INTO cultural (id, title, lecture_start, lecture_end, registration_start, registration_end, target, imagePath, count)
+		VALUES (#{id}, #{title}, #{lecture_start}, #{lecture_end}, #{registration_start}, #{registration_end}, #{target}, #{imagePath}, #{count})
 	</insert>
+	
+	<!-- cultural 테이블의 데이터 개수를 가져오는 SQL -->
+	<select id="count" resultType="int">
+	    SELECT COUNT(*) FROM cultural
+	</select>
 	
 </mapper>
