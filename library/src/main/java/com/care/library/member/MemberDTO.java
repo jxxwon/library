@@ -14,7 +14,14 @@ public class MemberDTO {
 	private String regDate;
 	private String status;
 	private String kakaoid;
+	private String rn;
 	
+	public String getRn() {
+		return rn;
+	}
+	public void setRn(String rn) {
+		this.rn = rn;
+	}
 	public String getId() {
 		return id;
 	}

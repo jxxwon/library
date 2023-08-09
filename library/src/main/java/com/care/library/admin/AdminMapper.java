@@ -9,6 +9,11 @@ import com.care.library.member.MemberDTO;
 @Mapper
 public interface AdminMapper {
 
-	ArrayList<MemberDTO> selectMember();
+	int count();
+
+	ArrayList<MemberDTO> selectMember(String memberSelect, int begin, int end);
+
+	MemberDTO selectUser(String id);
+
 
 }

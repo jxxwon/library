@@ -17,8 +17,8 @@
 	*/
 	function showMyLibSub(menu) {
 	
-		  const url = "/myLibrary/"+  menu;
-		  console.log(menu);
+		  var url = "/myLibrary/"+  menu;
+		  console.log(url);
 		  const myLibraryContent = document.querySelector('.myLibraryContent');
 		  const xhr = new XMLHttpRequest();
 		  xhr.open('GET', url, true);

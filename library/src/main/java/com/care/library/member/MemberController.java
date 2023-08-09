@@ -60,8 +60,8 @@ public class MemberController {
 				session.removeAttribute("savedId");
 			}
 			ra.addFlashAttribute("msg", result);
-			session.setAttribute("id", id);
-			session.setAttribute("name", name);
+//			session.setAttribute("id", id);
+//			session.setAttribute("name", name);
 			return "redirect:main";
 		}
 		model.addAttribute("msg", result);

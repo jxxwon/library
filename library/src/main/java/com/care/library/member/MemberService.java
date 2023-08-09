@@ -37,6 +37,7 @@ public class MemberService {
 			if(bpe.matches(pw, result.getPw())) {
 				session.setAttribute("id", result.getId());
 				session.setAttribute("name", result.getName());
+				session.setAttribute("status", result.getStatus());
 				return "로그인 성공";
 			}
 		}
