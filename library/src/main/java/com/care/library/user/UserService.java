@@ -105,15 +105,16 @@ public class UserService {
 		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
 		
 		System.out.println(search);
-//		ArrayList<InquiryDTO> inquiries = userMapper.selectInqiry(id, search, begin, end);
-//		
-//		String url = "myInquiry?currentPage=";
-//		int totalCount = userMapper.count();
-//		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
-//		
-//		model.addAttribute("inquiries", inquiries);
-//		model.addAttribute("result", result);
-//		model.addAttribute("currentPage", currentPage);
+		
+		ArrayList<InquiryDTO> inquiries = userMapper.selectInqiryTitle(id, search, begin, end);
+		
+		String url = "myInquiry?currentPage=";
+		int totalCount = userMapper.count();
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("inquiries", inquiries);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
 	}
 	
 }

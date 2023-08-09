@@ -20,5 +20,5 @@ public interface UserMapper {
 
 	ArrayList<InquiryDTO> selectInqiry(@Param("id")String id, @Param("begin")int begin, @Param("end")int end);
 
-	ArrayList<InquiryDTO> selectInqiry(@Param("id")String id, @Param("search")String search, @Param("begin")int begin, @Param("end")int end);
+	ArrayList<InquiryDTO> selectInqiryTitle(String id, String search, int begin, int end);
 }

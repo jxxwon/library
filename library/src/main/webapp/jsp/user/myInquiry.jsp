@@ -80,7 +80,6 @@
 	</div>
 	<c:import url="/footer"/>
 </body>
-
 <script>
 	function searchChange(){
 		var inqSelect = document.getElementById('inqSelect');
@@ -111,3 +110,4 @@
 			f.submit();
 	}
 </script>
+

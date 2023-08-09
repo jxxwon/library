@@ -25,7 +25,8 @@ public class UserController {
 	// 1:1문의 - 목록
 	@RequestMapping("/myLibrary/myInquiry")
 	public String myInquiry(@RequestParam(value="currentPage", required = false)String cp, 
-			@RequestParam(value="select", required = false)String select, String search, String replySelect, Model model) {
+			@RequestParam(value="select", required = false)String select, @RequestParam(value="search", required = false)String search, 
+			@RequestParam(value="replySelect", required = false) String replySelect, Model model) {
 		
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.equals("")) {

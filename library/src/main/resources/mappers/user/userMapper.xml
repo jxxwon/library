@@ -37,14 +37,11 @@
   	</insert>
   	
   	<select id = "selectInqiry" resultMap="inquiryDto">
-  		<choose>
-  			<when test = "search != null">
-			  	SELECT BBB.* FROM(SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry WHERE id = #{id} ORDER BY write_date DESC)AAA)BBB
-  			</when>
-  			<otherwise>
-			  	SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry WHERE id = #{id} ORDER BY write_date DESC)AAA
-  			</otherwise>
-  		</choose>
+		SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry WHERE id = #{id} ORDER BY write_date DESC)AAA)BBB WHERE BBB.rn BETWEEN #{begin} AND #{end}
+  	</select>
+  	
+  	<select id = "selectInqiryTitle" resultMap="inquiryDto">
+		SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry WHERE id = #{id} ORDER BY write_date DESC)AAA)BBB WHERE BBB.rn BETWEEN #{begin} AND #{end}
   	</select>
   	
   	<select id = "count">
