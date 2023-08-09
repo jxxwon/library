@@ -6,17 +6,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.care.library.member.MemberDTO;
-import com.care.library.member.MemberService;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
 	@Autowired HttpSession session;
-	@Autowired private MemberService service;
+	@Autowired private UserService service;
 
 	@RequestMapping("subMenuMyLibrary")
 	public String subMenuMyLibrary() {
@@ -25,7 +24,13 @@ public class UserController {
 	
 	// 1:1문의 - 목록
 	@RequestMapping("/myLibrary/myInquiry")
-	public String myInquiry() {
+	public String myInquiry(@RequestParam(value="currentPage", required = false, defaultValue = "1")String cp, Model model) {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.equals("")) {
+			return "redirect:main";
+		}
+		System.out.println(cp);
+		service.selectInquiry(cp, id, model);
 		return "user/myInquiry";
 	}
 	
@@ -61,7 +66,7 @@ public class UserController {
 			  model.addAttribute("detailAddress", myInfo.getDetailAddress());
 		  }
 		 
-		return "user/myInfo";
+		return "/user/myInfo";
 	}
 	
 	@PostMapping("/myLibrary/changeMyInfoProc")

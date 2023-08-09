@@ -21,6 +21,29 @@
 		post_code = #{postCode} WHERE id = #{id}
 	</update>
 
+	
+	<!-- 1:1문의 관련 -->
+	<resultMap type="com.care.library.user.InquiryDTO" id="inquiryDto"> <!-- id는 식별자일뿐 -->
+  		<result column = "write_date" property = "writeDate"/>
+  		<result column = "rn" property = "rn"/>
+  	</resultMap>
+  	
+  	<select id = "findMaxNum">
+  		SELECT MAX(no) FROM inquiry
+  	</select>
+  	
+  	<insert id = "myInquiryWrite" parameterType="com.care.library.user.InquiryDTO">
+  		INSERT INTO inquiry (no, title, content, id, write_date, reply) VALUES (#{no}, #{title}, #{content}, #{id}, #{writeDate}, #{reply})
+  	</insert>
+  	
+  	<select id = "selectInqiry" resultMap="inquiryDto">
+  		SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry WHERE id = #{id} ORDER BY write_date DESC)AAA
+  	</select>
+  	
+  	<select id = "count">
+  		SELECT count(no) FROM inquiry
+  	</select>
+  	
 </mapper>
 
 

@@ -36,7 +36,7 @@ function sendEmail(){
 	}
 }
 
-function auth(){
+function resAuth(){
 	var authNum = document.getElementById('authNum');
 	label = document.getElementById('label2');
 	if(authNum.value == ""){
@@ -139,7 +139,6 @@ function auth(){
 	} else{
 		xhr.open('post', 'sendAuth');
     	xhr.send(document.getElementById('authNum').value);
-    	xhr.onreadystatechange = resProcId
     	xhr.onreadystatechange = resProcId
 	}
 }
