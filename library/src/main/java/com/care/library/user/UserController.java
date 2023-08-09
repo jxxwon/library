@@ -37,13 +37,25 @@ public class UserController {
 	
 	// 1:1문의 - 목록
 	@RequestMapping("/myLibrary/myInquiry")
-	public String myInquiry(@RequestParam(value="currentPage", required = false, defaultValue = "1")String cp, Model model) {
+	public String myInquiry(@RequestParam(value="currentPage", required = false)String cp, 
+			@RequestParam(value="select", required = false)String select, @RequestParam(value="search", required = false)String search, 
+			@RequestParam(value="replySelect", required = false) String replySelect, Model model) {
+		
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.equals("")) {
 			return "redirect:main";
 		}
-		System.out.println(cp);
-		service.selectInquiry(cp, id, model);
+		System.out.println("select : " + select);
+		System.out.println("search : " + search);
+		System.out.println("replySelect : " + replySelect);
+		
+		//초기 화면 및 검색조건에 제목으로 해놓고 검색어 입력 안 하면 전체 조회
+		if(select == null || (select.equals("title") && search==null)) {
+			service.selectInquiry(cp, id, model);
+		} else if(select.equals("title") && search != null) {
+			service.selectInquiry(cp, search, id, model);
+		}
+		
 		return "user/myInquiry";
 	}
 	

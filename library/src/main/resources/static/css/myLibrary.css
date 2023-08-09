@@ -93,6 +93,13 @@ padding: 30px 0 30px 20px; margin-bottom: 30px; line-height: 180%;}
 .inquiryContainer .inquiryPage a{display:inline-block; width:30px; height:30px; line-height:30px; font-weight:400; border:1px solid #ddd; margin-right:5px;}
 .inquiryContainer .inquiryPage a:last-child{margin-right:0;}
 
+.inquirySearch {display:inline-block; padding-top:20px;}
+.inquirySearch select {width:80px; height:30px; text-align:center; padding:0; appearance: auto; -webkit-appearance: auto;}
+.inquirySearch select.replySelect{margin:0 10px;}
+.inquirySearch input[type="text"]{width:200px; height:30px; margin:0 10px;}
+.inquirySearch input[type="button"]{width:50px; height:30px;}
+
+
 /*1:1문의 - 작성*/
 .inquiryInfo {width:100%-10px; border:1px solid #ddd; margin:40px 0; padding:15px; line-height:145%; text-align:left;}
 .inquiryContainer .inquiryWriteForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}

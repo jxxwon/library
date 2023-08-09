@@ -3,6 +3,7 @@ package com.care.library.user;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserMapper {
@@ -15,8 +16,6 @@ public interface UserMapper {
 
 	int myInquiryWrite(InquiryDTO inquiry);
 
-	ArrayList<InquiryDTO> selectInqiry(String id, int begin, int end);
-
 	int count();
 	
 	String currentPwCheck(String id);
@@ -26,4 +25,8 @@ public interface UserMapper {
 	int updateAuth(String id);
 	
 	int updateId(String id, String delId);
+
+	ArrayList<InquiryDTO> selectInqiry(@Param("id")String id, @Param("begin")int begin, @Param("end")int end);
+
+	ArrayList<InquiryDTO> selectInqiryTitle(String id, String search, int begin, int end);
 }
