@@ -20,7 +20,6 @@
 	<div class = "myLibraryContainer inner">
 		<c:import url = "/subMenuMyLibrary"/>
 		<div class = "myLibraryContent">
-			<c:import url = "/myInquiry"/>
 		</div>
 	</div>
 	<c:import url="/footer"/>
