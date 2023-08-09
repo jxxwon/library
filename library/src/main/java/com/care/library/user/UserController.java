@@ -6,9 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.care.library.member.MemberDTO;
 import com.care.library.member.MemberService;
 
 import jakarta.servlet.http.HttpSession;
@@ -16,8 +16,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class UserController {
 	@Autowired HttpSession session;
-	@Autowired private MemberService service;
-	@Autowired private UserService userService;
+	@Autowired private UserService service;
 	
 	//마이 라이브러리(첫페이지) - container
 	@GetMapping("/myLibrary")
@@ -38,7 +37,13 @@ public class UserController {
 	
 	// 1:1문의 - 목록
 	@RequestMapping("/myLibrary/myInquiry")
-	public String myInquiry() {
+	public String myInquiry(@RequestParam(value="currentPage", required = false, defaultValue = "1")String cp, Model model) {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.equals("")) {
+			return "redirect:main";
+		}
+		System.out.println(cp);
+		service.selectInquiry(cp, id, model);
 		return "user/myInquiry";
 	}
 	
@@ -70,7 +75,7 @@ public class UserController {
 	@GetMapping("/myLibrary/updateInfo")
 	public String updateInfo(Model model) {
 		String id = (String)session.getAttribute("id");
-		UserDTO myInfo = userService.getMyInfo(id);
+		UserDTO myInfo = service.getMyInfo(id);
 		  if(myInfo != null) { 
 			  model.addAttribute("email", myInfo.getEmail()); 
 			  model.addAttribute("mobile", myInfo.getMobile()); 
@@ -87,7 +92,7 @@ public class UserController {
 		String id = (String)session.getAttribute("id");
 		myInfo.setId(id);
 		
-		String result = userService.changeMyInfoProc(myInfo);
+		String result = service.changeMyInfoProc(myInfo);
 		if(result.equals("정보가 수정되었습니다.")) {
 			ra.addFlashAttribute("updateMsg", result);
 			return "redirect:/main";
@@ -105,7 +110,7 @@ public class UserController {
 	@PostMapping("/myLibrary/updatePwProc")
 	public String updatePwProc(String currentPW, String newPW, String newConfirmPW) {
 		String id = (String)session.getAttribute("id");
-		String result = userService.updatePwProc(currentPW, newPW, newConfirmPW, id);
+		String result = service.updatePwProc(currentPW, newPW, newConfirmPW, id);
 		if(result.equals("비밀번호가 변경되었습니다."))
 			return "redirect:/main";
 		return "user/myInfo";
@@ -120,7 +125,7 @@ public class UserController {
 	@PostMapping("/myLibrary/updateAuthProc")
 	public String updateAuthProc(String pw) {
 		String id = (String)session.getAttribute("id");
-		String result = userService.updateAuthProc(pw, id);
+		String result = service.updateAuthProc(pw, id);
 		if(result.equals("신청이 완료 되었습니다."))
 			return "redirect:/main";
 		return "user/myInfo";
@@ -135,7 +140,7 @@ public class UserController {
 	@PostMapping("withdrawProc")
 	public String withdrawProc(String pw) {
 		String id = (String)session.getAttribute("id");
-		String result = userService.deleteMember(id, pw);
+		String result = service.deleteMember(id, pw);
 		if(result.equals("회원 탈퇴가 완료되었습니다.")) {
 			session.invalidate();
 			return "redirect:main";

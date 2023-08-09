@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpSession;
+import com.care.library.user.InquiryDTO;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -174,11 +175,6 @@ public class MemberService {
 		return mapper.emailCheck(kakaoEmail);
 	}
 
-	public void myInquiryWriteProc(String id, String title, String content2) {
-		int no;
-		
-	}
-	
 
 }
 

@@ -82,12 +82,16 @@ padding: 30px 0 30px 20px; margin-bottom: 30px; line-height: 180%;}
 .withdrawForm #pw {width: 280px;}
 /* 1:1문의 - 목록*/
 .inquiryContainer{text-align:center; border-top:1px solid #ddd;}
-.inquiryContainer .inquiryBtn{float:right; margin-top:20px; margin-bottom:40px;}
 
 .inquiry {overflow:hidden; width:100%;}
 .inquiry tr:first-child{border-bottom:2px solid #555;}
 .inquiry tr th{padding:5px;}
 .inquiry tr td{padding:5px; text-align:center; border-bottom:1px solid #ddd;}
+
+.inquiryContainer .inquiryBtn{width:100%; text-align:right; margin:20px 0;}
+
+.inquiryContainer .inquiryPage a{display:inline-block; width:30px; height:30px; line-height:30px; font-weight:400; border:1px solid #ddd; margin-right:5px;}
+.inquiryContainer .inquiryPage a:last-child{margin-right:0;}
 
 /*1:1문의 - 작성*/
 .inquiryInfo {width:100%-10px; border:1px solid #ddd; margin:40px 0; padding:15px; line-height:145%; text-align:left;}

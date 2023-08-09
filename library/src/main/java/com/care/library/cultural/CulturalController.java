@@ -18,6 +18,21 @@ public class CulturalController {
             @RequestParam(value="currentPage", required = false) String cp,
             Model model) {
         culturalService.culturalForm(cp, model);
-        return "cultural/culForm";
+        return "cultural/culForm"; // 뷰 이름 설정
     }
+    
+    @RequestMapping("cultural")
+	public String cultural() {
+		return "cultural/cultural";
+	}
+	
+	@RequestMapping("culResult")
+	public String culResult() {
+		return "cultural/culResult";
+	}
+	
+    @RequestMapping("culSubmit")
+	public String culSubmit() {
+		return "cultural/culSubmit";
+	}
 }
