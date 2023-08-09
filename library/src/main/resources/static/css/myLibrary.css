@@ -101,6 +101,9 @@ padding: 30px 0 30px 20px; margin-bottom: 30px; line-height: 180%;}
 
 
 /*1:1문의 - 작성*/
+.inquiryFormContainer {display:flex;}
+.inquiryFormContent{padding:50px 0 0 50px; width:1000px;}
+
 .inquiryInfo {width:100%-10px; border:1px solid #ddd; margin:40px 0; padding:15px; line-height:145%; text-align:left;}
 .inquiryContainer .inquiryWriteForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
 .inquiryContainer .inquiryWriteForm tr{border-bottom:1px solid #ddd;}
