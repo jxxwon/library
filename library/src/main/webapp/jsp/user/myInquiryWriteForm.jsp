@@ -27,9 +27,9 @@
 
 <body>
 	<c:import url = "/header"/>
-	<div class = "adminContainer inner">
+	<div class = "inquiryFormContainer inner ">
 		<c:import url = "/subMenuMyLibrary"/>
-		<div class = "adminContent">
+		<div class = "inquiryFormContent">
 			<div class = "admin header">
 				<h1>1:1문의</h1>
 				<div class="mb_30 mt_20">

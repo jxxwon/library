@@ -42,6 +42,39 @@ const submyLibraryItems = document.querySelectorAll('.submyLibrary_menu');
 					// 클릭한 메뉴 항목에 '활성' 클래스 추가
 					menuItems.forEach(item => item.addEventListener('click', activateMenuItem));
 			  }
+			  if(menu == "myInquiry"){
+						var inqSelect = document.getElementById('inqSelect');
+				  	function searchChange(){
+						var select = document.getElementById('inqSelect').options.selectedIndex;
+						var option = inqSelect.options[select].value;
+						if(option == "reply"){
+							document.getElementById('search').style.display='none';
+							document.getElementById('replySelect').style.display='inline-block';
+						} else {
+							document.getElementById('search').style.display='inline-block';
+							document.getElementById('replySelect').style.display='none';
+						}
+					}
+					inqSelect.addEventListener('change', searchChange);
+					
+				  	const myInquirySearchBtn = document.getElementById('myInquirySearchBtn');
+					/*submit 시 parameter 안 넘어가게 조절함(disabled)*/
+					function inquirySearch(){ 
+						var inqSelect = document.getElementById('inqSelect');
+						var select = document.getElementById('inqSelect').options.selectedIndex;
+						var option = inqSelect.options[select].value;
+						
+						var replySelect = document.getElementById('replySelect');
+						console.log(option)
+						if(option == 'title'){
+							document.getElementById('replySelect').disabled = true;
+						} else {
+							document.getElementById('search').disabled=true;
+						}
+							f.submit();
+					}
+					myInquirySearchBtn.addEventListener('click', inquirySearch);
+			  }
 		    }
 				
 			  };

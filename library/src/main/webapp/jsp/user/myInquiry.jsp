@@ -55,13 +55,13 @@
 						</c:choose>
 					</table>
 					<div class="inquiryBtn">
-						<input type = "button" value = "글쓰기" onclick="location.href='myInquiryWriteForm'">
+						<input type = "button" value = "글쓰기" onclick="location.href='/myLibrary/myInquiryWriteForm'">
 					</div>
 					<div class="inquiryPage">
 						${result }
 					</div>
 					<div class="inquirySearch">
-						<select class="inqSelect" name = "select" id="inqSelect" onchange="searchChange()">
+						<select class="inqSelect" name = "select" id="inqSelect" >
 							<option value="title">제목</option>
 							<option value="reply">처리상태</option>
 						</select>
@@ -70,41 +70,13 @@
 							<option value = "N">미답변</option>
 							<option value = "Y">답변완료</option>
 						</select>
-						<input type = "button" value = "검색" onclick = "inquirySearch()">
+						<input type = "button" id="myInquirySearchBtn" value = "검색" >
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-</body>
 <script>
-	function searchChange(){
-		var inqSelect = document.getElementById('inqSelect');
-		var select = document.getElementById('inqSelect').options.selectedIndex;
-		var option = inqSelect.options[select].value;
-		if(option == "reply"){
-			document.getElementById('search').style.display='none';
-			document.getElementById('replySelect').style.display='inline-block';
-		} else {
-			document.getElementById('search').style.display='inline-block';
-			document.getElementById('replySelect').style.display='none';
-		}
-	}
-	
-	/*submit 시 parameter 안 넘어가게 조절함(disabled)*/
-	function inquirySearch(){ 
-		var inqSelect = document.getElementById('inqSelect');
-		var select = document.getElementById('inqSelect').options.selectedIndex;
-		var option = inqSelect.options[select].value;
-		
-		var replySelect = document.getElementById('replySelect');
-		console.log(option)
-		if(option == 'title'){
-			document.getElementById('replySelect').disabled = true;
-		} else {
-			document.getElementById('search').disabled=true;
-		}
-			f.submit();
-	}
-</script>
 
+</script>
+</body>

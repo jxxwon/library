@@ -73,7 +73,7 @@ public class UserController {
 	public String myInquiryWriteProc(String title, String content) {
 		String id = (String)session.getAttribute("id");
 		service.myInquiryWriteProc(id, title, content);
-		return "redirect:myInquiry";
+		return "redirect:/myLibrary";
 	}
 	
 	// 회원정보 - container
