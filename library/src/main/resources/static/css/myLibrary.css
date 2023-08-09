@@ -81,6 +81,11 @@ padding: 30px 0 30px 20px; margin-bottom: 30px; line-height: 180%;}
 .withdrawForm .withdrawBtn{width:175px; height:60px; padding:10px; cursor: pointer;}
 .withdrawForm #pw {width: 280px;}
 /* 1:1문의 - 목록*/
+.adminContainer {display:flex;}
+h1{margin-bottom:50px;}
+.checked{font-weight: 600;}
+
+.adminContent{padding:50px 0 0 50px; width:1000px;}
 .inquiryContainer{text-align:center; border-top:1px solid #ddd;}
 
 .inquiry {overflow:hidden; width:100%;}

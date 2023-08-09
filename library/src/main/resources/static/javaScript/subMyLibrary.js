@@ -1,4 +1,4 @@
-const submyLibraryItems = document.querySelectorAll('.submyLibrary_menu');
+/*	const submyLibraryItems = document.querySelectorAll('.submyLibrary_menu');
 	console.log(submyLibraryItems);
 	
 	function activateMenuItem() {
@@ -14,7 +14,7 @@ const submyLibraryItems = document.querySelectorAll('.submyLibrary_menu');
 	
 	// 클릭한 메뉴 항목에 '활성' 클래스 추가
 	submyLibraryItems.forEach(item => item.addEventListener('click', activateMenuItem));
-	
+	*/
 	function showMyLibSub(menu) {
 	
 		  const url = "/myLibrary/"+  menu;
@@ -25,7 +25,7 @@ const submyLibraryItems = document.querySelectorAll('.submyLibrary_menu');
 		  xhr.onreadystatechange = function () {
 		    if (xhr.readyState === 4 && xhr.status === 200) {
 		      myLibraryContent.innerHTML = xhr.responseText;
-			  if(menu === "myInfo"){
+			/*  if(menu === "myInfo"){
 			      const menuItems = document.querySelectorAll('.myInfo_menu');
 					console.log(menuItems);
 					function activateMenuItem() {
@@ -58,7 +58,7 @@ const submyLibraryItems = document.querySelectorAll('.submyLibrary_menu');
 					inqSelect.addEventListener('change', searchChange);
 					
 				  	const myInquirySearchBtn = document.getElementById('myInquirySearchBtn');
-					/*submit 시 parameter 안 넘어가게 조절함(disabled)*/
+					submit 시 parameter 안 넘어가게 조절함(disabled)
 					function inquirySearch(){ 
 						var inqSelect = document.getElementById('inqSelect');
 						var select = document.getElementById('inqSelect').options.selectedIndex;
@@ -74,38 +74,42 @@ const submyLibraryItems = document.querySelectorAll('.submyLibrary_menu');
 							f.submit();
 					}
 					myInquirySearchBtn.addEventListener('click', inquirySearch);
-			  }
+			  }*/
 		    }
 				
 			  };
 		  xhr.send();
 	}
  // 현재 URL을 가져오는 JavaScript 함수
-    function getCurrentURL() {
+   function getCurrentURL() {
       return window.location.href;
     }
 
     // URL에 따라 버튼 색상을 변경하는 JavaScript 함수
-    function setButtonColorByURL() {
+   function setButtonColorByURL() {
       var currentURL = getCurrentURL();
-      
+      document.getElementById("subMyBookStatus").classList.add("active");
       // 원하는 URL 패턴에 따라 버튼 색상을 변경합니다.
       if (currentURL.includes("myInfo")) {
-		  console.dir(document.getElementById("subMyInfo"));
         document.getElementById("subMyInfo").classList.add("active");
-      } else if(currentURL.includes("myInquiry")){
+        document.getElementById("subMyBookStatus").classList.remove("active");
+        document.getElementById("subMyInquiry").classList.remove("active");
+      } else if(currentURL.includes("myBookStatus")){
+	      document.getElementById("subMyBookStatus").classList.add("active");
+	      document.getElementById("subMyInquiry").classList.remove("active");
+	      document.getElementById("subMyInfo").classList.remove("active");
+	  }else if(currentURL.includes("myInquiry")){
 	      document.getElementById("subMyInquiry").classList.add("active");
-	  } else {   // 기본적으로 어떤 패턴에도 해당하지 않을 경우 버튼 색상을 초기화합니다.
-		  
-	  }
-		  
+	      document.getElementById("subMyBookStatus").classList.remove("active");
+	      document.getElementById("subMyInfo").classList.remove("active");
+    }
     }
 
     // 페이지 로드 시 버튼 색상을 설정합니다.
     setButtonColorByURL();
 
     // 페이지 URL이 변경될 때마다 버튼 색상을 업데이트합니다.
-    window.onpopstate = function () {
+   window.onpopstate = function () {
       setButtonColorByURL();
     };
     

@@ -48,6 +48,7 @@ public class UserController {
 			@RequestParam(value="replySelect", required = false) String replySelect, Model model) {
 		
 		String id = (String)session.getAttribute("id");
+		System.out.println("myInquiryList"+ id);
 //		if(id == null || id.equals("")) {
 //			return "redirect:main";
 //		}
@@ -132,6 +133,7 @@ public class UserController {
 	public String updatePwProc(String currentPW, String newPW, String newConfirmPW) {
 		String id = (String)session.getAttribute("id");
 		String result = service.updatePwProc(currentPW, newPW, newConfirmPW, id);
+		System.out.println("result"+ result);
 		if(result.equals("비밀번호가 변경되었습니다."))
 			return "redirect:/main";
 		return "user/myInfo";
@@ -158,13 +160,14 @@ public class UserController {
 		return "user/withdraw";
 	}
 	
-	@PostMapping("withdrawProc")
+	@PostMapping("/myLibrary/withdrawProc")
 	public String withdrawProc(String pw) {
 		String id = (String)session.getAttribute("id");
 		String result = service.deleteMember(id, pw);
+		System.out.println("result"+ result);
 		if(result.equals("회원 탈퇴가 완료되었습니다.")) {
 			session.invalidate();
-			return "redirect:main";
+			return "redirect:/main";
 		}
 		return "user/withdraw";
 	}

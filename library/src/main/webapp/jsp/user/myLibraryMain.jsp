@@ -19,8 +19,9 @@
 	<c:import url = "/header"/>
 	<div class = "myLibraryContainer inner">
 		<c:import url = "/subMenuMyLibrary"/>
-		<div class = "myLibraryContent">
-		</div>
+			<div class = "myLibraryContent">
+				<c:import url = "/myBookStatus"/>
+			</div>
 	</div>
 	<c:import url="/footer"/>
 </body>

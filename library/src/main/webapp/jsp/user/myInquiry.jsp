@@ -8,7 +8,9 @@
 <title>하이미디어 도서관 - 마이라이브러리 : 1:1문의</title>
 
 <body>
-	<div class = "adminContainer">
+<c:import url = "/header"/>
+	<div class = "adminContainer inner">
+	<c:import url = "/subMenuMyLibrary"/>
 		<div class = "adminContent">
 			<div class = "admin header">
 				<h1>1:1문의</h1>
@@ -61,7 +63,7 @@
 						${result }
 					</div>
 					<div class="inquirySearch">
-						<select class="inqSelect" name = "select" id="inqSelect" >
+						<select class="inqSelect" name = "select" id="inqSelect" onchange="searchChange()">
 							<option value="title">제목</option>
 							<option value="reply">처리상태</option>
 						</select>
@@ -70,10 +72,42 @@
 							<option value = "N">미답변</option>
 							<option value = "Y">답변완료</option>
 						</select>
-						<input type = "button" id="myInquirySearchBtn" value = "검색" >
+						<input type = "button" id="myInquirySearchBtn" value = "검색" onclick="inquirySearch()" >
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
+	<c:import url="/footer"/>
 </body>
+<script>
+	function searchChange(){
+		var inqSelect = document.getElementById('inqSelect');
+		var select = document.getElementById('inqSelect').options.selectedIndex;
+		var option = inqSelect.options[select].value;
+		if(option == "reply"){
+			document.getElementById('search').style.display='none';
+			document.getElementById('replySelect').style.display='inline-block';
+		} else {
+			document.getElementById('search').style.display='inline-block';
+			document.getElementById('replySelect').style.display='none';
+		}
+	}
+	
+	/*submit 시 parameter 안 넘어가게 조절함(disabled)*/
+	function inquirySearch(){ 
+		const myInquirySearchBtn = document.getElementById('myInquirySearchBtn');
+		var inqSelect = document.getElementById('inqSelect');
+		var select = document.getElementById('inqSelect').options.selectedIndex;
+		var option = inqSelect.options[select].value;
+		
+		var replySelect = document.getElementById('replySelect');
+		console.log(option)
+		if(option == 'title'){
+			document.getElementById('replySelect').disabled = true;
+		} else {
+			document.getElementById('search').disabled=true;
+		}
+			f.submit();
+	}
+</script>
