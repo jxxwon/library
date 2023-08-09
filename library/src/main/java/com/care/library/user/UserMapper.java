@@ -26,7 +26,9 @@ public interface UserMapper {
 	
 	int updateId(String id, String delId);
 
-	ArrayList<InquiryDTO> selectInqiry(@Param("id")String id, @Param("begin")int begin, @Param("end")int end);
+	ArrayList<InquiryDTO> selectInquiry(@Param("id")String id, @Param("begin")int begin, @Param("end")int end);
 
-	ArrayList<InquiryDTO> selectInqiryTitle(String id, String search, int begin, int end);
+	ArrayList<InquiryDTO> selectInquiryTitle(String id, String search, int begin, int end);
+
+	ArrayList<InquiryDTO> selectInquiryReply(String id, String replySelect, int begin, int end);
 }

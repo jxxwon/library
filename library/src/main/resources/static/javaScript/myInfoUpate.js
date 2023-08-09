@@ -50,7 +50,7 @@
 	menuItems.forEach(item => item.addEventListener('click', activateMenuItem));
 */
 function showInfo(menu) {
-		const url = "/myLibrary/"+ menu;
+		const url = "/myLibrary/"+menu;
 		  const myInfoContainer = document.getElementById('myInfoContainer');
 		  const xhr = new XMLHttpRequest();
 		  xhr.open('GET', url, true);
@@ -59,6 +59,7 @@ function showInfo(menu) {
 		      myInfoContainer.innerHTML = xhr.responseText;
 		    }
 		  };
+		  location.href=url;
 		  xhr.send();
 	}
 

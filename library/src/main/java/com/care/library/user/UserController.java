@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.care.library.member.MemberService;
@@ -19,7 +20,12 @@ public class UserController {
 	@Autowired private UserService service;
 	
 	//마이 라이브러리(첫페이지) - container
-	@GetMapping("/myLibrary")
+	@RequestMapping("/myLibrary")
+	public String myLibray() {
+		return "user/myLibraryMain";
+	}
+
+	@RequestMapping("/myLibraryMain")
 	public String myLibrayMain() {
 		return "user/myLibraryMain";
 	}
@@ -37,23 +43,26 @@ public class UserController {
 	
 	// 1:1문의 - 목록
 	@RequestMapping("/myLibrary/myInquiry")
-	public String myInquiry(@RequestParam(value="currentPage", required = false)String cp, 
+	public String myInquiryList(@RequestParam(value="currentPage", required = false)String cp, 
 			@RequestParam(value="select", required = false)String select, @RequestParam(value="search", required = false)String search, 
 			@RequestParam(value="replySelect", required = false) String replySelect, Model model) {
 		
 		String id = (String)session.getAttribute("id");
-		if(id == null || id.equals("")) {
-			return "redirect:main";
-		}
+//		if(id == null || id.equals("")) {
+//			return "redirect:main";
+//		}
 		System.out.println("select : " + select);
 		System.out.println("search : " + search);
 		System.out.println("replySelect : " + replySelect);
 		
+		
 		//초기 화면 및 검색조건에 제목으로 해놓고 검색어 입력 안 하면 전체 조회
-		if(select == null || (select.equals("title") && search==null)) {
+		if(select == null || (select.equals("title") && (search==null || search == ""))) {
 			service.selectInquiry(cp, id, model);
 		} else if(select.equals("title") && search != null) {
 			service.selectInquiry(cp, search, id, model);
+		} else if(select.equals("reply")) {
+			service.selectInquiry(cp, select, replySelect, id, model);
 		}
 		
 		return "user/myInquiry";

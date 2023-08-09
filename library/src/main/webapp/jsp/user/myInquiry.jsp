@@ -55,7 +55,7 @@
 						</c:choose>
 					</table>
 					<div class="inquiryBtn">
-						<input type = "button" value = "글쓰기" onclick="location.href='myInquiryWriteForm'">
+						<input type = "button" value = "글쓰기" onclick="location.href='/myLibrary/myInquiryWriteForm'">
 					</div>
 					<div class="inquiryPage">
 						${result }
@@ -107,4 +107,3 @@
 			f.submit();
 	}
 </script>
-

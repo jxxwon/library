@@ -132,7 +132,7 @@ public class UserService {
 		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
 		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
 		
-		ArrayList<InquiryDTO> inquiries = userMapper.selectInqiry(id, begin, end);
+		ArrayList<InquiryDTO> inquiries = userMapper.selectInquiry(id, begin, end);
 		
 		String url = "myInquiry?currentPage=";
 		int totalCount = userMapper.count();
@@ -157,7 +157,31 @@ public class UserService {
 		
 		System.out.println(search);
 		
-		ArrayList<InquiryDTO> inquiries = userMapper.selectInqiryTitle(id, search, begin, end);
+		ArrayList<InquiryDTO> inquiries = userMapper.selectInquiryTitle(id, search, begin, end);
+		
+		String url = "myInquiry?currentPage=";
+		int totalCount = userMapper.count();
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("inquiries", inquiries);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+	}
+
+
+	public void selectInquiry(String cp, String select, String replySelect, String id, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<InquiryDTO> inquiries = userMapper.selectInquiryReply(id, replySelect, begin, end);
 		
 		String url = "myInquiry?currentPage=";
 		int totalCount = userMapper.count();

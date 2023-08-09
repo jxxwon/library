@@ -45,6 +45,7 @@ const submyLibraryItems = document.querySelectorAll('.submyLibrary_menu');
 		    }
 				
 			  };
+			  location.href="/myLibrary/"+menu;
 		  xhr.send();
 	}
  // 현재 URL을 가져오는 JavaScript 함수
