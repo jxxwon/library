@@ -48,13 +48,9 @@ public class UserController {
 			@RequestParam(value="replySelect", required = false) String replySelect, Model model) {
 		
 		String id = (String)session.getAttribute("id");
-//		if(id == null || id.equals("")) {
-//			return "redirect:main";
-//		}
-		System.out.println("select : " + select);
-		System.out.println("search : " + search);
-		System.out.println("replySelect : " + replySelect);
-		
+		if(id == null || id.equals("")) {
+			return "redirect:main";
+		}
 		
 		//초기 화면 및 검색조건에 제목으로 해놓고 검색어 입력 안 하면 전체 조회
 		if(select == null || (select.equals("title") && (search==null || search == ""))) {
