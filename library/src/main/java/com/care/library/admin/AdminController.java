@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.care.library.member.MemberDTO;
+
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -43,8 +45,9 @@ public class AdminController {
 	}
 	
 	@PostMapping("/memberConfirmProc")
-	public String memberConfirmProc() {
-		service.memberConfirm();
+	public String memberConfirmProc(MemberDTO member, String group) {
+		System.out.println(group);
+//		service.memberConfirm(model);
 		return "redirect:admin/member";
 	}
 }

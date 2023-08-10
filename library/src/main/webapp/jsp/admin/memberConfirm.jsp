@@ -26,7 +26,7 @@
 				<table class="memberDetail">
 					<tr>
 						<th>아이디</th>
-						<td>${member.id}</td>
+						<td><input type = "text" name="id" class = "id" value="${member.id}" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<th>이름</th>
@@ -54,18 +54,18 @@
 					</tr>
 					<tr>
 						<th>신청일</th>
-						<td>${member.regDate }</td>
+						<td>${member.authDate }</td>
 					</tr>
 					<tr>
 						<th>회원분류</th>
 						<td>
 							<select class="group" id = "group" onchange="deputyApply()">
-								<option value = "">선 택</option>
-								<option value = "child">어린이</option>
-								<option value = "student">중ㆍ고등학생</option>
-								<option value = "adult">성인</option>
-								<option value = "side">타시도 거주자</option>
-								<option value = "foreign">외국인</option>
+								<option id = "group" value = "">선 택</option>
+								<option id = "group" value = "child">어린이</option>
+								<option id = "group" value = "student">중ㆍ고등학생</option>
+								<option id = "group" value = "adult">성인</option>
+								<option id = "group" value = "side">타시도 거주자</option>
+								<option id = "group" value = "foreign">외국인</option>
 							</select>
 							<div class = "deputy noline" id = "deputy" style="display:none">
 								<input type = "checkbox" id ="deputyChk1" onclick="deChk()">

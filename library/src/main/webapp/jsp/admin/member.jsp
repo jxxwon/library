@@ -89,7 +89,7 @@
 												인증신청
 											</c:if>
 										</td>
-										<td>${member.regDate }</td>
+										<td>${member.authDate }</td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>

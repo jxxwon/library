@@ -142,3 +142,6 @@ h1{margin-bottom:50px;}
 	border-left-color:transparent;
 	transform:rotate(45deg);
 }
+
+/*회원 상세 조회*/
+.memberContainer .memberDetail input[type="text"]:first-child {border:0; height:24.5px; padding:0; font-size:16px; font-weight:normal; color:#14100c}

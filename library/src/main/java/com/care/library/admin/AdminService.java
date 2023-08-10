@@ -48,9 +48,10 @@ public class AdminService {
 		model.addAttribute("member", result);
 	}
 
-	public void memberConfirm() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println(sdf.format(new Date()));
+	public void memberConfirm(Model model) {
+		System.out.println(model);
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		System.out.println(sdf.format(new Date()));
 	}
 
 }
