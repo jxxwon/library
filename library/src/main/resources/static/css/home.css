@@ -1,6 +1,13 @@
-.homeContainer{border: 1px solid black;}
-.homeContainer .visual, 
-.homeContainer .condition{display: flex; justify-content: space-between}
+.homeContainer{margin-top: 215px;}
+.homeContainer::before{position: absolute; top: 0; left: 0; content: ""; display: inline-block;
+    height: 728px; width: 100%; 
+    background: url('/image/visual_main2.jpg')no-repeat fixed center;
+    background-size: cover;
+    opacity: 0.3;
+}
+.homeContainer .visual{background-color: rgba(0,0,0,0.7);}
+.homeContainer .visual .inner, 
+.homeContainer .condition .inner{display: flex; justify-content: space-between}
 .homeContainer .visual{margin-top:90px;position: relative;
     z-index: 1;}
 
@@ -8,7 +15,6 @@
 .homeContainer .visual .content.right{width: 48%; height: 400px; margin:0; border: 1px solid red;}
 
 .homeContainer .condition {
-	border: 1px solid blue;
     padding: 30px 0 80px 0;
 }
 .condition .announcement,

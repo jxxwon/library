@@ -25,19 +25,24 @@
 </head>
 <body>
 	<c:import url = "/header"/> 
-		<div class="inner homeContainer">
-			<div class="visual">
-				<div class="content left">
-				왼쪽
+		<div class=" homeContainer">
+			<div class="visual" >
+				<div class=" inner">
+					<div class="content left">
+					왼쪽
+					</div>
+					<div class="content right">
+					오른쪽
+					</div>
 				</div>
-				<div class="content right">
-				오른쪽
-				</div>
+			
 			</div>
 			<div class="condition">
-				<div class="announcement">공지사항</div>
-				<div class="schedule">도서관 일정</div>
-				<div class="readingRoom">열람실 현황</div>
+				<div class="inner">
+					<div class="announcement">공지사항</div>
+					<div class="schedule">도서관 일정</div>
+					<div class="readingRoom">열람실 현황</div>
+				</div>
 			</div>
 		</div>
 	<c:import url="/footer"/>

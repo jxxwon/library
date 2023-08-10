@@ -41,8 +41,8 @@
             	<div id="welcome" style = "display:none" align="right" >${sessionScope.id }님 환영합니다.</div>
                 <ul class="left">
                     <li><a href="${context}main">메인</a></li>
-                    <li id="login" style = "background-color:#fff"><a href="${context}login">로그인</a></li>
-                    <li id="register" style = "background-color:#fff"><a href="${context}register">회원가입</a></li>
+                    <li id="login" ><a href="${context}login">로그인</a></li>
+                    <li id="register"><a href="${context}register">회원가입</a></li>
                     <li id="logout" style = "display:none"><a href="${context}logout">로그아웃</a></li>
                     <li id = "myLibrary" style = "display:none"><a href="${context}myLibrary/myBookStatus">마이라이브러리</a></li>
                     <li id = "adminForm" style = "display:none"><a href="${context}adminForm/member">관리자페이지</a></li>
@@ -57,51 +57,51 @@
         </div>
     </div>
     <div class="header_nav">
-        <ul>
+        <ul class="inner">
             <li><a href="${context}index">도서관 소개</a>
             	<ul class="toggleBox">
-					<li><a href="/intro/intro.asp" class="menu">도서관현황</a></li>
-					<li><a href="/intro/use.asp" class="menu">도서관이용안내</a></li>
-					<li><a href="/intro/data.asp" class="menu">자료실 안내</a></li>
-					<li><a href="/intro/location.asp" class="menu">오시는 길/주차안내</a></li>
+					<li><a href="#" class="menu">도서관현황</a></li>
+					<li><a href="#" class="menu">도서관이용안내</a></li>
+					<li><a href="#" class="menu">자료실 안내</a></li>
+					<li><a href="#" class="menu">오시는 길/주차안내</a></li>
 				</ul>
             </li>
             <li><a href="${context}recom">추천자료</a>
             	<ul class="toggleBox">
-					<li><a href="/unified/search.asp" class="menu">추천도서</a></li>
-					<li><a href="/unified/detail_search.asp" class="menu">인기자료</a></li>
+					<li><a href="#" class="menu">추천도서</a></li>
+					<li><a href="#" class="menu">인기자료</a></li>
 				</ul>
             </li>
             <li><a href="${context}datasearch">자료검색</a>
             	<ul class="toggleBox">
-					<li><a href="/unified/search.asp" class="menu">통합검색</a></li>
-					<li><a href="/unified/detail_search.asp" class="menu">고급검색</a></li>
-					<li><a href="/unified/search_subject.asp" class="menu">자료탐색</a></li>
-					<li><a href="/unified/search_smartmedia.asp" class="menu">스마트도서관검색</a></li>
-					<li><a href="/unified/search_periodicals.asp" class="menu">연속간행물</a></li>
-					<li><a href="/unified/ai_book.asp" class="menu">큐레이션</a></li>
+					<li><a href="#" class="menu">통합검색</a></li>
+					<li><a href="#" class="menu">고급검색</a></li>
+					<li><a href="#" class="menu">자료탐색</a></li>
+					<li><a href="#" class="menu">스마트도서관검색</a></li>
+					<li><a href="#" class="menu">연속간행물</a></li>
+					<li><a href="#" class="menu">큐레이션</a></li>
 				</ul>
             </li>
             <li><a href="${context}reservation">좌석예약</a>
             	<ul class="toggleBox">
-					<li><a href="/culture/event.asp" class="menu">자율학습실1</a></li>
-					<li><a href="/culture/eventresult.asp?BOARD_STATE=1" class="menu">자율학습실2</a></li>
-					<li><a href="/culture/readingbook.asp" class="menu">스터디룸</a></li>
+					<li><a href="#" class="menu">자율학습실1</a></li>
+					<li><a href="#" class="menu">자율학습실2</a></li>
+					<li><a href="#" class="menu">스터디룸</a></li>
 				</ul>
             </li>
             <li><a href="${context}cultural">문화행사</a>
             	<ul class="toggleBox">
-					<li><a href="/culture/event.asp" class="menu">문화행사 신청</a></li>
-					<li><a href="/culture/eventresult.asp?BOARD_STATE=1" class="menu">문화행사 결과</a></li>
-					<li><a href="/culture/readingbook.asp" class="menu">한 주제 함께 읽기</a></li>
+					<li><a href="#" class="menu">문화행사 신청</a></li>
+					<li><a href="#" class="menu">문화행사 결과</a></li>
+					<li><a href="#" class="menu">한 주제 함께 읽기</a></li>
 				</ul>
             </li>
             <li><a href="${context}info">정보광장</a>
             	<ul class="toggleBox">
-					<li><a href="/info/news.asp" class="menu">공지사항</a></li>
-					<li><a href="/info/libsmall.asp" class="menu">자주하는 질문</a></li>
-					<li><a href="/info/district.asp" class="menu">자유게시판</a></li>
-					<li><a href="/info/olibrary.asp" class="menu">자원봉사 안내</a></li>
+					<li><a href="#" class="menu">공지사항</a></li>
+					<li><a href="#" class="menu">자주하는 질문</a></li>
+					<li><a href="#" class="menu">자유게시판</a></li>
+					<li><a href="#" class="menu">자원봉사 안내</a></li>
 				</ul>
             </li>
         </ul>

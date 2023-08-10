@@ -4,9 +4,11 @@ body {
 }
 
 .container {
+	position: relative;
+	z-index: 10000;
 	max-width: 1200px;
 	margin: 0 auto;
-	background-color: white;
+	/*background-color: white;*/
 }
 
 .header-container {
@@ -89,6 +91,8 @@ body {
 }
 
 .header_nav {
+	position: fixed;
+	z-index: 100;
 	height: 35px;
 	text-align: center;
 	display: flex;
@@ -96,19 +100,17 @@ body {
 	padding: 20px 0;
 	margin: 0 auto;
 	margin-top: 50px;
-	max-width: 1200px;
-	border: 1px solid black;
-	background-color: rgba(0,0,0,0.4);
-	
-	
+	width: 100%;
+	/*max-width: 1200px;*/
+	/*border: 1px solid black;*/
+	background-color: rgba(0,0,0,0.6);
+    transition: height 0.3s ease, background-color 0.3s ease; /* 전환 속성 */
 }
 
 .header_nav ul {
-	position: relative;
-    z-index: 2;
 	display: flex;
 	justify-content: space-between;
-	width: 100%;
+	max-width: 1200px;
 	list-style-type: none;
 	margin-bottom: 0;
 	padding-top: 6px;
@@ -127,28 +129,35 @@ body {
     /*height: 100%;*/
 	text-decoration: none;
 	/* 링크의 밑줄을 없앰 */
-	color: black;
+	color: white;
 }
 
 .header_nav .toggleBox {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	background-color: rgba(0,0,0,0.4);
 	width: 100%;
 	height: 295px;
 	margin-top: 30px;
 	padding-top: 25px;
-	opacity: 0; /* 초기 상태 */
-    visibility: hidden; /* 초기 상태 */
-    transition: opacity 0.3s ease, visibility 0.3s ease; /* 전환 속성 */
+	opacity: 0; /* 최종 상태 */
+    visibility: hidden; /* 최종 상태 */
+	transition: opacity 0.3s ease, visibility 0.3s ease; /* 전환 속성 */
+
 }
 
 .header_nav .toggleBox li{
 	margin-bottom: 30px;
 }
 
-.header_nav .toggleBox.show {
+.header_nav.show {
     opacity: 1; /* 최종 상태 */
     visibility: visible; /* 최종 상태 */
+    height: 350px;
+    background-color: rgba(0,0,0,0.7);
 }
+
+.header_nav .toggleBox.show {
+	opacity: 1; /* 최종 상태 */
+    visibility: visible; /* 최종 상태 */
+	}
