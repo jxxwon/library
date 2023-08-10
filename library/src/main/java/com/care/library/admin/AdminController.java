@@ -3,6 +3,8 @@ package com.care.library.admin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,9 +36,15 @@ public class AdminController {
 		return "admin/member";
 	}
 	
-	@RequestMapping("/memberConfirm")
+	@GetMapping("/memberConfirm")
 	public String memberConfirm(String id, Model model) {
 		service.selectUser(id, model);
 		return "admin/memberConfirm";
+	}
+	
+	@PostMapping("/memberConfirmProc")
+	public String memberConfirmProc() {
+		service.memberConfirm();
+		return "redirect:admin/member";
 	}
 }

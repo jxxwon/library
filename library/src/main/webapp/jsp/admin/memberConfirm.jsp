@@ -2,27 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<script>
-	function deputyApply(){
-		var select = document.getElementById('group');
-		var value = select.options[select.selectedIndex].value; // select에서 선택된 option의 value
-		if (value != 'child'){
-			document.getElementById('deputy').style.display='none';
-		} else {
-			document.getElementById('deputy').style.display='inline-block';
-		}
-	}
-	
-	function deChk() {
-        var deputyChk = document.getElementById('deputyChk');
-        console.log(deputyChk.checked); // Use 'checked' to get the checkbox value
-    }
+<script src = "/javaScript/admin.js"></script>
 
-</script>
 <link href = "/css/main.css" rel = "stylesheet" type = "text/css">
 <link href = "/css/admin.css" rel = "stylesheet" type = "text/css">
-
-
 
 <title>하이미디어 도서관 - 관리자 페이지 : 회원인증</title>
 
@@ -39,7 +22,7 @@
 			</div>
 		</div>
 		<div class="memberContainer">
-			<form>
+			<form action = "memberConfirmProc" id ="f" method="post">
 				<table class="memberDetail">
 					<tr>
 						<th>아이디</th>
@@ -85,29 +68,41 @@
 								<option value = "foreign">외국인</option>
 							</select>
 							<div class = "deputy noline" id = "deputy" style="display:none">
-								<input type = "checkbox" id ="deputyChk"  onclick="deChk()">
-								<label for = "deputyChk">보호자 대리신청</label>
+								<input type = "checkbox" id ="deputyChk1" onclick="deChk()">
+								<label for = "deputyChk1">보호자 대리신청</label>
 							</div>
 						</td>
 					</tr>
 					<tr>
 						<th>신청서류</th>
 						<td>
-							<select class = "paper">
-								<option>선 택</option>
-								<option>주민등록등본</option>
-								<option>학생증</option>
-								<option>주민등록증</option>
-								<option>운전면허증</option>
-								<option>국내거소신고증/외국인등록증</option>
+							<select class = "paper" id ="paper">
+								<option value = "">선 택</option>
+								<option value = "resident">주민등록등본</option>
+								<option value = "studentID">학생증</option>
+								<option value = "identity">주민등록증</option>
+								<option value = "driving">운전면허증</option>
+								<option value = "alien">국내거소신고증/외국인등록증</option>
 							</select>
+							<div class = "deputy noline guardian" id = "deputyGuardian" style="display:none">
+								<input type = "checkbox" id ="deputyChk2">
+								<label for = "deputyChk2" class="deputyChk2">부모님 신분증</label>
+								<input type = "checkbox" id ="deputyChk3" onclick="deChk()">
+								<label for = "deputyChk3" class="deputyChk3">가족관계 증빙서류</label>
+								<select id = "guardianPaper" class="guardianPaper" style="display:none">
+									<option>선 택</option>
+									<option>주민등록등본</option>
+									<option>가족관계증명서</option>
+									<option>기타</option>
+								</select>
+							</div>
 						</td>
 					</tr>
 				</table>
 				<div>
-					<input type = "button" value = "인증">
+					<input type = "button" value = "인증" onclick="certify()">
 					<input type = "button" value = "반려">
-					<input type = "button" value = "취소">
+					<input type = "button" value = "취소" onclick="location.href='admin/member'">
 				</div>
 			</form>
 		</div>

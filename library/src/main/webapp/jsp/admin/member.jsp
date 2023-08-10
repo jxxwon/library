@@ -71,7 +71,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="member" items="${members }">
-									<tr onclick = "location.href='/memberConfirm?id=${member.id}'">
+									<tr onclick = "location.href='/memberConfirm?id=${member.id}'" style="cursor:pointer;">
 										<td>${member.rn }</td>
 										<td>${member.id }</td>
 										<td>${member.name }</td>

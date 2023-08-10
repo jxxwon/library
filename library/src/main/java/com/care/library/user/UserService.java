@@ -63,7 +63,9 @@ public class UserService {
 		if(dataPw != null) {
 			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
 			if(bpe.matches(pw, dataPw)) {
-				int result = userMapper.updateAuth(id);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String authDate = sdf.format(new Date());
+				int result = userMapper.updateAuth(id, authDate);
 				if(result == 1 )
 					return "신청이 완료 되었습니다.";
 			}

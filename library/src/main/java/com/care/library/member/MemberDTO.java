@@ -15,7 +15,14 @@ public class MemberDTO {
 	private String status;
 	private String kakaoid;
 	private String rn;
+	private String authDate;
 	
+	public String getAuthDate() {
+		return authDate;
+	}
+	public void setAuthDate(String authDate) {
+		this.authDate = authDate;
+	}
 	public String getRn() {
 		return rn;
 	}
