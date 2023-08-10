@@ -13,25 +13,30 @@
     }
   }
 
-/*
-<!-- 실제 파일 첨부 input 요소 -->
-<input type="file" name="upfile" id="fileInput" class="file-upload-input" onchange="showFileName()">
-<!-- 파일명을 보여주는 요소 -->
-<span id="fileNameDisplay">첨부된 파일이 없음</span>
-<!-- 파일첨부 버튼 -->
-<label for="fileInput" class="file-upload-btn">파일 첨부</label>
-
-*/
 /* 파일첨부 input 요소를 숨김 */
 /*  
 .file-upload-input {
     display: none;
   }
 
-   파일명을 보여주는 요소 스타일 
+  /*파일첨부 버튼 스타일 
+  .file-upload-btn {
+    padding: 0px 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #555;
+    cursor: pointer;
+  }
+
+  /* 파일첨부 input 요소를 숨김
+  .file-upload-input {
+    display: none;
+  }
+
+  /* 파일명을 보여주는 요소 스타일 
   #fileNameDisplay {
     padding: 0px 20px;
-     border: 1px solid #ccc;
+/*     border: 1px solid #ccc;
     background-color: #f9f9f9;
     color: #555;
   }

@@ -69,7 +69,7 @@
 		
 		<div class="cul-list">
 			<ul class="teach_list">
-				<c:forEach var="cultural" items="${culturalList}">
+				<c:forEach var="cultural" items="${culturals}">
 		            <li class="ever_one">
 		                <a href="#" class="detail-btn">
 		                    <div class="thumb">

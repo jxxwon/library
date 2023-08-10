@@ -29,27 +29,10 @@
 	    padding-top: 30px;
 	    padding-bottom: 70px;
 	}
-	
-/*     input[type="text"], textarea {
-        width: 100%;
-        box-sizing: border-box;
-        resize: none; /* textarea의 크기 조절 기능 비활성화 
-    } */
-	.select2 {
-	    -webkit-appearance: auto;
-	    -moz-appearance: auto;
-	    appearance: auto;
-	    width: 20%;
-	    height: 30px;
-	}
-	
-/*     input[type="file"] {
-        width: 35%;
-    } */
     
-input[type="file"] {
-    display: none;
-}
+	input[type="file"] {
+	    display: none;
+	}
 
   /* 파일첨부 버튼 스타일 */
   .file-upload-btn {
@@ -118,7 +101,7 @@ input[type="file"] {
 			</div>
 
 			<div align="center">
-				<form action="${context}culForm" method='post' enctype="multipart/form-data">
+				<form action="culForm" method='post' enctype="multipart/form-data">
 					<table class="table">
 						<tr>
 							<th width="100px">제목</th>
@@ -126,18 +109,18 @@ input[type="file"] {
 						</tr>
 						<tr>
 						    <th>강의기간</th>
-						    <td>
-						        <input style="width: 100px; height: 30px;" class="lecture start-date" name="start-date">
-						        &nbsp;~&nbsp;
-						        <input style="width: 100px; height: 30px;" class="lecture end-date" name="end-date">
+						    <td class="calender">
+						        <input style="width: 100px; height: 30px;" class="lecture start-date" name="lectureStart">
+						        &nbsp;&nbsp;~&nbsp;&nbsp;
+						        <input style="width: 100px; height: 30px;" class="lecture end-date" name="lectureEnd">
 						    </td>
 						</tr>
 						<tr>
 						    <th>접수기간</th>
-						    <td>
-						        <input style="width: 100px; height: 30px;" class="registration start-date" name="registration-start">
-						        &nbsp;~&nbsp;
-						        <input style="width: 100px; height: 30px;" class="registration end-date" name="registration-end">
+						    <td class="calender">
+						        <input style="width: 100px; height: 30px;" class="registration start-date" name="registrationStart">
+						        &nbsp;&nbsp;~&nbsp;&nbsp;
+						        <input style="width: 100px; height: 30px;" class="registration end-date" name="registrationEnd">
 						    </td>
 						</tr>
 
@@ -146,7 +129,7 @@ input[type="file"] {
 						    <th>대&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상</th>
 						    <!-- appearance: auto; -webkit-appearance: auto; 글씨 크기에 맞게 아래방향 화살표 -->
 						    <td>
-						        <select class="select2" style="width: 20%; height: 30px; appearance: auto; -webkit-appearance: auto;" name="target">
+						        <select class="select2" style="width: 100px; height: 30px; appearance: auto; -webkit-appearance: auto;" name="target">
 								    <option value="전체">전체</option>
 								    <option value="어린이">어린이</option>
 								    <option value="청소년">청소년</option>

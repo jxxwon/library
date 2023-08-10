@@ -9,8 +9,9 @@ public class CulturalDTO {
     private String registration_end;
     private String target;
     private String imagePath; // 이미지 파일의 경로를 저장하는 필드
-	/* private byte[] image; */
+    private String writeDate;
     private String count;
+	/* private byte[] image; */
 	public String getId() {
 		return id;
 	}
@@ -59,13 +60,17 @@ public class CulturalDTO {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
+	public String getWriteDate() {
+		return writeDate;
+	}
+	public void setWriteDate(String writeDate) {
+		this.writeDate = writeDate;
+	}
 	public String getCount() {
 		return count;
 	}
 	public void setCount(String count) {
 		this.count = count;
 	}
-    
-	
-    
+
 }
