@@ -59,13 +59,13 @@
 					<tr>
 						<th>회원분류</th>
 						<td>
-							<select class="group" id = "group" onchange="deputyApply()">
-								<option id = "group" value = "">선 택</option>
-								<option id = "group" value = "child">어린이</option>
-								<option id = "group" value = "student">중ㆍ고등학생</option>
-								<option id = "group" value = "adult">성인</option>
-								<option id = "group" value = "side">타시도 거주자</option>
-								<option id = "group" value = "foreign">외국인</option>
+							<select class="group" id = "group" name="group" onchange="deputyApply()">
+								<option value = "">선 택</option>
+								<option value = "child">어린이</option>
+								<option value = "student">중ㆍ고등학생</option>
+								<option value = "adult">성인</option>
+								<option value = "side">타시도 거주자</option>
+								<option value = "foreign">외국인</option>
 							</select>
 							<div class = "deputy noline" id = "deputy" style="display:none">
 								<input type = "checkbox" id ="deputyChk1" onclick="deChk()">
