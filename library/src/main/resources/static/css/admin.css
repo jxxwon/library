@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.adminContainer {display:flex;}
+.adminContainer {display:flex; margin-top: 225px !important;}
 h1{margin-bottom:50px;}
 .checked{font-weight: 600;}
 
