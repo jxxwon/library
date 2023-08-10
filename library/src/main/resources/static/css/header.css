@@ -6,23 +6,25 @@ body {
 	position: fixed;
 	top: 0;
 	z-index: 10;
-	height: 235px;
+	height: 174px;
 	width: 100%;
+    background-color: rgba(0,0,0,0.4);
 }
 .container {
 	position: relative;
-	max-width: 1200px;
+	/*max-width: 1200px;*/
 	margin: 0 auto;
 	/*background-color: white;*/
-}
-
-.header-container {
 	width: 1200px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin: 50px 0 0 0;
-	padding: 0px
+	margin-top: 50px;
+	padding: 0px;
+}
+
+.header-container {
+
 }
 
 .logo img {
@@ -62,6 +64,7 @@ body {
 	overflow: hidden;
 	padding: 0;
 	margin: 0;
+	color: white;
 }
 
 
@@ -80,7 +83,7 @@ body {
 .main_nav ul li {
 	display: table-cell;
 	font-size: 0px;
-	height: 50px;
+	height: 58px;
 	line-height: 50px;
 	box-sizing: border-box;
 }
@@ -88,7 +91,7 @@ body {
 .main_nav ul li a {
 	text-decoration: none;
 	/* 링크의 밑줄을 없앰 */
-	color: black;
+	color: white;
 	display: inline-block;
 	font-size: 17px;
 	margin: 0 5px;
@@ -96,7 +99,6 @@ body {
 }
 
 .header_nav {
-	position: fixed;
 	height: 35px;
 	text-align: center;
 	display: flex;

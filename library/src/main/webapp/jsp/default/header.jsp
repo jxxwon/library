@@ -26,7 +26,6 @@
 <body onload="header()">
 	<div id="top_container">
 	    <div class="container">
-	        <div class="header-container">
 	            <div class="logo">
 	                <a href="${context}main"><img src="/image/LOGO.png"></a>
 	            </div>
@@ -55,7 +54,6 @@
 	                    <li><a href="#"><img src="/image/youtube.jpg"></a></li>
 	                </ul>
 	            </div>
-	        </div>
 	    </div>
 	    <div class="header_nav">
 	        <ul class="inner">
