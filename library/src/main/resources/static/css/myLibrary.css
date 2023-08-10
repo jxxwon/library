@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /*회원정보 수정*/
-.myLibraryContainer {display:flex; margin-top: 225px !important;}
+.myLibraryContainer {display:flex; margin-top: 241px !important;}
 h1{margin-bottom:50px;}
 .checked{font-weight: 600;}
 
@@ -81,7 +81,7 @@ padding: 30px 0 30px 20px; margin-bottom: 30px; line-height: 180%;}
 .withdrawForm .withdrawBtn{width:175px; height:60px; padding:10px; cursor: pointer;}
 .withdrawForm #pw {width: 280px;}
 /* 1:1문의 - 목록*/
-.adminContainer {display:flex; margin-top: 225px !important;}
+.adminContainer {display:flex; margin-top: 241px !important;}
 h1{margin-bottom:50px;}
 .checked{font-weight: 600;}
 
@@ -106,7 +106,7 @@ h1{margin-bottom:50px;}
 
 
 /*1:1문의 - 작성*/
-.inquiryFormContainer {display:flex; margin-top: 225px !important;}
+.inquiryFormContainer {display:flex; margin-top: 241px !important;}
 .inquiryFormContent{padding:50px 0 0 50px; width:1000px;}
 
 .inquiryInfo {width:100%-10px; border:1px solid #ddd; margin:40px 0; padding:15px; line-height:145%; text-align:left;}
