@@ -17,7 +17,7 @@
  </head>   
 <body>
 	<c:import url = "/header"/>
-	<div class = "myLibraryContainer inner">
+	<div class = "myLibraryContainer inner pageContent_mt">
 		<c:import url = "/subMenuMyLibrary"/>
 			<div class = "myLibraryContent">
 				<c:import url = "/myBookStatus"/>

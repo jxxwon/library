@@ -1,7 +1,7 @@
-.homeContainer{margin-top: 325px;}
+.homeContainer{margin-top: 245px;}
 .homeContainer::before{position: absolute; top: 0; left: 0; content: ""; display: inline-block;
-    height: 728px; width: 100%; 
-    background: url('/image/visual_main2.jpg')no-repeat fixed center;
+    height: 647px; width: 100%; 
+    background: url('/image/visual_main2.jpg')no-repeat fixed 50% 40%;
     background-size: cover;
     opacity: 0.3;
 }

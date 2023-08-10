@@ -18,7 +18,7 @@
 
 
 <body onload="condition()">
-	<div class = "adminContainer inner">
+	<div class = "adminContainer inner pageContent_mt">
 		<c:import url = "/subMenuAdmin"/>
 		<div class = "adminContent">
 			<div class = "admin header">

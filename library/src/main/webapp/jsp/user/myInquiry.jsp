@@ -9,7 +9,7 @@
 
 <body>
 <c:import url = "/header"/>
-	<div class = "adminContainer inner">
+	<div class = "adminContainer inner pageContent_mt">
 	<c:import url = "/subMenuMyLibrary"/>
 		<div class = "adminContent">
 			<div class = "admin header">

@@ -23,9 +23,9 @@
         
     </script>
 </head>
-<body>
+<body class = "mainController">
 	<c:import url = "/header"/> 
-		<div class=" homeContainer">
+		<div class = "homeContainer">
 			<div class="visual" >
 				<div class=" inner">
 					<div class="content left">
@@ -47,4 +47,5 @@
 		</div>
 	<c:import url="/footer"/>
 </body>
+
 </html>
