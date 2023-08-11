@@ -6,6 +6,7 @@
 
 <link href = "/css/main.css" rel = "stylesheet" type = "text/css">
 <link href = "/css/reservation.css" rel = "stylesheet" type = "text/css">
+<!-- <script src = "/javaScript/reservation.js"></script> -->
 </head>   
 <body>
 	<c:import url = "/header"/>
@@ -19,22 +20,22 @@
 						<div>사용중<br>96석</div>
 						<div>대기자<br>96석</div>
 					</div>
-					<div class = "subMenu_myInfo">
+					<div class = "subMenu_reserve">
 						<ul>
-						    <li class="myInfo_menu" onclick="showInfo('updateInfo')">회원정보 수정</li>
-						    <li class="myInfo_menu" onclick="showInfo('updatePW')">비밀번호 수정</li>
-						    <li class="myInfo_menu" onclick="showInfo('updateAuth')">회원 인증</li>
-						    <li class="myInfo_menu" onclick="showInfo('withdraw')">회원 탈퇴</li>
+						    <li class="room_menu" onclick="showInfo('readingRoom1')">자율학습실1</li>
+						    <li class="room_menu" onclick="showInfo('readingRoom2')">자율학습실2</li>
+						    <li class="room_menu" onclick="showInfo('studyRoom')">스터디룸</li>
 						  </ul>
 					</div>
 				</div>
 				<div class="RIContainer">
-					<div id="myInfoContainer">
+					<div id="room_container">
+						<c:import url="/reservation/readingRoom1"/>
 					</div>
 				</div>
 			</div>
 		</div>
 	<c:import url="/footer"/>
-<!--  <script src = "/javaScript/myInfoUpate.js"></script>-->
+	<script src = "/javaScript/reservation.js"></script>
 </body>
 

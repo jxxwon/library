@@ -34,6 +34,7 @@ h1 {
 	text-align: center;
 	line-height: 130%;
 	padding: 10px 8px;
+	cursor: pointer;
 }
 
 .reserve_menu > div > a{
@@ -41,31 +42,32 @@ h1 {
 	
 }
 
-.subMenu_myInfo {
+.subMenu_reserve {
 	border-bottom: 2px solid #ddd;
 	margin-top: 45px;
 }
 
-.subMenu_myInfo ul {
+.subMenu_reserve ul {
 	display: table;
 	border: 1px solid #ddd;
 	border-bottom: none;
 }
 
-.subMenu_myInfo ul li {
+.subMenu_reserve ul li {
 	display: table-cell;
 	width: 150px;
 	height: 40px;
 	line-height: 40px;
 	text-align: center;
 	border-right: 1px solid #ddd;
+	cursor: pointer;
 }
 
-.subMenu_myInfo ul li:last-child {
+.subMenu_reserve ul li:last-child {
 	border-right: none;
 }
 
-.subMenu_myInfo ul li.active {
+.subMenu_reserve ul li.active {
 	background-color: #338cfa;
 	color: #fff;
 }
@@ -81,138 +83,38 @@ h1 {
 	color: #fff;
 }
 
-.contentBox {
-	font-size: 0;
-	padding: 30px 0;
-}
-
-.condition {
-	display: inline-block;
-	font-size: 16px;
-	width: 100%;
-	text-align: center;
-}
-
-.condition label {
-	font-weight: 500;
-	margin-right: 10px;
-}
-
-.condition select {
-	width: 100px;
-	height: 30px;
-	margin-right: 30px;
-}
-
-.condition input[type="text"] {
-	width: 150px;
-	height: 30px;
-	margin-right: 30px;
-}
-
-.condition input[type="button"] {
-	width: 50px;
-	height: 27px;
-	line-height: 27px;
-	font-size: 15px;
-}
-
 .RIContainer {
 	width: 700px;
 	padding: 50px 0 50px;
 }
 
-.RIContainer .logo {
-	width: 240px;
-	margin: 0 auto 20px auto;
-}
+/* 열람실1 */
+.room_container{display: flex;}
 
-.RIContainer input {
-	margin: 10px 0 10px;
-}
-
-.RIContainer label {
+.room_container .seat_left, .room_container .seat_right{ 
 	display: inline-block;
-	width: 90px;
-	margin-bottom: 15px;
+}
+.room_container .seat_division{display: flex; flex-direction: column;}
+.room_container .seat_division .line:nth-child(even){margin-bottom: 30px;}
+
+.room_container .seat_left{margin-right: 40px;} 
+
+.seat_division .line{margin-bottom: 10px;}
+
+.room_container ul {
+	display: flex;
 }
 
-.RIContainer .myInfoId,
-.RIContainer .myInfoName,
-.RIContainer .myInfoBirth {
-	display: inline-block;
-	height: 45px;
-	line-height: 45px;
-}
-
-.RIContainer .caution {
-	color: red;
-	font-size: 16px;
-}
-
-.RIContainer .essential {
-	font-weight: 400;
-}
-
-.RIContainer .alert {
-	color: blue;
-}
-
-.RIContainer button,
-#postcodeBtn,
-#authBtn {
-	padding: 12px;
+.room_container ul li {
+	border: 1px solid #888;
+	width: 50px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
 	cursor: pointer;
+	margin-right: 10px;
 }
 
-.RIContainer .SMSBtn,
-.loginButton,
-.saveId {
-	cursor: pointer;
-}
-
-.RIContainer #id,
-.RIContainer #pw,
-#confirm,
-#name,
-#mobile,
-#proName,
-#birth,
-#postcode,
-#email,
-#nameLabel,
-#emailLabel {
-	width: 300px;
-}
-
-#idCheckLabel {
-	margin-bottom: 5px;
-}
-
-#idCondition,
-#passwordCondition {
-	display: inline-block;
-	margin-bottom: 7px;
-}
-
-#address,
-#detailAddress {
-	width: 450px;
-	margin-left: 94px;
-}
-
-.RIContainer .registerBtn,
-.RIContainer .cancelBtn {
-	width: 175px;
-	height: 60px;
-	padding: 10px;
-	cursor: pointer;
-}
-
-.RIContainer .registerBtn {
-	margin-right: 20px;
-}
-
-.RIContainer input::placeholder {
-	font-size: 15px;
+.room_container ul li:nth-child(2) {
+	margin-right:25px;
 }

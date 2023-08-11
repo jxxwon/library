@@ -20,11 +20,25 @@ public class ReserveController {
 	@Autowired private ReserveService service;
 	
 	//마이 라이브러리(첫페이지) - container
-	@RequestMapping("/reservation")
+	@GetMapping("/reservation")
 	public String reservation() {
 		return "reservation/reservationMain";
 	}
-
+	
+	@GetMapping("/reservation/readingRoom1")
+	public String readingRoom1() {
+		return "reservation/readingRoom1";
+	}
+	
+	@GetMapping("/reservation/readingRoom2")
+	public String readingRoom2() {
+		return "reservation/readingRoom2";
+	}
+	
+	@GetMapping("/reservation/studyRoom")
+	public String studyRoom() {
+		return "reservation/studyRoom";
+	}
 //	@PostMapping("/myLibrary/withdrawProc")
 //	public String withdrawProc(String pw) {
 //		String id = (String)session.getAttribute("id");
