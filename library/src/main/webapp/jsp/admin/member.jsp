@@ -61,7 +61,22 @@
 							<th>아이디</th>
 							<th>이름</th>
 							<th>상태</th>
-							<th>신청일</th>
+							<th>
+								<c:choose>
+									<c:when test = "${param.memberSelect == 'D' }">
+										가입일
+									</c:when>
+									<c:when test = "${param.memberSelect == 'W' }">
+										탈퇴일								
+									</c:when>
+									<c:when test = "${param.memberSelect == 'A'}">
+										인증일
+									</c:when>
+									<c:otherwise>
+										신청일
+									</c:otherwise>
+								</c:choose>
+							</th>
 						</tr>
 						<c:choose>
 							<c:when test = "${empty members}">
@@ -71,7 +86,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="member" items="${members }">
-									<tr onclick = "location.href='/memberConfirm?id=${member.id}'">
+									<tr onclick = "location.href='/memberConfirm?id=${member.id}'" style="cursor:pointer;">
 										<td>${member.rn }</td>
 										<td>${member.id }</td>
 										<td>${member.name }</td>
@@ -89,7 +104,14 @@
 												인증신청
 											</c:if>
 										</td>
-										<td>${member.regDate }</td>
+										<td>
+											<c:if test = "${member.status == 'D'}">
+												${member.regDate }
+											</c:if>
+											<c:if test = "${member.status != 'D'}">
+												${member.authDate }
+											</c:if>
+										</td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>

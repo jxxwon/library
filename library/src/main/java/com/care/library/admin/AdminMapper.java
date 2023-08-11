@@ -15,5 +15,7 @@ public interface AdminMapper {
 
 	MemberDTO selectUser(String id);
 
+	void memberConfirm(String id, String userGroup, String paper, String authDate);
+
 
 }

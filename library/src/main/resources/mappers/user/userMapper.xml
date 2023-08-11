@@ -9,6 +9,7 @@
   		<result column = "reg_date" property = "regDate"/>
   		<result column = "post_code" property = "postCode"/>
   		<result column = "detail_address" property = "detailAddress"/>
+  		<result column = "auth_date" property = "authDate"/>
   	</resultMap>
 
 	<!--  마이 라이브러리 회원정보 수정  -->
@@ -30,7 +31,7 @@
 	</update>
 	
 	<update id="updateAuth">
-		UPDATE member SET status = 'R' WHERE id = #{id}
+		UPDATE member SET status = 'R', auth_date = #{authDate} WHERE id = #{id}
 	</update>
 	
 	<!-- 회원탈퇴 (게시글 및 리뷰 보존을 위해 아이디를 난수로 변경, 기타 개인정보는 null) -->

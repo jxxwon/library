@@ -46,4 +46,8 @@ public class AdminService {
 		model.addAttribute("member", result);
 	}
 
+	public void memberConfirm(String id, String userGroup, String paper, String authDate) {
+		mapper.memberConfirm(id, userGroup, paper, authDate);
+	}
+
 }
