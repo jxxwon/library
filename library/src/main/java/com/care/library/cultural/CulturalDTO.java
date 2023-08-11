@@ -1,22 +1,22 @@
 package com.care.library.cultural;
 
 public class CulturalDTO {
-	private String id;
+	private int culId;
     private String title;
-    private String lecture_start;
-    private String lecture_end;
-    private String registration_start;
-    private String registration_end;
+    private String lectureStart;
+    private String lectureEnd;
+    private String registrationStart;
+    private String registrationEnd;
     private String target;
     private String imagePath; // 이미지 파일의 경로를 저장하는 필드
     private String writeDate;
     private String count;
 	/* private byte[] image; */
-	public String getId() {
-		return id;
+	public int getCulId() {
+		return culId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setCulId(int culId) {
+		this.culId = culId;
 	}
 	public String getTitle() {
 		return title;
@@ -24,29 +24,29 @@ public class CulturalDTO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getLecture_start() {
-		return lecture_start;
+	public String getLectureStart() {
+		return lectureStart;
 	}
-	public void setLecture_start(String lecture_start) {
-		this.lecture_start = lecture_start;
+	public void setLectureStart(String lectureStart) {
+		this.lectureStart = lectureStart;
 	}
-	public String getLecture_end() {
-		return lecture_end;
+	public String getLectureEnd() {
+		return lectureEnd;
 	}
-	public void setLecture_end(String lecture_end) {
-		this.lecture_end = lecture_end;
+	public void setLectureEnd(String lectureEnd) {
+		this.lectureEnd = lectureEnd;
 	}
-	public String getRegistration_start() {
-		return registration_start;
+	public String getRegistrationStart() {
+		return registrationStart;
 	}
-	public void setRegistration_start(String registration_start) {
-		this.registration_start = registration_start;
+	public void setRegistrationStart(String registrationStart) {
+		this.registrationStart = registrationStart;
 	}
-	public String getRegistration_end() {
-		return registration_end;
+	public String getRegistrationEnd() {
+		return registrationEnd;
 	}
-	public void setRegistration_end(String registration_end) {
-		this.registration_end = registration_end;
+	public void setRegistrationEnd(String registrationEnd) {
+		this.registrationEnd = registrationEnd;
 	}
 	public String getTarget() {
 		return target;

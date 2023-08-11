@@ -101,7 +101,7 @@
 			</div>
 
 			<div align="center">
-				<form action="culForm" method='post' enctype="multipart/form-data">
+				<form action="culFormWriteProc" method='post' enctype="multipart/form-data">
 					<table class="table">
 						<tr>
 							<th width="100px">제목</th>
