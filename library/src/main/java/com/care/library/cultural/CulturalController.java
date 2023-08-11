@@ -65,5 +65,5 @@ public class CulturalController {
 		model.addAttribute("msg", msg);
 		return "cultural/culSubmit";
 	}
-
+    
 }
