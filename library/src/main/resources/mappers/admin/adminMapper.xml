@@ -6,6 +6,7 @@
 <mapper namespace="com.care.library.admin.AdminMapper">
 	<resultMap type="com.care.library.member.MemberDTO" id="memberDto"> <!-- id는 식별자일뿐 -->
   		<result column = "pro_name" property = "proName"/>
+  		<result column = "detail_address" property = "detailAddress"/>
   		<result column = "reg_date" property = "regDate"/>
   		<result column = "post_code" property = "postCode"/>
   		<result column = "auth_date" property = "authDate"/>

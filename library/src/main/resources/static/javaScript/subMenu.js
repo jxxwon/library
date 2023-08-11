@@ -36,7 +36,7 @@
       } else if (currentURL.includes("cullist")) {
         document.getElementById("cullist").classList.add("active");
         document.getElementById("cultural").classList.remove("active");
-      } 
+      }
     }
 
     // 페이지 로드 시 버튼 색상을 설정합니다.

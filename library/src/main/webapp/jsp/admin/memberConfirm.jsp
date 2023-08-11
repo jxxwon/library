@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<script src = "/javaScript/admin.js"></script>
 
 <link href = "/css/main.css" rel = "stylesheet" type = "text/css">
 <link href = "/css/admin.css" rel = "stylesheet" type = "text/css">
@@ -10,7 +9,7 @@
 <title>하이미디어 도서관 - 관리자 페이지 : 회원인증</title>
 
 <c:import url = "/header"/>
-<div class = "adminContainer inner">
+<div class = "adminContainer inner pageContent_mt">
 	<c:import url = "/subMenuAdmin"/>
 	<div class = "adminContent">
 		<div class = "admin header">
@@ -100,7 +99,7 @@
 					</tr>
 				</table>
 				<div>
-					<input type = "button" name = "button1" value = "인증" onclick="certify()">
+					<input type = "button" value = "인증" onclick="certify()">
 					<input type = "button" value = "반려">
 					<input type = "button" value = "취소" onclick="location.href='admin/member'">
 				</div>
@@ -109,3 +108,4 @@
 	</div>
 </div>
 <c:import url = "/footer"/>
+<script src = "/javaScript/admin.js"></script>
