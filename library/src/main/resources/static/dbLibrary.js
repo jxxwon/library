@@ -180,7 +180,7 @@ function resProcIdChk(){
 }
 
 function changePwCheck(){
-	let regExp = /^[a-z0-9]{1}[a-z0-9_-]{4,19}$/;
+	let regExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,12}$/;
 	var changePw = document.getElementById('changePw');
  	var confirmChangePw = document.getElementById('confirmChangePw');
   	label = document.getElementById('confirmResult');
