@@ -15,9 +15,6 @@ body {
 
 .pageContent_mt{ margin-top: 165px !important;}
 .container {
-	position: absolute;
-	top:0;
-	left: 12%;
 	/*max-width: 1200px;*/
 	margin: 0 auto;
 	/*background-color: white;*/
