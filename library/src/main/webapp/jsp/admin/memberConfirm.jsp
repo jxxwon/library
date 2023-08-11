@@ -100,7 +100,7 @@
 					</tr>
 				</table>
 				<div>
-					<input type = "button" value = "인증" onclick="certify()">
+					<input type = "button" name = "button1" value = "인증" onclick="certify()">
 					<input type = "button" value = "반려">
 					<input type = "button" value = "취소" onclick="location.href='admin/member'">
 				</div>

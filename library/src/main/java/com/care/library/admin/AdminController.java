@@ -51,7 +51,7 @@ public class AdminController {
 	public String memberConfirmProc(String id, String userGroup, String paper) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String authDate = sdf.format(new Date());
-		service.memberConfirm(id, userGroup, paper, authDate);
+//		service.memberConfirm(id, userGroup, paper, authDate);
 		return "redirect:admin/member";
 	}
 }

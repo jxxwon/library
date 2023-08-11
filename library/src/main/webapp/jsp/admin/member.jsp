@@ -62,18 +62,20 @@
 							<th>이름</th>
 							<th>상태</th>
 							<th>
-								<c:if test = "${param.memberSelect == 'R'}">
-									신청일
-								</c:if>
-								<c:if test = "${param.memberSelect == 'D'}">
-									가입일
-								</c:if>
-								<c:if test = "${param.memberSelect == 'W' }">
-									탈퇴일								
-								</c:if>
-								<c:if test = "${param.memberSelect == 'A'}">
-									인증일
-								</c:if>
+								<c:choose>
+									<c:when test = "${param.memberSelect == 'D' }">
+										가입일
+									</c:when>
+									<c:when test = "${param.memberSelect == 'W' }">
+										탈퇴일								
+									</c:when>
+									<c:when test = "${param.memberSelect == 'A'}">
+										인증일
+									</c:when>
+									<c:otherwise>
+										신청일
+									</c:otherwise>
+								</c:choose>
 							</th>
 						</tr>
 						<c:choose>
