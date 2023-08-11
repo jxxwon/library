@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
 public interface CulturalMapper {
 	void insertCultural(CulturalDTO culturalDTO);
 
-	ArrayList<CulturalDTO> culForm(@Param("begin") int begin, @Param("end") int end);
+	ArrayList<CulturalDTO> culturalForm(@Param("begin") int begin, @Param("end") int end);
 
 	int count();
 

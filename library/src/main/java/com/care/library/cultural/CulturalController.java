@@ -27,7 +27,7 @@ public class CulturalController {
             @RequestParam(value="currentPage", required = false) String cp,
             Model model) {
     	System.out.println("culFrom호출");
-        service.culForm(cp, model);
+        service.culturalForm(cp, model);
         return "cultural/culForm"; // 뷰 이름 설정
     }
     

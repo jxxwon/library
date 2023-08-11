@@ -25,10 +25,11 @@ public class CulturalService {
     private CulturalMapper culturalMapper;
     @Autowired private HttpSession session;
     
-//    CulturalDTO cultural = new CulturalDTO();
+    CulturalDTO cultural = new CulturalDTO();
     
     // 페이지 넘기기
-    public void culForm(String cp, Model model) {
+    public void culturalForm(String cp, Model model) {
+    	System.out.println("Image Path: " + cultural.getImagePath());
         int currentPage = 1;
         try {
             currentPage = Integer.parseInt(cp);
@@ -41,15 +42,10 @@ public class CulturalService {
         int end = pagePerBlock * currentPage; // 테이블에서 가져올 마지막 행번호
         int begin = end - pagePerBlock + 1; // 테이블에서 가져올 시작 행번호
 
-        ArrayList<CulturalDTO> culturalList = culturalMapper.culForm(begin, end);
+        ArrayList<CulturalDTO> culturalList = culturalMapper.culturalForm(begin, end);
         int totalCount = culturalMapper.count();
         String url = "culForm?currentPage=";
         String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
-
-        // cultural 객체 생성 및 초기화
-        CulturalDTO cultural = new CulturalDTO();
-//        cultural.setImagePath(""); // 초기값 설정
-        System.out.println("Image Path: " + cultural.getImagePath());
 
         model.addAttribute("culturalList", culturalList);
         model.addAttribute("result", result);
