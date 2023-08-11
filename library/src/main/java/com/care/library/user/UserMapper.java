@@ -31,4 +31,6 @@ public interface UserMapper {
 	ArrayList<InquiryDTO> selectInquiryTitle(String id, String search, int begin, int end);
 
 	ArrayList<InquiryDTO> selectInquiryReply(String id, String replySelect, int begin, int end);
+
+	int updateAuth(String id, String authDate);
 }

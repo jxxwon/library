@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<script src = "/javaScript/admin.js"></script>
+
 <link href = "/css/main.css" rel = "stylesheet" type = "text/css">
 <link href = "/css/admin.css" rel = "stylesheet" type = "text/css">
 
@@ -20,11 +22,11 @@
 			</div>
 		</div>
 		<div class="memberContainer">
-			<form>
+			<form action = "memberConfirmProc" id ="f" method="post">
 				<table class="memberDetail">
 					<tr>
 						<th>아이디</th>
-						<td>${member.id}</td>
+						<td><input type = "text" name="id" class = "id" value="${member.id}" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<th>이름</th>
@@ -52,12 +54,56 @@
 					</tr>
 					<tr>
 						<th>신청일</th>
-						<td>${member.regDate }</td>
+						<td>${member.authDate }</td>
+					</tr>
+					<tr>
+						<th>회원분류</th>
+						<td>
+							<select class="userGroup" id = "userGroup" name="userGroup" onchange="deputyApply()">
+								<option value = "">선 택</option>
+								<option value = "child">어린이</option>
+								<option value = "student">중ㆍ고등학생</option>
+								<option value = "adult">성인</option>
+								<option value = "side">타시도 거주자</option>
+								<option value = "foreign">외국인</option>
+							</select>
+							<div class = "deputy noline" id = "deputy" style="display:none">
+								<input type = "checkbox" id ="deputyChk1" onclick="deChk()">
+								<label for = "deputyChk1">보호자 대리신청</label>
+							</div>
+						</td>
 					</tr>
 					<tr>
 						<th>신청서류</th>
+						<td>
+							<select class = "paper" id ="paper" name ="paper">
+								<option value = "">선 택</option>
+								<option value = "resident">주민등록등본</option>
+								<option value = "studentID">학생증</option>
+								<option value = "identity">주민등록증</option>
+								<option value = "driving">운전면허증</option>
+								<option value = "alien">국내거소신고증/외국인등록증</option>
+							</select>
+							<div class = "deputy noline guardian" id = "deputyGuardian" style="display:none">
+								<input type = "checkbox" id ="deputyChk2" name = "deputyChk2">
+								<label for = "deputyChk2" class="deputyChk2">부모님 신분증</label>
+								<input type = "checkbox" id ="deputyChk3" onclick="deChk()">
+								<label for = "deputyChk3" class="deputyChk3">가족관계 증빙서류</label>
+								<select id = "guardianPaper" class="guardianPaper" style="display:none">
+									<option>선 택</option>
+									<option>주민등록등본</option>
+									<option>가족관계증명서</option>
+									<option>기타</option>
+								</select>
+							</div>
+						</td>
 					</tr>
 				</table>
+				<div>
+					<input type = "button" name = "button1" value = "인증" onclick="certify()">
+					<input type = "button" value = "반려">
+					<input type = "button" value = "취소" onclick="location.href='admin/member'">
+				</div>
 			</form>
 		</div>
 	</div>

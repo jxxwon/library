@@ -8,6 +8,7 @@
   		<result column = "pro_name" property = "proName"/>
   		<result column = "reg_date" property = "regDate"/>
   		<result column = "post_code" property = "postCode"/>
+  		<result column = "auth_date" property = "authDate"/>
   	</resultMap>
 	
 	<select id="getNameById">
