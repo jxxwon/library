@@ -1,8 +1,6 @@
 package com.care.library.admin;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,10 +46,8 @@ public class AdminService {
 		model.addAttribute("member", result);
 	}
 
-	public void memberConfirm(Model model) {
-		System.out.println(model);
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		System.out.println(sdf.format(new Date()));
+	public void memberConfirm(String id, String userGroup, String paper, String authDate) {
+		mapper.memberConfirm(id, userGroup, paper, authDate);
 	}
 
 }

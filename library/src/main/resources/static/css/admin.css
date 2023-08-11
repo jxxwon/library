@@ -46,7 +46,7 @@ h1{margin-bottom:50px;}
 .memberDetail tr:last-child{border-bottom:none;}
 .memberDetail th{border-right:2px solid #555; width:160px;}
 .memberDetail tr td{padding:10px; padding-left:20px;}
-.memberDetail tr td .group {width:150px; margin-right:10px; appearance: auto; -webkit-appearance: auto;}
+.memberDetail tr td .userGroup {width:150px; margin-right:10px; appearance: auto; -webkit-appearance: auto;}
 .memberDetail tr td .paper {width:210px; appearance: auto; -webkit-appearance: auto;}
 .memberDetail tr td select {height:25px;}
 .deputyChk2 {margin:0 10px;}

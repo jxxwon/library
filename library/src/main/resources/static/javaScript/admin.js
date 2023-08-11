@@ -35,7 +35,7 @@ function condition(){
 
 // 회원인증 상세화면
 function deputyApply(){
-	var select = document.getElementById('group');
+	var select = document.getElementById('userGroup');
 	var value = select.options[select.selectedIndex].value; // select에서 선택된 option의 value
 	if (value != 'child'){
 		document.getElementById('deputy').style.display='none';
@@ -64,7 +64,7 @@ function deChk() {
 
 //회원인증 화면에서 인증체크
 function certify(){
-	var group = document.getElementById('group');
+	var group = document.getElementById('userGroup');
 	var groupValue = group.options[group.selectedIndex].value;
 	
 	if(groupValue == ""){

@@ -9,6 +9,7 @@
   		<result column = "reg_date" property = "regDate"/>
   		<result column = "post_code" property = "postCode"/>
   		<result column = "auth_date" property = "authDate"/>
+  		<result column = "user_group" property = "userGroup"/>
   	</resultMap>
   	
   	<select id = "count">
@@ -22,6 +23,10 @@
 	<select id = "selectUser" resultMap="memberDto">
 		SELECT * FROM member WHERE id = #{id}
 	</select>
+	
+	<update id = "memberConfirm" parameterType="com.care.library.member.MemberDTO">
+		UPDATE member SET status = 'A', user_group = #{userGroup}, paper = #{paper}, auth_date = #{authDate} WHERE id = #{id}
+	</update>
 	
 </mapper>
 

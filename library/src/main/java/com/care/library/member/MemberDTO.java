@@ -16,6 +16,21 @@ public class MemberDTO {
 	private String kakaoid;
 	private String rn;
 	private String authDate;
+	private String userGroup;
+	
+	public String getUserGroup() {
+		return userGroup;
+	}
+	public void setUserGroup(String userGroup) {
+		this.userGroup = userGroup;
+	}
+	public String getPaper() {
+		return paper;
+	}
+	public void setPaper(String paper) {
+		this.paper = paper;
+	}
+	private String paper;
 	
 	public String getAuthDate() {
 		return authDate;

@@ -59,7 +59,7 @@
 					<tr>
 						<th>회원분류</th>
 						<td>
-							<select class="group" id = "group" name="group" onchange="deputyApply()">
+							<select class="userGroup" id = "userGroup" name="userGroup" onchange="deputyApply()">
 								<option value = "">선 택</option>
 								<option value = "child">어린이</option>
 								<option value = "student">중ㆍ고등학생</option>
@@ -76,7 +76,7 @@
 					<tr>
 						<th>신청서류</th>
 						<td>
-							<select class = "paper" id ="paper">
+							<select class = "paper" id ="paper" name ="paper">
 								<option value = "">선 택</option>
 								<option value = "resident">주민등록등본</option>
 								<option value = "studentID">학생증</option>
@@ -85,7 +85,7 @@
 								<option value = "alien">국내거소신고증/외국인등록증</option>
 							</select>
 							<div class = "deputy noline guardian" id = "deputyGuardian" style="display:none">
-								<input type = "checkbox" id ="deputyChk2">
+								<input type = "checkbox" id ="deputyChk2" name = "deputyChk2">
 								<label for = "deputyChk2" class="deputyChk2">부모님 신분증</label>
 								<input type = "checkbox" id ="deputyChk3" onclick="deChk()">
 								<label for = "deputyChk3" class="deputyChk3">가족관계 증빙서류</label>

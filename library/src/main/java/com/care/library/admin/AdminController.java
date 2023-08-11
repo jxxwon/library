@@ -1,5 +1,8 @@
 package com.care.library.admin;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,9 +48,10 @@ public class AdminController {
 	}
 	
 	@PostMapping("/memberConfirmProc")
-	public String memberConfirmProc(MemberDTO member, String group) {
-		System.out.println(group);
-//		service.memberConfirm(model);
+	public String memberConfirmProc(String id, String userGroup, String paper) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String authDate = sdf.format(new Date());
+		service.memberConfirm(id, userGroup, paper, authDate);
 		return "redirect:admin/member";
 	}
 }
