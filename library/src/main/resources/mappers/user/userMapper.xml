@@ -9,6 +9,7 @@
   		<result column = "reg_date" property = "regDate"/>
   		<result column = "post_code" property = "postCode"/>
   		<result column = "detail_address" property = "detailAddress"/>
+  		<result column = "auth_date" property = "authDate"/>
   	</resultMap>
 
 	<!--  마이 라이브러리 회원정보 수정  -->
@@ -19,6 +20,23 @@
 	<update id="changeMyInfoProc">
 		UPDATE member SET birth = #{birth}, email = #{email}, address = #{address}, mobile = #{mobile}, detail_address = #{detailAddress}, 
 		post_code = #{postCode} WHERE id = #{id}
+	</update>
+	
+	<select id="currentPwCheck">
+		SELECT pw FROM member WHERE id = #{id}
+	</select>
+	
+	<update id="updatePw">
+		UPDATE member SET pw = #{newPW} WHERE id = #{id}
+	</update>
+	
+	<update id="updateAuth">
+		UPDATE member SET status = 'R', auth_date = #{authDate} WHERE id = #{id}
+	</update>
+	
+	<!-- 회원탈퇴 (게시글 및 리뷰 보존을 위해 아이디를 난수로 변경, 기타 개인정보는 null) -->
+	<update id = "updateId">
+		UPDATE member SET id = #{delId}, name = '', pro_name = '', birth = '', email = '', post_code = '', address = '', detail_address = '', mobile = '', reg_date='', status = 'W', kakaoid='' WHERE id = #{id}
 	</update>
 
 	
@@ -36,8 +54,16 @@
   		INSERT INTO inquiry (no, title, content, id, write_date, reply) VALUES (#{no}, #{title}, #{content}, #{id}, #{writeDate}, #{reply})
   	</insert>
   	
-  	<select id = "selectInqiry" resultMap="inquiryDto">
-  		SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry WHERE id = #{id} ORDER BY write_date DESC)AAA
+  	<select id = "selectInquiry" resultMap="inquiryDto">
+		SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry WHERE id = #{id} ORDER BY write_date DESC)AAA)BBB WHERE BBB.rn BETWEEN #{begin} AND #{end}
+  	</select>
+  	
+  	<select id = "selectInquiryTitle" resultMap="inquiryDto">
+		SELECT CCC.* FROM (SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry WHERE id = #{id} ORDER BY write_date DESC)AAA)BBB WHERE BBB.rn BETWEEN #{begin} AND #{end})CCC WHERE title like '%'||#{search}||'%'
+  	</select>
+  	
+  	<select id = "selectInquiryReply" resultMap="inquiryDto">
+		SELECT CCC.* FROM (SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry WHERE id = #{id} ORDER BY write_date DESC)AAA)BBB WHERE BBB.rn BETWEEN #{begin} AND #{end})CCC WHERE reply = #{replySelect}
   	</select>
   	
   	<select id = "count">

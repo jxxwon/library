@@ -1,25 +1,24 @@
 @charset "UTF-8";
 
-.adminContainer {display:flex;}
+
+/*회원정보 수정*/
+.myLibraryContainer {display:flex;}
 h1{margin-bottom:50px;}
 .checked{font-weight: 600;}
 
-.adminContent{padding:50px 0 0 50px; width:1000px;}
+.myLibraryContent{padding:50px 0 0 50px; width:1000px;}
 
-.subMenu_member{border-bottom:2px solid #ddd; margin-top:45px;}
-.subMenu_member ul{display:table; border:1px solid #ddd; border-bottom:none;}
-.subMenu_member ul li{display:table-cell; width:150px; height:40px; line-height:40px; text-align:center; border-right:1px solid #ddd;}
-.subMenu_member ul li:last-child{border-right:none;}
+.subMenu_myInfo{border-bottom:2px solid #ddd; margin-top:45px;}
+.subMenu_myInfo ul{display:table; border:1px solid #ddd; border-bottom:none;}
+.subMenu_myInfo ul li{display:table-cell; width:150px; height:40px; line-height:40px; text-align:center; border-right:1px solid #ddd;}
+.subMenu_myInfo ul li:last-child{border-right:none;}
 
-.subMenu_member ul li a{display:block;}
+.subMenu_myInfo ul li.active{background-color:#338cfa;color:#fff;}
 
-.subMenu_member ul li.active{background-color:#338cfa;}
-.subMenu_member ul li.active a{color:#fff;}
+.subMenu_myInfo ul li:hover{background-color:#338cfa;color:#fff; cursor: pointer;}
 
-.subMenu_member ul li:hover{background-color:#338cfa;}
-.subMenu_member ul li:hover a{color:#fff;}
+.active {background:#338cfa; color:#fff;}
 
-/*회원관리 - 조회조건*/
 .contentBox{font-size:0; padding:30px 0;}
 
 .condition{display:inline-block; font-size:16px; width:100%; text-align:center;}
@@ -48,8 +47,7 @@ h1{margin-bottom:50px;}
 
 .RIContainer #id, .RIContainer #pw, #confirm, #name, #mobile, 
 #proName, #birth, #postcode, #email, 
-#nameLabel, #emailLabel {width: 300px;}
-
+#nameLabel, #emailLabel {width: 300px;} 
 #idCheckLabel{margin-bottom: 5px;}
 
 #idCondition, #passwordCondition{display:inline-block; margin-bottom: 7px;}
@@ -68,8 +66,27 @@ h1{margin-bottom:50px;}
 	color: white;
 }
 
+/*패스워드 수정*/
+#currentPW, #newPW, #newConfirmPW {width: 280px;}
+.updatePwContainer label{width: 136px;}
 
+/* 회원 인증 */
+.updateAuthContent{width: 700px; border: 1px solid black; 
+padding: 30px 0 30px 20px; margin-bottom: 30px; line-height: 180%;}
+.updateAuthContent label {width: 100px;}
+.updateAuthForm #pw {width: 280px;}
+
+/*회원 탈퇴*/
+.withdrawContent{width: 700px; border: 1px solid black; 
+padding: 30px 0 30px 20px; margin-bottom: 30px; line-height: 180%;}
+.withdrawForm .withdrawBtn{width:175px; height:60px; padding:10px; cursor: pointer;}
+.withdrawForm #pw {width: 280px;}
 /* 1:1문의 - 목록*/
+.adminContainer {display:flex;}
+h1{margin-bottom:50px;}
+.checked{font-weight: 600;}
+
+.adminContent{padding:50px 0 0 50px; width:1000px;}
 .inquiryContainer{text-align:center; border-top:1px solid #ddd;}
 
 .inquiry {overflow:hidden; width:100%;}
@@ -82,7 +99,17 @@ h1{margin-bottom:50px;}
 .inquiryContainer .inquiryPage a{display:inline-block; width:30px; height:30px; line-height:30px; font-weight:400; border:1px solid #ddd; margin-right:5px;}
 .inquiryContainer .inquiryPage a:last-child{margin-right:0;}
 
+.inquirySearch {display:inline-block; padding-top:20px;}
+.inquirySearch select {width:80px; height:30px; text-align:center; padding:0; appearance: auto; -webkit-appearance: auto;}
+.inquirySearch select.replySelect{margin:0 10px;}
+.inquirySearch input[type="text"]{width:200px; height:30px; margin:0 10px;}
+.inquirySearch input[type="button"]{width:50px; height:30px;}
+
+
 /*1:1문의 - 작성*/
+.inquiryFormContainer {display:flex;}
+.inquiryFormContent{padding:50px 0 0 50px; width:1000px;}
+
 .inquiryInfo {width:100%-10px; border:1px solid #ddd; margin:40px 0; padding:15px; line-height:145%; text-align:left;}
 .inquiryContainer .inquiryWriteForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
 .inquiryContainer .inquiryWriteForm tr{border-bottom:1px solid #ddd;}

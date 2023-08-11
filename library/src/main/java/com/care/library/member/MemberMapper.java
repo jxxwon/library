@@ -4,7 +4,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface MemberMapper {
-
+	
+	String getNameById(String id);
 	MemberDTO loginProc(String id);
 	MemberDTO emailCheck(String email); //카카오 로그인시, 기존 회원 여부를 알기 위해.
 	
@@ -16,4 +17,5 @@ public interface MemberMapper {
 	void registerProc(MemberDTO member);
 	int changePw(String authId, String cryptPassword);
 	int updateId(String id, String delId);
+	
 }

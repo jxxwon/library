@@ -36,11 +36,7 @@
       } else if (currentURL.includes("cullist")) {
         document.getElementById("cullist").classList.add("active");
         document.getElementById("cultural").classList.remove("active");
-      } else {
-        // 기본적으로 어떤 패턴에도 해당하지 않을 경우 버튼 색상을 초기화합니다.
-        document.getElementById("redButton").classList.remove("red-button");
-        document.getElementById("blueButton").classList.remove("blue-button");
-      }
+      } 
     }
 
     // 페이지 로드 시 버튼 색상을 설정합니다.

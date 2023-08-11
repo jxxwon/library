@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.care.library.member.MemberService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -16,21 +18,54 @@ import jakarta.servlet.http.HttpSession;
 public class UserController {
 	@Autowired HttpSession session;
 	@Autowired private UserService service;
+	
+	//마이 라이브러리(첫페이지) - container
+	@RequestMapping("/myLibrary")
+	public String myLibray() {
+		return "user/myLibraryMain";
+	}
 
+	@RequestMapping("/myLibraryMain")
+	public String myLibrayMain() {
+		return "user/myLibraryMain";
+	}
+	
 	@RequestMapping("subMenuMyLibrary")
 	public String subMenuMyLibrary() {
 		return "user/subMenuMyLibrary";
 	}
 	
+	//대출/예약/연장 현황
+	@RequestMapping("myLibrary/myBookStatus")
+	public String myBookStatus() {
+		return "user/myBookStatus";
+	}
+	
 	// 1:1문의 - 목록
 	@RequestMapping("/myLibrary/myInquiry")
-	public String myInquiry(@RequestParam(value="currentPage", required = false, defaultValue = "1")String cp, Model model) {
+	public String myInquiryList(@RequestParam(value="currentPage", required = false)String cp, 
+			@RequestParam(value="select", required = false)String select, @RequestParam(value="search", required = false)String search, 
+			@RequestParam(value="replySelect", required = false) String replySelect, Model model) {
+		
 		String id = (String)session.getAttribute("id");
+		System.out.println("myInquiryList"+ id);
+		System.out.println("select : " + select);
+		System.out.println("search : " + search);
+		System.out.println("replySelect : " + replySelect);
+		
 		if(id == null || id.equals("")) {
 			return "redirect:main";
 		}
-		System.out.println(cp);
-		service.selectInquiry(cp, id, model);
+		
+		//초기 화면 및 검색조건에 제목으로 해놓고 검색어 입력 안 하면 전체 조회
+		if(select == null || (select.equals("title") && (search==null || search == ""))) {
+			service.selectInquiry(cp, id, model);
+		} else if(select.equals("title") && search != null) {
+			service.selectInquiry(cp, search, id, model);
+		} else if(select.equals("reply")) {
+			service.selectInquiry(cp, select, replySelect, id, model);
+		}
+		
 		return "user/myInquiry";
 	}
 	
@@ -48,15 +83,21 @@ public class UserController {
 	public String myInquiryWriteProc(String title, String content) {
 		String id = (String)session.getAttribute("id");
 		service.myInquiryWriteProc(id, title, content);
-		return "redirect:myInquiry";
+		return "redirect:/myLibrary";
 	}
-	@Autowired private UserService userService;
 	
+	// 회원정보 - container
 	@GetMapping("/myLibrary/myInfo")
-	public String myInfo(Model model) {
+	public String myInfo() {
 		String id = (String)session.getAttribute("id");
-		UserDTO myInfo = userService.getMyInfo(id);
-		
+		return "user/myInfo";
+	}
+	
+	// 회원정보 - 회원정보 수정
+	@GetMapping("/myLibrary/updateInfo")
+	public String updateInfo(Model model) {
+		String id = (String)session.getAttribute("id");
+		UserDTO myInfo = service.getMyInfo(id);
 		  if(myInfo != null) { 
 			  model.addAttribute("email", myInfo.getEmail()); 
 			  model.addAttribute("mobile", myInfo.getMobile()); 
@@ -65,8 +106,7 @@ public class UserController {
 			  model.addAttribute("postCode", myInfo.getPostCode()); 
 			  model.addAttribute("detailAddress", myInfo.getDetailAddress());
 		  }
-		 
-		return "/user/myInfo";
+		return "user/updateInfo";
 	}
 	
 	@PostMapping("/myLibrary/changeMyInfoProc")
@@ -74,13 +114,62 @@ public class UserController {
 		String id = (String)session.getAttribute("id");
 		myInfo.setId(id);
 		
-		String result = userService.changeMyInfoProc(myInfo);
+		String result = service.changeMyInfoProc(myInfo);
 		if(result.equals("정보가 수정되었습니다.")) {
 			ra.addFlashAttribute("updateMsg", result);
 			return "redirect:/main";
 		}
 		ra.addFlashAttribute("updateMsg", result);
 		return "user/myInfo";
+	}
+	
+	// 회원정보 - 비밀번호 수정
+	@GetMapping("/myLibrary/updatePW")
+	public String updatePW() {
+		return "user/updatePW";
+	}
+	
+	@PostMapping("/myLibrary/updatePwProc")
+	public String updatePwProc(String currentPW, String newPW, String newConfirmPW) {
+		String id = (String)session.getAttribute("id");
+		String result = service.updatePwProc(currentPW, newPW, newConfirmPW, id);
+		System.out.println("result"+ result);
+		if(result.equals("비밀번호가 변경되었습니다."))
+			return "redirect:/main";
+		return "user/myInfo";
+	}
+	
+	// 회원정보 - 회원인증
+	@GetMapping("/myLibrary/updateAuth")
+	public String updateAuth() {
+		return "user/updateAuth";
+	}
+	
+	@PostMapping("/myLibrary/updateAuthProc")
+	public String updateAuthProc(String pw) {
+		String id = (String)session.getAttribute("id");
+		String result = service.updateAuthProc(pw, id);
+		if(result.equals("신청이 완료 되었습니다."))
+			return "redirect:/main";
+		return "user/myInfo";
+	}
+	
+	// 회원정보 -  회원탈퇴
+	@GetMapping("/myLibrary/withdraw")
+	public String withdraw() {
+		return "user/withdraw";
+	}
+	
+	@PostMapping("/myLibrary/withdrawProc")
+	public String withdrawProc(String pw) {
+		String id = (String)session.getAttribute("id");
+		String result = service.deleteMember(id, pw);
+		System.out.println("result"+ result);
+		if(result.equals("회원 탈퇴가 완료되었습니다.")) {
+			session.invalidate();
+			return "redirect:/main";
+		}
+		return "user/withdraw";
 	}
 	
 }

@@ -30,20 +30,73 @@ public class UserService {
 
 	public String changeMyInfoProc(UserDTO myInfo) {
 		int check = userMapper.changeMyInfoProc(myInfo);
-//		MemberDTO check = mapper.loginProc(authId);
-//		if(check != null) {
-//			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
-//			String cryptPassword = bpe.encode(changePw);
-//			int result = mapper.changePw(authId, cryptPassword);
-//			if(result == 1) {
-//				return "비밀번호 변경이 완료되었습니다.";
-//			} else {
-//				return "비밀번호 변경에 실패하였습니다.";
-//			}
-//		}
 		if(check == 1)
 			return "정보가 수정되었습니다.";
 		return "수정에 실패했습니다.";
+	}
+	
+	public String updatePwProc(String currentPW, String newPW, String newConfirmPW, String id) {
+		// 기존 비밀번호랑 currentPW가 맞는지 확인하기
+		String dataCurrentPw = userMapper.currentPwCheck(id);
+		if(dataCurrentPw != null) {
+			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+			if(bpe.matches(currentPW, dataCurrentPw)) {
+				// O => newPW랑 newConfirmPW가 같은지 확인
+				if(newPW.equals(newConfirmPW)) {
+					// O => "비밀번호가 변경되었습니다."
+					String cryptPassword = bpe.encode(newPW);
+					int result = userMapper.updatePw(cryptPassword, id);
+					if(result == 1 )
+						return "비밀번호가 변경되었습니다.";
+					return "비밀번호 변경에 실패했습니다.";
+				}
+				// X => "비밀번호를 확인해주세요."
+				return "비밀번호를 확인해주세요.";
+			}
+		}
+		// X => "비밀번호 변경에 실패했습니다."
+		return "비밀번호 변경에 실패했습니다.";
+	}
+	
+	public String updateAuthProc(String pw, String id) {
+		String dataPw = userMapper.currentPwCheck(id);
+		if(dataPw != null) {
+			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+			if(bpe.matches(pw, dataPw)) {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String authDate = sdf.format(new Date());
+				int result = userMapper.updateAuth(id, authDate);
+				if(result == 1 )
+					return "신청이 완료 되었습니다.";
+			}
+		}
+		return "요청을 실패했습니다.";
+	}
+	
+	public String deleteMember(String id, String pw) {
+		if(pw == null || pw.equals("")) {
+			return "비밀번호를 입력하세요.";
+		}
+
+		UserDTO check = userMapper.getMyInfo(id);
+		if(check == null) {
+			return "등록되지 않은 회원입니다.";
+		}
+		BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+		if(bpe.matches(pw, check.getPw())) {
+			Random r = new Random();
+			String delId = String.format("%06d", r.nextInt(1000000));
+			UserDTO delChk = userMapper.getMyInfo(delId);
+			if(delChk != null) {
+				return "탈퇴 중 오류가 발생하였습니다. 관리자에게 문의하세요.";
+			} else {
+				int result = userMapper.updateId(id, delId);
+				if(result != 1) {
+					return "탈퇴 중 오류가 발생하였습니다. 관리자에게 문의하세요.";
+				}
+			}
+		}
+		return "회원 탈퇴가 완료되었습니다.";
 	}
 
 	public void myInquiryWriteProc(String id, String title, String content2) {
@@ -81,9 +134,59 @@ public class UserService {
 		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
 		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
 		
-		ArrayList<InquiryDTO> inquiries = userMapper.selectInqiry(id, begin, end);
+		ArrayList<InquiryDTO> inquiries = userMapper.selectInquiry(id, begin, end);
+		
+		String url = "myInquiry?currentPage=";
 		int totalCount = userMapper.count();
-		String url = "myInquery?currentPage=";
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+
+		model.addAttribute("inquiries", inquiries);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+	}
+	
+	public void selectInquiry(String cp, String search, String id, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		System.out.println(search);
+		
+		ArrayList<InquiryDTO> inquiries = userMapper.selectInquiryTitle(id, search, begin, end);
+		
+		String url = "myInquiry?currentPage=";
+		int totalCount = userMapper.count();
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("inquiries", inquiries);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+	}
+
+
+	public void selectInquiry(String cp, String select, String replySelect, String id, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<InquiryDTO> inquiries = userMapper.selectInquiryReply(id, replySelect, begin, end);
+		
+		String url = "myInquiry?currentPage=";
+		int totalCount = userMapper.count();
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		
 		model.addAttribute("inquiries", inquiries);

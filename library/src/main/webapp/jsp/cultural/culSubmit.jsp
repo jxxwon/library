@@ -78,7 +78,7 @@
 <c:import url="/header" />
 
 <div class="table-wrapper">
-	<div class="inner">
+	<div class="inner pageContent_mt">
 		<div class="sub-menu">
 			<c:import url="/subMenuCultural" />
 		</div>

@@ -18,15 +18,15 @@
 
 
 <body onload="condition()">
-	<div class = "adminContainer inner">
+	<div class = "adminContainer inner pageContent_mt">
 		<c:import url = "/subMenuAdmin"/>
 		<div class = "adminContent">
 			<div class = "admin header">
 				<h1>회원관리</h1>
 				<div class="mb_30 mt_20">
 					<a href="/main">HOME</a> > 
-					<a href="/adminMember">관리자페이지</a> >
-					<a class="checked" href="/adminMember">회원관리</a>
+					<a href="/member">관리자페이지</a> >
+					<a class="checked" href="/member">회원관리</a>
 				</div>
 				<div class = "subMenu_member">
 					<ul >
@@ -37,12 +37,14 @@
 				</div>
 			</div>
 			<div class="contentBox">
-				<form>
+				<form action="">
 					<div class="condition" >
 						<label id="memberLbl" class="memberLbl">회원구분</label>
-						<select id="memberSelect" class="memberSelect">
-							<option>준회원</option>
-							<option>정회원</option>
+						<select id="memberSelect" class="memberSelect" name="memberSelect">
+							<option value = "R">인증신청</option>
+							<option value = "D">준회원</option>
+							<option value = "A">정회원</option>
+							<option value = "W">탈퇴회원</option>
 						</select>
 						<label id="idLbl" class="idLbl">아이디</label>
 						<select id="searchSelect" class="searchSelect">
@@ -51,7 +53,7 @@
 							<option>연락처</option>
 						</select>
 						<input type = "text" placeholder="검색어를 입력하세요." id="memberSearch">
-						<input type = "button" value = "조회" id="searchBtn">
+						<input type = "submit" value = "조회" id="searchBtn">
 					</div>
 					<table class="selectMember">
 						<tr>
@@ -59,7 +61,22 @@
 							<th>아이디</th>
 							<th>이름</th>
 							<th>상태</th>
-							<th>신청일</th>
+							<th>
+								<c:choose>
+									<c:when test = "${param.memberSelect == 'D' }">
+										가입일
+									</c:when>
+									<c:when test = "${param.memberSelect == 'W' }">
+										탈퇴일								
+									</c:when>
+									<c:when test = "${param.memberSelect == 'A'}">
+										인증일
+									</c:when>
+									<c:otherwise>
+										신청일
+									</c:otherwise>
+								</c:choose>
+							</th>
 						</tr>
 						<c:choose>
 							<c:when test = "${empty members}">
@@ -69,17 +86,40 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="member" items="${members }">
-									<tr>
-										<td>1</td>
+									<tr onclick = "location.href='/memberConfirm?id=${member.id}'" style="cursor:pointer;">
+										<td>${member.rn }</td>
 										<td>${member.id }</td>
 										<td>${member.name }</td>
-										<td>${member.status }</td>
-										<td>신청일</td>
+										<td>
+											<c:if test = "${member.status == 'D'}">
+												준회원
+											</c:if>
+											<c:if test = "${member.status == 'A'}">
+												정회원
+											</c:if>
+											<c:if test = "${member.status == 'W'}">
+												탈퇴회원
+											</c:if>
+											<c:if test = "${member.status == 'R'}">
+												인증신청
+											</c:if>
+										</td>
+										<td>
+											<c:if test = "${member.status == 'D'}">
+												${member.regDate }
+											</c:if>
+											<c:if test = "${member.status != 'D'}">
+												${member.authDate }
+											</c:if>
+										</td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
 					</table>
+					<div class="memberPage">
+						${result }
+					</div>
 					
 				</form>
 			</div>
