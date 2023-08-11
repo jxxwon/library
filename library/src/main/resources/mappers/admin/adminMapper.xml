@@ -9,10 +9,18 @@
   		<result column = "reg_date" property = "regDate"/>
   		<result column = "post_code" property = "postCode"/>
   	</resultMap>
+  	
+  	<select id = "count">
+  		SELECT count(id) FROM member
+  	</select>
 	
 	<select id = "selectMember" resultMap="memberDto">
-		SELECT * FROM member
-	</select>	
+		SELECT AAA.* FROM (SELECT rownum as rn, member.* FROM member WHERE status = #{memberSelect} ORDER BY reg_date ASC)AAA
+	</select>
+	
+	<select id = "selectUser" resultMap="memberDto">
+		SELECT * FROM member WHERE id = #{id}
+	</select>
 	
 </mapper>
 

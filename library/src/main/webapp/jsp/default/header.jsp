@@ -9,13 +9,14 @@
     <script>
     	function header(){
   			var id = "${sessionScope.id}";
+  			var status = "${sessionScope.status}"
   			if(id != ''){
   				document.getElementById('welcome').style.display = 'block';
   				document.getElementById('login').style.display = 'none';
   				document.getElementById('register').style.display = 'none';
   				document.getElementById('logout').style.display = 'inline-block';
   				document.getElementById('myLibrary').style.display = 'table-cell';
-  				if(id == 'admin'){
+  				if(status == 'M'){
 	  				document.getElementById('myLibrary').style.display = 'none';
 	  				document.getElementById('adminForm').style.display = 'table-cell';
   				}

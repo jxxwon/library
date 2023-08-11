@@ -20,11 +20,11 @@ h1{margin-bottom:50px;}
 .subMenu_member ul li:hover a{color:#fff;}
 
 /*회원관리 - 조회조건*/
-.contentBox{font-size:0; padding:30px 0;}
+.contentBox{font-size:0; padding:30px 0; text-align:center;}
 
 .condition{display:inline-block; font-size:16px; width:100%; text-align:center; margin-bottom:40px;}
 .condition label{font-weight:500; margin-right:10px;}
-.condition select{width:100px; height:30px; margin-right:30px;}
+.condition select{width:100px; height:30px; margin-right:30px; appearance: auto; -webkit-appearance: auto;}
 .condition input[type="text"]{width:150px; height:30px; margin-right:30px;}
 .condition input[type="button"]{width:50px; height:27px; line-height:27px; font-size:15px;}
 
@@ -32,3 +32,17 @@ h1{margin-bottom:50px;}
 .selectMember tr:first-child{border-bottom:2px solid #555;}
 .selectMember tr th{padding:5px;}
 .selectMember tr td{padding:5px; text-align:center; border-bottom:1px solid #ddd;}
+
+/*회원관리 - 목록*/
+.contentBox .memberPage{margin-top:20px;}
+.contentBox .memberPage a{text-align:center; display:inline-block; width:30px; height:30px; line-height:30px; font-weight:400; border:1px solid #ddd; margin-right:5px; font-size:15px; padding:0}
+.contentBox .memberPage a:last-child{margin-right:0;}
+
+/*회원관리 - 상세화면*/
+.memberContainer{text-align:center; border-top:1px solid #ddd;}
+
+.memberDetail{width:100%; margin:40px 0;}
+.memberDetail tr{border-bottom:1px solid #ddd;}
+.memberDetail tr:last-child{border-bottom:none;}
+.memberDetail th{border-right:2px solid #555;}
+.memberDetail tr td{padding:10px;}
