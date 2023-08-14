@@ -1,6 +1,9 @@
 .homeContainer{margin-top: 245px;}
 .homeContainer::before{position: absolute; top: 0; left: 0; content: ""; display: inline-block;
-    height: 647px; width: 100%; 
+    height: 647px; 
+    width: 100%; 
+    margin: 0 auto;
+    min-width: 1200px;
     background: url('/image/visual_main2.jpg')no-repeat fixed 50% 40%;
     background-size: cover;
     opacity: 0.3;

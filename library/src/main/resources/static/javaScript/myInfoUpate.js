@@ -62,9 +62,42 @@ function showInfo(menu) {
         };
         xhr.send();
    }
+   
+// 비밀번호 수정
 
-  // 페이지가 로드되면 초기 메뉴 선택 설정을 수행합니다.
- /* window.onload = function () {
-    showInfo('updateInfo'); // 해당 메뉴에 대한 정보를 로드하여 표시합니다.
-  };*/
-       
+
+	let currentPW = null;
+	let newPW = null;
+	let newConfirmPW = null;
+	let newPwMsg = null;
+	
+function newPWCheck(){
+	 currentPW = document.getElementById('currentPW');
+	 newPW = document.getElementById('newPW');
+	 newConfirmPW = document.getElementById('newConfirmPW');
+	 newPwMsg = document.getElementById('newPwMsg');
+	  if (newPW.value == newConfirmPW.value) {
+	    newPwMsg.style.color = 'blue';
+	    newPwMsg.innerHTML = '일치';
+	  } else {
+	   newPwMsg.style.color = 'red';
+	    newPwMsg.innerHTML = '불일치';
+	  }
+}
+function changePw(){
+	 currentPW = document.getElementById('currentPW');
+	 newPW = document.getElementById('newPW');
+	 newConfirmPW = document.getElementById('newConfirmPW');
+	if(currentPW.value == ""){
+		alert('기존 비밀번호를 입력해주세요.');
+	}else if(newPW.value == ""){
+		alert('신규 비밀번호를 입력해주세요.');
+	}else if(newConfirmPW.value == ""){
+		alert('신규 비밀번호 확인을 입력해주세요.');
+	}else{
+		var f = document.getElementById('f');
+		f.submit();
+	}
+}
+
+	

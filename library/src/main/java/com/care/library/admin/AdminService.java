@@ -42,12 +42,15 @@ public class AdminService {
 
 	public void selectUser(String id, Model model) {
 		MemberDTO result = mapper.selectUser(id);
-		
 		model.addAttribute("member", result);
 	}
 
-	public void memberConfirm(String id, String userGroup, String paper, String authDate) {
-		mapper.memberConfirm(id, userGroup, paper, authDate);
+	public void memberConfirm(String id, String userGroup, String paper, String authDate, String reject) {
+		if (reject.equals("")) {
+			mapper.memberConfirm(id, userGroup, paper, authDate);
+		} else {
+			mapper.memberReject(id);
+		}
 	}
 
 }

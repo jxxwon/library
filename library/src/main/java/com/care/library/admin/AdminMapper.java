@@ -17,5 +17,7 @@ public interface AdminMapper {
 
 	void memberConfirm(String id, String userGroup, String paper, String authDate);
 
+	void memberReject(String id);
+
 
 }

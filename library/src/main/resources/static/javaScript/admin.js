@@ -7,7 +7,7 @@ function getCurrentURL() {
 function setButtonColorByURL() {
   var currentURL = getCurrentURL();
   // 원하는 URL 패턴에 따라 버튼 색상을 변경합니다.
-  if (currentURL.includes("Member")) {
+  if (currentURL.includes("member")) {
     document.getElementById("subMember").classList.add("active");
   } 
 
@@ -19,6 +19,20 @@ setButtonColorByURL();
 // 페이지 URL이 변경될 때마다 버튼 색상을 업데이트합니다.
 window.onpopstate = function () {
   setButtonColorByURL();
+}
+
+// 회원관리 탭 클릭 시 화면 전환
+function showMember(menu){
+	var url = "/admin/"+ menu;
+	const memberContainer = document.getElementById('memberContainer');
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            memberContainer.innerHTML = xhr.responseText;
+          }
+        };
+        xhr.send();
 }
 
 
@@ -62,7 +76,7 @@ function deChk() {
     console.log(deputyChk3.checked); // Use 'checked' to get the checkbox value
 }
 
-//회원인증 화면에서 인증체크
+//회원인증 화면에서 인증
 function certify(){
 	var group = document.getElementById('userGroup');
 	var groupValue = group.options[group.selectedIndex].value;
@@ -87,5 +101,35 @@ function certify(){
 			}
 		}
 	}
+}
+
+//회원인증 화면에서 반려
+function rejectProc(){
+	var group = document.getElementById('userGroup');
+	var groupValue = group.options[group.selectedIndex].value;
 	
+	var reject = document.getElementById('reject');
+	if(groupValue == ""){
+		alert('회원분류를 선택하세요.');
+	} else {
+		var paper = document.getElementById('paper');
+		var paperValue = paper.options[paper.selectedIndex].value;
+		if(paperValue == ""){
+			alert('신청서류를 선택하세요.');
+		} else {
+			if(groupValue == 'child' && paperValue != 'resident'){
+				alert('신청서류를 확인하세요.');
+			} else if(groupValue == 'student' && (paperValue == 'driving') || paperValue == 'alien'){
+				alert('신청서류를 확인하세요.')
+			} else if(groupValue != 'foreign' && paperValue == 'alien'){
+				alert('신청서류를 확인하세요.')
+			} else if(reject.value == "" || reject.value == null)
+				alert('반려의 경우, 반려 사유를 입력하셔야 합니다.')
+			 else {
+				var f = document.getElementById('f');
+				f.submit();
+				console.log(reject)
+			}
+		}
+	}
 }

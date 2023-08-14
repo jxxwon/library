@@ -17,9 +17,10 @@
 		<input type="password" name="newPW" id="newPW" ><br>
 		
 		<label>신규 비밀번호 확인<span class="caution">*</span></label>
-		<input type="password" name="newConfirmPW" id="newConfirmPW" ><br>
+		<input type="password" name="newConfirmPW" id="newConfirmPW" onkeyup="newPWCheck()" >
+		<span id="newPwMsg" ></span><br>
 		
-		<input type="submit" class="registerBtn" value="비밀번호 변경">
+		<input type="button" class="registerBtn" value="비밀번호 변경" onclick="changePw()">
 		<input type="button" class="cancelBtn" value="취소" onclick="location.href='/myLibrary/myBookStatus'"><br>
 	</form>
 	<script src = "/javaScript/myInfoUpate.js"></script>

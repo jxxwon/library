@@ -1,8 +1,10 @@
 @charset "UTF-8";
 
-.adminContainer {display:flex; margin-top: 225px !important;}
+.adminContainer {display:flex;}
 h1{margin-bottom:50px;}
 .checked{font-weight: 600;}
+
+.adminMemberContainer {width:1000px;}
 
 .adminContent{padding:50px 0 0 50px; width:1000px;}
 
@@ -13,8 +15,7 @@ h1{margin-bottom:50px;}
 
 .subMenu_member ul li a{display:block;}
 
-.subMenu_member ul li.active{background-color:#338cfa;}
-.subMenu_member ul li.active a{color:#fff;}
+.subMenu_member ul li.active{background-color:#338cfa; color:#fff; cursor:pointer;}
 
 .subMenu_member ul li:hover{background-color:#338cfa;}
 .subMenu_member ul li:hover a{color:#fff;}
@@ -145,3 +146,4 @@ h1{margin-bottom:50px;}
 
 /*회원 상세 조회*/
 .memberContainer .memberDetail input[type="text"]:first-child {border:0; height:24.5px; padding:0; font-size:16px; font-weight:normal; color:#14100c}
+.memberContainer .memberDetail input[type="text"].reject {border:1px solid #dcdcdc; padding-left:10px; font-size:14px; height:25px; line-height:25px;}

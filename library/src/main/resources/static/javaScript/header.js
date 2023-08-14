@@ -15,3 +15,29 @@ header_nav.addEventListener("mouseout", () =>
         item.classList.remove("show"); // 전환을 위한 클래스 제거
     });
 });
+
+
+function toggleMenu(){
+	var notification = document.getElementById('notification');
+	var expanded = notification.getAttribute('aria-hidden') === 'false';
+	
+	if (expanded) {
+        notification.setAttribute('aria-hidden', 'true');
+        notification.classList.remove('show'); // 알림 메뉴를 감추기 위해 클래스 제거
+    } else {
+        notification.setAttribute('aria-hidden', 'false');
+        notification.classList.add('show'); // 알림 메뉴를 표시하기 위해 클래스 추가
+    }
+}
+// 헤더 스크롤에 따라 네비게이션 맨 위로 이동시키기
+const mainController = document.querySelector('.mainController');
+
+window.addEventListener('scroll', function () {
+	//console.log(window.scrollY);
+    if (window.scrollY > 40) {
+    //console.log(window.scrollY);
+        header_nav.classList.add('fix');
+    } else {
+        header_nav.classList.remove('fix');
+    }
+});

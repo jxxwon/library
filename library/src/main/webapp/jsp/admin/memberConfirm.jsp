@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<script src = "/javaScript/admin.js"></script>
 
 <link href = "/css/main.css" rel = "stylesheet" type = "text/css">
 <link href = "/css/admin.css" rel = "stylesheet" type = "text/css">
@@ -10,7 +9,7 @@
 <title>하이미디어 도서관 - 관리자 페이지 : 회원인증</title>
 
 <c:import url = "/header"/>
-<div class = "adminContainer inner">
+<div class = "adminContainer inner pageContent_mt">
 	<c:import url = "/subMenuAdmin"/>
 	<div class = "adminContent">
 		<div class = "admin header">
@@ -98,14 +97,21 @@
 							</div>
 						</td>
 					</tr>
+					<tr>
+						<th>반려사유</th>
+						<td>
+							<input type = "text" name = "reject" class = "reject" id = "reject" placeholder ="반려시에만 작성해주세요.">
+						</td>
+					</tr>
 				</table>
 				<div>
-					<input type = "button" name = "button1" value = "인증" onclick="certify()">
-					<input type = "button" value = "반려">
-					<input type = "button" value = "취소" onclick="location.href='admin/member'">
+					<input type = "button" value = "인증" onclick="certify()">
+					<input type = "button" value = "반려" onclick="rejectProc()">
+					<input type = "button" value = "취소" onclick="location.href='member'">
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
 <c:import url = "/footer"/>
+<script src = "/javaScript/admin.js"></script>
