@@ -39,6 +39,11 @@ public class ReserveController {
 	public String studyRoom() {
 		return "reservation/studyRoom";
 	}
+	@GetMapping("/reservation/roomPopUp")
+	public String roomPopUp() {
+		System.out.println("통신중");
+		return "reservation/roomPopUp";
+	}
 //	@PostMapping("/myLibrary/withdrawProc")
 //	public String withdrawProc(String pw) {
 //		String id = (String)session.getAttribute("id");

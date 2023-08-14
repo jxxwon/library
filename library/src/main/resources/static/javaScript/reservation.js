@@ -25,12 +25,44 @@ function showInfo(menu) {
             room_container.innerHTML = xhr.responseText;
             
             const each_seat = document.querySelectorAll('.each_seat');  
-			function activateEach_seat() {
-				console.dir(this.textContent);
-			}
+		
 			each_seat.forEach(item => item.addEventListener('click', activateEach_seat));
-			            
+			
+			const popupDiv = document.getElementById('roomPopUp');
+			const popupBtn = document.getElementById('popupBtn');
+			popupBtn.addEventListener('click', popup);
+			      
 			          }
 			        };
         xhr.send();
 }
+
+function activateEach_seat() {
+	let seatNumber = this.textContent;
+	console.log(seatNumber)
+	
+	// 확인을 누르면 팝업창 띄우기
+		
+	/*let reserve = confirm(seatNumber+"를 예약하시겠습니까?"); 
+	if(reserve){
+		console.log("확인");
+	}*/
+}
+
+function popup(){
+	console.log("팝업 버트")
+	   var url = "/reservation/roomPopUp";
+		const popupDiv = document.getElementById('roomPopUp');
+		console.log(popupDiv.innerHTML);
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+			console.log("팝업 버트2")
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            popupDiv.innerHTML = xhr.responseText;
+            }
+           }
+	
+}
+
+
