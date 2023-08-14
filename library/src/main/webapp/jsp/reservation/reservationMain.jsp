@@ -14,18 +14,11 @@
 			<div class = "reserve_content">
 				<div class="reserve_top">
 					<h1>열람실 좌석 예약</h1>
-					<div class="reserve_menu mb_30 mt_20">
-						<div>자율 학습실1<br>96석</div>
-						<div>빈좌석<br>96석</div>
-						<div>사용중<br>96석</div>
-						<div>대기자<br>96석</div>
-					</div>
 					<div class = "subMenu_reserve">
 						<ul>
 						    <li class="room_menu" onclick="showInfo('readingRoom1')">자율학습실1</li>
 						    <li class="room_menu" onclick="showInfo('readingRoom2')">자율학습실2</li>
 						    <li class="room_menu" onclick="showInfo('studyRoom')">스터디룸</li>
-						    <li class="room_menu" onclick="showInfo('roomPopUp')">스터디룸</li>
 						  </ul>
 					</div>
 				</div>

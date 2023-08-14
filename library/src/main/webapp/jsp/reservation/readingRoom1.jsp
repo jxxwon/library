@@ -7,7 +7,14 @@
 <title>하이미디어 도서관 - 마이라이브러리 : 회원정보</title>
 
 <body>
+	<div class="reserve_menu mb_30 mt_20">
+		<div>자율 학습실1<br>96석</div>
+		<div style="background-color: blue; color:white">빈좌석<br>96석</div>
+		<div style="background-color: red; color:white">사용중<br>96석</div>
+		<!-- <div>대기자<br>96석</div> -->
+	</div>
 	<div class="room_container">
+	
 		<div class="seat_division">
 			<c:forEach var="i" begin="1" end="96" step="8">
 				<div class="line">
