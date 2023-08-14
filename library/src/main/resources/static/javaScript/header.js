@@ -28,6 +28,4 @@ function toggleMenu(){
         notification.setAttribute('aria-hidden', 'false');
         notification.classList.add('show'); // 알림 메뉴를 표시하기 위해 클래스 추가
     }
-	
-	console.log('안됨???')
 }
