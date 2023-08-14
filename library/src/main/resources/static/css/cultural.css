@@ -146,7 +146,7 @@
 
 .ever_one{
 	flex: 0 0 calc(33.33% - 30px); /* 1줄에 3개 요소가 보이도록 설정 */
-	margin:0px 15px 25px 10px;
+	margin:0px 15px 25px 5px;
 }
 
 .list_area {
