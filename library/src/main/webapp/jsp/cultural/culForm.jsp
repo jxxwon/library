@@ -73,7 +73,7 @@
 	                <li class="ever_one">
 	                    <a href="#" class="detail-btn">
 	                        <div class="thumb">
-                				<img src="${cultural.imagePath}" alt="image" class="teach_img" style="width:280px; height: 385px;">
+                				<img url="${cultural.imagePath}" alt="image" class="teach_img" style="width:280px; height: 385px;">
 	                        </div>
 	                        <div class="list_area">
 	                            <div class="title_area">

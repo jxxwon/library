@@ -54,8 +54,7 @@ public class CulturalController {
                                    @RequestParam("registrationEnd") String registrationEnd) {
         String msg = service.culFormWriteProc(multi, lectureStart, lectureEnd, registrationStart, registrationEnd);
         
-		System.out.println("1");
-		System.out.println("2");
+		System.out.println("culFormWriteProc_Controller_Start");
 		if(msg.equals("로그인"))
 			return "redirect:login";
 		
@@ -63,6 +62,7 @@ public class CulturalController {
 			return "redirect:culForm";
 		
 		model.addAttribute("msg", msg);
+		System.out.println("culFormWriteProc_Controller_End");
 		return "cultural/culSubmit";
 	}
     

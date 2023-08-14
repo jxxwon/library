@@ -29,6 +29,7 @@ public class CulturalService {
     
     // 페이지 넘기기
     public void culturalForm(String cp, Model model) {
+    	System.out.println("culturalForm실행");
     	System.out.println("Image Path: " + cultural.getImagePath());
         int currentPage = 1;
         try {
@@ -50,6 +51,8 @@ public class CulturalService {
         model.addAttribute("culturalList", culturalList);
         model.addAttribute("result", result);
         model.addAttribute("currentPage", currentPage);
+
+    	System.out.println("culturalForm종료");
     }
 
 //    public void culForm(String cp, Model model) {
@@ -79,7 +82,7 @@ public class CulturalService {
 
 	// 문화행사 신청 데이터를 DB에 저장하는 메서드 추가
     public String culFormWriteProc(MultipartHttpServletRequest multi, String lectureStart, String lectureEnd, String registrationStart, String registrationEnd) {
-    	System.out.println("3");
+    	System.out.println("culFormWriteProc실행");
 
     	// 서버로 전송할 데이터 생성
 	    CulturalDTO cultural = new CulturalDTO();
@@ -114,7 +117,7 @@ public class CulturalService {
 		    
 		    //사진경로전체 DB에 넣기
 		    cultural.setImagePath(fileLocation + fileName);
-		    System.out.println("Image Path: " + cultural.getImagePath());
+		    System.out.println("Write Image Path: " + cultural.getImagePath());
 	        
 		    // 디렉토리가 없는 경우 생성
 		    File directory = new File(fileLocation);
@@ -131,6 +134,7 @@ public class CulturalService {
 		}
 		
 		culturalMapper.culFormWriteProc(cultural);
+		System.out.println("culFormWriteProc종료");
 		return "게시글 작성 완료";
 	}
 
