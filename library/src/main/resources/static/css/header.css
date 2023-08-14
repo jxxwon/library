@@ -91,6 +91,10 @@ body {
 	box-sizing: border-box;
 }
 
+.main_nav ul li.notification_active{
+	display: none;
+}
+
 .main_nav ul li a {
 	text-decoration: none;
 	/* 링크의 밑줄을 없앰 */
