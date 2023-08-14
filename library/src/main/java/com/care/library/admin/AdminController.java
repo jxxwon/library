@@ -20,9 +20,14 @@ public class AdminController {
 	@Autowired HttpSession session;
 	@Autowired AdminService service;
 	
-	@RequestMapping("/admin")
+	@RequestMapping("/admin/member")
 	public String admin() {
-		return "redirect:admin/member";
+		String id = (String)session.getAttribute("id");
+		String status = (String)session.getAttribute("status");
+		if(id == null || id.equals("")||status.equals("M") == false) {
+			return "redirect:main";
+		}
+		return "admin/member";
 	}
 	
 	@RequestMapping("subMenuAdmin")
@@ -30,18 +35,13 @@ public class AdminController {
 		return "admin/subMenuAdmin";
 	}
 	
-	@RequestMapping("admin/member")
+	@RequestMapping("/admin/memberAuth")
 	public String adminMember(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="memberSelect", required = false)String memberSelect, Model model) {
-		String id = (String)session.getAttribute("id");
-		String status = (String)session.getAttribute("status");
-		if(id == null || id.equals("")||status.equals("M") == false) {
-			return "redirect:main";
-		}
 		service.selectMember(cp, memberSelect, model);
-		return "admin/member";
+		return "admin/memberAuth";
 	}
 	
-	@GetMapping("/memberConfirm")
+	@GetMapping("/admin/memberConfirm")
 	public String memberConfirm(String id, Model model) {
 		service.selectUser(id, model);
 		return "admin/memberConfirm";

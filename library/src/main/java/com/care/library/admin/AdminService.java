@@ -42,7 +42,6 @@ public class AdminService {
 
 	public void selectUser(String id, Model model) {
 		MemberDTO result = mapper.selectUser(id);
-		
 		model.addAttribute("member", result);
 	}
 

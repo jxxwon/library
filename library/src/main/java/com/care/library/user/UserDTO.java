@@ -14,7 +14,21 @@ public class UserDTO {
 	private String regDate;
 	private String status;
 	private String kakaoid;
+	private String authDate;
+	private String userGroup;
 	
+	public String getAuthDate() {
+		return authDate;
+	}
+	public void setAuthDate(String authDate) {
+		this.authDate = authDate;
+	}
+	public String getUserGroup() {
+		return userGroup;
+	}
+	public void setUserGroup(String userGroup) {
+		this.userGroup = userGroup;
+	}
 	public String getId() {
 		return id;
 	}
