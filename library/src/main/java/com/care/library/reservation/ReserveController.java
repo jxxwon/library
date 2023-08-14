@@ -41,7 +41,6 @@ public class ReserveController {
 	}
 	@GetMapping("/reservation/roomPopUp")
 	public String roomPopUp() {
-		System.out.println("통신중");
 		return "reservation/roomPopUp";
 	}
 //	@PostMapping("/myLibrary/withdrawProc")

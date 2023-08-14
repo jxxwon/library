@@ -27,42 +27,64 @@ function showInfo(menu) {
             const each_seat = document.querySelectorAll('.each_seat');  
 		
 			each_seat.forEach(item => item.addEventListener('click', activateEach_seat));
-			
-			const popupDiv = document.getElementById('roomPopUp');
-			const popupBtn = document.getElementById('popupBtn');
-			popupBtn.addEventListener('click', popup);
 			      
+	
 			          }
 			        };
         xhr.send();
 }
 
+				
 function activateEach_seat() {
 	let seatNumber = this.textContent;
 	console.log(seatNumber)
 	
 	// 확인을 누르면 팝업창 띄우기
 		
-	/*let reserve = confirm(seatNumber+"를 예약하시겠습니까?"); 
+	let reserve = confirm(seatNumber+"를 예약하시겠습니까?"); 
 	if(reserve){
 		console.log("확인");
-	}*/
+		  var url = "/reservation/roomPopUp";
+		  const xhr = new XMLHttpRequest();
+		  xhr.open('GET', url, true);
+		  
+		  xhr.onreadystatechange = function () {
+		    if (xhr.readyState === 4) {
+		      if (xhr.status === 200) {
+		        console.log("통신 성공 후 내용: " + xhr.responseText);
+		        //popupDiv.innerHTML = xhr.responseText;
+    		      var popupWidth = 500;
+					var popupHeight = 500;
+							  
+					var leftPosition = (window.innerWidth - popupWidth) / 2;
+					var topPosition = (window.innerHeight - popupHeight) / 2;
+					  
+					var popupWindow = window.open('', 'Seat Popup', 'width=' + popupWidth + ',height=' + popupHeight + ',left=' + leftPosition + ',top=' + topPosition);
+							
+          
+		          popupWindow.document.open();
+		          popupWindow.document.write(xhr.responseText);
+		          popupWindow.document.close();
+		document.addEventListener('click', function (event) {
+		  // 팝업 창이 열려있고, 클릭된 요소가 팝업 창 내부가 아닌 경우 팝업을 닫음
+		  if (popupWindow !== null && event.target !== popupWindow) {
+		    popupWindow.close();
+		    popupWindow = null; // 전역 변수 초기화
+		  }
+		}
+		);
+				console.log("4")
+		      } else {
+		        console.log("통신 오류 발생: " + xhr.status);
+		      }
+		    }
+		    // document의 클릭 이벤트 리스너 추가
+
+  	};
+  
+  xhr.send();
+	}
 }
 
-function popup(){
-	console.log("팝업 버트")
-	   var url = "/reservation/roomPopUp";
-		const popupDiv = document.getElementById('roomPopUp');
-		console.log(popupDiv.innerHTML);
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-			console.log("팝업 버트2")
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            popupDiv.innerHTML = xhr.responseText;
-            }
-           }
-	
-}
 
 

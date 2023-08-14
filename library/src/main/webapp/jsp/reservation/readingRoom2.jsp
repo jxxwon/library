@@ -8,7 +8,6 @@
 
 <body>
 	<div class="room_container">
-		<div id="roomPopUp">sdf</div>
 		<div class="seat_division">
 			<c:forEach var="i" begin="1" end="96" step="8">
 				<div class="line">
@@ -31,6 +30,5 @@
 				</div>
 			</c:forEach>	
 		</div>
-		<button id="popupBtn" onclick="popup()">팝업</button>
 	</div>
 </body>
