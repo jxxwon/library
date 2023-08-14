@@ -146,3 +146,4 @@ h1{margin-bottom:50px;}
 
 /*회원 상세 조회*/
 .memberContainer .memberDetail input[type="text"]:first-child {border:0; height:24.5px; padding:0; font-size:16px; font-weight:normal; color:#14100c}
+.memberContainer .memberDetail input[type="text"].reject {border:1px solid #dcdcdc; padding-left:10px; font-size:14px; height:25px; line-height:25px;}

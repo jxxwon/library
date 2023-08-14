@@ -97,11 +97,17 @@
 							</div>
 						</td>
 					</tr>
+					<tr>
+						<th>반려사유</th>
+						<td>
+							<input type = "text" name = "reject" class = "reject" id = "reject" placeholder ="반려시에만 작성해주세요.">
+						</td>
+					</tr>
 				</table>
 				<div>
 					<input type = "button" value = "인증" onclick="certify()">
-					<input type = "button" value = "반려">
-					<input type = "button" value = "취소" onclick="location.href='admin/member'">
+					<input type = "button" value = "반려" onclick="rejectProc()">
+					<input type = "button" value = "취소" onclick="location.href='member'">
 				</div>
 			</form>
 		</div>
