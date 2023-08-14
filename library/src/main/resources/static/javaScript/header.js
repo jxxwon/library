@@ -1,6 +1,6 @@
 const header_nav = document.querySelector(".header_nav");
 const toggle_box = document.querySelectorAll(".toggleBox");
-console.log("header_nav", header_nav);
+//console.log("header_nav", header_nav);
 	
 header_nav.addEventListener("mouseover", () => {
 	header_nav.classList.add("show");

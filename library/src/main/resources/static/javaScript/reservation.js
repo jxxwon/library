@@ -1,5 +1,5 @@
 const room_menu = document.querySelectorAll('.room_menu');
-console.log(room_menu);
+//console.log(room_menu);
 
 function activateMenuItem() {
 	// 모든 메뉴 항목에서 '활성' 클래스 제거
