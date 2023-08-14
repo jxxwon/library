@@ -24,17 +24,3 @@
 		</div>
 	</div>
 </div>
-
-<script type="text/javascript">
-
-const mainController = document.querySelector('.mainController');
-
-window.addEventListener('scroll', function () {
-    if (window.scrollY > 15) {
-        header_nav.classList.add('fix');
-    } else {
-        header_nav.classList.remove('fix');
-    }
-});
-
-</script>

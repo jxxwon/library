@@ -25,6 +25,7 @@
 						    <li class="room_menu" onclick="showInfo('readingRoom1')">자율학습실1</li>
 						    <li class="room_menu" onclick="showInfo('readingRoom2')">자율학습실2</li>
 						    <li class="room_menu" onclick="showInfo('studyRoom')">스터디룸</li>
+						    <li class="room_menu" onclick="showInfo('roomPopUp')">스터디룸</li>
 						  </ul>
 					</div>
 				</div>
