@@ -41,17 +41,17 @@ public class AdminController {
 		return "admin/memberAuth";
 	}
 	
-	@GetMapping("/admin/memberConfirm")
+	@RequestMapping("/admin/memberConfirm")
 	public String memberConfirm(String id, Model model) {
 		service.selectUser(id, model);
 		return "admin/memberConfirm";
 	}
 	
-	@PostMapping("/memberConfirmProc")
-	public String memberConfirmProc(String id, String userGroup, String paper) {
+	@PostMapping("/admin/memberConfirmProc")
+	public String memberConfirmProc(String id, String userGroup, String paper, String reject) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String authDate = sdf.format(new Date());
-//		service.memberConfirm(id, userGroup, paper, authDate);
-		return "redirect:admin/member";
+		service.memberConfirm(id, userGroup, paper, authDate, reject);
+		return "admin/member";
 	}
 }

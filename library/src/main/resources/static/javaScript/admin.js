@@ -102,3 +102,34 @@ function certify(){
 		}
 	}
 }
+
+//회원인증 화면에서 반려
+function rejectProc(){
+	var group = document.getElementById('userGroup');
+	var groupValue = group.options[group.selectedIndex].value;
+	
+	var reject = document.getElementById('reject');
+	if(groupValue == ""){
+		alert('회원분류를 선택하세요.');
+	} else {
+		var paper = document.getElementById('paper');
+		var paperValue = paper.options[paper.selectedIndex].value;
+		if(paperValue == ""){
+			alert('신청서류를 선택하세요.');
+		} else {
+			if(groupValue == 'child' && paperValue != 'resident'){
+				alert('신청서류를 확인하세요.');
+			} else if(groupValue == 'student' && (paperValue == 'driving') || paperValue == 'alien'){
+				alert('신청서류를 확인하세요.')
+			} else if(groupValue != 'foreign' && paperValue == 'alien'){
+				alert('신청서류를 확인하세요.')
+			} else if(reject.value == "" || reject.value == null)
+				alert('반려의 경우, 반려 사유를 입력하셔야 합니다.')
+			 else {
+				var f = document.getElementById('f');
+				f.submit();
+				console.log(reject)
+			}
+		}
+	}
+}

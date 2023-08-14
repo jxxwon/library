@@ -29,6 +29,10 @@
 		UPDATE member SET status = 'A', user_group = #{userGroup}, paper = #{paper}, auth_date = #{authDate} WHERE id = #{id}
 	</update>
 	
+	<update id = "memberReject">
+		UPDATE member SET status = 'D' WHERE id = #{id}
+	</update>
+	
 </mapper>
 
 
