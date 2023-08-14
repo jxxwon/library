@@ -218,5 +218,8 @@
 	color: white;
   }
 
-
+/*페이지 처리*/
+.culturalContainer .paging{margin-top:20px;}
+.culturalContainer .paging a{text-align:center; display:inline-block; width:30px; height:30px; line-height:30px; font-weight:400; border:1px solid #ddd; margin-right:5px; font-size:15px; padding:0}
+.culturalContainer .paging a:last-child{margin-right:0;}
 
