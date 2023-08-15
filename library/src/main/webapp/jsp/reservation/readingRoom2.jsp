@@ -8,7 +8,7 @@
 
 <body>
 	<div class="reserve_menu mb_30 mt_20">
-			<div>자율 학습실2<br>96석</div>
+			<div class="whichRoom">자율 학습실2<br><span>96석</span></div>
 			<div style="background-color: blue; color:white">빈좌석<br>96석</div>
 			<div style="background-color: red; color:white">사용중<br>96석</div>
 			<!-- <div>대기자<br>96석</div> -->

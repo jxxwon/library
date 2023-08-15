@@ -1,55 +1,34 @@
 package com.care.library.reservation;
 
 public class ReserveDTO {
-	private int rn;
-	private int no;
-	private String title;
-	private String content;
-	private String id;
-	private String writeDate;
-	private String reply;
+	private String seatId;
+	private String userId;
+	private String reserveDate;
+	private String room;
+	public String getReserveDate() {
+		return reserveDate;
+	}
+	public void setReserveDate(String reserveDate) {
+		this.reserveDate = reserveDate;
+	}
+	public String getSeatId() {
+		return seatId;
+	}
+	public void setSeatId(String seatId) {
+		this.seatId = seatId;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getRoom() {
+		return room;
+	}
+	public void setRoom(String room) {
+		this.room = room;
+	}
 
-	public int getRn() {
-		return rn;
-	}
-	public void setRn(int rn) {
-		this.rn = rn;
-	}
 	
-	public int getNo() {
-		return no;
-	}
-	public void setNo(int no) {
-		this.no = no;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getWriteDate() {
-		return writeDate;
-	}
-	public void setWriteDate(String writeDate) {
-		this.writeDate = writeDate;
-	}
-	public String getReply() {
-		return reply;
-	}
-	public void setReply(String reply) {
-		this.reply = reply;
-	}
 }
