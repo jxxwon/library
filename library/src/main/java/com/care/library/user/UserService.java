@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.care.library.common.NotifyDTO;
+import com.care.library.common.NotifyService;
 import com.care.library.common.PageService;
 import com.care.library.member.MailService;
 import com.care.library.member.MemberMapper;
@@ -22,6 +24,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class UserService {
 	
 	@Autowired UserMapper userMapper;
+	@Autowired NotifyService notiService;
 
 	public UserDTO getMyInfo(String id) { 
 		return userMapper.getMyInfo(id); 
@@ -66,7 +69,13 @@ public class UserService {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				String authDate = sdf.format(new Date());
 				int result = userMapper.updateAuth(id, authDate);
+				NotifyDTO notification = new NotifyDTO();
 				if(result == 1 )
+					notification.setId(id);
+					notification.setCategory("회원");
+					notification.setTitle("인증 신청이 완료되었습니다.");
+					notification.setUrl("/myLibrary/myInfo");
+					notiService.add(notification);
 					return "신청이 완료 되었습니다.";
 			}
 		}

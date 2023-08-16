@@ -16,7 +16,7 @@ public class NotifyService {
 	public void noticitation(Model model) {
 	}
 
-	public void register(NotifyDTO notification) {
+	public void add(NotifyDTO notification) {
 		int no;
 		try {
 			no = mapper.findMaxNum();

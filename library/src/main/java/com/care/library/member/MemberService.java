@@ -122,7 +122,7 @@ public class MemberService {
 			notification.setCategory("회원");
 			notification.setTitle("회원가입을 축하합니다.");
 			notification.setUrl("/myLibrary/myInfo");
-			notiService.register(notification);
+			notiService.add(notification);
 			return "회원 등록 완료";
 		}
 		
