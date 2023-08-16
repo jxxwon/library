@@ -6,13 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.care.library.common.NotifyDTO;
+import com.care.library.common.NotifyService;
 import com.care.library.common.PageService;
 import com.care.library.member.MemberDTO;
 
 @Service
 public class AdminService {
 	@Autowired AdminMapper mapper;
-
+	@Autowired NotifyService notiService;
+	
 	public void selectMember(String cp, String memberSelect, Model model) {
 		if(memberSelect == null) {
 			memberSelect = "R";
@@ -48,6 +51,12 @@ public class AdminService {
 	public void memberConfirm(String id, String userGroup, String paper, String authDate, String reject) {
 		if (reject.equals("")) {
 			mapper.memberConfirm(id, userGroup, paper, authDate);
+			NotifyDTO notification = new NotifyDTO();
+			notification.setId(id);
+			notification.setCategory("회원");
+			notification.setTitle("정회원이 되셨습니다.");
+			notification.setUrl("/myLibrary/myInfo");
+			notiService.register(notification);
 		} else {
 			mapper.memberReject(id);
 		}

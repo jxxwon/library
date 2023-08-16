@@ -35,6 +35,7 @@
 		<c:choose>
 			<c:when test = "${result != null}">
 				<p style = "margin-top:40px; color:red;">${result }</p>
+				<input type = "button" class="cancelBtn" value ="돌아가기" onclick = "location.href='/myLibrary/myInfo'">
 			</c:when>
 			<c:otherwise>
 				<label>비밀번호<span class="caution">*</span></label>

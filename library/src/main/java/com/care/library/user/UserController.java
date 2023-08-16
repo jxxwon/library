@@ -146,6 +146,10 @@ public class UserController {
 		String status = service.getMyInfo(id).getStatus();
 		if(status.equals("R")) {
 			model.addAttribute("result", "이미 인증신청을 하셨습니다.");
+		} else if(status.equals("A")){
+			model.addAttribute("result", "이미 정회원입니다.");
+		} else {
+			model.addAttribute("result","");
 		}
 		return "user/updateAuth";
 	}
