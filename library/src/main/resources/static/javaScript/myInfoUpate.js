@@ -67,4 +67,11 @@ function showInfo(menu) {
  /* window.onload = function () {
     showInfo('updateInfo'); // 해당 메뉴에 대한 정보를 로드하여 표시합니다.
   };*/
+  
+  
+// 회원 인증신청 시 인증 재신청
+function reapply(){
+	document.getElementById('reapply').style.display="block";
+	document.getElementById('reapplyButton').style.display="none";
+}
        

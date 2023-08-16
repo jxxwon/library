@@ -52,6 +52,6 @@ public class AdminController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String authDate = sdf.format(new Date());
 		service.memberConfirm(id, userGroup, paper, authDate, reject);
-		return "admin/member";
+		return "redirect:/admin/member";
 	}
 }

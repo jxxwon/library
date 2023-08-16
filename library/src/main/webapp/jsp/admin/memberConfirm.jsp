@@ -100,7 +100,7 @@
 					<tr>
 						<th>반려사유</th>
 						<td>
-							<input type = "text" name = "reject" class = "reject" id = "reject" placeholder ="반려시에만 작성해주세요.">
+							<input type = "text" name = "reject" class = "reject" id = "reject" placeholder ="반려시에만 작성해주세요.(10자이내)">
 						</td>
 					</tr>
 				</table>

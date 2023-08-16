@@ -48,18 +48,28 @@ public class AdminService {
 		model.addAttribute("member", result);
 	}
 
-	public void memberConfirm(String id, String userGroup, String paper, String authDate, String reject) {
+	public String memberConfirm(String id, String userGroup, String paper, String authDate, String reject) {
+		String result = "";
 		if (reject.equals("")) {
 			mapper.memberConfirm(id, userGroup, paper, authDate);
+			result ="정회원이 되셨습니다.";
 			NotifyDTO notification = new NotifyDTO();
 			notification.setId(id);
 			notification.setCategory("회원");
-			notification.setTitle("정회원이 되셨습니다.");
+			notification.setTitle(result);
 			notification.setUrl("/myLibrary/myInfo");
 			notiService.register(notification);
 		} else {
-			mapper.memberReject(id);
+			mapper.memberReject(id, reject);
+			result ="인증 신청이 반려되었습니다.";
+			NotifyDTO notification = new NotifyDTO();
+			notification.setId(id);
+			notification.setCategory("회원");
+			notification.setTitle(result);
+			notification.setUrl("/myLibrary/myInfo");
+			notiService.register(notification);
 		}
+		return result;
 	}
 
 }

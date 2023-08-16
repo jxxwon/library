@@ -30,7 +30,7 @@
 	</update>
 	
 	<update id = "memberReject">
-		UPDATE member SET status = 'D' WHERE id = #{id}
+		UPDATE member SET status = 'D', reject = #{reject} WHERE id = #{id}
 	</update>
 	
 </mapper>

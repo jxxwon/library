@@ -149,17 +149,17 @@ public class UserController {
 		} else if(status.equals("A")){
 			model.addAttribute("result", "이미 정회원입니다.");
 		} else {
-			model.addAttribute("result","");
+			String reject = service.getMyInfo(id).getReject();
+			model.addAttribute("reject", reject);
 		}
 		return "user/updateAuth";
 	}
 	
 	@PostMapping("/myLibrary/updateAuthProc")
-	public String updateAuthProc(String pw, RedirectAttributes ra) {
+	public String updateAuthProc(String pw) {
 		String id = (String)session.getAttribute("id");
 		String result = service.updateAuthProc(pw, id);
 		if(result.equals("신청이 완료 되었습니다.")) {
-			ra.addFlashAttribute("authMsg", result);
 			return "redirect:/main";
 		}
 		return "user/myInfo";

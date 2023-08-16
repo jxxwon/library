@@ -35,7 +35,7 @@ h1{margin-bottom:50px;}
 .RIContainer input{margin: 10px 0 10px; }
 .RIContainer label{display:inline-block; width:90px; margin-bottom:15px;}
 
-.RIContainer .myInfoId, .RIContainer .myInfoName, .RIContainer .myInfoBirth
+.RIContainer .myInfoId, .RIContainer .myInfoName, .RIContainer .myInfoBirth, .RIContainer .myInfoReject
 {display: inline-block; height: 45px; line-height: 45px;}
     
 .RIContainer .caution{color:red; font-size: 16px;}
@@ -75,6 +75,9 @@ h1{margin-bottom:50px;}
 padding: 30px 0 30px 20px; margin-bottom: 30px; line-height: 180%;}
 .updateAuthContent label {width: 100px;}
 .updateAuthForm #pw {width: 280px;}
+.backBtn {width:175px; height:60px; padding:10px; cursor: pointer; text-align:center;}
+.reapplyBtn {width:175px; height:60px; padding:10px; cursor: pointer; text-align:center;}
+.result {height:45px; line-height:45px; color:red; font-weight:500;}
 
 /*회원 탈퇴*/
 .withdrawContent{width: 700px; border: 1px solid black; 
