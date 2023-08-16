@@ -1,6 +1,5 @@
 const header_nav = document.querySelector(".header_nav");
 const toggle_box = document.querySelectorAll(".toggleBox");
-//console.log("header_nav", header_nav);
 	
 header_nav.addEventListener("mouseover", () => {
 	header_nav.classList.add("show");
@@ -33,9 +32,7 @@ function toggleMenu(){
 const mainController = document.querySelector('.mainController');
 
 window.addEventListener('scroll', function () {
-	//console.log(window.scrollY);
     if (window.scrollY > 40) {
-    //console.log(window.scrollY);
         header_nav.classList.add('fix');
     } else {
         header_nav.classList.remove('fix');

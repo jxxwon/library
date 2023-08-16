@@ -24,6 +24,11 @@ public class MemberController {
 		return "default/header";
 	}
 
+	@RequestMapping("notification")
+	public String notification() {
+		return "default/notification";
+	}
+
 	@RequestMapping("subMenuLogin")
 	public String subMenu() {
 		return "default/subMenuLogin";

@@ -64,10 +64,7 @@
                    	<div id = "notification" class="notification" role = "menu" aria-hidden="true" >
 	                    <div>
 					        <div role="menuitem">
-					            구분
-					        </div>
-					        <div role="menuitem" >
-					            <a href="#">1번ㅋ</a>
+				        		<c:import url = "/notification"/>
 					        </div>
                    		</div>
                    	</div>

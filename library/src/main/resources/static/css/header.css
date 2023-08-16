@@ -15,15 +15,20 @@ body {
 }
 
 .notification {
-    background-color: red;
+    border:1px solid #ddd;
+    border-radius:15px;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+    width:400px;
     height:200px;
-    position: relative;
-    top:40px;
+    position: absolute;
+    top:85px;
     right:0px;
     z-index:999999;
+    color:#666;
+    background-color: #fff;
+    padding:10px;
 }
 
 .notification.show {
