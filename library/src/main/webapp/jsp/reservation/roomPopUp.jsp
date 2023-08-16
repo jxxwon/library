@@ -8,7 +8,7 @@
 <body>
 	<div class="pop_container">
 		<div class="pop_inner">
-			<div class="logo"><img src="/image/LOGO.png"/></div>
+			<div class="pop_logo"><img src="/image/LOGO.png"/></div>
 			<div class="pop_contentBox">
 				<h2>열람실 예약</h2>
 				<form action="reserveProc" method="post" id="f">

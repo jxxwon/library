@@ -57,22 +57,19 @@ public class ReserveController {
 	public void reserveProc(@RequestBody ReserveDTO reqData) {
 		String id = (String)session.getAttribute("id");
 		String name = (String)session.getAttribute("name");
-		//System.out.println("reqData.getRoom() : " + reqData.getRoom());
-		//System.out.println("reqData.getSeatId() : " + reqData.getSeatId());
+		System.out.println("여기"+reqData.getRoom());
 		
-		
-		 Map<String, String> data = new HashMap<String, String>();
-		 data.put("room", reqData.getRoom());
-		 data.put("seatId", reqData.getSeatId());
 		 
 		 Date nowDate = new Date();
 		 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); 
      	 //원하는 데이터 포맷 지정
 		 String strNowDate = simpleDateFormat.format(nowDate); 
      	 //지정한 포맷으로 변환 
-		 
 		 reqData.setReserveDate(strNowDate);
+		 
 		 reqData.setUserId(id);
+		 
+		 String result = service.reservation(reqData);
 		 
 	}
 
