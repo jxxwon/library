@@ -9,5 +9,6 @@ import org.apache.ibatis.annotations.Param;
 public interface ReserveMapper {
 	
 	int reservation(ReserveDTO resevedData);
+	ArrayList<String> getReservedSeat(String room);
 
 }

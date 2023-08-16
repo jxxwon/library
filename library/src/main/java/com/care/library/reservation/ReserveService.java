@@ -16,13 +16,15 @@ import com.care.library.common.PageService;
 import com.care.library.member.MailService;
 import com.care.library.member.MemberMapper;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class ReserveService {
 	
 	@Autowired ReserveMapper userMapper;
-	
+	@Autowired HttpSession session;
 	  public String reservation(ReserveDTO resevedData) {
 		  if(resevedData.getRoom().equals("자율 학습실2")) {
 			  resevedData.setRoom("R2"); 
@@ -32,9 +34,20 @@ public class ReserveService {
 			  resevedData.setRoom("SR"); //Study Room
 		  }
 		  int result = userMapper.reservation(resevedData); 
-		  if(result == 1)
+		  if(result == 1) {
+			  
 			  return "예약이 완료되었습니다.";
+		  }
 		  return "예약이 정상적으로 이루어지지 않았습니다.";
+	  }
+	  
+	  public void getReservedSeat(Model model, String whichRoom) {
+		  System.out.println("getRecentSeat : "+ whichRoom);
+		  ArrayList<String> reservedSeat = userMapper.getReservedSeat(whichRoom); 
+		  for(String seat : reservedSeat) {
+			  System.out.println(seat);
+		  }
+		  model.addAttribute("reservedSeat", reservedSeat);
 	  }
 	  
 	  

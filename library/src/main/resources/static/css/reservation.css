@@ -121,6 +121,8 @@ h1 {
 
 .room_container ul li {
 	border: 1px solid #888;
+	background-color: #338cfa;
+	color: white;
 	width: 50px;
 	height: 40px;
 	line-height: 40px;
@@ -131,6 +133,15 @@ h1 {
 
 .room_container ul li:nth-child(2) {
 	margin-right: 25px;
+}
+
+.room_container ul li.using{
+	background-color: red;
+}
+
+.using{
+	background-color: red;
+	color: white;
 }
 
 /*예약 팝업창*/

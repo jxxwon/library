@@ -1,6 +1,7 @@
 package com.care.library.reservation;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,12 +34,17 @@ public class ReserveController {
 	}
 	
 	@GetMapping("/reservation/readingRoom1")
-	public String readingRoom1() {
+	public String readingRoom1(Model model) {
+		String whichRoom = "R1";
+		service.getReservedSeat(model, whichRoom);
+		
 		return "reservation/readingRoom1";
 	}
 	
 	@GetMapping("/reservation/readingRoom2")
-	public String readingRoom2() {
+	public String readingRoom2(Model model) {
+		String whichRoom = "R2";
+		service.getReservedSeat(model, whichRoom);
 		return "reservation/readingRoom2";
 	}
 	
@@ -58,7 +64,6 @@ public class ReserveController {
 		String id = (String)session.getAttribute("id");
 		String name = (String)session.getAttribute("name");
 		System.out.println("여기"+reqData.getRoom());
-		
 		 
 		 Date nowDate = new Date();
 		 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); 

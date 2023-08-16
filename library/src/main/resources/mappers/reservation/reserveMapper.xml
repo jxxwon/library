@@ -15,9 +15,9 @@
   		VALUES (#{seatId}, #{userId}, #{reserveDate}, #{room})
   	</insert>
 	<!--  마이 라이브러리 회원정보 수정  -->
-	<!-- <select id="getMyInfo" resultMap="userDto">
-		SELECT * FROM member WHERE id = #{id}
-	</select> -->
+	 <select id="getReservedSeat">
+		SELECT seat_id FROM reservation WHERE room = #{room}
+	</select> 
 	
 	<!-- <update id="changeMyInfoProc">
 		UPDATE member SET birth = #{birth}, email = #{email}, address = #{address}, mobile = #{mobile}, detail_address = #{detailAddress}, 
