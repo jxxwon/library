@@ -45,7 +45,7 @@ public class NotifyService {
 		adminNoti.setCategory(notification.getCategory());
 		adminNoti.setTitle(notification.getTitle());
 		if(category.equals("회원")) {
-			adminNoti.setUrl("member");
+			adminNoti.setUrl("/admin/member");
 		}
 		mapper.insert(adminNoti);
 	}

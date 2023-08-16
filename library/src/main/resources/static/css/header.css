@@ -21,7 +21,8 @@ body {
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     width:400px;
-    height:auto;
+    max-height: 400px;
+    overflow-y: auto; /*컨텐츠가 넘칠 때 세로 스크롤바 자동 생성*/
     position: absolute;
     top:85px;
     right:0px;
@@ -207,4 +208,9 @@ body {
 	
 .fix{
 	top:0;
+}
+
+table tr {
+    height: 40px;
+    line-height: 40px;
 }

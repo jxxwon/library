@@ -54,4 +54,32 @@ public class AdminController {
 		service.memberConfirm(id, userGroup, paper, authDate, reject);
 		return "redirect:/admin/member";
 	}
+	
+	// 1:1문의 - 목록
+	@RequestMapping("/admin/inquiry")
+	public String myInquiryList(@RequestParam(value="currentPage", required = false)String cp, 
+			@RequestParam(value="select", required = false)String select, @RequestParam(value="search", required = false)String search, 
+			@RequestParam(value="replySelect", required = false) String replySelect, Model model) {
+		
+		String id = (String)session.getAttribute("id");
+		System.out.println("myInquiryList"+ id);
+		System.out.println("select : " + select);
+		System.out.println("search : " + search);
+		System.out.println("replySelect : " + replySelect);
+		
+		if(id == null || id.equals("")) {
+			return "redirect:main";
+		}
+		
+		//초기 화면 및 검색조건에 제목으로 해놓고 검색어 입력 안 하면 전체 조회
+//		if(select == null || (select.equals("title") && (search==null || search == ""))) {
+//			service.selectInquiry(cp, id, model);
+//		} else if(select.equals("title") && search != null) {
+//			service.selectInquiry(cp, search, id, model);
+//		} else if(select.equals("reply")) {
+//			service.selectInquiry(cp, select, replySelect, id, model);
+//		}
+		
+		return "admin/inquiry";
+	}
 }
