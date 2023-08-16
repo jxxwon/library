@@ -7,6 +7,7 @@
 
 
 <title>하이미디어 도서관 - 마이라이브러리 : 회원정보</title>
+
 <body>
 	<div class="updateAuthContent">
 		<p>
@@ -31,11 +32,17 @@
 		<label>아이디</label>
 		<span class="myInfoId">${sessionScope.id}</span><br>
 		
-		<label>비밀번호<span class="caution">*</span></label>
-		<input type="password" name="pw" id="pw" ><br>
-		
-		<input type="submit" class="registerBtn" value="인증신청">
-		<input type="button" class="cancelBtn" value="취소" onclick="location.href='/myLibrary/myInfo'"><br>
+		<c:choose>
+			<c:when test = "${result != null}">
+				<p style = "margin-top:40px; color:red;">${result }</p>
+			</c:when>
+			<c:otherwise>
+				<label>비밀번호<span class="caution">*</span></label>
+				<input type="password" name="pw" id="pw" ><br>
+				<input type="submit" class="registerBtn" value="인증신청">
+				<input type="button" class="cancelBtn" value="취소" onclick="location.href='/myLibrary/myInfo'"><br>
+			</c:otherwise>
+		</c:choose>
 	</form>
 	<script src = "/javaScript/myInfoUpate.js"></script>
 </body>

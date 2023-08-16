@@ -62,21 +62,25 @@ public class UserService {
 	}
 	
 	public String updateAuthProc(String pw, String id) {
-		String dataPw = userMapper.currentPwCheck(id);
-		if(dataPw != null) {
-			BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
-			if(bpe.matches(pw, dataPw)) {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				String authDate = sdf.format(new Date());
-				int result = userMapper.updateAuth(id, authDate);
-				NotifyDTO notification = new NotifyDTO();
-				if(result == 1 )
-					notification.setId(id);
-					notification.setCategory("회원");
-					notification.setTitle("인증 신청이 완료되었습니다.");
-					notification.setUrl("/myLibrary/myInfo");
-					notiService.add(notification);
+		String status = userMapper.getMyInfo(id).getStatus();
+		if (status.equals("R") == false) {
+			String dataPw = userMapper.currentPwCheck(id);
+			if(dataPw != null) {
+				BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+				if(bpe.matches(pw, dataPw)) {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					String authDate = sdf.format(new Date());
+					int result = userMapper.updateAuth(id, authDate);
+					NotifyDTO notification = new NotifyDTO();
+					if(result == 1 ) {
+						notification.setId(id);
+						notification.setCategory("회원");
+						notification.setTitle("인증 신청이 완료되었습니다.");
+						notification.setUrl("/myLibrary/myInfo");
+						notiService.add(notification);
 					return "신청이 완료 되었습니다.";
+					}
+				}
 			}
 		}
 		return "요청을 실패했습니다.";

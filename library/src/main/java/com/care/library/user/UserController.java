@@ -141,16 +141,23 @@ public class UserController {
 	
 	// 회원정보 - 회원인증
 	@GetMapping("/myLibrary/updateAuth")
-	public String updateAuth() {
+	public String updateAuth(Model model) {
+		String id = (String)session.getAttribute("id");
+		String status = service.getMyInfo(id).getStatus();
+		if(status.equals("R")) {
+			model.addAttribute("result", "이미 인증신청을 하셨습니다.");
+		}
 		return "user/updateAuth";
 	}
 	
 	@PostMapping("/myLibrary/updateAuthProc")
-	public String updateAuthProc(String pw) {
+	public String updateAuthProc(String pw, RedirectAttributes ra) {
 		String id = (String)session.getAttribute("id");
 		String result = service.updateAuthProc(pw, id);
-		if(result.equals("신청이 완료 되었습니다."))
+		if(result.equals("신청이 완료 되었습니다.")) {
+			ra.addFlashAttribute("authMsg", result);
 			return "redirect:/main";
+		}
 		return "user/myInfo";
 	}
 	

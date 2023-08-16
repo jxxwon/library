@@ -18,6 +18,18 @@
   	<select id = "selectAll" resultMap="notifyDto">
   		SELECT * FROM notify WHERE id = #{id} ORDER BY no DESC
 	</select>
+	
+	<resultMap type="com.care.library.member.MemberDTO" id="memberDto">
+  		<result column = "pro_name" property = "proName"/>
+  		<result column = "reg_date" property = "regDate"/>
+  		<result column = "post_code" property = "postCode"/>
+  		<result column = "auth_date" property = "authDate"/>
+  	</resultMap>
+  	
+  	<select id = "findAdmin">
+  		SELECT * FROM member WHERE status = 'M'
+  	</select>
+	
 </mapper>
 
 
