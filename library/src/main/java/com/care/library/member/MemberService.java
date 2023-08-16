@@ -2,16 +2,15 @@ package com.care.library.member;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.ArrayList;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import jakarta.servlet.http.HttpSession;
 
-import com.care.library.common.NotificationDTO;
+import com.care.library.common.NotifyDTO;
+import com.care.library.common.NotifyService;
 import com.care.library.user.InquiryDTO;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,9 +19,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class MemberService {
 	@Autowired MemberMapper mapper;
 	@Autowired private HttpSession session;
+	@Autowired NotifyService notiService;
 
-	ArrayList<NotificationDTO> notify = new ArrayList<>();
-	
 	public String getNameById(String id) {
 		return mapper.getNameById(id); 
 	}
@@ -119,10 +117,12 @@ public class MemberService {
 			member.setPw(cryptPassword);
 			member.setStatus("D");
 			mapper.registerProc(member);
-			NotificationDTO notification = new NotificationDTO();
-			notification.setNotify("회원가입을 축하합니다.");
-			notification.setUrl("/myLibrary");
-			notify.add(notification);
+			NotifyDTO notification = new NotifyDTO();
+			notification.setId(member.getId());
+			notification.setCategory("회원");
+			notification.setTitle("회원가입을 축하합니다.");
+			notification.setUrl("/myLibrary/myInfo");
+			notiService.register(notification);
 			return "회원 등록 완료";
 		}
 		
@@ -184,12 +184,5 @@ public class MemberService {
 	public MemberDTO emailExists(String kakaoEmail) {
 		return mapper.emailCheck(kakaoEmail);
 	}
-
-	public void noticitation(Model model) {
-		if(notify.isEmpty() == false) {
-			model.addAttribute("notify", notify);
-		}
-	}
-
 
 }

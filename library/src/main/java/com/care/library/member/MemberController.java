@@ -24,12 +24,6 @@ public class MemberController {
 		return "default/header";
 	}
 
-	@RequestMapping("notification")
-	public String notification(Model model) {
-		service.noticitation(model);
-		return "default/notification";
-	}
-
 	@RequestMapping("subMenuLogin")
 	public String subMenu() {
 		return "default/subMenuLogin";
