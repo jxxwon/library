@@ -96,6 +96,7 @@ h1{margin-bottom:50px;}
 .inquiry {overflow:hidden; width:100%;}
 .inquiry tr:first-child{border-bottom:2px solid #555;}
 .inquiry tr:hover{cursor:pointer; color:blue;}
+.inquiry tr:first-child:hover{cursor:default; color:#000;}
 .inquiry tr th{padding:5px;}
 .inquiry tr td{padding:5px; text-align:center; border-bottom:1px solid #ddd;}
 
@@ -104,7 +105,7 @@ h1{margin-bottom:50px;}
 .inquiryContainer .inquiryPage a{display:inline-block; width:30px; height:30px; line-height:30px; font-weight:400; border:1px solid #ddd; margin-right:5px;}
 .inquiryContainer .inquiryPage a:last-child{margin-right:0;}
 
-.inquirySearch {display:inline-block; padding-top:20px;}
+.inquirySearch {display:inline-block; margin-top:40px; margin-bottom:20px;}
 .inquirySearch select {width:80px; height:30px; text-align:center; padding:0; appearance: auto; -webkit-appearance: auto;}
 .inquirySearch select.replySelect{margin:0 10px;}
 .inquirySearch input[type="text"]{width:200px; height:30px; margin:0 10px;}

@@ -95,7 +95,7 @@ public class UserController {
 		return "/user/myInquiryContent";
 	}
 	
-	// 1:1문의 - 글 수정
+	// 1:1문의 - 수정
 	@RequestMapping("/myLibrary/myInquiryUpdate")
 	public String myInquiryUpdate(String rn, Model model) {
 		String id = (String)session.getAttribute("id");
@@ -111,7 +111,7 @@ public class UserController {
 		return "redirect:/myLibrary/myInquiry";
 	}
 	
-	//1:1문의 삭제
+	//1:1문의 - 삭제
 	@RequestMapping("/myLibrary/myInquiryDelete")
 	public String myInquiryDelete(String rn) {
 		String id = (String)session.getAttribute("id");

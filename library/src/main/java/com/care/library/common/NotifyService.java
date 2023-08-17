@@ -15,7 +15,8 @@ public class NotifyService {
 	@Autowired NotifyMapper mapper;
 	@Autowired HttpSession session;
 
-	public void register(NotifyDTO notification) {
+	//한 사람에게만 알림이 뜨게 하는 것
+	public void register(NotifyDTO notification) { 
 		int no;
 		try {
 			no = mapper.findMaxNum();
@@ -26,6 +27,7 @@ public class NotifyService {
 		mapper.insert(notification);
 	}
 	
+	// 사용자, 관리자 모두에게 알림이 뜨게 하는 것
 	public void add(NotifyDTO notification) {
 		int no;
 		try {

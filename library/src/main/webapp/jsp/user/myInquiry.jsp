@@ -22,6 +22,18 @@
 			</div>
 			<div class="inquiryContainer">
 				<form action="" id="f">
+					<div class="inquirySearch">
+						<select class="inqSelect" name = "select" id="inqSelect" onchange="searchChange()">
+							<option value="reply">처리상태</option>
+							<option value="title">제목</option>
+						</select>
+						<input type = "text" name = "search" id = "search" placeholder ="검색어를 입력하세요" style = "display:none">
+						<select class = "replySelect" name = "replySelect" id = "replySelect">
+							<option value = "N">미답변</option>
+							<option value = "Y">답변완료</option>
+						</select>
+						<input type = "button" id="myInquirySearchBtn" value = "검색" onclick="inquirySearch()" >
+					</div>
 					<table class="inquiry">
 						<tr>
 							<th>번호</th>
@@ -61,18 +73,6 @@
 					</div>
 					<div class="inquiryPage">
 						${result }
-					</div>
-					<div class="inquirySearch">
-						<select class="inqSelect" name = "select" id="inqSelect" onchange="searchChange()">
-							<option value="title">제목</option>
-							<option value="reply">처리상태</option>
-						</select>
-						<input type = "text" name = "search" id = "search" placeholder ="검색어를 입력하세요">
-						<select class = "replySelect" name = "replySelect" id = "replySelect" style = "display:none">
-							<option value = "N">미답변</option>
-							<option value = "Y">답변완료</option>
-						</select>
-						<input type = "button" id="myInquirySearchBtn" value = "검색" onclick="inquirySearch()" >
 					</div>
 				</form>
 			</div>

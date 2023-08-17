@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.care.library.member.MemberDTO;
+import com.care.library.user.InquiryDTO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -57,19 +58,22 @@ public class AdminController {
 	
 	// 1:1문의 - 목록
 	@RequestMapping("/admin/inquiry")
-	public String myInquiryList(@RequestParam(value="currentPage", required = false)String cp, 
+	public String inquiryList(@RequestParam(value="currentPage", required = false)String cp, 
 			@RequestParam(value="select", required = false)String select, @RequestParam(value="search", required = false)String search, 
 			@RequestParam(value="replySelect", required = false) String replySelect, Model model) {
 		
 		String id = (String)session.getAttribute("id");
-		System.out.println("myInquiryList"+ id);
+		String status = service.statusChk(id).getStatus();
+		
 		System.out.println("select : " + select);
 		System.out.println("search : " + search);
 		System.out.println("replySelect : " + replySelect);
 		
-		if(id == null || id.equals("")) {
+		if(id == null || id.equals("") || (status.equals("M")==false)) {
 			return "redirect:main";
 		}
+		
+		service.selectInquiry(cp, model);
 		
 		//초기 화면 및 검색조건에 제목으로 해놓고 검색어 입력 안 하면 전체 조회
 //		if(select == null || (select.equals("title") && (search==null || search == ""))) {
@@ -81,5 +85,28 @@ public class AdminController {
 //		}
 		
 		return "admin/inquiry";
+	}
+	
+	// 1:1문의 - 내용
+	@RequestMapping("/admin/inquiryContent")
+	public String inquiryContent(int no, Model model) {
+		InquiryDTO inquiry = service.inquiryContent(no);
+		model.addAttribute("inquiry", inquiry);
+		return "admin/inquiryContent";
+	}
+	
+	//1:1문의 - 답변 작성
+	@RequestMapping("/admin/inquiryReplyWrite")
+	public String replyWrite(int no, Model model) {
+		InquiryDTO inquiry = service.inquiryContent(no);
+		model.addAttribute("inquiry", inquiry);
+		return "admin/inquiryReplyWrite";
+	}
+	
+	
+	@PostMapping("/admin/inquiryReplyWriteProc")
+	public String replyWriteProc(int no, String content) {
+		service.replyWrite(no, content);
+		return "redirect:/admin/inquiry";
 	}
 }

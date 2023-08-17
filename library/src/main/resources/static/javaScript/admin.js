@@ -8,8 +8,10 @@ function setButtonColorByURL() {
   var currentURL = getCurrentURL();
   // 원하는 URL 패턴에 따라 버튼 색상을 변경합니다.
   if (currentURL.includes("member")) {
-    document.getElementById("subMember").classList.add("active");
-  } 
+      document.getElementById("subMember").classList.add("active");
+  } else if(currentURL.includes("inquiry")){
+	  document.getElementById("subInquiry").classList.add("active");
+  }
 
 }
 
@@ -106,10 +108,24 @@ function certify(){
 //회원인증 화면에서 반려
 function rejectProc(){
 	var reject = document.getElementById('reject').value;
-	if(reject == ''){
+	if(reject == '' || reject.trim().lengh == 0){
 		alert('반려 사유를 작성하세요.');
 	} else {
 		var f = document.getElementById('f');
 		f.submit();
+	}
+}
+
+// 1:1문의 작성시 답변 관련
+function replyProc(){
+	var content = document.getElementById('content').value;
+	if(content == "" || content.trim().length == 0){
+		alert('답변을 입력하세요.');
+	} else {
+		if(confirm('답변 등록 후 수정이 불가합니다. 답변을 등록하시겠습니까?') == true){
+			alert('답변이 등록되었습니다.');
+			var f = document.getElementById('f');
+			f.submit();
+		}
 	}
 }
