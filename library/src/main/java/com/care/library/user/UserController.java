@@ -86,6 +86,15 @@ public class UserController {
 		return "redirect:/myLibrary/myInquiry";
 	}
 	
+	// 1:1문의 - 글내용
+	@RequestMapping("/myLibrary/myInquiryContent")
+	public String myInquiryContent(String rn, Model model) {
+		String id = (String)session.getAttribute("id");
+		InquiryDTO inquiry = service.myInquiryContent(id, rn);
+		model.addAttribute("inquiry", inquiry);
+		return "/user/myInquiryContent";
+	}
+	
 	// 회원정보 - container
 	@GetMapping("/myLibrary/myInfo")
 	public String myInfo() {

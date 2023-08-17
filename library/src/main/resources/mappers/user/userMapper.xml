@@ -70,6 +70,10 @@
   		SELECT count(no) FROM inquiry
   	</select>
   	
+  	<select id = "selectMyInquiry" resultMap="inquiryDto">
+  		SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM (SELECT * FROM inquiry WHERE id = #{id} ORDER BY write_date DESC)AAA)BBB WHERE rn = #{rn}
+  	</select>
+  	
 </mapper>
 
 

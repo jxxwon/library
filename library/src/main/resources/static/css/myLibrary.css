@@ -84,6 +84,7 @@ padding: 30px 0 30px 20px; margin-bottom: 30px; line-height: 180%;}
 padding: 30px 0 30px 20px; margin-bottom: 30px; line-height: 180%;}
 .withdrawForm .withdrawBtn{width:175px; height:60px; padding:10px; cursor: pointer;}
 .withdrawForm #pw {width: 280px;}
+
 /* 1:1문의 - 목록*/
 .adminContainer {display:flex;}
 h1{margin-bottom:50px;}
@@ -94,6 +95,7 @@ h1{margin-bottom:50px;}
 
 .inquiry {overflow:hidden; width:100%;}
 .inquiry tr:first-child{border-bottom:2px solid #555;}
+.inquiry tr:hover{cursor:pointer; color:blue;}
 .inquiry tr th{padding:5px;}
 .inquiry tr td{padding:5px; text-align:center; border-bottom:1px solid #ddd;}
 
@@ -119,3 +121,10 @@ h1{margin-bottom:50px;}
 .inquiryContainer .inquiryWriteForm th{padding:10px; border-right:1px solid #ddd;}
 .inquiryContainer .inquiryWriteForm td{padding:10px;}
 .inquiryContainer .inquiryWriteForm input[type="text"]{height:30px;}
+
+/*1:1문의 - 내용*/
+.inquiryContainer .inquiryContentForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
+.inquiryContainer .inquiryContentForm tr{border-bottom:1px solid #ddd;}
+.inquiryContainer .inquiryContentForm th{padding:10px; border-right:1px solid #ddd;}
+.inquiryContainer .inquiryContentForm th.reply{border-left:1px solid #ddd;}
+.inquiryContainer .inquiryContentForm td{padding:10px;}

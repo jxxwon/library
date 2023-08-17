@@ -16,8 +16,8 @@
 				<h1>1:1문의</h1>
 				<div class="mb_30 mt_20">
 					<a href="/main">HOME</a> > 
-					<a href="/adminMember">마이라이브러리</a> >
-					<a class="checked" href="/myInquiry">1:1문의</a>
+					<a href="/myLibrary">마이라이브러리</a> >
+					<a class="checked" href="/myLibrary/myInquiry">1:1문의</a>
 				</div>
 			</div>
 			<div class="inquiryContainer">
@@ -39,7 +39,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="inquiry" items = "${inquiries}">
-									<tr>
+									<tr onclick = "location.href='/myLibrary/myInquiryContent?rn=${inquiry.rn}'">
 										<td>${inquiry.rn}</td>
 										<td>${inquiry.title }</td>
 										<td>

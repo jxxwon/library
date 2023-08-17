@@ -206,6 +206,11 @@ public class UserService {
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
 	}
+
+
+	public InquiryDTO myInquiryContent(String id, String rn) {
+		return userMapper.selectMyInquiry(id, rn);
+	}
 	
 }
 
