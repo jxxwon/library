@@ -48,7 +48,11 @@ public class ReserveService {
 			  //System.out.println("seat : " + seat);
 		  }
 		  //System.out.println();
-		  model.addAttribute("reservedSeat", reservedSeat);
+		  if(whichRoom.equals("R1")) {
+			  model.addAttribute("reservedSeat", reservedSeat);
+		  }else if(whichRoom.equals("R2")){
+			  model.addAttribute("reservedSeat2", reservedSeat);
+		  }
 	  }
 	  
 //	  public ArrayList<String> getReservedSeat(String whichRoom) {

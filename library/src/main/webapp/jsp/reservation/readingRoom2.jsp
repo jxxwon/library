@@ -11,8 +11,9 @@
 
 <c:set var="using_seat" value="${fn:length(reservedSeat)}" />
 <c:set var="empty_seat" value="${96 - fn:length(reservedSeat)}" />
-
+	
 <body>
+
 	<div class="reserve_menu mb_30 mt_20">
 		<div class="whichRoom">자율 학습실2<br><span>96석</span></div>
 		<div style="background-color: #338cfa; color:white">빈좌석<br><c:out value="${empty_seat}" />석</div>
