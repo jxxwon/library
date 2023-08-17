@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.care.library.member.MemberService;
@@ -33,17 +34,22 @@ public class ReserveController {
 	    
 	    return "reservation/reservationMain";
 	}
-//	@ResponseBody //return을 jsp가 아닌 응답 데이터를 주는 것이다.
-//	@PostMapping(value="room", produces = "text/plain; charset=UTF-8")
-//	public String room(@RequestBody(required = false) String room) {
-//		System.out.println( "reservation : "+room);
-//		return room;
-//	}
+	
+	@ResponseBody//return을 jsp가 아닌 응답 데이터를 주는 것이다.
+	 @PostMapping(value = "room", produces = "application/json; charset=UTF-8")
+    public Object room(@RequestBody(required = false) String room) {
+        System.out.println("reservation : " + room);
+        	ArrayList<String> reservedSeat = service.getReservedSeat(room);
+        	for(String seat: reservedSeat) {
+        		System.out.println(seat);
+        	}
+        	return reservedSeat;
+    }
 	
 	@GetMapping("/reservation/readingRoom1")
 	public String readingRoom1(Model model) {
 		String whichRoom = "R1";
-		service.getReservedSeat(model, whichRoom);
+		service.reservedSeatNum(model, whichRoom);
 		
 		return "reservation/readingRoom1";
 	}
@@ -51,7 +57,7 @@ public class ReserveController {
 	@GetMapping("/reservation/readingRoom2")
 	public String readingRoom2(Model model) {
 		String whichRoom = "R2";
-		service.getReservedSeat(model, whichRoom);
+		service.reservedSeatNum(model,whichRoom);
 		return "reservation/readingRoom2";
 	}
 	

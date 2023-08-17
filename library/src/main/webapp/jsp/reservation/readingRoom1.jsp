@@ -7,19 +7,8 @@
 <link href = "/css/reservation.css" rel = "stylesheet" type = "text/css">
 <title>하이미디어 도서관 - 좌석예약</title>
 
-<script>
-	var reservedSeat;
-	var reservedSeat2 = [];
-	reservedSeat = ${reservedSeat};
-	console.log("room1",reservedSeat)
-</script>
-<script>
-		reservedSeat2 = ${reservedSeat2};
-		console.log("room2",reservedSeat2)
-	</script>
-
-<c:set var="using_seat" value="${fn:length(reservedSeat)}" />
-<c:set var="empty_seat" value="${96 - fn:length(reservedSeat)}" />
+<c:set var="using_seat" value="${reservedNum}" />
+<c:set var="empty_seat" value="${96 - reservedNum}" />
 
 <body>
 	<div class="reserve_menu mb_30 mt_20">
@@ -30,30 +19,25 @@
 	<div class="room_container">
 		<div class="seat_division">
 			<c:forEach var="i" begin="1" end="96" step="8">
-				<c:forEach var="seat"  items="${reservedSeat2}">
-					<c:if test="${i == seat}">
-					
-					</c:if>
-					<div class="line">
-						<div class="seat_left">
-							<ul>
-								<li class="each_seat"><span>${i}</span></li>
-								<li class="each_seat"><span>${i+1}</span></li>
-								<li class="each_seat"><span>${i+2}</span></li>
-								<li class="each_seat"><span>${i+3}</span></li>
-							</ul>
-						</div>
-						<div class="seat_right">
-							<ul>
-								<li class="each_seat"><span>${i+4}</span></li>
-								<li class="each_seat"><span>${i+5}</span></li>
-								<li class="each_seat"><span>${i+6}</span></li>
-								<li class="each_seat"><span>${i+7}</span></li>
-							</ul>
-						</div>
+				<div class="line">
+					<div class="seat_left">
+						<ul>
+							<li class="each_seat"><span>${i}</span></li>
+							<li class="each_seat"><span>${i+1}</span></li>
+							<li class="each_seat"><span>${i+2}</span></li>
+							<li class="each_seat"><span>${i+3}</span></li>
+						</ul>
 					</div>
-				</c:forEach>
-			</c:forEach>	
+					<div class="seat_right">
+						<ul>
+							<li class="each_seat"><span>${i+4}</span></li>
+							<li class="each_seat"><span>${i+5}</span></li>
+							<li class="each_seat"><span>${i+6}</span></li>
+							<li class="each_seat"><span>${i+7}</span></li>
+						</ul>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 </body>

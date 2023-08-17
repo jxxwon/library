@@ -41,31 +41,31 @@ public class ReserveService {
 		  return "예약이 정상적으로 이루어지지 않았습니다.";
 	  }
 	  
-	  public void getReservedSeat(Model model, String whichRoom) {
+//	  public void getReservedSeat(Model model, String whichRoom) {
+//		  //System.out.println("getRecentSeat : "+ whichRoom);
+//		  ArrayList<String> reservedSeat = userMapper.getReservedSeat(whichRoom); 
+//		  for(String seat: reservedSeat) {
+//			  //System.out.println("seat : " + seat);
+//		  }
+//		  //System.out.println();
+//		  model.addAttribute("reservedSeat", reservedSeat);
+//	  }
+	  
+	  public ArrayList<String> getReservedSeat(String whichRoom) {
 		  //System.out.println("getRecentSeat : "+ whichRoom);
 		  ArrayList<String> reservedSeat = userMapper.getReservedSeat(whichRoom); 
 		  for(String seat: reservedSeat) {
-			  //System.out.println("seat : " + seat);
+			  System.out.println("seat : " + seat);
 		  }
-		  //System.out.println();
-		  if(whichRoom.equals("R1")) {
-			  model.addAttribute("reservedSeat", reservedSeat);
-		  }else if(whichRoom.equals("R2")){
-			  model.addAttribute("reservedSeat2", reservedSeat);
-		  }
+		  System.out.println();
+		  return reservedSeat;
 	  }
 	  
-//	  public ArrayList<String> getReservedSeat(String whichRoom) {
-//		  //System.out.println("getRecentSeat : "+ whichRoom);
-//		  return userMapper.getReservedSeat(whichRoom); 
-//	  }
-	  
-	  
-//	  public String changeMyInfoProc(UserDTO myInfo) {
-//		  int check = userMapper.changeMyInfoProc(myInfo);
-//		  if(check == 1) return "정보가 수정되었습니다.";
-//	  return "수정에 실패했습니다."; 
-//	  }
+	  public void reservedSeatNum(Model model, String whichRoom) {
+		  System.out.println("getRecentSeat : "+ whichRoom);
+		  int reservedNum = userMapper.reservedNum(whichRoom);
+		  model.addAttribute("reservedNum", reservedNum);
+	  }
 	  
 	
 }

@@ -7,11 +7,9 @@
 <link href = "/css/myLibrary.css" rel = "stylesheet" type = "text/css">
 <title>하이미디어 도서관 - 좌석예약</title>
 
+<c:set var="using_seat" value="${reservedNum}" />
+<c:set var="empty_seat" value="${96 - reservedNum}" />
 
-
-<c:set var="using_seat" value="${fn:length(reservedSeat)}" />
-<c:set var="empty_seat" value="${96 - fn:length(reservedSeat)}" />
-	
 <body>
 
 	<div class="reserve_menu mb_30 mt_20">

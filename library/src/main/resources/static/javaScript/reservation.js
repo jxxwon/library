@@ -17,17 +17,19 @@ let each_seat = document.querySelectorAll('.each_seat');
 each_seat.forEach(item => item.addEventListener('click', activateEach_seat));
 
 // 탭 클릭 시에 좌석 상태 업데이트
-let roomXhr;
+var reservedSeat=[];
+let room = "R1";
+
 
 function showInfo(menu) {
     //console.log(menu);
-    let whichRoom = "";
+    room = "R1";
     if (menu == "readingRoom1") {
-        whichRoom = "R1";
+        room = "R1";
     } else if (menu == "readingRoom2") {
-        whichRoom = "R2";
+        room = "R2";
     } else {
-        whichRoom = "SR";
+        room = "SR";
     }
 
     var url = "/reservation/" + menu;
@@ -37,24 +39,43 @@ function showInfo(menu) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             room_container.innerHTML = xhr.responseText;
-
+			
+			showReservedSeat(room);
+		
             // 각 좌석 클릭 리스너 등록하기.
             each_seat = document.querySelectorAll('.each_seat');
             each_seat.forEach(item => item.addEventListener('click', activateEach_seat));
 
             // 좌석 상태 업데이트
-            updateSeatStatus();
+            //updateSeatStatus();
         }
     };
     xhr.send();
 }
 
+	let seatXhr;
+	showReservedSeat(room);
+function showReservedSeat(room){
+	seatXhr = new XMLHttpRequest();
+	seatXhr.open('POST', "room");
+	//seatXhr.setRequestHeader('content-type', 'application/json');
+	seatXhr.send(room);
+	seatXhr.onreadystatechange = roomProc;
+	
+}
+
+
 function roomProc() {
-    if (roomXhr.readyState === 4) {
-        if (roomXhr.status === 200) {
-            //console.log(roomXhr.responseText);
+	console.log("roomProc");
+    if (seatXhr.readyState === 4) {console.log("roomProc1");
+        if (seatXhr.status === 200) {console.log("roomProc2");
+			reservedSeat = JSON.parse(seatXhr.responseText);console.log("roomProc3");
+			updateSeatStatus();
+			//reservedSeat = seatXhr.responseText;
+            console.log(typeof seatXhr.responseText);
+            console.log(typeof reservedSeat);
         } else {
-            console.log('에러: ' + roomXhr.status);
+            console.log('에러: ' + seatXhr.status);
         }
     }
 }
@@ -68,7 +89,8 @@ function updateSeatStatus() {
 	each_seat.forEach(item => {
 		for (let i = 0; i < reservedSeat.length; i++) {
 			if (item.textContent === String(reservedSeat[i])) {
-				//console.log("여기요",i);
+				console.log("이고"+String(reservedSeat[i]));
+				console.log("여기요",i);
 				item.classList.add('using');
 				
 			} 
