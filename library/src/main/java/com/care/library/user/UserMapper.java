@@ -35,4 +35,7 @@ public interface UserMapper {
 	int updateAuth(String id, String authDate);
 
 	InquiryDTO selectMyInquiry(String id, String rn);
+
+	void updateMyInquiry(String id, int no, String title, String content);
+
 }

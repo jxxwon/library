@@ -128,3 +128,14 @@ h1{margin-bottom:50px;}
 .inquiryContainer .inquiryContentForm th{padding:10px; border-right:1px solid #ddd;}
 .inquiryContainer .inquiryContentForm th.reply{border-left:1px solid #ddd;}
 .inquiryContainer .inquiryContentForm td{padding:10px;}
+
+/*1:1문의 - 수정*/
+.inquiryFormContent{padding:50px 0 0 50px; width:1000px;}
+
+.inquiryInfo {width:100%-10px; border:1px solid #ddd; margin:40px 0; padding:15px; line-height:145%; text-align:left;}
+.inquiryContainer .inquiryUpdateForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
+.inquiryContainer .inquiryUpdateForm tr{border-bottom:1px solid #ddd;}
+.inquiryContainer .inquiryUpdateForm th{padding:10px; border-right:1px solid #ddd;}
+.inquiryContainer .inquiryUpdateForm td{padding:10px;}
+.inquiryContainer .inquiryUpdateForm input[type="text"]{height:30px;}
+

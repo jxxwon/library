@@ -48,6 +48,8 @@
 					</tr>
 				</table>
 				<div class="inquiryBtn">
+					<input type = "button" value = "수정" onclick="location.href='myInquiryUpdate?rn=${inquiry.rn}'">
+					<input type = "button" value = "삭제" onclick="location.href='myInquiry'">
 					<input type = "button" value = "목록" onclick="location.href='myInquiry'">
 				</div>
 			</div>

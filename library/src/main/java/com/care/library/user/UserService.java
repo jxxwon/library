@@ -211,6 +211,13 @@ public class UserService {
 	public InquiryDTO myInquiryContent(String id, String rn) {
 		return userMapper.selectMyInquiry(id, rn);
 	}
+
+
+	public void myInquiryUpdateProc(String id, String rn, String title, String content) {
+		InquiryDTO inquiry = userMapper.selectMyInquiry(id,rn);
+		int no = inquiry.getNo();
+		userMapper.updateMyInquiry(id, no, title, content);
+	}
 	
 }
 

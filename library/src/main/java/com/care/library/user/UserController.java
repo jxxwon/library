@@ -95,6 +95,22 @@ public class UserController {
 		return "/user/myInquiryContent";
 	}
 	
+	// 1:1문의 - 글 수정
+	@RequestMapping("/myLibrary/myInquiryUpdate")
+	public String myInquiryUpdate(String rn, Model model) {
+		String id = (String)session.getAttribute("id");
+		InquiryDTO inquiry = service.myInquiryContent(id, rn);
+		model.addAttribute("inquiry", inquiry);
+		return"/user/myInquiryUpdate";
+	}
+	
+	@PostMapping("/myLibrary/myInquiryUpdateProc")
+	public String myInquiryUpdateProc(String rn, String title, String content) {
+		String id = (String)session.getAttribute("id");
+		service.myInquiryUpdateProc(id, rn, title, content);
+		return "redirect:/myLibrary/myInquiry";
+	}
+	
 	// 회원정보 - container
 	@GetMapping("/myLibrary/myInfo")
 	public String myInfo() {

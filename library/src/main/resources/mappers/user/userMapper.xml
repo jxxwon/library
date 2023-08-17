@@ -74,6 +74,11 @@
   		SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM (SELECT * FROM inquiry WHERE id = #{id} ORDER BY write_date DESC)AAA)BBB WHERE rn = #{rn}
   	</select>
   	
+  	<update id = "updateMyInquiry" parameterType="com.care.library.user.InquiryDTO">
+  		UPDATE inquiry SET title = #{title}, content = #{content} WHERE no = #{no}
+  	</update>
+  	
+  	
 </mapper>
 
 
