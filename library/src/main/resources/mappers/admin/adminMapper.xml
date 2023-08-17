@@ -12,6 +12,10 @@
   		<result column = "auth_date" property = "authDate"/>
   		<result column = "user_group" property = "userGroup"/>
   	</resultMap>
+  	<resultMap type="com.care.library.user.InquiryDTO" id="inquiryDto">
+  		<result column = "write_date" property = "writeDate"/>
+  		<result column = "reply_content" property = "replyContent"/>
+  	</resultMap>
   	
   	<select id = "count">
   		SELECT count(id) FROM member
@@ -29,6 +33,25 @@
 		UPDATE member SET status = 'A', user_group = #{userGroup}, paper = #{paper}, auth_date = #{authDate} WHERE id = #{id}
 	</update>
 	
+	<update id = "memberReject">
+		UPDATE member SET status = 'D', reject = #{reject} WHERE id = #{id}
+	</update>
+	
+	<select id="selectInquiry" resultMap="inquiryDto">
+		SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry ORDER BY no ASC)AAA)BBB WHERE BBB.rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="countInquiry">
+		SELECT count(no) FROM inquiry
+	</select>
+	
+	<select id="selectInquiryContent" resultMap="inquiryDto">
+		SELECT * FROM inquiry WHERE no=#{no}
+	</select>
+	
+	<update id ="replyWrite">
+		UPDATE inquiry SET reply_content = #{content}, reply = 'Y' WHERE no = #{no}
+	</update>
 </mapper>
 
 

@@ -12,7 +12,7 @@
 		<li><a href="/login" class="button" id="subPro">프로그램관리</a></li>
 		<li><a href="/login" class="button" id="subRoom">열람실관리</a></li>
 		<li><a href="/login" class="button" id="subPay">결제관리</a></li>
-		<li><a href="/login" class="button" id="subInquiry">문의관리</a></li>
+		<li><a href="${context }admin/inquiry" class="button" id="subInquiry">문의관리</a></li>
 	</ul>
 </div>
 
