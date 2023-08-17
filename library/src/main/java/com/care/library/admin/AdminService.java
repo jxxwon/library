@@ -6,13 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.care.library.common.NotifyDTO;
+import com.care.library.common.NotifyService;
 import com.care.library.common.PageService;
 import com.care.library.member.MemberDTO;
+import com.care.library.user.InquiryDTO;
 
 @Service
 public class AdminService {
 	@Autowired AdminMapper mapper;
-
+	@Autowired NotifyService notiService;
+	
 	public void selectMember(String cp, String memberSelect, Model model) {
 		if(memberSelect == null) {
 			memberSelect = "R";
@@ -42,12 +46,79 @@ public class AdminService {
 
 	public void selectUser(String id, Model model) {
 		MemberDTO result = mapper.selectUser(id);
-		
 		model.addAttribute("member", result);
 	}
 
-	public void memberConfirm(String id, String userGroup, String paper, String authDate) {
-		mapper.memberConfirm(id, userGroup, paper, authDate);
+	public String memberConfirm(String id, String userGroup, String paper, String authDate, String reject) {
+		String result = "";
+		if (reject.equals("")) {
+			mapper.memberConfirm(id, userGroup, paper, authDate);
+			result ="정회원이 되셨습니다.";
+			NotifyDTO notification = new NotifyDTO();
+			notification.setId(id);
+			notification.setCategory("회원");
+			notification.setTitle(result);
+			notification.setUrl("/myLibrary/myInfo");
+			notiService.register(notification);
+		} else {
+			mapper.memberReject(id, reject);
+			result ="인증 신청이 반려되었습니다.";
+			NotifyDTO notification = new NotifyDTO();
+			notification.setId(id);
+			notification.setCategory("회원");
+			notification.setTitle(result);
+			notification.setUrl("/myLibrary/myInfo");
+			notiService.register(notification);
+		}
+		return result;
 	}
+
+	public MemberDTO statusChk(String id) {
+		return mapper.selectUser(id);
+	}
+
+	public void selectInquiry(String cp, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<InquiryDTO> inquiries = mapper.selectInquiry(begin, end);
+		
+		String url = "inquiry?currentPage=";
+		int totalCount = mapper.countInquiry();
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("inquiries", inquiries);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+		
+	}
+
+	public InquiryDTO inquiryContent(int no) {
+		return mapper.selectInquiryContent(no);
+	}
+
+	public void replyWrite(int no, String content) {
+		mapper.replyWrite(no, content);
+		String result = "1:1문의 답변이 등록되었습니다.";
+		
+		InquiryDTO writer = mapper.selectInquiryContent(no);
+		String id = writer.getId();
+		
+		NotifyDTO notification = new NotifyDTO();
+		notification.setId(id);
+		notification.setCategory("문의");
+		notification.setTitle(result);
+		notification.setUrl("/myLibrary/myInquiry");
+		notiService.register(notification);
+	}
+
 
 }

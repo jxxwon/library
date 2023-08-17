@@ -83,7 +83,40 @@ public class UserController {
 	public String myInquiryWriteProc(String title, String content) {
 		String id = (String)session.getAttribute("id");
 		service.myInquiryWriteProc(id, title, content);
-		return "redirect:/myLibrary";
+		return "redirect:/myLibrary/myInquiry";
+	}
+	
+	// 1:1문의 - 글내용
+	@RequestMapping("/myLibrary/myInquiryContent")
+	public String myInquiryContent(String rn, Model model) {
+		String id = (String)session.getAttribute("id");
+		InquiryDTO inquiry = service.myInquiryContent(id, rn);
+		model.addAttribute("inquiry", inquiry);
+		return "/user/myInquiryContent";
+	}
+	
+	// 1:1문의 - 수정
+	@RequestMapping("/myLibrary/myInquiryUpdate")
+	public String myInquiryUpdate(String rn, Model model) {
+		String id = (String)session.getAttribute("id");
+		InquiryDTO inquiry = service.myInquiryContent(id, rn);
+		model.addAttribute("inquiry", inquiry);
+		return"/user/myInquiryUpdate";
+	}
+	
+	@PostMapping("/myLibrary/myInquiryUpdateProc")
+	public String myInquiryUpdateProc(String rn, String title, String content) {
+		String id = (String)session.getAttribute("id");
+		service.myInquiryUpdateProc(id, rn, title, content);
+		return "redirect:/myLibrary/myInquiry";
+	}
+	
+	//1:1문의 - 삭제
+	@RequestMapping("/myLibrary/myInquiryDelete")
+	public String myInquiryDelete(String rn) {
+		String id = (String)session.getAttribute("id");
+		service.myInquiryDelete(id, rn);
+		return "redirect:/myLibrary/myInquiry";
 	}
 	
 	// 회원정보 - container
@@ -141,7 +174,17 @@ public class UserController {
 	
 	// 회원정보 - 회원인증
 	@GetMapping("/myLibrary/updateAuth")
-	public String updateAuth() {
+	public String updateAuth(Model model) {
+		String id = (String)session.getAttribute("id");
+		String status = service.getMyInfo(id).getStatus();
+		if(status.equals("R")) {
+			model.addAttribute("result", "이미 인증신청을 하셨습니다.");
+		} else if(status.equals("A")){
+			model.addAttribute("result", "이미 정회원입니다.");
+		} else {
+			String reject = service.getMyInfo(id).getReject();
+			model.addAttribute("reject", reject);
+		}
 		return "user/updateAuth";
 	}
 	
@@ -149,8 +192,9 @@ public class UserController {
 	public String updateAuthProc(String pw) {
 		String id = (String)session.getAttribute("id");
 		String result = service.updateAuthProc(pw, id);
-		if(result.equals("신청이 완료 되었습니다."))
+		if(result.equals("신청이 완료 되었습니다.")) {
 			return "redirect:/main";
+		}
 		return "user/myInfo";
 	}
 	

@@ -7,9 +7,11 @@ function getCurrentURL() {
 function setButtonColorByURL() {
   var currentURL = getCurrentURL();
   // 원하는 URL 패턴에 따라 버튼 색상을 변경합니다.
-  if (currentURL.includes("Member")) {
-    document.getElementById("subMember").classList.add("active");
-  } 
+  if (currentURL.includes("member")) {
+      document.getElementById("subMember").classList.add("active");
+  } else if(currentURL.includes("inquiry")){
+	  document.getElementById("subInquiry").classList.add("active");
+  }
 
 }
 
@@ -19,6 +21,20 @@ setButtonColorByURL();
 // 페이지 URL이 변경될 때마다 버튼 색상을 업데이트합니다.
 window.onpopstate = function () {
   setButtonColorByURL();
+}
+
+// 회원관리 탭 클릭 시 화면 전환
+function showMember(menu){
+	var url = "/admin/"+ menu;
+	const memberContainer = document.getElementById('memberContainer');
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            memberContainer.innerHTML = xhr.responseText;
+          }
+        };
+        xhr.send();
 }
 
 
@@ -62,7 +78,7 @@ function deChk() {
     console.log(deputyChk3.checked); // Use 'checked' to get the checkbox value
 }
 
-//회원인증 화면에서 인증체크
+//회원인증 화면에서 인증
 function certify(){
 	var group = document.getElementById('userGroup');
 	var groupValue = group.options[group.selectedIndex].value;
@@ -87,5 +103,29 @@ function certify(){
 			}
 		}
 	}
-	
+}
+
+//회원인증 화면에서 반려
+function rejectProc(){
+	var reject = document.getElementById('reject').value;
+	if(reject == '' || reject.trim().lengh == 0){
+		alert('반려 사유를 작성하세요.');
+	} else {
+		var f = document.getElementById('f');
+		f.submit();
+	}
+}
+
+// 1:1문의 작성시 답변 관련
+function replyProc(){
+	var content = document.getElementById('content').value;
+	if(content == "" || content.trim().length == 0){
+		alert('답변을 입력하세요.');
+	} else {
+		if(confirm('답변 등록 후 수정이 불가합니다. 답변을 등록하시겠습니까?') == true){
+			alert('답변이 등록되었습니다.');
+			var f = document.getElementById('f');
+			f.submit();
+		}
+	}
 }

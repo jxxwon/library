@@ -8,7 +8,14 @@ public class InquiryDTO {
 	private String id;
 	private String writeDate;
 	private String reply;
+	private String replyContent;
 
+	public String getReplyContent() {
+		return replyContent;
+	}
+	public void setReplyContent(String replyContent) {
+		this.replyContent = replyContent;
+	}
 	public int getRn() {
 		return rn;
 	}

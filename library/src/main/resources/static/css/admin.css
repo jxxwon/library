@@ -1,8 +1,10 @@
 @charset "UTF-8";
 
-.adminContainer {display:flex; margin-top: 225px !important;}
+.adminContainer {display:flex;}
 h1{margin-bottom:50px;}
 .checked{font-weight: 600;}
+
+.adminMemberContainer {width:1000px;}
 
 .adminContent{padding:50px 0 0 50px; width:1000px;}
 
@@ -13,8 +15,7 @@ h1{margin-bottom:50px;}
 
 .subMenu_member ul li a{display:block;}
 
-.subMenu_member ul li.active{background-color:#338cfa;}
-.subMenu_member ul li.active a{color:#fff;}
+.subMenu_member ul li.active{background-color:#338cfa; color:#fff; cursor:pointer;}
 
 .subMenu_member ul li:hover{background-color:#338cfa;}
 .subMenu_member ul li:hover a{color:#fff;}
@@ -145,3 +146,17 @@ h1{margin-bottom:50px;}
 
 /*회원 상세 조회*/
 .memberContainer .memberDetail input[type="text"]:first-child {border:0; height:24.5px; padding:0; font-size:16px; font-weight:normal; color:#14100c}
+.memberContainer .memberDetail input[type="text"].reject {border:1px solid #dcdcdc; padding-left:10px; font-size:14px; height:25px; line-height:25px;}
+
+/*1:1문의 - 목록*/
+.inquiryContainer{text-align:center; border-top:1px solid #ddd;}
+.inquirySearch{margin:20px 0;}
+.inquiryPage{margin-top:20px; margin-bottom:40px;}
+.inquiryContainer .inquiryBtn{width:100%; text-align:right; margin:20px 0;}
+
+/*1:1문의 - 내용*/
+.inquiryContainer .inquiryContentForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
+.inquiryContainer .inquiryContentForm tr{border-bottom:1px solid #ddd;}
+.inquiryContainer .inquiryContentForm th{padding:10px; border-right:1px solid #ddd;}
+.inquiryContainer .inquiryContentForm th.right{border-left:1px solid #ddd;}
+.inquiryContainer .inquiryContentForm td{padding:10px;}

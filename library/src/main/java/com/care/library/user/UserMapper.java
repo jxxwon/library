@@ -33,4 +33,13 @@ public interface UserMapper {
 	ArrayList<InquiryDTO> selectInquiryReply(String id, String replySelect, int begin, int end);
 
 	int updateAuth(String id, String authDate);
+
+	InquiryDTO selectMyInquiry(String id, String rn);
+
+	void updateMyInquiry(String id, int no, String title, String content);
+
+	void deleteMyInquiry(int no);
+
+	String findAdmin();
+
 }
