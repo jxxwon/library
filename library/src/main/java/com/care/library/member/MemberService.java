@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpSession;
 
+import com.care.library.common.NotifyDTO;
+import com.care.library.common.NotifyService;
 import com.care.library.user.InquiryDTO;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,7 +19,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class MemberService {
 	@Autowired MemberMapper mapper;
 	@Autowired private HttpSession session;
-	
+	@Autowired NotifyService notiService;
+
 	public String getNameById(String id) {
 		return mapper.getNameById(id); 
 	}
@@ -114,6 +117,12 @@ public class MemberService {
 			member.setPw(cryptPassword);
 			member.setStatus("D");
 			mapper.registerProc(member);
+			NotifyDTO notification = new NotifyDTO();
+			notification.setId(member.getId());
+			notification.setCategory("회원");
+			notification.setTitle("회원가입을 축하합니다.");
+			notification.setUrl("/myLibrary/myInfo");
+			notiService.register(notification);
 			return "회원 등록 완료";
 		}
 		
@@ -176,9 +185,4 @@ public class MemberService {
 		return mapper.emailCheck(kakaoEmail);
 	}
 
-
 }
-
-
-
-

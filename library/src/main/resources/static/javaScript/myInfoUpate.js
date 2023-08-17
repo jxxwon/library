@@ -99,5 +99,10 @@ function changePw(){
 		f.submit();
 	}
 }
-
-	
+  
+// 회원 인증신청 시 인증 재신청
+function reapply(){
+	document.getElementById('reapply').style.display="block";
+	document.getElementById('reapplyButton').style.display="none";
+}
+       

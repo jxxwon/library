@@ -5,30 +5,35 @@ body {
 #top_container{
 	display: flex;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     top: 0;
     z-index: 10;
     height: 95px;
-    width: 100%;
-    min-width: 1200px;
+    width:100%;
     margin: 0 auto;
     background-color: rgba(0,0,0,0.4);
 }
 
 .notification {
-    background-color: red;
-    z-index: 99999999;
+    border:1px solid #ddd;
+    border-radius:15px;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    height:200px;
-    position: relative;
-    top:0;
-    right:0;
+    width:400px;
+    max-height: 400px;
+    overflow-y: auto; /*컨텐츠가 넘칠 때 세로 스크롤바 자동 생성*/
+    position: absolute;
+    top:85px;
+    right:0px;
+    z-index:999999;
+    color:#666;
+    background-color: #fff;
+    padding:10px;
 }
 
 .notification.show {
-    opacity: 1;
+    opacity: 0.8;
     visibility: visible;
 }
 
@@ -203,4 +208,9 @@ body {
 	
 .fix{
 	top:0;
+}
+
+table tr {
+    height: 40px;
+    line-height: 40px;
 }

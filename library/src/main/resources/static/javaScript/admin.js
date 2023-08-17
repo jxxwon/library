@@ -8,8 +8,10 @@ function setButtonColorByURL() {
   var currentURL = getCurrentURL();
   // 원하는 URL 패턴에 따라 버튼 색상을 변경합니다.
   if (currentURL.includes("member")) {
-    document.getElementById("subMember").classList.add("active");
-  } 
+      document.getElementById("subMember").classList.add("active");
+  } else if(currentURL.includes("inquiry")){
+	  document.getElementById("subInquiry").classList.add("active");
+  }
 
 }
 
@@ -105,31 +107,25 @@ function certify(){
 
 //회원인증 화면에서 반려
 function rejectProc(){
-	var group = document.getElementById('userGroup');
-	var groupValue = group.options[group.selectedIndex].value;
-	
-	var reject = document.getElementById('reject');
-	if(groupValue == ""){
-		alert('회원분류를 선택하세요.');
+	var reject = document.getElementById('reject').value;
+	if(reject == '' || reject.trim().lengh == 0){
+		alert('반려 사유를 작성하세요.');
 	} else {
-		var paper = document.getElementById('paper');
-		var paperValue = paper.options[paper.selectedIndex].value;
-		if(paperValue == ""){
-			alert('신청서류를 선택하세요.');
-		} else {
-			if(groupValue == 'child' && paperValue != 'resident'){
-				alert('신청서류를 확인하세요.');
-			} else if(groupValue == 'student' && (paperValue == 'driving') || paperValue == 'alien'){
-				alert('신청서류를 확인하세요.')
-			} else if(groupValue != 'foreign' && paperValue == 'alien'){
-				alert('신청서류를 확인하세요.')
-			} else if(reject.value == "" || reject.value == null)
-				alert('반려의 경우, 반려 사유를 입력하셔야 합니다.')
-			 else {
-				var f = document.getElementById('f');
-				f.submit();
-				console.log(reject)
-			}
+		var f = document.getElementById('f');
+		f.submit();
+	}
+}
+
+// 1:1문의 작성시 답변 관련
+function replyProc(){
+	var content = document.getElementById('content').value;
+	if(content == "" || content.trim().length == 0){
+		alert('답변을 입력하세요.');
+	} else {
+		if(confirm('답변 등록 후 수정이 불가합니다. 답변을 등록하시겠습니까?') == true){
+			alert('답변이 등록되었습니다.');
+			var f = document.getElementById('f');
+			f.submit();
 		}
 	}
 }

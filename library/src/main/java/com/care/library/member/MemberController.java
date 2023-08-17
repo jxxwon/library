@@ -128,7 +128,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("registerProc")
-	public String registerProc(MemberDTO member, String confirm) {
+	public String registerProc(MemberDTO member, String confirm, Model model) {
 		String result = service.registerProc(member, confirm);
 		if(result.equals("회원 등록 완료")) {
 			System.out.println("회원 등록 완료 된듯");

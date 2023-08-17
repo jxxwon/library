@@ -16,7 +16,14 @@ public class UserDTO {
 	private String kakaoid;
 	private String authDate;
 	private String userGroup;
+	private String reject;
 	
+	public String getReject() {
+		return reject;
+	}
+	public void setReject(String reject) {
+		this.reject = reject;
+	}
 	public String getAuthDate() {
 		return authDate;
 	}
