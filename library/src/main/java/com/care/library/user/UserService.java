@@ -131,6 +131,14 @@ public class UserService {
 		inquiry.setWriteDate(writeDate);
 		inquiry.setReply("N");
 		
+		NotifyDTO notification = new NotifyDTO();
+		String admin = userMapper.findAdmin();
+		notification.setId(admin);
+		notification.setCategory("문의");
+		notification.setTitle("1:1문의가 등록되었습니다.");
+		notification.setUrl("/admin/inquiry");
+		notiService.register(notification);
+		
 		userMapper.myInquiryWrite(inquiry);
 	}
 

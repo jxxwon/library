@@ -40,4 +40,6 @@ public interface UserMapper {
 
 	void deleteMyInquiry(int no);
 
+	String findAdmin();
+
 }
