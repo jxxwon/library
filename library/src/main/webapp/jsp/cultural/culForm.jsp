@@ -25,6 +25,8 @@
     	justify-content: center;
     	margin-bottom: 50px;
   	}
+  	.subMenu .active{background-color:#338cfa;}
+	.subMenu .active a{color:#fff;}
 </style>
 
 <c:import url="/header" />
@@ -57,7 +59,6 @@
 				<li class="menu-item" id="menu1"><a href="#"><span>접수중 / 예정행사</span></a></li>
 				<!-- <li class="menu-item" id="menu2"><a href="#" keyvalue1="15" keyvalue2="9"><span>문화행사 신청</span></a></li> -->
 				<li class="menu-item" id="menu3"><a href="#"><span>접수마감된 행사</span></a></li>
-				<li class="menu-item" id="menu4"><a href="#"><span>나의신청내역보기</span></a></li>
 			</ul>
 		</div>
 	
@@ -68,27 +69,53 @@
 		</div>
 		
 		<div class="cul-list">
-	        <ul class="teach_list">
+	        <%-- <ul class="teach_list">
 	            <c:forEach var="cultural" items="${culturalList}">
 	                <li class="ever_one">
-	                    <a href="#" class="detail-btn">
-	                        <div class="thumb">
-                				<img url="${cultural.imagePath}" alt="image" class="teach_img" style="width:280px; height: 385px;">
-	                        </div>
-	                        <div class="list_area">
-	                            <div class="title_area">
-	                                <b class="title">${cultural.title}</b>
-	                            </div>
-	                            <ul class="con2">
-	                                <li><span class="tit">강의기간</span>${cultural.lectureStart} ~ ${cultural.lectureEnd}</li>
-	                                <li><span class="tit">접수기간</span>${cultural.registrationStart} ~ ${cultural.registrationEnd}</li>
-	                                <li><span class="tit">대&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상</span>${cultural.target}</li>
-	                            </ul>
-	                        </div>
-	                    </a>
+                        <div class="thumb">
+                        	<a href="${context}culWrite" >
+               					<img src="${cultural.imagePath}" alt="image" class="teach_img" style="width:280px; height: 385px;">
+                        	</a>
+                        </div>
+                        <div class="list_area">
+                            <div class="title_area">
+                            	<a href="${context}culWrite" >
+                                	<b class="title">${cultural.title}</b>
+                                </a>
+                            </div>
+                            <ul class="con2">
+                                <li><span class="tit">강의기간</span>${cultural.lectureStart} ~ ${cultural.lectureEnd}</li>
+                                <li><span class="tit">접수기간</span>${cultural.registrationStart} ~ ${cultural.registrationEnd}</li>
+                                <li><span class="tit">대&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상</span>${cultural.target}</li>
+                            </ul>
+                        </div>
 	                </li>
 	            </c:forEach>
-	        </ul>
+	        </ul> --%>
+			<ul class="teach_list">
+	            <c:forEach var="cultural" items="${culturalList}">
+	                <li class="ever_one">
+	                    <div class="thumb">
+	                        <a href="${context}culWrite?culId=${cultural.culId}">
+	                            <img src="${cultural.imagePath}" alt="image" class="teach_img" style="width:280px; height: 385px;">
+	                        </a>
+	                    </div>
+	                    <div class="list_area">
+	                        <div class="title_area">
+	                            <a href="${context}culWrite?culId=${cultural.culId}">
+	                           <%--  <a href="${context}culWrite/${cultural.culId}"> --%>
+	                                <b class="title">${cultural.title}</b>
+	                            </a>
+	                        </div>
+	                        <ul class="con2">
+	                            <li><span class="tit">강의기간</span>${cultural.lectureStart} ~ ${cultural.lectureEnd}</li>
+	                            <li><span class="tit">접수기간</span>${cultural.registrationStart} ~ ${cultural.registrationEnd}</li>
+	                            <li><span class="tit">대&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상</span>${cultural.target}</li>
+	                        </ul>
+	                    </div>
+	                </li>
+	            </c:forEach>
+			</ul>
 	    </div>
 		<div class="paging">	
             ${result}

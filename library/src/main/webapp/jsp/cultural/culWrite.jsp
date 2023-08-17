@@ -20,11 +20,29 @@
 </script>
 	
 <style>
-  	.paging{
+/*   	.paging{
   		display: flex;
     	justify-content: center;
     	margin-bottom: 50px;
-  	}
+  	} */
+  	.culWrite {
+	    list-style-type: none;
+	    padding-left: 0; /* Optionally remove left padding */
+	    margin-top:40px;
+	    margin-bottom:50px;
+	}
+	.writeImg{
+		margin-bottom:40px;
+	}
+	.Write_con li::before {		/*::before > 선택한 요소의 시작 부분에 콘텐츠를 생성*/
+	  content: "•"; /* 임의의 원형 마커를 생성 */
+	  color: #999999; /* 마커 색상 */
+	  font-size: 16px; /* 마커 크기 */
+	  position: absolute;
+	  left: 0;
+	  top: 50%;
+	  transform: translateY(-50%);	/*세로 중앙을 기준으로 위쪽으로 50%만큼 이동*/
+	}
 </style>
 
 <c:import url="/header" />
@@ -51,7 +69,30 @@
 				</ul>
 			</div>
 		</div>
-		
+		<c:out value="${param.culId}" />
+		<div align="center">
+	        <ul>
+	            <li class="culWrite">
+	                <div class="writeImg">
+	                    <img src="${param.imagePath}" alt="image" class="teach_img" style="width:280px; height: 385px;">
+	                </div>
+	                
+	                <div class="write_list_area">
+	                    <div class="title_area">
+	                        <!-- 제목을 그대로 표시합니다. -->
+	                        <b class="title">${param.title}</b>
+	                    </div>
+	                    
+	                    <ul class="Write_con">
+	                        <li><span class="tit">강의기간</span>${param.lectureStart} ~ ${cultural.lectureEnd}</li>
+	                        <li><span class="tit">접수기간</span>${cultural.registrationStart} ~ ${cultural.registrationEnd}</li>
+	                        <li><span class="tit">대&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상</span>${cultural.target}</li>
+	                    </ul>
+	                </div>
+	            </li>
+	        </ul>
+		</div>
+
  		
 	</div>
 </div>

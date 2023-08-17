@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,26 @@ public class CulturalController {
     	System.out.println("culFrom호출");
         service.culturalForm(cp, model);
         return "cultural/culForm"; // 뷰 이름 설정
+    }
+	
+	/*
+	 * @RequestMapping("culWrite") public String culWrite() { return
+	 * "cultural/culWrite"; }
+	 */
+    
+	/*
+	 * @RequestMapping("culWrite") public String culWrite(String imagePath, int
+	 * culId, String title, String lectureStart, String lectureEnd, String
+	 * registrationStart, String registrationEnd ,String target, String writeDate) {
+	 * service.culFormWrite(imagePath, culId, title, lectureStart, lectureEnd,
+	 * registrationStart, registrationEnd, target, writeDate); return
+	 * "cultural/culWrite"; // 뷰 페이지로 이동 }
+	 */
+    @RequestMapping("culWrite") 
+    public String culWrite(CulturalDTO cultural) {
+    	service.culFormWrite(cultural);
+    	System.out.println("CulturalController_culWrite 확인");
+    	return "cultural/culWrite"; // 뷰 페이지로 이동
     }
     
     @RequestMapping("cultural")
@@ -55,15 +76,16 @@ public class CulturalController {
         String msg = service.culFormWriteProc(multi, lectureStart, lectureEnd, registrationStart, registrationEnd);
         
 		System.out.println("culFormWriteProc_Controller_Start");
-		if(msg.equals("로그인"))
+		if("로그인".equals(msg))
 			return "redirect:login";
 		
-		if(msg.equals("게시글 작성 완료"))
+		if("게시글 작성 완료".equals(msg))
 			return "redirect:culForm";
 		
 		model.addAttribute("msg", msg);
 		System.out.println("culFormWriteProc_Controller_End");
 		return "cultural/culSubmit";
 	}
+    
     
 }

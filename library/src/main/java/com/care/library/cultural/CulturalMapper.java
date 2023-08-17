@@ -5,6 +5,9 @@ import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import com.care.library.member.MemberDTO;
 
 @Mapper
 public interface CulturalMapper {
@@ -17,5 +20,15 @@ public interface CulturalMapper {
 	/* ArrayList<CulturalDTO> culForm(HashMap<String, Integer> map); */
 
 	void culFormWriteProc(CulturalDTO cultural);
+	
+	MemberDTO culFormWriteProc(String culId);
+	
+	/*
+	 * void culFormWrite(String imagePath, int culId, String title, String
+	 * lectureStart, String lectureEnd, String registrationStart, String
+	 * registrationEnd, String target, String writeDate);
+	 */
+
+	void culFormWrite(CulturalDTO cultural);
 
 }

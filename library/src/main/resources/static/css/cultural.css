@@ -20,8 +20,8 @@
 .top-cultural {
     display: flex;
     align-items: flex-start;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    padding-bottom: 33px;
+    /*border-bottom: 1px solid rgba(0, 0, 0, 0.2);*/
+    /*padding-bottom: 33px;*/
 }
 
 .top-cbox {
@@ -92,7 +92,7 @@
 .apply ul{
 	display: flex;
 	justify-content: right;
-	margin-right: 30px;
+	margin-right: 25px;
 	margin-top: -35px;
 }
 
@@ -106,8 +106,21 @@
 	color: white;
 }
 /**************************************************/
+/*상단메뉴바*/
+.top-menu{border-bottom:2px solid #ddd; margin-top:45px;}
+.top-menu ul{display:table; border:1px solid #ddd; border-bottom:none;}
+.top-menu ul li{display:table-cell; width:150px; height:40px; line-height:40px; text-align:center; border-right:1px solid #ddd;}
+.top-menu ul li:last-child{border-right:none;}
 
-.top-menu{
+.top-menu ul li a{display:block;}
+
+.top-menu ul li.active{background-color:#338cfa;}
+.top-menu ul li.active a{color:#fff;}
+
+.top-menu ul li:hover{background-color:#338cfa;}
+.top-menu ul li:hover a{color:#fff;}
+
+/*.top-menu{
 	margin-top: 30px;
 	margin-bottom: 00px;	
 }
@@ -116,18 +129,18 @@
 	display: flex;
 	font-size: 22px;
 }
-.top-menu ul li{	/*상단 메뉴칸*/
+.top-menu ul li{	상단 메뉴칸
 	padding:15px 30px 15px 30px;
 	border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
-/*상단 바 선택시 색 변경*/
+상단 바 선택시 색 변경
 .top-menu ul li.active {
     background-color: rgba(0, 0, 0, 0.4);
   }
 .top-menu ul li.active a{
 	color: white;
-  }
+  }*/
   
 .cul-list{
   	display: flex;
@@ -196,7 +209,21 @@
 
 
 /*****************************culResult********************************/
-.resultMenu{
+/*상단 메뉴바*/
+.resultMenu{border-bottom:2px solid #ddd; margin-top:45px;}
+.resultMenu ul{display:table; border:1px solid #ddd; border-bottom:none;}
+.resultMenu ul li{display:table-cell; width:150px; height:40px; line-height:40px; text-align:center; border-right:1px solid #ddd;}
+.resultMenu ul li:last-child{border-right:none;}
+
+.resultMenu ul li a{display:block;}
+
+.resultMenu ul li.active{background-color:#338cfa;}
+.resultMenu ul li.active a{color:#fff;}
+
+.resultMenu ul li:hover{background-color:#338cfa;}
+.resultMenu ul li:hover a{color:#fff;}
+
+/*.resultMenu{
 	margin-top: 30px;
 	margin-bottom: 00px;	
 }
@@ -205,21 +232,30 @@
 	display: flex;
 	font-size: 22px;
 }
-.resultMenu ul li{	/*상단 메뉴칸*/
+.resultMenu ul li{	상단 메뉴칸
 	padding:15px 70px 15px 70px;
 	border: 1px solid rgba(0, 0, 0, 0.4);
 }
 
-/*상단 바 선택시 색 변경*/
+상단 바 선택시 색 변경
 .resultMenu ul li.active {
     background-color: rgba(0, 0, 0, 0.4);
   }
 .resultMenu ul li.active a{
 	color: white;
-  }
+  }*/
 
 /*페이지 처리*/
 .culturalContainer .paging{margin-top:20px;}
 .culturalContainer .paging a{text-align:center; display:inline-block; width:30px; height:30px; line-height:30px; font-weight:400; border:1px solid #ddd; margin-right:5px; font-size:15px; padding:0}
 .culturalContainer .paging a:last-child{margin-right:0;}
+
+/*culSubmit 게시판*/
+.inquiryContainer .inquiryWriteForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
+.inquiryContainer .inquiryWriteForm tr{border-bottom:1px solid #ddd;}
+.inquiryContainer .inquiryWriteForm th{padding:10px 50px; border-right:1px solid #ddd;}
+.inquiryContainer .inquiryWriteForm td{padding:10px;}
+.inquiryContainer .inquiryWriteForm input[type="text"]{height:30px;}
+
+
 
