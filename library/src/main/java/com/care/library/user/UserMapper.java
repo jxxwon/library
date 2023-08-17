@@ -38,4 +38,6 @@ public interface UserMapper {
 
 	void updateMyInquiry(String id, int no, String title, String content);
 
+	void deleteMyInquiry(int no);
+
 }

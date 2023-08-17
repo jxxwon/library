@@ -111,6 +111,14 @@ public class UserController {
 		return "redirect:/myLibrary/myInquiry";
 	}
 	
+	//1:1문의 삭제
+	@RequestMapping("/myLibrary/myInquiryDelete")
+	public String myInquiryDelete(String rn) {
+		String id = (String)session.getAttribute("id");
+		service.myInquiryDelete(id, rn);
+		return "redirect:/myLibrary/myInquiry";
+	}
+	
 	// 회원정보 - container
 	@GetMapping("/myLibrary/myInfo")
 	public String myInfo() {

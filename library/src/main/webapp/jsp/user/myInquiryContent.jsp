@@ -7,6 +7,15 @@
 
 <title>하이미디어 도서관 - 마이라이브러리 : 1:1문의</title>
 
+<script>
+	function delInquiry(){
+		if (confirm('해당 문의를 삭제하시겠습니까?')==true){
+			alert('문의가 삭제되었습니다.');
+			location.href='myInquiryDelete?rn=${inquiry.rn}';
+		}
+	}
+</script>
+
 <body>
 	<c:import url = "/header"/>
 	<div class = "inquiryFormContainer inner pageContent_mt">
@@ -49,7 +58,7 @@
 				</table>
 				<div class="inquiryBtn">
 					<input type = "button" value = "수정" onclick="location.href='myInquiryUpdate?rn=${inquiry.rn}'">
-					<input type = "button" value = "삭제" onclick="location.href='myInquiry'">
+					<input type = "button" value = "삭제" onclick="delInquiry()">
 					<input type = "button" value = "목록" onclick="location.href='myInquiry'">
 				</div>
 			</div>

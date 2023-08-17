@@ -218,6 +218,13 @@ public class UserService {
 		int no = inquiry.getNo();
 		userMapper.updateMyInquiry(id, no, title, content);
 	}
+
+
+	public void myInquiryDelete(String id, String rn) {
+		InquiryDTO inquiry = userMapper.selectMyInquiry(id,rn);
+		int no = inquiry.getNo();
+		userMapper.deleteMyInquiry(no);
+	}
 	
 }
 
