@@ -102,6 +102,7 @@ h1{margin-bottom:50px;}
 
 .inquiryContainer .inquiryBtn{width:100%; text-align:right; margin:20px 0;}
 
+.inquiryPage {margin:40px 0;}
 .inquiryContainer .inquiryPage a{display:inline-block; width:30px; height:30px; line-height:30px; font-weight:400; border:1px solid #ddd; margin-right:5px;}
 .inquiryContainer .inquiryPage a:last-child{margin-right:0;}
 
