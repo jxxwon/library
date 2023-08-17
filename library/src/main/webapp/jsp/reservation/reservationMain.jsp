@@ -30,6 +30,7 @@
 			</div>
 		</div>
 	<c:import url="/footer"/>
+
 	<script src = "/javaScript/reservation.js"></script>
 </body>
 

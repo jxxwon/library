@@ -42,13 +42,19 @@ public class ReserveService {
 	  }
 	  
 	  public void getReservedSeat(Model model, String whichRoom) {
-		  System.out.println("getRecentSeat : "+ whichRoom);
+		  //System.out.println("getRecentSeat : "+ whichRoom);
 		  ArrayList<String> reservedSeat = userMapper.getReservedSeat(whichRoom); 
-		  for(String seat : reservedSeat) {
-			  System.out.println(seat);
+		  for(String seat: reservedSeat) {
+			  //System.out.println("seat : " + seat);
 		  }
+		  //System.out.println();
 		  model.addAttribute("reservedSeat", reservedSeat);
 	  }
+	  
+//	  public ArrayList<String> getReservedSeat(String whichRoom) {
+//		  //System.out.println("getRecentSeat : "+ whichRoom);
+//		  return userMapper.getReservedSeat(whichRoom); 
+//	  }
 	  
 	  
 //	  public String changeMyInfoProc(UserDTO myInfo) {

@@ -7,17 +7,14 @@
 <link href = "/css/myLibrary.css" rel = "stylesheet" type = "text/css">
 <title>하이미디어 도서관 - 좌석예약</title>
 
-<script>
-	reservedSeat = ${reservedSeat};
-	console.log("room2",reservedSeat)
-</script>
+
 
 <c:set var="using_seat" value="${fn:length(reservedSeat)}" />
 <c:set var="empty_seat" value="${96 - fn:length(reservedSeat)}" />
 
 <body>
 	<div class="reserve_menu mb_30 mt_20">
-		<div class="whichRoom">자율 학습실1<br><span>96석</span></div>
+		<div class="whichRoom">자율 학습실2<br><span>96석</span></div>
 		<div style="background-color: #338cfa; color:white">빈좌석<br><c:out value="${empty_seat}" />석</div>
  		<div class="seat_status using">사용중<br><c:out value="${using_seat}" />석</div>		<!-- <div>대기자<br>96석</div> -->
 	</div>
@@ -45,4 +42,9 @@
 			</c:forEach>	
 		</div>
 	</div>
+<script>
+	var reservedSeat;
+	reservedSeat = ${reservedSeat};
+	console.log("room2",reservedSeat)
+</script>
 </body>

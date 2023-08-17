@@ -13,39 +13,62 @@ room_menu.forEach(item => item.addEventListener('click', activateMenuItem));
 
 
 
-
-
-// 탭 클릭 시에 좌석 상태 업데이트
-function showInfo(menu) {
-	var url = "/reservation/" + menu;
-	const room_container = document.getElementById('room_container');
-	const xhr = new XMLHttpRequest();
-	xhr.open('GET', url, true);
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState === 4 && xhr.status === 200) {
-			room_container.innerHTML = xhr.responseText;
-			each_seat = document.querySelectorAll('.each_seat');
-			each_seat.forEach(item => item.addEventListener('click', activateEach_seat));
-			
-			// 좌석 상태 업데이트
-			updateSeatStatus();
-		}
-	};
-	xhr.send();
-}
-
 let each_seat = document.querySelectorAll('.each_seat');
 each_seat.forEach(item => item.addEventListener('click', activateEach_seat));
+
+// 탭 클릭 시에 좌석 상태 업데이트
+let roomXhr;
+
+function showInfo(menu) {
+    //console.log(menu);
+    let whichRoom = "";
+    if (menu == "readingRoom1") {
+        whichRoom = "R1";
+    } else if (menu == "readingRoom2") {
+        whichRoom = "R2";
+    } else {
+        whichRoom = "SR";
+    }
+
+    var url = "/reservation/" + menu;
+    const room_container = document.getElementById('room_container');
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            room_container.innerHTML = xhr.responseText;
+
+            // 각 좌석 클릭 리스너 등록하기.
+            each_seat = document.querySelectorAll('.each_seat');
+            each_seat.forEach(item => item.addEventListener('click', activateEach_seat));
+
+            // 좌석 상태 업데이트
+            updateSeatStatus();
+        }
+    };
+    xhr.send();
+}
+
+function roomProc() {
+    if (roomXhr.readyState === 4) {
+        if (roomXhr.status === 200) {
+            //console.log(roomXhr.responseText);
+        } else {
+            console.log('에러: ' + roomXhr.status);
+        }
+    }
+}
 
 // 초기 로딩 시 좌석 상태 업데이트
 updateSeatStatus();
 
 // 좌석 상태 업데이트 함수
 function updateSeatStatus() {
+	//console.log(reservedSeat.length)
 	each_seat.forEach(item => {
 		for (let i = 0; i < reservedSeat.length; i++) {
 			if (item.textContent === String(reservedSeat[i])) {
-				console.log("여기요",i);
+				//console.log("여기요",i);
 				item.classList.add('using');
 				
 			} 
@@ -102,7 +125,7 @@ function closePopUp() {
 	}
 }
 function reserveSubmit() {
-	let result = confirm("예약 하시겠습니까?");
+	let result = popupWindow.confirm("예약 하시겠습니까?");
 	if(result){
 		var reqData = { seatId: seatNumber, room: whichRoom }
 		// JSON.stringify(reqData) : 자바스크립트 object 자료형을 JSON 문자열 자료형으로 변환
@@ -116,6 +139,9 @@ function reserveSubmit() {
 		xhr.send(reqData);
 
 		f.submit();
+		
+		// 원래 창 새로고침
+        window.location.reload();
 		popupWindow.close();
 	}
 }

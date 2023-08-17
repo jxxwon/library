@@ -26,8 +26,8 @@
 						<span id = "seat">${param.seatId} 번</span><br>
 					</div>
 					<div class="pop_BtnBox">
-						<input type="button" class="reserveBtn" value="예약">
-						<input type="button" class="popCancelBtn" value="취소"><br>
+						<input type="button" class="reserveBtn" value="예약" onclick="reserveSubmit()">
+						<input type="button" class="popCancelBtn" value="취소" onclick="closePopUp()"><br>
 					</div>
 				</form>
 			</div>

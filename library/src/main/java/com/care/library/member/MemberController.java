@@ -172,7 +172,7 @@ public class MemberController {
 		
 		if(result.equals("회원 등록 완료")) {
 			ra.addFlashAttribute("msg", result);
-			return "redirect:main";
+			return "redirect:login";
 		}
 		return "member/kakaoRegister";
 	}

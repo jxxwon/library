@@ -28,10 +28,17 @@ public class ReserveController {
 	@Autowired private ReserveService service;
 	
 	//마이 라이브러리(첫페이지) - container
-	@GetMapping("/reservation")
+	@RequestMapping("/reservation")
 	public String reservation() {
-		return "reservation/reservationMain";
+	    
+	    return "reservation/reservationMain";
 	}
+//	@ResponseBody //return을 jsp가 아닌 응답 데이터를 주는 것이다.
+//	@PostMapping(value="room", produces = "text/plain; charset=UTF-8")
+//	public String room(@RequestBody(required = false) String room) {
+//		System.out.println( "reservation : "+room);
+//		return room;
+//	}
 	
 	@GetMapping("/reservation/readingRoom1")
 	public String readingRoom1(Model model) {
@@ -58,7 +65,7 @@ public class ReserveController {
 		return "reservation/roomPopUp";
 	}
 	
-	@ResponseBody
+	//@ResponseBody
 	@PostMapping("/reservation/reserveProc")
 	public void reserveProc(@RequestBody ReserveDTO reqData) {
 		String id = (String)session.getAttribute("id");

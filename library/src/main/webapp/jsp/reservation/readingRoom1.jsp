@@ -10,7 +10,7 @@
 <script>
 	var reservedSeat;
 	reservedSeat = ${reservedSeat};
-	console.log("room1",reservedSeat)
+	//console.log("room1",reservedSeat)
 </script>
 <c:set var="using_seat" value="${fn:length(reservedSeat)}" />
 <c:set var="empty_seat" value="${96 - fn:length(reservedSeat)}" />
