@@ -7,7 +7,20 @@
 <link href = "/css/main.css" rel = "stylesheet" type = "text/css">
 <link href = "/css/reservation.css" rel = "stylesheet" type = "text/css">
 <!-- <script src = "/javaScript/reservation.js"></script> -->
-</head>   
+<script>
+        // 메세지 변수를 JavaScript 변수로 변환
+        var userCheckMsg = "${userCheckMsg}";
+        var reserveMsg = "${reserveMsg}";
+        
+        if(userCheckMsg !== "")
+        // alert로 메세지 출력
+        	alert("${sessionScope.name}"+"님은 "+ userCheckMsg);
+        if(reserveMsg !== "")
+        // alert로 메세지 출력
+        	alert(reserveMsg);
+        
+    </script>  
+</head> 
 <body>
 	<c:import url = "/header"/>
 	<div class = "reserve_container inner pageContent_mt">

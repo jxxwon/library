@@ -16,6 +16,11 @@
   		VALUES (#{seatId}, #{userId}, #{reserveDate}, #{room})
   	</insert>
   	
+  	<!-- 아이디 중복 예약 체크  -->	
+	 <select id="usingUser">
+		SELECT count(seat_id) FROM reservation WHERE user_id = #{userId}
+	</select> 
+  	
   	<!-- 열람실 별 예약한 좌석수 -->	
 	 <select id="getReservedSeat">
 		SELECT seat_id FROM reservation WHERE room = #{room}

@@ -3,8 +3,6 @@ package com.care.library.reservation;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,15 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.care.library.member.MemberService;
-
 import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.Extension.Parameter;
 
 @Controller
 public class ReserveController {
@@ -41,7 +34,7 @@ public class ReserveController {
         System.out.println("reservation : " + room);
         	ArrayList<String> reservedSeat = service.getReservedSeat(room);
         	for(String seat: reservedSeat) {
-        		System.out.println(seat);
+        		//System.out.println(seat);
         	}
         	return reservedSeat;
     }
@@ -73,11 +66,15 @@ public class ReserveController {
 	
 	//@ResponseBody
 	@PostMapping("/reservation/reserveProc")
-	public void reserveProc(@RequestBody ReserveDTO reqData) {
+	public String reserveProc(@RequestBody ReserveDTO reqData,  RedirectAttributes ra) {
 		String id = (String)session.getAttribute("id");
-		String name = (String)session.getAttribute("name");
-		System.out.println("여기"+reqData.getRoom());
-		 
+		
+		String userCheck = service.userCheck(id);
+		if(userCheck.equals("이미 예약한 좌석이 존재합니다.")) {
+			ra.addFlashAttribute("userCheckMsg", userCheck);
+			return "redirect:/reservation";
+		}
+
 		 Date nowDate = new Date();
 		 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); 
      	 //원하는 데이터 포맷 지정
@@ -88,6 +85,8 @@ public class ReserveController {
 		 reqData.setUserId(id);
 		 
 		 String result = service.reservation(reqData);
+		 ra.addFlashAttribute("reserveMsg", result);
+		 return "redirect:/reservation";
 		 
 	}
 

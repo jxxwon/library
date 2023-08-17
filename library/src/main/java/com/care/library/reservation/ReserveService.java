@@ -1,30 +1,24 @@
 package com.care.library.reservation;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
-import com.care.library.common.PageService;
-import com.care.library.member.MailService;
-import com.care.library.member.MemberMapper;
-
 import jakarta.servlet.http.HttpSession;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class ReserveService {
 	
 	@Autowired ReserveMapper userMapper;
 	@Autowired HttpSession session;
+	
+	public String userCheck(String id) {
+		 int usingUser = userMapper.usingUser(id); 
+		 if(usingUser >= 1) 
+			 return "이미 예약한 좌석이 존재합니다.";
+		 return "예약 가능한 회원입니다.";
+	}
 	  public String reservation(ReserveDTO resevedData) {
 		  if(resevedData.getRoom().equals("자율 학습실2")) {
 			  resevedData.setRoom("R2"); 
@@ -33,6 +27,8 @@ public class ReserveService {
 		  }else {
 			  resevedData.setRoom("SR"); //Study Room
 		  }
+		 
+		  
 		  int result = userMapper.reservation(resevedData); 
 		  if(result == 1) {
 			  
