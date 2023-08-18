@@ -12,7 +12,7 @@
 <link href="/css/cultural.css" rel="stylesheet" type="text/css">
 
 <style>
-	.table-wrapper {
+	/* .table-wrapper {
     	display: flex;
     	justify-content: center;
   	}
@@ -28,7 +28,7 @@
 	.table tr:last-child td {
 	    padding-top: 30px;
 	    padding-bottom: 70px;
-	}
+	} */
     
 	input[type="file"] {
 	    display: none;
@@ -68,9 +68,14 @@
         background-color: #256aaa;
     }
     
-    .picture{
+    /* .picture{
     	font-size: 15px;
     	padding-right: 0px;
+    } */
+    
+    .culBtn {
+    	margin-top:30px;
+    	margin-bottom:50px;
     }
    
 </style>
@@ -100,12 +105,12 @@
 				</div>
 			</div>
 
-			<div align="center">
+			<div class="inquiryContainer" align="center">
 				<form action="culFormWriteProc" method='post' enctype="multipart/form-data">
-					<table class="table">
+					<table class="table inquiryWriteForm">
 						<tr>
 							<th width="100px">제목</th>
-							<td><input style="width: 500px; height: 30px" type="text" name="title"></td>
+							<td><input style="width: 100%; height: 30px" type="text" name="title"></td>
 						</tr>
 						<tr>
 						    <th>강의기간</th>
@@ -139,6 +144,30 @@
 						    </td>
 						</tr>
 						<tr>
+							<th width="100px">강의시간</th>
+							<td><input style="width: 100%; height: 30px" type="text" name="title" placeholder="10:00 - 12:00"></td>
+						</tr>
+						<tr>
+							<th width="100px">강의장소</th>
+							<td><input style="width: 100%; height: 30px" type="text" name="title" placeholder="하이미디어 도서관"></td>
+						</tr>
+						<tr>
+							<th width="100px">강의요일</th>
+							<td><input style="width: 100%; height: 30px" type="text" name="title" placeholder="월, 화, 수, 목, 금"></td>
+						</tr>
+						<tr>
+							<th width="100px">강사명</th>
+							<td><input style="width: 100%; height: 30px" type="text" name="title"></td>
+						</tr>
+						<tr>
+							<th width="100px">준비물 및 재료비</th>
+							<td><input style="width: 100%; height: 30px" type="text" name="title" placeholder="없음"></td>
+						</tr>
+						<tr>
+							<th width="100px">설명 내용</th>
+							<td><textarea style="width: 100%; height: 200px; resize: none;" name="description"></textarea></td>
+						</tr>
+						<tr>
 							<th class="picture">사진&nbsp;첨부</th>
 							<td>
 								<!-- 실제 파일 첨부 input 요소 -->
@@ -149,13 +178,11 @@
 								<label for="fileInput" class="file-upload-btn">파일 첨부</label>
 							</td>
 						</tr>
-						<tr>
-							<td colspan="2" align="center">
-								<input type="submit" value="신청"> 
-								<input type="button" value="취소"	 onclick="location.href='culForm'">
-							</td>
-						</tr>
 					</table>
+					<div class="culBtn" align="center">
+						<input type="submit" value="신청"> 
+						<input type="button" value="취소"	 onclick="location.href='culForm'">
+					</div>
 				</form>
 			</div>
 

@@ -28,30 +28,51 @@
 	</insert>
 	
 	<!-- cultural 테이블에서 데이터를 가져오는 SQL과 resultMap 설정 -->
-<!--  	<select id="culturalForm" resultMap="culturalDto">
-		SELECT cul_id, title, lecture_start, lecture_end,
-        registration_start, registration_end, target,
-        image_path, write_date, count
-		FROM (
-		    SELECT ROWNUM() as rn, AAA.*
-		    FROM (
-		        SELECT cul_id, title, lecture_start, lecture_end,
-		               registration_start, registration_end, target,
-		               image_path, write_date, count
-		        FROM cultural
-		        ORDER BY cul_id DESC
-		    ) AAA
-		) BBB
-	    WHERE BBB.rn BETWEEN #{begin} AND #{end}
-	</select> -->
-	
 	<select id="culturalForm" resultMap="culturalDto">
 		SELECT cul_id, title, lecture_start, lecture_end, registration_start,
 		registration_end, target, image_path, count FROM (
 			SELECT CCC.*, ROWNUM as rn FROM (
-				SELECT cul_id, title, lecture_start, lecture_end, registration_start,
-				registration_end, target, image_path, count FROM cultural ORDER BY cul_id DESC
+				SELECT cul_id, 
+				title, lecture_start, 
+				lecture_end, 
+				registration_start,
+				registration_end, 
+				target, 
+				image_path, 
+				count 
+				FROM cultural ORDER BY cul_id DESC
 			) CCC
 		) WHERE rn BETWEEN #{begin} AND #{end}
 	</select>
+	
+	<select id="culFormWrite" resultMap="culturalDto">
+	   SELECT
+			image_path,
+			title,
+			lecture_start,
+			lecture_end,
+			registration_start,
+			registration_end,
+			target,
+			write_date
+		FROM
+			cultural
+		WHERE
+			cul_id = #{culId}
+	</select>
+<!-- 	<select id="culFormWrite" resultMap="culturalDto">
+	   SELECT
+			image_path,
+			title,
+			lecture_start,
+			lecture_end,
+			registration_start,
+			registration_end,
+			target,
+			write_date
+		FROM
+			cultural
+		WHERE
+			cul_id = #{culId}
+	</select> -->
 </mapper>
