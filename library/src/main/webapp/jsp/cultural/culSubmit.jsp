@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url var="context" value="/"/>
 <!-- 캘린더 추가 -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css">
 
-<script src="/javaScript/daytoday.js"></script>
+<script src="${context }javaScript/daytoday.js"></script>
 
 <title>하이디미어 도서관 - 문화행사</title>
-<c:url var="context" value="/"/>
-<link href="/css/cultural.css" rel="stylesheet" type="text/css">
+<link href="${context }css/cultural.css" rel="stylesheet" type="text/css">
 
 <style>
 	.table-wrapper {
@@ -165,5 +165,5 @@
 
 <c:import url="/footer" />
 
-<script src="/javaScript/file.js"></script>
-<script src="/javaScript/subCulTop.js"></script>
+<script src="${context }javaScript/file.js"></script>
+<script src="${context }javaScript/subCulTop.js"></script>

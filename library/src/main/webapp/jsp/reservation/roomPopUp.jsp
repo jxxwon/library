@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url var="context" value="/"/>
 
-<link href = "/css/main.css" rel = "stylesheet" type = "text/css">
+<link href = "${context }css/main.css" rel = "stylesheet" type = "text/css">
 
 <body>
 <!-- 컴퓨터가 맛이가서... db가 켜지지 않아서 세션을 확인할 수 없음. -->
