@@ -1,4 +1,4 @@
-.homeContainer{margin-top: 245px;}
+.homeContainer{margin-top: 152px;}
 .homeContainer::before{position: absolute; top: 0; left: 0; content: ""; display: inline-block;
     height: 647px; 
     width: 100%; 
@@ -11,8 +11,7 @@
 .homeContainer .visual{background-color: rgba(0,0,0,0.7);}
 .homeContainer .visual .inner, 
 .homeContainer .condition .inner{display: flex; justify-content: space-between}
-.homeContainer .visual{margin-top:90px;position: relative;
-    z-index: 1;}
+.homeContainer .visual{position: relative; z-index: 1;}
 
 .homeContainer .visual .content.left, 
 .homeContainer .visual .content.right{width: 48%; height: 400px; margin:0; border: 1px solid red;}

@@ -35,7 +35,6 @@
 					오른쪽
 					</div>
 				</div>
-			
 			</div>
 			<div class="condition">
 				<div class="inner">

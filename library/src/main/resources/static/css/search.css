@@ -1,0 +1,78 @@
+.searchContainer {margin-top: 152px;}
+
+.searchContainer .visual .inner, 
+.searchContainer .condition .inner{display: flex; justify-content: space-between;}
+
+.searchContainer .condition {
+	position: relative;
+    /*padding: 50px 0 50px 0;*/
+}
+.searchContainer .condition::before {
+	position: absolute; bottom: 0; left: 0; content: ""; 
+    height: 647px; 
+    width: 100%; 
+    margin: 0 auto;
+    min-width: 1200px;
+    background: url('/image/visual_main2.jpg')no-repeat fixed 50% 40%;
+    background-size: cover;
+    opacity: 0.3;
+}
+
+.searchContainer .condition .inner{
+	position: relative;
+	padding: 50px 0px;
+}
+
+.search_area {
+	position: relative;
+	width: 700px;
+	height: 70px;
+	background-color: white;
+	border:2px solid cornflowerblue;
+	margin:0 auto;
+	border-radius: 60px;
+}
+
+.search_area > input{
+	height: 100%;
+	width: 575px;
+	margin-left:30px;
+	background-color: transparent;
+	border: transparent;
+	font-size: 18px;
+}
+.search_area > input::placeholder{
+	font-size: 18px;
+}
+
+.search_area .search_Btn{
+	position: absolute;
+	right: 7px;
+	top: 6px;
+	background-color: cornflowerblue;
+	border: transparent;
+	border-radius:50% ;
+	width: 60px;
+	height: 60px;
+	padding:13px;
+}
+
+.search_area .search_Btn > img{
+	width: 100%;
+}
+
+.searchContainer .visual{background-color: rgba(0,0,0,0.7);}
+
+.searchContainer .visual{position: relative; z-index: 1;}
+
+.searchContainer .visual .content.left, 
+.searchContainer .visual .content.right{ height: 700px; margin:0; border: 1px solid red;}
+
+.searchContainer .visual .content.left{width: 100%; display: flex; flex-direction: column;}
+.searchContainer .visual .content.right{width: 35%;}
+
+.visual .content.left .popularBook, .visual .content.left .newBook{
+	border: 1px solid red;
+	height: 50%; padding-top:20px; 
+	color: white; font-weight: 500; font-size: 20px;
+	}
