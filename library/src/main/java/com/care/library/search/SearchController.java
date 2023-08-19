@@ -9,6 +9,7 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -47,76 +48,84 @@ public class SearchController {
 	public String datasearchProc() {
 
 		String key = "";
-		String xmlResponse="";
+		String xmlResponse = "";
+		
+		//공공 API를 사용하여 xml형태의 데이터 받아오기.
 		try {
 			// parsing할 url 지정(API 키 포함해서)
 			String url = "http://data4library.kr/api/loanItemSrch";
-			
-			String urlParam ="?authKey=8d6b32bd9b40ff27779c0cd9cd76329dd858b557eff8d78747d43e3845117641";
+
+			String urlParam = "?authKey=8d6b32bd9b40ff27779c0cd9cd76329dd858b557eff8d78747d43e3845117641";
 			urlParam += "&startDt=2022-01-01&endDt=2022-03-31";
 			urlParam += "&gender=1&age=20";
 			urlParam += "&region=11;31";
 			urlParam += "&addCode=0";
 			urlParam += "&kdc=6";
 			urlParam += "&pageNo=1&pageSize=10";
-			
+
 			url = url + urlParam;
-			RestTemplate restTemplate = new RestTemplate();
-	        
-			 // XML을 String으로 가져오기
-			 xmlResponse = restTemplate.getForObject(url, String.class);
-			 //ResponseEntity<String> xmlFile = ResponseEntity.ok(xmlResponse);
-			 
-			 //System.out.println(xmlFile);
-			 
+			URL requestUrl = new URL(url);
+			
+			HttpURLConnection conn = (HttpURLConnection) requestUrl.openConnection();
+			conn.setRequestMethod("GET"); // GET 요청 설정
+			conn.setRequestProperty("Accept", "application/xml"); // Accept 헤더 설정 (응답 형식 지정)
+			
+			int responseCode = conn.getResponseCode(); // 요청 보내고 응답 코드 받기
+			if (responseCode == HttpURLConnection.HTTP_OK) { // 성공적인 응답
+				BufferedReader in = new BufferedReader(
+						new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
+				String inputLine;
+				StringBuilder response = new StringBuilder();
+
+				while ((inputLine = in.readLine()) != null) {
+					response.append(inputLine);
+				}
+				// System.out.println("response : "+response);
+				in.close();
+				
+				//xml을 문자열로 바
+				xmlResponse = response.toString();
+				// System.out.println("Response Body:");
+				// System.out.println(xmlResponse);
+			} else {
+				System.out.println("GET request failed");
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder;
-			try {
-				dBuilder = dbFactory.newDocumentBuilder();
-				Document doc = dBuilder.parse(new InputSource(new StringReader(xmlResponse)));
-				
-				doc.getDocumentElement().normalize();
-				
-				NodeList docList = doc.getElementsByTagName("doc");
-				 for (int i = 0; i < docList.getLength(); i++) {
-		                Node docNode = docList.item(i);
-		                if (docNode.getNodeType() == Node.ELEMENT_NODE) {
-		                    Element docElement = (Element) docNode;
-		                    String bookname = docElement.getElementsByTagName("bookname").item(0).getTextContent();
-		                    String authors = docElement.getElementsByTagName("authors").item(0).getTextContent();
-		                    String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
-		                    // ... similarly extract other information you need
-		                    
-		                    System.out.println("Book Name: " + bookname);
-		                    System.out.println("Authors: " + authors);
-		                    System.out.println("Publisher: " + publisher);
-		                    System.out.println("--------------------------------");
-		                }
-		            }
-			} 
-				catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		
+		
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder;
+		try {
+			dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(new InputSource(new StringReader(xmlResponse)));
+
+			doc.getDocumentElement().normalize();
+
+			NodeList docList = doc.getElementsByTagName("doc");
+			for (int i = 0; i < docList.getLength(); i++) {
+				Node docNode = docList.item(i);
+				if (docNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element docElement = (Element) docNode;
+					String bookname = docElement.getElementsByTagName("bookname").item(0).getTextContent();
+					String authors = docElement.getElementsByTagName("authors").item(0).getTextContent();
+					String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
+					// ... similarly extract other information you need
+
+					System.out.println("Book Name: " + bookname);
+					System.out.println("Authors: " + authors);
+					System.out.println("Publisher: " + publisher);
+					System.out.println("--------------------------------");
+				}
 			}
-			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return "search/searchMain";
 	}
-	
-	public static String getTagValue(String tag, Element eElement) {
-
-    	//결과를 저장할 result 변수 선언
-    	String result = "";
-
-	NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
-
-	result = nlList.item(0).getTextContent();
-
-	return result;
-}
-
 
 }
