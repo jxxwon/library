@@ -5,17 +5,16 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,65 +22,101 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 @Controller
 public class SearchController {
-	
+
 	@RequestMapping("/datasearch")
 	public String datasearch() {
 		return "search/searchMain";
 	}
-	
-   @PostMapping("datasearchProc")
-   public String datasearchProc(){
-		
-		  System.out.println("여기요"); 
-		  HttpURLConnection conn = null; 
-		  StringBuilder sb = new StringBuilder(); 
-		  sb.append("http://data4library.kr/api/loanItemSrch?authKey=8d6b32bd9b40ff27779c0cd9cd76329dd858b557eff8d78747d43e3845117641&startDt=2022-01-01&endDt=2022-03-31&gender=1&age=20&region=11;31&addCode=0&kdc=6&pageNo=1&pageSize=10"); 
-//		  sb.append("?libCode=111042");
-//		  sb.append("&startDt="+"2017-06-01");
-//		  sb.append("&endDt="+"2017-06-30");
-//		  sb.append("&authKey=");
-//		  sb.append("8d6b32bd9b40ff27779c0cd9cd76329dd858b557eff8d78747d43e3845117641"); 
-//		  sb.append("&startDt=" + "2022-01-01"); 
-//		  sb.append("&endDt="+"2022-03-31");
-		  System.out.println("sb :" + sb);
-		  try { 
-			  URL url = new URL(sb.toString()); 
-			  conn = (HttpURLConnection)url.openConnection();
-			  conn.setRequestProperty("Content-Type","application/xml");
-			  conn.setRequestMethod("GET"); 
-			  conn.connect();
-			  SAXBuilder builder = new SAXBuilder();
-			  Document document;
-				document = builder.build(conn.getInputStream());
-				Element root = document.getRootElement();
-				
-				Element docs = root.getChild("docs");
-				System.out.println("docs = " + docs);
-				Element doc = docs.getChild("doc");
-				System.out.println("doc = " + doc);
-			 //List<Element> item = items.getChildren("item");
-	
-	
-//			  for (Element element : item) {
-//			      ApartXmlParser apartXmlParser = transferXmlToParser(element);
-//			      System.out.println("apartXmlParser = " + apartXmlParser);
-//			  }
-		} catch (JDOMException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
+	@PostMapping("datasearchProc")
+	public String datasearchProc() {
+
+		String key = "";
+		String xmlResponse="";
+		try {
+			// parsing할 url 지정(API 키 포함해서)
+			String url = "http://data4library.kr/api/loanItemSrch";
+			
+			String urlParam ="?authKey=8d6b32bd9b40ff27779c0cd9cd76329dd858b557eff8d78747d43e3845117641";
+			urlParam += "&startDt=2022-01-01&endDt=2022-03-31";
+			urlParam += "&gender=1&age=20";
+			urlParam += "&region=11;31";
+			urlParam += "&addCode=0";
+			urlParam += "&kdc=6";
+			urlParam += "&pageNo=1&pageSize=10";
+			
+			url = url + urlParam;
+			RestTemplate restTemplate = new RestTemplate();
+	        
+			 // XML을 String으로 가져오기
+			 xmlResponse = restTemplate.getForObject(url, String.class);
+			 //ResponseEntity<String> xmlFile = ResponseEntity.ok(xmlResponse);
+			 
+			 //System.out.println(xmlFile);
+			 
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder;
+			try {
+				dBuilder = dbFactory.newDocumentBuilder();
+				Document doc = dBuilder.parse(new InputSource(new StringReader(xmlResponse)));
+				
+				doc.getDocumentElement().normalize();
+				
+				NodeList docList = doc.getElementsByTagName("doc");
+				 for (int i = 0; i < docList.getLength(); i++) {
+		                Node docNode = docList.item(i);
+		                if (docNode.getNodeType() == Node.ELEMENT_NODE) {
+		                    Element docElement = (Element) docNode;
+		                    String bookname = docElement.getElementsByTagName("bookname").item(0).getTextContent();
+		                    String authors = docElement.getElementsByTagName("authors").item(0).getTextContent();
+		                    String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
+		                    // ... similarly extract other information you need
+		                    
+		                    System.out.println("Book Name: " + bookname);
+		                    System.out.println("Authors: " + authors);
+		                    System.out.println("Publisher: " + publisher);
+		                    System.out.println("--------------------------------");
+		                }
+		            }
+			} 
+				catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 
-		  return "search/searchMain";
-   }
-
+		return "search/searchMain";
+	}
 	
+	public static String getTagValue(String tag, Element eElement) {
+
+    	//결과를 저장할 result 변수 선언
+    	String result = "";
+
+	NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
+
+	result = nlList.item(0).getTextContent();
+
+	return result;
+}
+
+
 }
