@@ -27,9 +27,7 @@ public class SearchController {
 		if(apiResult.equals("API 호출 성공")) {
 			service.getBookImages(popularBook);
 		}
-				
 		return "search/searchMain";
-			
 	}
 
 	@PostMapping("/datasearchProc")
