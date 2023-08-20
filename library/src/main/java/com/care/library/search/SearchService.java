@@ -92,13 +92,13 @@ public class SearchService {
 			e.printStackTrace();
 		}
 
-		// xml파일을 json형태의 파일로 바꿔서 db에 저장하기.
+		// xml파일을 db에 저장하기.
 		xmlToJson(xmlResponse);
 		return "API 호출 성공";
 
 	}
 
-	// xml파일을 json형태의 파일로 바꿔서 db에 저장하기.
+	// xml파일을  db에 저장하기.
 	public void xmlToJson(String xmlResponse) {
 		List<BookDTO> books = null;
 		try {
