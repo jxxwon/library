@@ -76,3 +76,20 @@
 	height: 50%; padding-top:20px; 
 	color: white; font-weight: 500; font-size: 20px;
 	}
+
+.popularBook  .bookContainer{
+	border: 1px solid blue;
+	display: flex;
+	padding-top:50px;
+}
+.popularBook .bookImageBox {
+	margin-right: 20px;
+	width: 130px;
+	height: 180px;
+	border: 1px solid black;
+}
+
+.popularBook .bookImageBox > img{
+	width: 100%;
+	height: 100%;
+}

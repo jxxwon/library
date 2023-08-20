@@ -24,8 +24,10 @@
 					<div class="content left">
 						<div class="popularBook">
 							<span>인기도서</span>
-							<div>
-								<div><img src=""></div>
+							<div class="bookContainer">
+								<c:forEach var="image" items="${bookImages}">
+									<div class="bookImageBox"><img src="${image}"></div>
+								</c:forEach>
 							</div>
 						</div>
 						<div class="newBook">

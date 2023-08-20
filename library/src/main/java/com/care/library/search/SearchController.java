@@ -2,38 +2,34 @@ package com.care.library.search;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+@EnableScheduling
 @Controller
 public class SearchController {
 	
 	@Autowired SearchService service;
 	
 	@RequestMapping("/datasearch")
-	public String datasearch() {
-		String key = "";
+	public String datasearch(Model popularBook) {
 		
-		//인기도서 loanItemSrch
-		String url = "http://data4library.kr/api/loanItemSrch";
-
-		String urlParam = "?authKey=8d6b32bd9b40ff27779c0cd9cd76329dd858b557eff8d78747d43e3845117641";
-		urlParam += "&startDt=2023-08-10&endDt=2023-08-17";
-		//urlParam += "&gender=1&age=20";
-		urlParam += "&region=11;31"; /// 다중 선택 가능 / 서울: 11
-		urlParam += "&dtl_region=11120"; // 은평
-		//urlParam += "&addCode=0";
-		//urlParam += "&kdc=6";
-		urlParam += "&pageNo=1&pageSize=5";
-
-		url = url + urlParam;
+		// 공공 API를 사용하여 xml형태의 데이터 받아오기. 매월 1일에 받아오기.
 		
-		// 공공 API를 사용하여 xml형태의 데이터 받아오기.
-		service.connAPI(url);
+		String result = service.getBookImages(popularBook);
+		if(result.equals("이미지 가져오기 완료"))
+			return "search/searchMain";
 		
+		String apiResult = service.connAPI();
+		if(apiResult.equals("API 호출 성공")) {
+			service.getBookImages(popularBook);
+		}
+				
 		return "search/searchMain";
+			
 	}
 
 	@PostMapping("/datasearchProc")
