@@ -167,6 +167,7 @@ body {
 	flex-direction: column;
 	/*margin: 0 50px;*/
 	width: 200px;
+	color: white;
 }
 
 .header_nav li a {

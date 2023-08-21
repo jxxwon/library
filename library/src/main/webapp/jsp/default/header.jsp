@@ -32,6 +32,10 @@
   				}
   			}
     }
+    	let sessionId ="";
+    	if("${sessionScope.id}" !== null){
+    		sessionId = "${sessionScope.id}";
+    	}
     </script>
 </head>
 <body onload="header()">
@@ -96,11 +100,11 @@
 						<li><a href="#" class="menu">큐레이션</a></li>
 					</ul>
 	            </li>
-	            <li><a href="${context}reservation">좌석예약</a>
+	            <li class="reservation"><a href="${context}reservation/readingRoom1" class="menu">좌석예약</a>
 	            	<ul class="toggleBox">
-						<li><a href="#" class="menu">자율학습실1</a></li>
-						<li><a href="#" class="menu">자율학습실2</a></li>
-						<li><a href="#" class="menu">스터디룸</a></li>
+						<li onclick="reservation('readingRoom1')" class="reservation">자율학습실1</li>
+						<li onclick="reservation('readingRoom2')" class="reservation">자율학습실2</li>
+						<li>스터디룸</li>
 					</ul>
 	            </li>
 	            <li><a href="${context}cultural">문화행사</a>

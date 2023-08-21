@@ -1,6 +1,6 @@
-const room_menu = document.querySelectorAll('.room_menu');
-
 //열람실 탭 이동
+/*const room_menu = document.querySelectorAll('.room_menu');
+
 function activateMenuItem() {
 	room_menu.forEach(item => item.classList.remove('active'));
 
@@ -9,11 +9,12 @@ function activateMenuItem() {
 
 room_menu[0].classList.add('active');
 
-room_menu.forEach(item => item.addEventListener('click', activateMenuItem));
+room_menu.forEach(item => item.addEventListener('click', activateMenuItem));*/
 
 
-
+//각 좌석 클릭 리스너 등록
 let each_seat = document.querySelectorAll('.each_seat');
+//console.log(each_seat);
 each_seat.forEach(item => item.addEventListener('click', activateEach_seat));
 
 // 탭 클릭 시에 좌석 상태 업데이트
@@ -21,7 +22,7 @@ var reservedSeat=[];
 let room = "R1";
 
 
-function showInfo(menu) {
+/*function showInfo(menu) {
     //console.log(menu);
     room = "R1";
     if (menu == "readingRoom1") {
@@ -38,7 +39,7 @@ function showInfo(menu) {
     xhr.open('GET', url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            room_container.innerHTML = xhr.responseText;
+            //room_container.innerHTML = xhr.responseText;
 			
 			showReservedSeat(room);
 		
@@ -51,9 +52,9 @@ function showInfo(menu) {
         }
     };
     xhr.send();
-}
+}*/
 
-	let seatXhr;
+/*	let seatXhr;
 	showReservedSeat(room);
 function showReservedSeat(room){
 	seatXhr = new XMLHttpRequest();
@@ -62,7 +63,7 @@ function showReservedSeat(room){
 	seatXhr.send(room);
 	seatXhr.onreadystatechange = roomProc;
 	
-}
+}*/
 
 
 function roomProc() {
@@ -104,6 +105,7 @@ let f;
 let seatNumber;
 let whichRoom;
 function activateEach_seat() {
+	console.log("클릭");
 	seatNumber = this.textContent;
 	let roomDiv = document.querySelector('.whichRoom');
 	whichRoom = roomDiv.innerText.split('\n')[0];
@@ -112,9 +114,9 @@ function activateEach_seat() {
 	if(this.classList.contains("using")){
 		alert("이미 사용중인 좌석입니다.")
 	}else{
-		reserve = confirm(seatNumber + "를 예약하시겠습니까?");
+		//reserve = confirm(seatNumber + "를 예약하시겠습니까?");
 	}
-	if (reserve) {
+	//if (reserve) {
 		let url = "/reservation/roomPopUp?seatId=" + seatNumber + "&room=" + whichRoom;
 
 		var popupWidth = 500;
@@ -134,7 +136,7 @@ function activateEach_seat() {
 			f = popupWindow.document.getElementById('f');
 			//console.log(f);
 			reserveBtn.addEventListener('click', reserveSubmit);
-		};
+		//};
 	}
 }
 
