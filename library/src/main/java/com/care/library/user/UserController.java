@@ -48,10 +48,6 @@ public class UserController {
 			@RequestParam(value="replySelect", required = false) String replySelect, Model model) {
 		
 		String id = (String)session.getAttribute("id");
-//		System.out.println("myInquiryList"+ id);
-//		System.out.println("select : " + select);
-//		System.out.println("search : " + search);
-//		System.out.println("replySelect : " + replySelect);
 		
 		if(id == null || id.equals("")) {
 			return "redirect:main";

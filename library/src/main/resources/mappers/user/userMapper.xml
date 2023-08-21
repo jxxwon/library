@@ -52,7 +52,7 @@
   	</select>
   	
   	<insert id = "myInquiryWrite" parameterType="com.care.library.user.InquiryDTO">
-  		INSERT INTO inquiry (no, title, content, id, write_date, reply) VALUES (#{no}, #{title}, #{content}, #{id}, #{writeDate}, #{reply})
+  		INSERT INTO inquiry (no, title, content, id, write_date, reply) VALUES (#{no}, #{title}, #{content}, #{id}, #{writeDate}, 'N')
   	</insert>
   	
   	<select id = "selectInquiry" resultMap="inquiryDto">
