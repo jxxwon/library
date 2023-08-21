@@ -158,7 +158,7 @@ public class UserService {
 		ArrayList<InquiryDTO> inquiries = userMapper.selectInquiry(id, begin, end);
 		
 		String url = "myInquiry?currentPage=";
-		int totalCount = userMapper.count();
+		int totalCount = userMapper.count(id);
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 
 		model.addAttribute("inquiries", inquiries);
@@ -183,7 +183,7 @@ public class UserService {
 		ArrayList<InquiryDTO> inquiries = userMapper.selectInquiryTitle(id, search, begin, end);
 		
 		String url = "myInquiry?currentPage=";
-		int totalCount = userMapper.count();
+		int totalCount = userMapper.count(id);
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		
 		model.addAttribute("inquiries", inquiries);
@@ -205,9 +205,8 @@ public class UserService {
 		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
 		
 		ArrayList<InquiryDTO> inquiries = userMapper.selectInquiryReply(id, replySelect, begin, end);
-		
-		String url = "myInquiry?currentPage=";
-		int totalCount = userMapper.count();
+		String url = "myInquiry?select=reply&replySelect=" + replySelect + "&currentPage=";
+		int totalCount = userMapper.countReply(id, replySelect);
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		
 		model.addAttribute("inquiries", inquiries);

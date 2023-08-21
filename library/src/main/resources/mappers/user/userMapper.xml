@@ -68,7 +68,11 @@
   	</select>
   	
   	<select id = "count">
-  		SELECT count(no) FROM inquiry
+  		SELECT count(no) FROM inquiry WHERE id = #{id}
+  	</select>
+
+  	<select id = "countReply">
+  		SELECT count(no) FROM inquiry WHERE id = #{id} AND reply = #{replySelect}
   	</select>
   	
   	<select id = "selectMyInquiry" resultMap="inquiryDto">
