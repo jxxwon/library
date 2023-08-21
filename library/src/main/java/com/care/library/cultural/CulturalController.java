@@ -1,6 +1,8 @@
 package com.care.library.cultural;
 
 import java.io.Console;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,12 +47,26 @@ public class CulturalController {
 	 * registrationStart, registrationEnd, target, writeDate); return
 	 * "cultural/culWrite"; // 뷰 페이지로 이동 }
 	 */
-    @RequestMapping("culWrite") 
-    public String culWrite(CulturalDTO cultural) {
-    	service.culFormWrite(cultural);
+   
+    @RequestMapping("culModify")
+	public String culModify(String id) {
+		service.culModify(id);
     	System.out.println("CulturalController_culWrite 확인");
-    	return "cultural/culWrite"; // 뷰 페이지로 이동
+    	return "cultural/culModify"; // 뷰 페이지로 이동
+	}
+    
+    public String culModify(@ModelAttribute("cultural") CulturalDTO culturalDTO, Model model) {
+        model.addAttribute("cultural", culturalDTO);
+        return "culModify";
     }
+	
+	/*
+	 * @PostMapping("/admin/memberConfirmProc") public String
+	 * memberConfirmProc(String id, String userGroup, String paper, String reject) {
+	 * SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); String authDate =
+	 * sdf.format(new Date()); service.memberConfirm(id, userGroup, paper, authDate,
+	 * reject); return "redirect:/admin/member"; }
+	 */
     
     @RequestMapping("cultural")
 	public String cultural() {

@@ -69,7 +69,9 @@
 				</ul>
 			</div>
 		</div>
-		<c:out value="${param.culId}" />
+		
+		<c:out value="culId : ${cultural.culId}"></c:out></br>
+		<c:out value="paramId : ${param.culId}"></c:out>
 		<div align="center">
 	        <ul>
 	            <li class="culWrite">
