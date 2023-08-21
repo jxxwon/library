@@ -61,7 +61,7 @@ public class CulturalService {
     }
 
 	// 문화행사 신청 데이터를 DB에 저장하는 메서드 추가
-    public String culFormWriteProc(MultipartHttpServletRequest multi, String lectureStart, String lectureEnd, String registrationStart, String registrationEnd) {
+    public String culFormWriteProc(MultipartHttpServletRequest multi) {
     	System.out.println("culFormWriteProc실행");
     	
     	CulturalDTO cultural = new CulturalDTO();
@@ -72,15 +72,23 @@ public class CulturalService {
         }
     	// 서버로 전송할 데이터 생성
 	    cultural.setTitle(multi.getParameter("title"));
-	    cultural.setLectureStart(lectureStart);
-	    cultural.setLectureEnd(lectureEnd);
-	    cultural.setRegistrationStart(registrationStart);
-	    cultural.setRegistrationEnd(registrationEnd);
+	    cultural.setLectureStart(multi.getParameter("lectureStart"));
+	    cultural.setLectureEnd(multi.getParameter("lectureEnd"));
+	    cultural.setRegistrationStart(multi.getParameter("registrationStart"));
+	    cultural.setRegistrationEnd(multi.getParameter("registrationEnd"));
+	    cultural.setLectureTime(multi.getParameter("LectureTime"));
+	    cultural.setLecturePlace(multi.getParameter("LecturePlace"));
+	    cultural.setLectureDay(multi.getParameter("LectureDay"));
+	    cultural.setLectureName(multi.getParameter("LectureName"));
+	    cultural.setCost(multi.getParameter("Cost"));
+	    cultural.setLectureText(multi.getParameter("LectureText"));
+	    cultural.setImagePath(multi.getParameter("ImagePath"));
 	    cultural.setTarget(multi.getParameter("target"));
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-		cultural.setImagePath("");
 		cultural.setWriteDate(sdf.format(new Date()));
-	    System.out.println("WriteDate" + sdf.format(new Date()));
+	    System.out.println("WriteDate : " + sdf.format(new Date()));
+	    System.out.println("ImagePath : " + multi.getParameter("ImagePath"));
+	    System.out.println("title : " + multi.getParameter("title"));
 		
 		/*
 		 * if(multi.getParameter("title") == null ||
@@ -118,7 +126,7 @@ public class CulturalService {
 		        e.printStackTrace();
 		    }
 		}
-		
+
 		culturalMapper.culFormWriteProc(cultural);
 		System.out.println("culFormWriteProc종료");
 		return "게시글 작성 완료";

@@ -145,33 +145,33 @@
 						</tr>
 						<tr>
 							<th width="100px">강의시간</th>
-							<td><input style="width: 100%; height: 30px" type="text" name="title" placeholder="10:00 - 12:00"></td>
+							<td><input style="width: 100%; height: 30px" type="text" name="LectureTime" placeholder="10:00 - 12:00"></td>
 						</tr>
 						<tr>
 							<th width="100px">강의장소</th>
-							<td><input style="width: 100%; height: 30px" type="text" name="title" placeholder="하이미디어 도서관"></td>
+							<td><input style="width: 100%; height: 30px" type="text" name="LecturePlace" placeholder="하이미디어 도서관"></td>
 						</tr>
 						<tr>
 							<th width="100px">강의요일</th>
-							<td><input style="width: 100%; height: 30px" type="text" name="title" placeholder="월, 화, 수, 목, 금"></td>
+							<td><input style="width: 100%; height: 30px" type="text" name="LectureDay" placeholder="월, 화, 수, 목, 금"></td>
 						</tr>
 						<tr>
 							<th width="100px">강사명</th>
-							<td><input style="width: 100%; height: 30px" type="text" name="title"></td>
+							<td><input style="width: 100%; height: 30px" type="text" name="LectureName"></td>
 						</tr>
 						<tr>
-							<th width="100px">준비물 및 재료비</th>
-							<td><input style="width: 100%; height: 30px" type="text" name="title" placeholder="없음"></td>
+							<th width="100px">준비물</th>
+							<td><input style="width: 100%; height: 30px" type="text" name="Cost" placeholder="없음"></td>
 						</tr>
 						<tr>
 							<th width="100px">설명 내용</th>
-							<td><textarea style="width: 100%; height: 200px; resize: none;" name="description"></textarea></td>
+							<td><textarea style="width: 100%; height: 200px; resize: none;" name="LectureText"></textarea></td>
 						</tr>
 						<tr>
 							<th class="picture">사진&nbsp;첨부</th>
 							<td>
 								<!-- 실제 파일 첨부 input 요소 -->
-								<input type="file" name="upfile" id="fileInput" class="file-upload-input" onchange="showFileName()">
+								<input type="file" name="upfile" id="fileInput" class="file-upload-input" onchange="showFileName()" name="ImagePath">
 								<!-- 파일명을 보여주는 요소 -->
 								<span id="fileNameDisplay">첨부된 파일이 없음</span>
 								<!-- 파일첨부 버튼 -->

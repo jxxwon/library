@@ -11,6 +11,12 @@
 	    <result property="registrationStart" column="registration_start"/>
 	    <result property="registrationEnd" column="registration_end"/>
 	    <result property="target" column="target"/>
+	    <result property="lectureTime" column="lecture_time"/>
+	    <result property="lecturePlace" column="lecture_place"/>
+	    <result property="lectureDay" column="lecture_day"/>
+	    <result property="lectureName" column="lecture_name"/>
+	    <result property="cost" column="cost"/>
+	    <result property="lectureText" column="lecture_text"/>
 	    <result property="imagePath" column="image_path"/>
 	    <result property="writeDate" column="write_date"/>
 	    <result property="count" column="count"/>
@@ -23,8 +29,8 @@
 		
 	<!-- cultural 테이블에 데이터를 삽입하는 SQL -->
 	<insert id="culFormWriteProc" parameterType="com.care.library.cultural.CulturalDTO">
-		INSERT INTO cultural (title, lecture_start, lecture_end, registration_start, registration_end, target, image_path, write_date) 
-		VALUES (#{title}, #{lectureStart}, #{lectureEnd}, #{registrationStart}, #{registrationEnd}, #{target}, #{imagePath}, #{writeDate})
+		INSERT INTO cultural (title, lecture_start, lecture_end, registration_start, registration_end, target, lecture_time, lecture_place, lecture_day, lecture_name, cost, lecture_text, image_path, write_date) 
+		VALUES (#{title}, #{lectureStart}, #{lectureEnd}, #{registrationStart}, #{registrationEnd}, #{target}, #{lectureTime} , #{lecturePlace} , #{lectureDay} , #{lectureName} , #{cost} , #{lectureText}, #{imagePath}, #{writeDate})
 	</insert>
 	
 	<!-- cultural 테이블에서 데이터를 가져오는 SQL과 resultMap 설정 -->

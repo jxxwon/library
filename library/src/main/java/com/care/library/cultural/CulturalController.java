@@ -68,19 +68,15 @@ public class CulturalController {
 	}
     
     @PostMapping("culFormWriteProc")
-    public String culFormWriteProc(Model model, MultipartHttpServletRequest multi,
-                                   @RequestParam("lectureStart") String lectureStart,
-                                   @RequestParam("lectureEnd") String lectureEnd,
-                                   @RequestParam("registrationStart") String registrationStart,
-                                   @RequestParam("registrationEnd") String registrationEnd) {
-        String msg = service.culFormWriteProc(multi, lectureStart, lectureEnd, registrationStart, registrationEnd);
-        
+    public String culFormWriteProc(Model model, MultipartHttpServletRequest multi){
+        String msg = service.culFormWriteProc(multi);
 		System.out.println("culFormWriteProc_Controller_Start");
-		if("로그인".equals(msg))
-			return "redirect:login";
-		
-		if("게시글 작성 완료".equals(msg))
+		System.out.println("multi : " + multi);
+	
+		if(msg.equals("게시글 작성 완료")) {
+			System.out.println("게시글 작성 완료");
 			return "redirect:culForm";
+		}
 		
 		model.addAttribute("msg", msg);
 		System.out.println("culFormWriteProc_Controller_End");

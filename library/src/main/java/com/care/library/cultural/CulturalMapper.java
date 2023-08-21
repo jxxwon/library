@@ -17,11 +17,9 @@ public interface CulturalMapper {
 
 	int count();
 
-	/* ArrayList<CulturalDTO> culForm(HashMap<String, Integer> map); */
-
-	void culFormWriteProc(CulturalDTO cultural);
+	/* MemberDTO culFormWriteProc(String culId); */
 	
-	MemberDTO culFormWriteProc(String culId);
+	void culFormWriteProc(CulturalDTO cultural);
 	
 	/*
 	 * void culFormWrite(String imagePath, int culId, String title, String
