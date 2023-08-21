@@ -61,35 +61,38 @@
 	width: 100%;
 }
 
-.searchContainer .visual{background-color: rgba(0,0,0,0.7);}
+.searchContainer .visual{background-color: rgba(0,0,0,0.6);}
 
-.searchContainer .visual{position: relative; z-index: 1;}
+.searchContainer .visual{position: relative; z-index: 1; padding: 10px 0;}
 
 .searchContainer .visual .content.left, 
-.searchContainer .visual .content.right{ height: 700px; margin:0; border: 1px solid red;}
+.searchContainer .visual .content.right{ height: 550px; margin:0; /*border: 1px solid red;*/}
 
 .searchContainer .visual .content.left{width: 100%; display: flex; flex-direction: column;}
 .searchContainer .visual .content.right{width: 35%;}
 
 .visual .content.left .popularBook, .visual .content.left .newBook{
-	border: 1px solid red;
+	/*border: 1px solid red;*/
 	height: 50%; padding-top:20px; 
 	color: white; font-weight: 500; font-size: 20px;
 	}
 
-.popularBook  .bookContainer{
-	border: 1px solid blue;
+.popularBook .bookContainer, .newBook .bookContainer{
+	/*border: 1px solid blue;*/
 	display: flex;
-	padding-top:50px;
+	padding-top:10px;
 }
-.popularBook .bookImageBox {
+.popularBook .bookImageBox, .newBook  .bookImageBox {
 	margin-right: 20px;
 	width: 130px;
 	height: 180px;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 }
 
-.popularBook .bookImageBox > img{
+.popularBook .bookImageBox > img, .newBook .bookImageBox > img{
 	width: 100%;
 	height: 100%;
 }
+
+/*통합검색*/
+

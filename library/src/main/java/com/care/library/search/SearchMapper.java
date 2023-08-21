@@ -10,9 +10,13 @@ import org.apache.ibatis.annotations.Param;
 public interface SearchMapper {
 
 	int jsonInsert(BookDTO book);
+	
+	int recentInsert(BookDTO book);
 
 	void jsonDelete();
 	
-	ArrayList<String> getBookImages();
+	void recentDelete();
+	
+	ArrayList<String> getBookImages(String whichTable);
 
 }

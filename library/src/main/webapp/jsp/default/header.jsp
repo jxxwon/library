@@ -88,7 +88,7 @@
 	            </li>
 	            <li><a href="${context}datasearch">자료검색</a>
 	            	<ul class="toggleBox">
-						<li><a href="#" class="menu">통합검색</a></li>
+						<li><a href="${context}datasearch/totalSearch" class="menu">통합검색</a></li>
 						<li><a href="#" class="menu">고급검색</a></li>
 						<li><a href="#" class="menu">자료탐색</a></li>
 						<li><a href="#" class="menu">스마트도서관검색</a></li>

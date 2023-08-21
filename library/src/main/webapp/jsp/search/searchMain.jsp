@@ -23,16 +23,28 @@
 				<div class="inner">
 					<div class="content left">
 						<div class="popularBook">
-							<span>인기도서</span>
+							<div>
+								<img src="/image/heart.png"/>
+								<span>인기도서</span>
+							</div>
 							<div class="bookContainer">
-								<c:forEach var="image" items="${bookImages}">
+								<c:forEach var="image" items="${popularBook}">
 									<div class="bookImageBox"><img src="${image}"></div>
 								</c:forEach>
 							</div>
 						</div>
 						<div class="newBook">
-							<span>신착도서</span>
-							<div>책</div>
+							<div>
+								<img src="/image/book.png"/>
+								<span>신착도서</span>
+							</div>
+							<div class="bookContainer">
+								<c:forEach var="image" items="${recentBook}" varStatus="loop">
+									 <c:if test="${loop.index < 5}">
+										<div class="bookImageBox"><img src="${image}"></div>
+									</c:if>
+								</c:forEach>
+							</div>
 						</div>
 					</div>
 					<!-- <div class="content right">
@@ -40,14 +52,7 @@
 					</div> -->
 				</div>
 			</div>
-				<!-- <div class = "searchContent">
-					<div class="search_area">
-						<button class="search_Btn"></button>
-					</div>
-					<form action="datasearchProc" method="post">
-						<button type="submit">검색하기</button>
-					</form>
-				</div> -->
+			
 		</div>
 	<c:import url="/footer"/>
 </body>

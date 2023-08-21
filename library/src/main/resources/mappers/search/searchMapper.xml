@@ -12,12 +12,25 @@
 		INSERT INTO popularBook VALUES(#{no}, #{ranking}, #{publicationYear},#{bookName}, #{authors}, #{publisher}, #{bookImageURL})
 	</insert>
 	
+	<insert id="recentInsert" parameterType="com.care.library.search.BookDTO">
+		INSERT INTO recentBook VALUES(#{bookName}, #{authors}, #{publisher}, #{bookImageURL},  #{publicationYear})
+	</insert>
+	
 	<delete id="jsonDelete">
 		DELETE FROM popularBook
 	</delete>
 	
+	<delete id="recentDelete">
+		DELETE FROM recentBook
+	</delete>
+	
 	<select id="getBookImages">
-		SELECT bookImageURL FROM popularBook
+		<if test="whichTable == 'popularBook'">
+			SELECT bookImageURL FROM popularBook <!-- 동적으로 테이블명 변환 -->
+		</if>
+		<if test="whichTable == 'recentBook'">
+			SELECT bookImageURL FROM recentBook <!-- 동적으로 테이블명 변환 -->
+		</if>
 	</select>
 
 </mapper>
