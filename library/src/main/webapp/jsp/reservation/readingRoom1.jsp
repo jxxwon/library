@@ -22,6 +22,10 @@
         // alert로 메세지 출력
         	alert(reserveMsg);
         
+        let sessionId ="";
+    	if("${sessionScope.id}" !== null){
+    		sessionId = "${sessionScope.id}";
+    	}
     </script>  
 <body>
 	<c:import url="/header" />

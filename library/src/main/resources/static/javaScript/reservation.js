@@ -110,6 +110,18 @@ function activateEach_seat() {
 	let roomDiv = document.querySelector('.whichRoom');
 	whichRoom = roomDiv.innerText.split('\n')[0];
 	//console.log(whichRoom);
+	
+	//예약 눌렀을 경우 로그인 안하면 loginPage로넘어가도록
+	if(sessionId == ""){
+		result = confirm("로그인 후 이용해주세요.")
+		if(result){
+			location.href="/login";
+			return;
+		}else{
+			location.href="/main";
+			return;
+		}
+	}	
 	let reserve;
 	if(this.classList.contains("using")){
 		alert("이미 사용중인 좌석입니다.")

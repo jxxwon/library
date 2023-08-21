@@ -168,6 +168,7 @@ body {
 	/*margin: 0 50px;*/
 	width: 200px;
 	color: white;
+	cursor: pointer;
 }
 
 .header_nav li a {

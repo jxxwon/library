@@ -9,19 +9,22 @@
 
 <c:set var="using_seat" value="${reservedNum}" />
 <c:set var="empty_seat" value="${96 - reservedNum}" />
-<script>
-        // 메세지 변수를 JavaScript 변수로 변환
-        var userCheckMsg = "${userCheckMsg}";
-        var reserveMsg = "${reserveMsg}";
-        
-        if(userCheckMsg !== "")
-        // alert로 메세지 출력
-        	alert("${sessionScope.name}"+"님은 "+ userCheckMsg);
-        if(reserveMsg !== "")
-        // alert로 메세지 출력
-        	alert(reserveMsg);
-        
-    </script>  
+	<script>
+	        // 메세지 변수를 JavaScript 변수로 변환
+	        var userCheckMsg = "${userCheckMsg}";
+	        var reserveMsg = "${reserveMsg}";
+	        
+	        if(userCheckMsg !== "")
+	        // alert로 메세지 출력
+	        	alert("${sessionScope.name}"+"님은 "+ userCheckMsg);
+	        if(reserveMsg !== "")
+	        // alert로 메세지 출력
+	        	alert(reserveMsg);
+	        let sessionId ="";
+	    	if("${sessionScope.id}" !== null){
+	    		sessionId = "${sessionScope.id}";
+	    	}
+	</script>  
 <body>
 	<c:import url="/header" />
 	<div class="reserve_container inner pageContent_mt">

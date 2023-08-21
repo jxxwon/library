@@ -38,22 +38,3 @@ window.addEventListener('scroll', function () {
         header_nav.classList.remove('fix');
     }
 });
-
-//예약 눌렀을 경우 로그인 안하면 loginPage로넘어가도록
-function reservation(room){
-	console.log(room);
-	let result = "";
-	if(sessionId == ""){
-		result = confirm("로그인 후 이용해주세요.")
-		if(result){
-			location.href="/login";
-			return;
-		}else{
-			location.href="/main";
-			return;
-		}
-	}
-	
-	location.href="/reservation/"+room;
-	console.log("sessionId", sessionId);
-}
