@@ -36,19 +36,43 @@
 	<update id = "memberReject">
 		UPDATE member SET status = 'D', reject = #{reject} WHERE id = #{id}
 	</update>
-	
-	<select id="selectInquiry" resultMap="inquiryDto">
-		SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry ORDER BY no ASC)AAA)BBB WHERE BBB.rn BETWEEN #{begin} AND #{end}
-	</select>
-	
+
 	<select id="countInquiry">
 		SELECT count(no) FROM inquiry
 	</select>
 	
+	<select id="selectInquiry" resultMap="inquiryDto">
+		SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM(SELECT * FROM inquiry ORDER BY no DESC)AAA)BBB WHERE BBB.rn BETWEEN #{begin} AND #{end}
+	</select>
+
+	<select id="countInquiryReply">
+		SELECT count(no) FROM inquiry WHERE reply = #{replySelect}
+	</select>
+
+	<select id="selectInquiryReply" resultMap="inquiryDto">
+		SELECT BBB.* FROM(SELECT rownum as rn, AAA.* FROM (SELECT * FROM inquiry WHERE reply = #{replySelect} ORDER BY no DESC)AAA)BBB WHERE BBB.rn BETWEEN #{begin} AND #{end}
+	</select>
+
+	<select id="countInquiryTitle">
+		SELECT count(no) FROM inquiry WHERE title like '%'||#{search}||'%'
+	</select>
+
+	<select id="selectInquiryTitle">
+		SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM (SELECT * FROM inquiry WHERE title like '%'||#{search}||'%' ORDER BY no DESC)AAA)BBB WHERE BBB.rn BETWEEN #{begin} AND #{end}
+	</select>
+
+	<select id="countInquiryWriter">
+		SELECT count(no) FROM inquiry WHERE id like '%'||#{search}||'%'
+	</select>
+	
+	<select id="selectInquiryWriter">
+		SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM (SELECT * FROM inquiry WHERE id like '%'||#{search}||'%' ORDER BY no DESC)AAA)BBB WHERE BBB.rn BETWEEN #{begin} AND #{end}
+	</select>
+
 	<select id="selectInquiryContent" resultMap="inquiryDto">
 		SELECT * FROM inquiry WHERE no=#{no}
 	</select>
-	
+
 	<update id ="replyWrite">
 		UPDATE inquiry SET reply_content = #{content}, reply = 'Y' WHERE no = #{no}
 	</update>
