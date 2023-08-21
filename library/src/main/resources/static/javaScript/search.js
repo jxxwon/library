@@ -7,13 +7,13 @@ function getCurrentURL() {
 // URL에 따라 버튼 색상을 변경하는 JavaScript 함수
 function setButtonColorByURL() {
 	var currentURL = getCurrentURL();
-	document.getElementById("subMyBookStatus").classList.add("active");
+	document.getElementById("subTotalSearch").classList.add("active");
 	// 원하는 URL 패턴에 따라 버튼 색상을 변경합니다.
-	if (currentURL.includes("myInfo")) {
-		document.getElementById("subMyInfo").classList.add("active");
-		document.getElementById("subMyBookStatus").classList.remove("active");
-		document.getElementById("subMyInquiry").classList.remove("active");
-	} else if (currentURL.includes("myBookStatus")) {
+	if (currentURL.includes("totalSearch")) {
+		document.getElementById("subTotalSearch").classList.add("active");
+		//document.getElementById("subMyBookStatus").classList.remove("active");
+		//document.getElementById("subMyInquiry").classList.remove("active");
+	} /*else if (currentURL.includes("myBookStatus")) {
 		document.getElementById("subMyBookStatus").classList.add("active");
 		document.getElementById("subMyInquiry").classList.remove("active");
 		document.getElementById("subMyInfo").classList.remove("active");
@@ -21,7 +21,7 @@ function setButtonColorByURL() {
 		document.getElementById("subMyInquiry").classList.add("active");
 		document.getElementById("subMyBookStatus").classList.remove("active");
 		document.getElementById("subMyInfo").classList.remove("active");
-	}
+	}*/
 }
 
 // 페이지 로드 시 버튼 색상을 설정합니다.

@@ -54,8 +54,6 @@ public class SearchController {
 	@PostMapping("/datasearchProc")
 	public String datasearchProc() {
 
-	
-
 		return "search/searchMain";
 	}
 	
@@ -65,7 +63,13 @@ public class SearchController {
 		return "search/totalSearch";
 	}
 	
-	@GetMapping("/datasearch/subMenuSearch")
+	@PostMapping("/datasearch/totalSearchProc")
+	public String totalSearchProc(String totalSearch) {
+		System.out.println("totalSearch : "+ totalSearch);
+		return "search/totalSearch";
+	}
+	
+	@RequestMapping("/datasearch/subMenuSearch")
 	public String subMenuSearch() {
 		// TODO Auto-generated method stub
 		return "search/subMenuSearch";

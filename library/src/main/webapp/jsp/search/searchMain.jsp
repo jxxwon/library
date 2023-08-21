@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <head>
-<title>하이미디어 도서관 - 마이라이브러리 : 검색 메인</title>
+<title>하이미디어 도서관 - 검색 메인</title>
 
-<link href = "/css/main.css" rel = "stylesheet" type = "text/css">
-<link href = "/css/search.css" rel = "stylesheet" type = "text/css">
+<link href = "${context}css/main.css" rel = "stylesheet" type = "text/css">
+<link href = "${context}css/search.css" rel = "stylesheet" type = "text/css">
 </head>   
 
 <body>

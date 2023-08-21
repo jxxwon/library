@@ -53,7 +53,7 @@ function showInfo(menu) {
     xhr.send();
 }
 
-	let seatXhr;
+	let seatXhr = null;
 	showReservedSeat(room);
 function showReservedSeat(room){
 	seatXhr = new XMLHttpRequest();
