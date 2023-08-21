@@ -182,7 +182,7 @@ public class UserService {
 		
 		ArrayList<InquiryDTO> inquiries = userMapper.selectInquiryTitle(id, search, begin, end);
 		
-		String url = "myInquiry?currentPage=";
+		String url = "myInquiry?select=title&search="+search+"&currentPage=";
 		int totalCount = userMapper.count(id);
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		
