@@ -6,7 +6,7 @@
 <link href = "${context }css/admin.css" rel = "stylesheet" type = "text/css">
 <head>
 	<title>하이미디어 도서관 - 관리자 페이지 : 회원관리</title>
-		<script src = "/javaScript/admin.js"></script>
+		<script src = "${context }javaScript/admin.js"></script>
 </head>
 
 <c:import url = "/header"/>
@@ -24,16 +24,16 @@
 					<a class="checked" href="/member">회원관리</a>
 				</div>
 				<div class = "subMenu_member" id = "subMenu_member">
-					<ul >
-						<li id = "activeLi" class = "admin_menu active" onclick="showMember('memberAuth')">인증 승인/반려</li>
-						<li><a href = "#">회원 제재</a></li>
-						<li><a href = "#">회원 목록 조회</a></li>
+					<ul>
+						<li class = "admin_menu" onclick="showMember('memberAuth')">인증 승인/반려</li>
+						<li class = "admin_menu"><a href = "#">회원 제재</a></li>
+						<li class = "admin_menu" onclick="showMember('memberList')">회원 목록 조회</li>
 					</ul>
 				</div>
 			</div>
 			<div class="adminMemberContainer">
 				<div id = "memberContainer">
-					<c:import url = "/admin/memberAuth"/>
+					<c:import url = "${context }admin/memberAuth"/>
 				</div>
 			</div>
 		</div>

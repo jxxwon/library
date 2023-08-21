@@ -6,22 +6,20 @@ function getCurrentURL() {
 // URL에 따라 버튼 색상을 변경하는 JavaScript 함수
 function setButtonColorByURL() {
   var currentURL = getCurrentURL();
+  var subMemberElement = document.getElementById("subMember");
+  var subInquiryElement = document.getElementById("subInquiry");
+  
   // 원하는 URL 패턴에 따라 버튼 색상을 변경합니다.
-  if (currentURL.includes("member")) {
-      document.getElementById("subMember").classList.add("active");
-  } else if(currentURL.includes("inquiry")){
-	  document.getElementById("subInquiry").classList.add("active");
+  if (currentURL.includes("member") && subMemberElement) {
+      subMemberElement.classList.add("active");
+  } else if(currentURL.includes("inquiry") && subInquiryElement){
+	  subInquiryElement.classList.add("active");
   }
 
 }
 
 // 페이지 로드 시 버튼 색상을 설정합니다.
 setButtonColorByURL();
-
-// 페이지 URL이 변경될 때마다 버튼 색상을 업데이트합니다.
-window.onpopstate = function () {
-  setButtonColorByURL();
-}
 
 // 회원관리 탭 클릭 시 화면 전환
 function showMember(menu){
@@ -35,18 +33,6 @@ function showMember(menu){
           }
         };
         xhr.send();
-}
-
-
-// 회원관리 - 조회조건
-
-function condition(){
-	var li = document.getElementById('activeLi').textContent;
-	if(li == '인증 승인/반려'){
-		document.getElementById('idLbl').style.display="none";
-		document.getElementById('searchSelect').style.display="none";
-		document.getElementById('memberSearch').style.display="none";
-	}
 }
 
 // 회원인증 상세화면

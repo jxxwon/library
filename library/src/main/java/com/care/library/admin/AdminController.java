@@ -42,6 +42,12 @@ public class AdminController {
 		return "admin/memberAuth";
 	}
 	
+	@RequestMapping("/admin/memberList")
+	public String memberList(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="memberSelect", required = false)String memberSelect, Model model) {
+		service.selectMember(cp, memberSelect, model);
+		return "admin/memberList";
+	}
+	
 	@RequestMapping("/admin/memberConfirm")
 	public String memberConfirm(String id, Model model) {
 		service.selectUser(id, model);
