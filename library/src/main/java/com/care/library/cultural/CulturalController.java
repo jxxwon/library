@@ -45,11 +45,17 @@ public class CulturalController {
 	 * registrationStart, registrationEnd, target, writeDate); return
 	 * "cultural/culWrite"; // 뷰 페이지로 이동 }
 	 */
-    @RequestMapping("culWrite") 
-    public String culWrite(CulturalDTO cultural) {
-    	service.culFormWrite(cultural);
-    	System.out.println("CulturalController_culWrite 확인");
-    	return "cultural/culWrite"; // 뷰 페이지로 이동
+	/*
+	 * @RequestMapping("culWrite") public String culWrite(CulturalDTO cultural) {
+	 * service.culFormWrite(cultural);
+	 * System.out.println("CulturalController_culWrite 확인"); return
+	 * "cultural/culWrite"; // 뷰 페이지로 이동 }
+	 */
+    @RequestMapping("culWrite")
+    public String getCultural(@RequestParam("culId") int culId, Model model) {
+    	CulturalDTO cultural = service.culFormWrite(culId); // 데이터 가져오기
+        model.addAttribute("cultural", cultural); // JSP로 데이터 전달
+        return "cultural/culWrite"; // 뷰 페이지로 이동
     }
     
     @RequestMapping("cultural")

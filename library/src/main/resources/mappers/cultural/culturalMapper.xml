@@ -66,19 +66,5 @@
 		WHERE
 			cul_id = #{culId}
 	</select>
-<!-- 	<select id="culFormWrite" resultMap="culturalDto">
-	   SELECT
-			image_path,
-			title,
-			lecture_start,
-			lecture_end,
-			registration_start,
-			registration_end,
-			target,
-			write_date
-		FROM
-			cultural
-		WHERE
-			cul_id = #{culId}
-	</select> -->
+
 </mapper>

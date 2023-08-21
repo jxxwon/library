@@ -30,10 +30,10 @@ public class CulturalService {
     
     @Autowired private HttpSession session;
     
-    CulturalDTO cultural = new CulturalDTO();
-    
     // 페이지 넘기기
     public void culturalForm(String cp, Model model) {
+    	CulturalDTO cultural = new CulturalDTO();
+    	
     	System.out.println("culturalForm실행");
     	System.out.println("Image Path: " + cultural.getImagePath());
         int currentPage = 1;
@@ -139,22 +139,11 @@ public class CulturalService {
 	 * culturalMapper.culFormWrite(imagePath, culId, title, lectureStart,
 	 * lectureEnd, registrationStart, registrationEnd, target, writeDate); }
 	 */
-    public void culFormWrite(CulturalDTO cultural) {
-    	System.out.println("culFormWrite실행");
-        culturalMapper.culFormWrite(cultural);
-        
-		/*
-		 * cultural.setLectureStart(multi.getParameter("ImagePath"));
-		 * cultural.setLectureStart(multi.getParameter("title"));
-		 * cultural.setLectureStart(multi.getParameter("LectureStart"));
-		 * cultural.setLectureEnd(multi.getParameter("LectureEnd"));
-		 * cultural.setRegistrationStart(multi.getParameter("RegistrationStart"));
-		 * cultural.setRegistrationEnd(multi.getParameter("RegistrationEnd"));
-		 * cultural.setRegistrationEnd(multi.getParameter("target"));
-		 * cultural.setRegistrationEnd(multi.getParameter("WriteDate"));
-		 */
-                
-        System.out.println("culFormWrite_종료");
+    public CulturalDTO culFormWrite(int culId) {
+        System.out.println("culFormWrite 실행");
+        CulturalDTO cultural = culturalMapper.culFormWrite(culId); // 해당 ID에 해당하는 데이터 가져오기
+        System.out.println("culFormWrite 종료");
+        return cultural;
     }
     
 }
