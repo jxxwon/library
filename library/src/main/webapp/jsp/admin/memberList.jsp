@@ -6,16 +6,8 @@
 <link href = "${context }css/main.css" rel = "stylesheet" type = "text/css">
 <link href = "${context }css/admin.css" rel = "stylesheet" type = "text/css">
 <script src = "${context }javaScript/admin.js"></script>
-<head>
-	<title>하이미디어 도서관 - 관리자 페이지 : 회원관리</title>
-		<script>
-		document.addEventListener('DOMContentLoaded', function() {
-		      condition();
-		    });
-		</script>
-</head>
 
-<body onload="condition()">
+<body>
 	<div class="contentBox">
 		<form action="">
 			<div class="condition" >

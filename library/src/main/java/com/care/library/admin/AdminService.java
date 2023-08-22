@@ -35,8 +35,8 @@ public class AdminService {
 		
 		ArrayList<MemberDTO> members = mapper.selectMember(memberSelect, begin, end);
 		
-		String url = "member?currentPage=";
-		int totalCount = mapper.count();
+		String url = "member?memberSelect="+memberSelect+"&currentPage=";
+		int totalCount = mapper.countUser(memberSelect);
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		
 		model.addAttribute("members", members);

@@ -20,6 +20,10 @@
   	<select id = "count">
   		SELECT count(id) FROM member
   	</select>
+
+  	<select id = "countUser">
+  		SELECT count(id) FROM member WHERE status = #{memberSelect}
+  	</select>
 	
 	<select id = "selectMember" resultMap="memberDto">
 		SELECT rownum as rn, AAA.* FROM (SELECT * FROM member WHERE status = #{memberSelect} ORDER BY auth_date ASC)AAA

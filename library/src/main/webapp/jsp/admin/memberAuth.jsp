@@ -45,7 +45,7 @@
 				</tr>
 				<c:choose>
 					<c:when test = "${empty members}">
-						<tr>
+						<tr style = "color:#000; cursor:default">
 							<td colspan=5> 조회된 회원이 없습니다. </td>
 						</tr>
 					</c:when>

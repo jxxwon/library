@@ -36,6 +36,9 @@ h1{margin-bottom:50px;}
 .contentBox .memberPage a{text-align:center; display:inline-block; width:30px; height:30px; line-height:30px; font-weight:400; border:1px solid #ddd; margin-right:5px; font-size:15px; padding:0}
 .contentBox .memberPage a:last-child{margin-right:0;}
 
+.selectMember tr:hover {color:blue; cursor:pointer;}
+.selectMember tr:first-child:hover {color:#000; cursor:default;}
+
 /*회원관리 - 상세화면*/
 .memberContainer{text-align:center; border-top:1px solid #ddd;}
 

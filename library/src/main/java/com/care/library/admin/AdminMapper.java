@@ -40,4 +40,6 @@ public interface AdminMapper {
 
 	ArrayList<InquiryDTO> selectInquiryWriter(String search, int begin, int end);
 
+	int countUser(String memberSelect);
+
 }
