@@ -8,12 +8,12 @@
     /*padding: 50px 0 50px 0;*/
 }
 .searchContainer .condition::before {
-	position: absolute; bottom: 0; left: 0; content: ""; 
-    height: 647px; 
+	position: absolute; top: -165px; left: 0; content: ""; 
+    height: 908px; 
     width: 100%; 
     margin: 0 auto;
     min-width: 1200px;
-    background: url('/image/visual_main2.jpg')no-repeat fixed 50% 40%;
+    background: url('/image/search_background1.jpg')no-repeat fixed 50% 40%;
     background-size: cover;
     opacity: 0.3;
 }
