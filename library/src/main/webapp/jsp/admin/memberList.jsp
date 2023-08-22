@@ -13,6 +13,7 @@
 			<div class="condition" >
 				<label id="memberLbl" class="memberLbl">회원구분</label>
 				<select id="memberSelect" class="memberSelect" name="memberSelect">
+					<option <c:if test="${param.memberSelect == 'T'}">selected='selected'</c:if> value = "T">전체</option>
 					<option <c:if test="${param.memberSelect == 'R'}">selected='selected'</c:if> value = "R">인증신청</option>
 					<option <c:if test="${param.memberSelect == 'D'}">selected='selected'</c:if> value = "D">준회원</option>
 					<option <c:if test="${param.memberSelect == 'A'}">selected='selected'</c:if> value = "A">정회원</option>
@@ -20,9 +21,9 @@
 				</select>
 				<label id="idLbl" class="idLbl">아이디</label>
 				<select id="searchSelect" class="searchSelect">
-					<option>아이디</option>
-					<option>이름</option>
-					<option>연락처</option>
+					<option <c:if test="${param.searchSelect == 'id'}">selected='selected'</c:if> value = "id">아이디</option>
+					<option <c:if test="${param.searchSelect == 'name'}">selected='selected'</c:if> value = "name">이름</option>
+					<option <c:if test="${param.searchSelect == 'mobile'}">selected='selected'</c:if> value = "mobile">연락처</option>
 				</select>
 				<input type = "text" placeholder="검색어를 입력하세요." id="memberSearch">
 				<input type = "submit" value = "조회" id="searchBtn">

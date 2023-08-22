@@ -44,7 +44,7 @@ public class AdminController {
 	
 	@RequestMapping("/admin/memberList")
 	public String memberList(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="memberSelect", required = false)String memberSelect, Model model) {
-		service.selectMember(cp, memberSelect, model);
+//		service.selectMember(cp, memberSelect, model);
 		return "admin/memberList";
 	}
 	

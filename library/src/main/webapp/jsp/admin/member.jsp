@@ -9,6 +9,24 @@
 		<script src = "${context }javaScript/admin.js"></script>
 </head>
 
+<script>
+//탭 클릭 시 active 추가
+	document.addEventListener('DOMContentLoaded', function() {
+	    const subMenuItems = document.querySelectorAll('.admin_menu');
+	    subMenuItems[0].classList.add('active');
+	
+	    subMenuItems.forEach(item => {
+	        item.addEventListener('click', function() {
+	            subMenuItems.forEach(item => {
+	                item.classList.remove('active');
+	            });
+	
+	            this.classList.add('active');
+	        });
+	    });
+	});
+</script>
+
 <c:import url = "/header"/>
 
 
@@ -24,7 +42,7 @@
 					<a class="checked" href="/member">회원관리</a>
 				</div>
 				<div class = "subMenu_member" id = "subMenu_member">
-					<ul>
+					<ul class = "admin_member">
 						<li class = "admin_menu" onclick="showMember('memberAuth')">인증 승인/반려</li>
 						<li class = "admin_menu"><a href = "#">회원 제재</a></li>
 						<li class = "admin_menu" onclick="showMember('memberList')">회원 목록 조회</li>
