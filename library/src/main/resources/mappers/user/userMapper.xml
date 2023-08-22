@@ -36,7 +36,7 @@
 	
 	<!-- 회원탈퇴 (게시글 및 리뷰 보존을 위해 아이디를 난수로 변경, 기타 개인정보는 null) -->
 	<update id = "updateId">
-		UPDATE member SET id = #{delId}, name = '', pro_name = '', birth = '', email = '', post_code = '', address = '', detail_address = '', mobile = '', reg_date='', status = 'W', kakaoid='' WHERE id = #{id}
+		UPDATE member SET id = #{delId}, name = '', pro_name = '', birth = '', email = '', post_code = '', address = '', detail_address = '', mobile = '', reg_date='', status = 'W', kakaoid='', auth_date = '', paper = '', user_group = '', reject = '' WHERE id = #{id}
 	</update>
 
 	

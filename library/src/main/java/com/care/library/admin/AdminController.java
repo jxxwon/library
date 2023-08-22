@@ -38,8 +38,33 @@ public class AdminController {
 	
 	@RequestMapping("/admin/memberAuth")
 	public String adminMember(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="memberSelect", required = false)String memberSelect, Model model) {
+		if (memberSelect == null) {
+			memberSelect = "R";
+		}
 		service.selectMember(cp, memberSelect, model);
 		return "admin/memberAuth";
+	}
+	
+	@RequestMapping("/admin/memberList")
+	public String memberList(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="memberSelect", required = false)String memberSelect,  @RequestParam(value="searchSelect", required = false)String searchSelect, @RequestParam(value="search", required = false)String search, Model model) {
+		if(memberSelect == null && searchSelect == null && search == null) {
+			service.selectMember(cp, model); // 전체 검색
+		}
+		if(memberSelect == null && searchSelect != null) {
+			service.selectMember(cp, searchSelect, search, model);
+		}
+		if(memberSelect != null && searchSelect != null) {
+			service.selectMember(cp, memberSelect, searchSelect, search, model);
+		} else if(memberSelect != null && searchSelect == null){
+			service.selectMember(cp, memberSelect, model);
+		}
+		return "admin/memberList";
+	}
+	
+	@RequestMapping("/admin/memberDetail")
+	public String memberDetail(String id, Model model) {
+		service.selectUser(id, model);
+		return "admin/memberDetail";
 	}
 	
 	@RequestMapping("/admin/memberConfirm")

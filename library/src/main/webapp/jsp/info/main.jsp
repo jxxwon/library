@@ -5,7 +5,7 @@
 <link href = "${context }css/main.css" rel = "stylesheet" type = "text/css">
 <link href = "${context }css/admin.css" rel = "stylesheet" type = "text/css">
 <head>
-	<title>하이미디어 도서관 - 관리자 페이지 : 회원관리</title>
+	<title>하이미디어 도서관 - 정보광장</title>
 		<script src = "${context }javaScript/admin.js"></script>
 </head>
 
@@ -29,10 +29,9 @@
 
 <c:import url = "/header"/>
 
-
 <body>
 	<div class = "adminContainer inner pageContent_mt">
-		<c:import url = "/subMenuAdmin"/>
+		<c:import url = "/subMenuInfo"/>
 		<div class = "adminContent">
 			<div class = "admin header">
 				<h1>회원관리</h1>

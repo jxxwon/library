@@ -17,38 +17,9 @@ public class AdminService {
 	@Autowired AdminMapper mapper;
 	@Autowired NotifyService notiService;
 	
-	public void selectMember(String cp, String memberSelect, Model model) {
-		if(memberSelect == null) {
-			memberSelect = "R";
-		}
-		
-		int currentPage = 1;
-		try{
-			currentPage = Integer.parseInt(cp);
-		}catch(Exception e){
-			currentPage = 1;
-		}
-		
-		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
-		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
-		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
-		
-		ArrayList<MemberDTO> members = mapper.selectMember(memberSelect, begin, end);
-		
-		String url = "member?currentPage=";
-		int totalCount = mapper.count();
-		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
-		
-		model.addAttribute("members", members);
-		model.addAttribute("result", result);
-		model.addAttribute("currentPage", currentPage);
-	}
+	//회원관리 관련
 
-	public void selectUser(String id, Model model) {
-		MemberDTO result = mapper.selectUser(id);
-		model.addAttribute("member", result);
-	}
-
+	// 회원 인증
 	public String memberConfirm(String id, String userGroup, String paper, String authDate, String reject) {
 		String result = "";
 		if (reject.equals("")) {
@@ -76,7 +47,106 @@ public class AdminService {
 	public MemberDTO statusChk(String id) {
 		return mapper.selectUser(id);
 	}
+	
+	// 회원 목록 - 전체 조회
+	public void selectMember(String cp, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<MemberDTO> members = mapper.selectAllMember(begin, end);
+		
+		String url = "memberList?currentPage=";
+		int totalCount = mapper.count();
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("members", members);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+		
+	}
+	public void selectMember(String cp, String memberSelect, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<MemberDTO> members = mapper.selectMember(memberSelect, begin, end);
+		
+		String url = "member?memberSelect="+memberSelect+"&currentPage=";
+		int totalCount = mapper.countUser(memberSelect);
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("members", members);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+	}
+	
+	public void selectUser(String id, Model model) {
+		MemberDTO result = mapper.selectUser(id);
+		model.addAttribute("member", result);
+	}
 
+	public void selectMember(String cp, String searchSelect, String search, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<MemberDTO> members = mapper.searchMember(searchSelect, search, begin, end);
+		int totalCount = mapper.countMember(searchSelect, search);
+		
+		String url = "memberList?searchSelect="+searchSelect+"&search="+search +"&currentPage=";
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("members", members);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+	}
+	
+	public void selectMember(String cp, String memberSelect, String searchSelect, String search, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<MemberDTO> members = mapper.searchMemberDiv(memberSelect, searchSelect, search, begin, end);
+		int totalCount = mapper.countMemberDiv(memberSelect, searchSelect, search);
+		
+		String url = "memberList?memberSelect="+memberSelect+"&searchSelect="+searchSelect+"&search="+search +"&currentPage=";
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("members", members);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+	}
+	
+	//1:1문의
 	public void selectInquiryTitle(String cp, String select, String search, Model model) {
 		int currentPage = 1;
 		try{
@@ -174,6 +244,8 @@ public class AdminService {
 		notification.setUrl("/myLibrary/myInquiry");
 		notiService.register(notification);
 	}
+
+
 
 
 
