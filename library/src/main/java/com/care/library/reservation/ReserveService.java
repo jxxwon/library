@@ -58,6 +58,21 @@ public class ReserveService {
 //		System.out.println();
 		return reservedSeat;
 	}
+	
+	public ReserveDTO getMySeat(String id, Model model) {
+		ReserveDTO mySeat = userMapper.getMySeat(id);
+		if(mySeat != null) {
+			if(mySeat.getRoom().equals("R1"))
+				mySeat.setRoom("자율 학습실1");
+			if(mySeat.getRoom().equals("R2"))
+				mySeat.setRoom("자율 학습실2");
+			
+			model.addAttribute("mySeat", mySeat);
+			return mySeat;
+		}
+		return null;
+	}
 
 
+	
 }

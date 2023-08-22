@@ -92,7 +92,7 @@ function updateSeatStatus() {
 let popupWindow;
 //let popupForm;
 let seatNumber;
-
+let recentRoom;
 let reserveXhr;
 
 function activateEach_seat() {
@@ -105,15 +105,20 @@ function activateEach_seat() {
 		} 
 		return;
 	}
-
-	//좌석 번호, 아이디, 열람실 이름을 변수에 설정.
-	if (this.classList.contains("using")) {
-		alert("이미 예약된 좌석입니다.");
-		return;
-	}
 	seatNumber = this.textContent;
 	let roomDiv = document.querySelector('.whichRoom');
 	recentRoom = roomDiv.innerText.split('\n')[0];
+	
+	//좌석 번호, 아이디, 열람실 이름을 변수에 설정.
+	if (this.classList.contains("using")) {
+		if(this.classList.contains("mine")){
+			mySeatProc();
+			return;
+		}
+		alert("이미 예약된 좌석입니다.");
+		return;
+	}
+	
 
 	let message = `열람실: ${recentRoom}\n좌석 번호: ${seatNumber}\n이름: ${userName}\n\n예약하시겠습니까?`; // 메시지 구성
 	let isConfirmed = confirm(message); // confirm 다이얼로그 표시
@@ -145,3 +150,41 @@ function reserveProc() {
 	window.location.reload();
 }
 
+//내좌석 클릭시 좌석 정보를 보여주고 퇴실 여부 묻기.
+
+let mySeat = document.querySelector('.mine');
+mySeat.addEventListener('click', mySeatProc);
+
+function mySeatProc(){
+	console.log("내 자리");
+	openCustomModal();
+	modalContent();
+	//let message = `열람실: ${recentRoom}\n좌석 번호: ${seatNumber}\n이름: ${userName}\n\n예약하시겠습니까?`; // 메시지 구성
+	//let isConfirmed = confirm(message); // confirm 다이얼로그 표시
+}
+
+//모달
+const customModal = document.getElementById('customModal');
+const confirmButton = document.getElementById('confirmButton');
+const cancelButton = document.getElementById('cancelButton');
+
+function openCustomModal() {
+  customModal.style.display = 'flex';
+}
+
+function closeCustomModal() {
+  customModal.style.display = 'none';
+}
+
+function modalContent() {
+  let modal_content = document.querySelector('.modal_content').textContent;
+  modal_content = `열람실: ${recentRoom}\n좌석 번호: ${seatNumber}\n이름: ${userName}\n\n예약하시겠습니까?`;
+  
+}
+
+confirmButton.addEventListener('click', function() {
+  // 예약 처리 로직
+  closeCustomModal();
+});
+
+cancelButton.addEventListener('click', closeCustomModal);

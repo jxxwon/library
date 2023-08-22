@@ -31,12 +31,20 @@ public class ReserveController {
 	}
 
 	@GetMapping("/reservation/readingRoom1")
-	public String readingRoom1() {
+	public String readingRoom1(Model model) {
+		String id = (String) session.getAttribute("id");
+		if(id != null) {
+			service.getMySeat(id, model);
+		}
 		return "reservation/readingRoom1";
 	}
 
 	@GetMapping("/reservation/readingRoom2")
-	public String readingRoom2() {
+	public String readingRoom2(Model model) {
+		String id = (String) session.getAttribute("id");
+		if(id != null) {
+			service.getMySeat(id, model);
+		}
 		return "reservation/readingRoom2";
 	}
 

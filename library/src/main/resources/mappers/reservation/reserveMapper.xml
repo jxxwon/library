@@ -25,6 +25,11 @@
 	 <select id="getReservedSeat" resultMap="reserveDTO">
 		SELECT seat_id, user_id FROM reservation WHERE room = #{room}
 	</select> 
+	
+	<!-- 내 좌석 정 -->	
+	 <select id="getMySeat" resultMap="reserveDTO">
+		SELECT * FROM reservation WHERE user_id = #{id}
+	</select> 
   	
 </mapper>
 

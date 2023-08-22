@@ -15,5 +15,7 @@ public interface ReserveMapper {
 	ArrayList<ReserveDTO> getReservedSeat(String room);
 	
 	int reservedNum(String room);
+	
+	ReserveDTO getMySeat(String id);
 
 }
