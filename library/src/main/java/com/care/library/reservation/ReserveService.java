@@ -14,6 +14,7 @@ public class ReserveService {
 	@Autowired HttpSession session;
 	
 	public String userCheck(String id) {
+	System.out.println("userCheck");
 		 int usingUser = userMapper.usingUser(id); 
 		 if(usingUser >= 1) 
 			 return "이미 예약한 좌석이 존재합니다.";
@@ -31,7 +32,6 @@ public class ReserveService {
 		  
 		  int result = userMapper.reservation(resevedData); 
 		  if(result == 1) {
-			  
 			  return "예약이 완료되었습니다.";
 		  }
 		  return "예약이 정상적으로 이루어지지 않았습니다.";
@@ -58,7 +58,7 @@ public class ReserveService {
 	  }
 	  
 	  public void reservedSeatNum(Model model, String whichRoom) {
-		  System.out.println("getRecentSeat : "+ whichRoom);
+		  //System.out.println("getRecentSeat : "+ whichRoom);
 		  int reservedNum = userMapper.reservedNum(whichRoom);
 		  model.addAttribute("reservedNum", reservedNum);
 	  }

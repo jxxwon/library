@@ -12,8 +12,8 @@
 <c:set var="empty_seat" value="${96 - reservedNum}" />
 <script>
         // 메세지 변수를 JavaScript 변수로 변환
-        var userCheckMsg = "${userCheckMsg}";
-        var reserveMsg = "${reserveMsg}";
+        let userCheckMsg = "${userCheckMsg}";
+       	let reserveMsg = "${reserveMsg}";
         
         if(userCheckMsg !== "")
         // alert로 메세지 출력

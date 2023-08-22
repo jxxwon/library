@@ -68,13 +68,12 @@ public class ReserveController {
 	@PostMapping("/reservation/reserveProc")
 	public String reserveProc(@RequestBody ReserveDTO reqData,  RedirectAttributes ra) {
 		String id = (String)session.getAttribute("id");
-		
 		String userCheck = service.userCheck(id);
+		
 		if(userCheck.equals("이미 예약한 좌석이 존재합니다.")) {
 			ra.addFlashAttribute("userCheckMsg", userCheck);
 			return "redirect:/reservation";
 		}
-
 		 Date nowDate = new Date();
 		 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); 
      	 //원하는 데이터 포맷 지정
@@ -83,11 +82,22 @@ public class ReserveController {
 		 reqData.setReserveDate(strNowDate);
 		 
 		 reqData.setUserId(id);
+		System.out.println("팝업에서 져온것 : "+reqData.getRoom());
 		 
 		 String result = service.reservation(reqData);
+		 System.out.println("result : " + result);
 		 ra.addFlashAttribute("reserveMsg", result);
-		 return "redirect:/reservation";
 		 
+		 if(result.equals("예약이 완료되었습니다.")) {
+			 System.out.println(reqData.getRoom());
+			 if(reqData.getRoom().equals("R1")) {
+				 System.out.println("자율 학습실1에 예약");
+				 return "redirect:/reservation/readingRoom1";
+			 }
+			 return "redirect:/reservation/readingRoom2";
+			 
+		 }
+		 return "redirect:/reservation/readingRoom1";
 	}
 
 }

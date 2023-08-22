@@ -11,8 +11,8 @@
 <c:set var="empty_seat" value="${96 - reservedNum}" />
 	<script>
 	        // 메세지 변수를 JavaScript 변수로 변환
-	        var userCheckMsg = "${userCheckMsg}";
-	        var reserveMsg = "${reserveMsg}";
+	        let userCheckMsg = "${userCheckMsg}";
+	        let reserveMsg = "${reserveMsg}";
 	        
 	        if(userCheckMsg !== "")
 	        // alert로 메세지 출력
@@ -92,7 +92,7 @@
 		reservedSeat = ${reservedSeat};
 		console.log("room2", reservedSeat)
 	</script> -->
+	<script src="/javaScript/reservation.js"></script>
 	<c:import url="/footer" />
 
-	<script src="/javaScript/reservation.js"></script>
 </body>

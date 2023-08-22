@@ -101,7 +101,7 @@ function updateSeatStatus() {
 
 //팝업으로 좌석 예약하기
 let popupWindow;
-let f;
+//let popupForm;
 let seatNumber;
 let whichRoom;
 function activateEach_seat() {
@@ -125,9 +125,10 @@ function activateEach_seat() {
 	let reserve;
 	if(this.classList.contains("using")){
 		alert("이미 사용중인 좌석입니다.")
-	}else{
-		//reserve = confirm(seatNumber + "를 예약하시겠습니까?");
 	}
+	//else{
+		//reserve = confirm(seatNumber + "를 예약하시겠습니까?");
+	//}
 	//if (reserve) {
 		let url = "/reservation/roomPopUp?seatId=" + seatNumber + "&room=" + whichRoom;
 
@@ -144,8 +145,9 @@ function activateEach_seat() {
 		popupWindow.onload = function() {
 			const cancelBtn = popupWindow.document.querySelector('.popCancelBtn');
 			cancelBtn.addEventListener('click', closePopUp);
+			
 			const reserveBtn = popupWindow.document.querySelector('.reserveBtn')
-			f = popupWindow.document.getElementById('f');
+			//popupForm = popupWindow.document.getElementById('f');
 			//console.log(f);
 			reserveBtn.addEventListener('click', reserveSubmit);
 		//};
@@ -160,8 +162,9 @@ function closePopUp() {
 		popupWindow.close();
 	}
 }
+var reserveXhr;
 function reserveSubmit() {
-	let result = popupWindow.confirm("예약 하시겠습니까?");
+	var result = popupWindow.confirm("예약 하시겠습니까?");
 	if(result){
 		var reqData = { seatId: seatNumber, room: whichRoom }
 		// JSON.stringify(reqData) : 자바스크립트 object 자료형을 JSON 문자열 자료형으로 변환
@@ -169,16 +172,39 @@ function reserveSubmit() {
 		//console.log('JSON.stringify(reqData) : ' + JSON.stringify(reqData))
 
 		reqData = JSON.stringify(reqData);
-		const xhr = new XMLHttpRequest();
-		xhr.open('POST', "/reservation/reserveProc");
-		xhr.setRequestHeader('content-type', 'application/json');
-		xhr.send(reqData);
-
-		f.submit();
+		reserveXhr = new XMLHttpRequest();
+		reserveXhr.open('POST', "/reservation/reserveProc");
+		reserveXhr.setRequestHeader('content-type', 'application/json');
+		reserveXhr.send(reqData);
+		
+		reserveXhr.onreadystatechange = reserveProc;
+		//popupForm.submit();
+        if(whichRoom == "자율 학습실1")
+        	whichRoom = "readingRoom1";
+        if(whichRoom == "자율 학습실2")
+        	whichRoom = "readingRoom2";
+        location.href="/reservation/"+whichRoom;
 		
 		// 원래 창 새로고침
-        window.location.reload();
 		popupWindow.close();
+        window.location.reload();
 	}
 }
+
+
+function reserveProc() {
+	console.log("reserveProc");
+    if (reserveXhr.readyState === 4) {console.log("roomProc1");
+        if (seatXhr.status === 200) {console.log("roomProc2");
+        	let response = seatXhr.responseText;
+        	console.log(response);
+        	
+			//updateSeatStatus();
+			//reservedSeat = seatXhr.responseText;
+        } else {
+            console.log('에러: ' + seatXhr.status);
+        }
+    }
+}
+
 
