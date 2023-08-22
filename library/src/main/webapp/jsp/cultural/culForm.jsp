@@ -3,7 +3,7 @@
 <%@ page import="com.care.library.common.PageService" %>
 <title>하이디미어 도서관 - 문화행사</title>
 <c:url var="context" value="/" />
-<link href="/css/cultural.css" rel="stylesheet" type="text/css">
+<link href="${context }css/cultural.css" rel="stylesheet" type="text/css">
 
 <script>
   	document.addEventListener('DOMContentLoaded', function() {	
@@ -93,28 +93,30 @@
 	            </c:forEach>
 	        </ul> --%>
 			<ul class="teach_list">
-	            <c:forEach var="cultural" items="${culturalList}">
-	                <li class="ever_one">
-	                    <div class="thumb">
-	                        <a href="${context}culWrite?culId=${cultural.culId}">
-	                            <img src="${cultural.imagePath}" alt="image" class="teach_img" style="width:280px; height: 385px;">
-	                        </a>
-	                    </div>
-	                    <div class="list_area">
-	                        <div class="title_area">
-	                            <a href="${context}culWrite?culId=${cultural.culId}">
-	                           <%--  <a href="${context}culWrite/${cultural.culId}"> --%>
-	                                <b class="title">${cultural.title}</b>
-	                            </a>
-	                        </div>
-	                        <ul class="con2">
-	                            <li><span class="tit">강의기간</span>${cultural.lectureStart} ~ ${cultural.lectureEnd}</li>
-	                            <li><span class="tit">접수기간</span>${cultural.registrationStart} ~ ${cultural.registrationEnd}</li>
-	                            <li><span class="tit">대&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상</span>${cultural.target}</li>
-	                        </ul>
-	                    </div>
-	                </li>
-	            </c:forEach>
+				<c:if test="${cultural.culId eq param.culId}">
+		            <c:forEach var="cultural" items="${culturalList}">
+		                <li class="ever_one">
+		                    <div class="thumb">
+		                        <a href="culModify.jsp?culId=${cultural.culId}">${cultural.title}</a>
+		                            <img scr="${cultural.imagePath}" alt="image" class="teach_img" style="width:280px; height: 385px;">
+		                        </a>
+		                    </div>
+		                    <div class="list_area">
+		                        <div class="title_area">
+		                            <a href="${context}culWrite?culId=${cultural.culId}">
+		                           <%--  <a href="${context}culWrite/${cultural.culId}"> --%>
+		                                <b class="title">${cultural.title}</b>
+		                            </a>
+		                        </div>
+		                        <ul class="con2">
+		                            <li><span class="tit">강의기간</span>${cultural.lectureStart} ~ ${cultural.lectureEnd}</li>
+		                            <li><span class="tit">접수기간</span>${cultural.registrationStart} ~ ${cultural.registrationEnd}</li>
+		                            <li><span class="tit">대&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상</span>${cultural.target}</li>
+		                        </ul>
+		                    </div>
+		                </li>
+		            </c:forEach>
+	            </c:if>
 			</ul>
 	    </div>
 		<div class="paging">	
@@ -125,4 +127,4 @@
 
 <c:import url="/footer" />
 
-<script src="/javaScript/subCulTop.js"></script>
+<script src="${context }javaScript/subCulTop.js"></script>

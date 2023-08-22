@@ -28,5 +28,16 @@ public interface AdminMapper {
 
 	void replyWrite(int no, String content);
 
+	int countInquiryReply(String replySelect);
+
+	ArrayList<InquiryDTO> selectInquiryReply(String replySelect, int begin, int end);
+
+	int countInquiryTitle(String search);
+
+	ArrayList<InquiryDTO> selectInquiryTitle(String search, int begin, int end);
+
+	int countInquiryWriter(String search);
+
+	ArrayList<InquiryDTO> selectInquiryWriter(String search, int begin, int end);
 
 }

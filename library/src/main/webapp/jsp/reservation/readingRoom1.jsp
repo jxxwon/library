@@ -2,9 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:url var="context" value="/"/>
 
 <link href="/css/main.css" rel="stylesheet" type="text/css">
 <link href="/css/reservation.css" rel="stylesheet" type="text/css">
+<link href = "${context }css/main.css" rel = "stylesheet" type = "text/css">
+<link href = "${context }css/reservation.css" rel = "stylesheet" type = "text/css">
 <title>하이미디어 도서관 - 좌석예약</title>
 
 <script>
@@ -92,6 +95,4 @@
 	</div>
 	<script src="/javaScript/reservation.js"></script>
 	<c:import url="/footer" />
-
-
 </body>

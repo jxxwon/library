@@ -48,10 +48,6 @@ public class UserController {
 			@RequestParam(value="replySelect", required = false) String replySelect, Model model) {
 		
 		String id = (String)session.getAttribute("id");
-		System.out.println("myInquiryList"+ id);
-		System.out.println("select : " + select);
-		System.out.println("search : " + search);
-		System.out.println("replySelect : " + replySelect);
 		
 		if(id == null || id.equals("")) {
 			return "redirect:main";
@@ -63,7 +59,11 @@ public class UserController {
 		} else if(select.equals("title") && search != null) {
 			service.selectInquiry(cp, search, id, model);
 		} else if(select.equals("reply")) {
-			service.selectInquiry(cp, select, replySelect, id, model);
+			if(replySelect.equals("A")) {
+				service.selectInquiry(cp, id, model);
+			} else {
+				service.selectInquiry(cp, select, replySelect, id, model);
+			}
 		}
 		
 		return "user/myInquiry";

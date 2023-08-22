@@ -21,7 +21,8 @@ public interface CulturalMapper {
 
 	void culFormWriteProc(CulturalDTO cultural);
 	
-	MemberDTO culFormWriteProc(String culId);
+	CulturalDTO culModifyId(String culId);
+	void culModifyProc(CulturalDTO cultural);
 	
 	/*
 	 * void culFormWrite(String imagePath, int culId, String title, String
@@ -29,6 +30,5 @@ public interface CulturalMapper {
 	 * registrationEnd, String target, String writeDate);
 	 */
 
-	void culFormWrite(CulturalDTO cultural);
 
 }
