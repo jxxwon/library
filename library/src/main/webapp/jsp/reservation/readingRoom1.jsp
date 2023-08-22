@@ -4,8 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:url var="context" value="/"/>
 
-<link href="/css/main.css" rel="stylesheet" type="text/css">
-<link href="/css/reservation.css" rel="stylesheet" type="text/css">
 <link href = "${context }css/main.css" rel = "stylesheet" type = "text/css">
 <link href = "${context }css/reservation.css" rel = "stylesheet" type = "text/css">
 <title>하이미디어 도서관 - 좌석예약</title>
@@ -40,8 +38,8 @@
 				<h1>열람실 좌석 예약</h1>
 				<div class="subMenu_reserve">
 					<ul>
-						<li class="room_menu active"><a href="${context}readingRoom1">자율학습실1</a></li>
-						<li class="room_menu"><a href="${context}readingRoom2">자율학습실2</a></li>
+						<li class="room_menu active"><a href="${context}reservation/readingRoom1">자율학습실1</a></li>
+						<li class="room_menu"><a href="${context}reservation/readingRoom2">자율학습실2</a></li>
 						<li class="room_menu"><a href="">스터디룸</a></li>
 					</ul>
 				</div>

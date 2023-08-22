@@ -43,7 +43,6 @@ public class ReserveService {
 
 	public void reservedSeatNum(Model model, String whichRoom, RedirectAttributes ra) {
 		int reservedNum = userMapper.reservedNum(whichRoom);
-		System.out.println("사용좌석 : " + reservedNum);
 		model.addAttribute("reservedNum", reservedNum);
 		ra.addAttribute("reservedNum", reservedNum);
 	}

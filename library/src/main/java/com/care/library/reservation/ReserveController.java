@@ -26,7 +26,6 @@ public class ReserveController {
 	@ResponseBody // return을 jsp가 아닌 응답 데이터를 주는 것이다.
 	@PostMapping(value = "reservation/room", produces = "application/json; charset=UTF-8")
 	public Object room(@RequestBody(required = false) String whichRoom) {
-		System.out.println("reservation : " + whichRoom);
 		ArrayList<String> reservedSeat = service.getReservedSeat(whichRoom);
 		return reservedSeat;
 	}
