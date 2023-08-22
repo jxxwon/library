@@ -54,7 +54,7 @@
 	</select>
 	
 	<update id = "memberConfirm" parameterType="com.care.library.member.MemberDTO">
-		UPDATE member SET status = 'A', user_group = #{userGroup}, paper = #{paper}, auth_date = #{authDate} WHERE id = #{id}
+		UPDATE member SET status = 'A', user_group = #{userGroup}, paper = #{paper}, auth_date = #{authDate}, reject = '' WHERE id = #{id}
 	</update>
 	
 	<update id = "memberReject">
