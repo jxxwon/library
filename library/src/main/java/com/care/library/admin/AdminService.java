@@ -77,7 +77,7 @@ public class AdminService {
 		return mapper.selectUser(id);
 	}
 
-	public void selectInquiry(String cp, Model model) {
+	public void selectInquiryTitle(String cp, String select, String search, Model model) {
 		int currentPage = 1;
 		try{
 			currentPage = Integer.parseInt(cp);
@@ -89,16 +89,71 @@ public class AdminService {
 		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
 		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
 		
-		ArrayList<InquiryDTO> inquiries = mapper.selectInquiry(begin, end);
+		ArrayList<InquiryDTO> inquiries = mapper.selectInquiryTitle(search, begin, end);
 		
-		String url = "inquiry?currentPage=";
-		int totalCount = mapper.countInquiry();
+		String url = "inquiry?select=" + select + "&search=" + search + "&currentPage=";
+		int totalCount = mapper.countInquiryTitle(search);
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("inquiries", inquiries);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+	}
+	
+	
+	public void selectInquiryWriter(String cp, String select, String search, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<InquiryDTO> inquiries = mapper.selectInquiryWriter(search, begin, end);
+		
+		String url = "inquiry?select=" + select + "&search=" + search + "&currentPage=";
+		int totalCount = mapper.countInquiryWriter(search);
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		
 		model.addAttribute("inquiries", inquiries);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
 		
+	}
+	
+	public void selectInquiryReply(String cp, String select, String replySelect, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<InquiryDTO> inquiries;
+		int totalCount;
+		
+		if(replySelect.equals("A")) {
+			inquiries = mapper.selectInquiry(begin, end);
+			totalCount = mapper.countInquiry();
+		} else {
+			inquiries = mapper.selectInquiryReply(replySelect, begin, end);
+			totalCount = mapper.countInquiryReply(replySelect);
+		}
+
+		String url = "inquiry?select=reply&replySelect="+replySelect +"&currentPage=";
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("inquiries", inquiries);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
 	}
 
 	public InquiryDTO inquiryContent(int no) {
@@ -119,6 +174,9 @@ public class AdminService {
 		notification.setUrl("/myLibrary/myInquiry");
 		notiService.register(notification);
 	}
+
+
+
 
 
 }
