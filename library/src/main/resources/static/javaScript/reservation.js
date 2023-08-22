@@ -24,7 +24,6 @@ setButtonColorByURL();
 window.onpopstate = function() {
 	setButtonColorByURL();
 };
-console.log("url에 따른 룸 이름 : ", whichRoom)
 
 
 
@@ -33,18 +32,16 @@ let each_seat = document.querySelectorAll('.each_seat');
 each_seat.forEach(item => item.addEventListener('click', activateEach_seat));
 
 
-// 탭 클릭 시에 좌석 상태 업데이트
+// 좌석 상태 업데이트 관련
 var reservedSeat = [];
 let seatXhr;
 let emptyNum;
 let usingNum;
-let empty_seat = document.querySelector('.empty_seat').textContent;
-let using_seat = document.querySelector('.using_seat').textContent;
+
 showReservedSeat(whichRoom);
 
-//선택한 좌석에 className 추가하기.(안하면 새로고침시 다 사라짐.)
+// 예약된 좌석 리스트를 가져와서 사용중임을 표시
 function showReservedSeat(whichRoom) {
-	console.log(whichRoom);
 	seatXhr = new XMLHttpRequest();
 	seatXhr.open('POST', "room");
 	seatXhr.send(whichRoom);
@@ -52,19 +49,13 @@ function showReservedSeat(whichRoom) {
 }
 
 function roomProc() {
-	console.log("roomProc");
 	if (seatXhr.readyState === 4) {
-		console.log("roomProc1");
 		if (seatXhr.status === 200) {
-			console.log("roomProc2");
-			reservedSeat = JSON.parse(seatXhr.responseText); console.log("roomProc3");
-
+			reservedSeat = JSON.parse(seatXhr.responseText);
 			usingNum = reservedSeat.length;
 			emptyNum = 96 - usingNum;
 
 			updateSeatStatus();
-			console.log("usingNum", usingNum);
-			console.log(typeof emptyNum);
 		} else {
 			console.log('에러: ' + seatXhr.status);
 		}
@@ -75,23 +66,26 @@ function roomProc() {
 // 초기 로딩 시 좌석 상태 업데이트
 updateSeatStatus();
 
-// 좌석 상태 업데이트 함수
 
+//선택한 좌석에 className 추가하기.(안하면 새로고침시 다 사라짐.)
 function updateSeatStatus() {
 	document.querySelector('.empty_seat').textContent = emptyNum;
 	document.querySelector('.using_seat').textContent = usingNum;
-	//console.log(empty_seat );
+	
+	
 	each_seat.forEach(item => {
 		for (let i = 0; i < reservedSeat.length; i++) {
-			console.log(reservedSeat);
-			if (item.textContent === String(reservedSeat[i])) {
-				console.log("이고" + String(reservedSeat[i]));
-				console.log("여기요", i);
+			if (item.textContent === String(reservedSeat[i].seatId)) {
 				item.classList.add('using');
+				if(sessionId ==  String(reservedSeat[i].userId)){
+					document.querySelector('.my_seat').textContent = reservedSeat[i].seatId+"번";
+					item.classList.add('mine');
+				}
 			}
 			
 		}
 	});
+
 }
 
 //팝업으로 좌석 예약하기
@@ -113,7 +107,6 @@ function activateEach_seat() {
 	}
 
 	//좌석 번호, 아이디, 열람실 이름을 변수에 설정.
-	console.log(this.classList);
 	if (this.classList.contains("using")) {
 		alert("이미 예약된 좌석입니다.");
 		return;
@@ -124,10 +117,8 @@ function activateEach_seat() {
 
 	let message = `열람실: ${recentRoom}\n좌석 번호: ${seatNumber}\n이름: ${userName}\n\n예약하시겠습니까?`; // 메시지 구성
 	let isConfirmed = confirm(message); // confirm 다이얼로그 표시
-	console.log("백엔드로 보낼때 룸이름 : ", whichRoom);
 	if (isConfirmed) {
 		// 사용자가 확인을 선택한 경우 처리할 내용
-		console.log("사용자가 확인을 선택했습니다.");
 		var reqData = { seatId: seatNumber, room: whichRoom }
 		reqData = JSON.stringify(reqData);
 		reserveXhr = new XMLHttpRequest();
@@ -140,16 +131,11 @@ function activateEach_seat() {
 }
 
 function reserveProc() {
-	console.log("reserveProc");
 	if (reserveXhr.readyState === 4) {
 		if (reserveXhr.status === 200) {
-			console.log(whichRoom);
 			showReservedSeat(whichRoom);
 
 			let response = reserveXhr.responseText;
-			console.log(response);
-			console.log(whichRoom);
-			console.log(seatNumber);
 			alert(response);
 
 		} else {

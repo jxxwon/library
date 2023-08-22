@@ -49,10 +49,11 @@ public class ReserveService {
 		return "예약이 정상적으로 이루어지지 않았습니다.";
 	}
 
-	public ArrayList<String> getReservedSeat(String whichRoom) {
-		ArrayList<String> reservedSeat = userMapper.getReservedSeat(whichRoom);
-//		for (String seat : reservedSeat) {
-//			System.out.println("seat : " + seat);
+	public ArrayList<ReserveDTO> getReservedSeat(String whichRoom) {
+		ArrayList<ReserveDTO> reservedSeat = userMapper.getReservedSeat(whichRoom);
+//		for (ReserveDTO seat : reservedSeat) {
+//			System.out.println("seat : " + seat.getSeatId());
+//			System.out.println("seat : " + seat.getUserId());
 //		}
 //		System.out.println();
 		return reservedSeat;

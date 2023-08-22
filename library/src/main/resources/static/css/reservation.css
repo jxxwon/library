@@ -139,13 +139,17 @@ h1 {
 	background-color: red;
 }
 
+.room_container ul li.mine{
+	background-color: purple;
+}
+
 .using{
 	background-color: red;
 	color: white;
 }
 
 .mine{
-	background-color: mediumpurple;
+	background-color: purple;
 	color: white;
 }
 

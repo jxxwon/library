@@ -22,8 +22,8 @@
 	</select> 
   	
   	<!-- 열람실 별 예약한 좌석수 -->	
-	 <select id="getReservedSeat">
-		SELECT seat_id FROM reservation WHERE room = #{room}
+	 <select id="getReservedSeat" resultMap="reserveDTO">
+		SELECT seat_id, user_id FROM reservation WHERE room = #{room}
 	</select> 
   	
 </mapper>

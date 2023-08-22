@@ -59,6 +59,10 @@
 							<span class="using_seat"></span>
 							석
 						</div>
+						<div class="seat_status mine">
+							내 좌석<br>
+							<span class="my_seat"></span>
+						</div>
 						<!-- <div>대기자<br>96석</div> -->
 					</div>
 					<div class="room_container">
