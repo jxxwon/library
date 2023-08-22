@@ -30,7 +30,6 @@ console.log("url에 따른 룸 이름 : ", whichRoom)
 
 //각 좌석 클릭 리스너 등록
 let each_seat = document.querySelectorAll('.each_seat');
-//console.log(each_seat);
 each_seat.forEach(item => item.addEventListener('click', activateEach_seat));
 
 
@@ -48,7 +47,6 @@ function showReservedSeat(whichRoom) {
 	console.log(whichRoom);
 	seatXhr = new XMLHttpRequest();
 	seatXhr.open('POST', "room");
-	//seatXhr.setRequestHeader('content-type', 'application/json');
 	seatXhr.send(whichRoom);
 	seatXhr.onreadystatechange = roomProc;
 }
@@ -65,7 +63,6 @@ function roomProc() {
 			emptyNum = 96 - usingNum;
 			
 			updateSeatStatus();
-			//reservedSeat = seatXhr.responseText;
 			console.log("usingNum", usingNum);
 			console.log(typeof emptyNum);
 		} else {
@@ -80,19 +77,9 @@ updateSeatStatus();
 
 // 좌석 상태 업데이트 함수
 
-//let emptyNum = Number(empty_seat);
-//let usingNum = Number(using_seat);
-console.log("empty_seat typeof : ", emptyNum);
-console.log("using_seat : ", typeof usingNum);
-
 function updateSeatStatus() {
-	//empty_seat = emptyNum;
-	//using_seat = usingNum;
-	
 	document.querySelector('.empty_seat').textContent = emptyNum;
 	document.querySelector('.using_seat').textContent = usingNum;
-	console.log("updateSeatStatus : ", empty_seat);
-	console.log("updateSeatStatus : ", typeof empty_seat);
 	//console.log(empty_seat );
 	each_seat.forEach(item => {
 		for (let i = 0; i < reservedSeat.length; i++) {
@@ -162,13 +149,8 @@ function reserveProc() {
 
 			let response = reserveXhr.responseText;
 			console.log(response);
-			// 여기서 classList를 가져와서 addClassName 함수에 전달
 			console.log(whichRoom);
 			console.log(seatNumber);
-			//let clickedSeat = document.querySelector(`.each_seat[data-room="${whichRoom}"][data-seat="${seatNumber}"]`);
-			//console.log(clickedSeat);
-			//clickedSeat.classList.add('using');
-			//addClassName(response, classList)
 			alert(response);
 
 		} else {

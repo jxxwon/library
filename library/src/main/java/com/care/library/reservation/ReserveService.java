@@ -16,9 +16,8 @@ public class ReserveService {
 	ReserveMapper userMapper;
 	@Autowired
 	HttpSession session;
-	
+
 	public String userCheck(String id) {
-		System.out.println("userCheck");
 		int usingUser = userMapper.usingUser(id);
 		if (usingUser >= 1)
 			return "이미 다른 좌석을 예약하셨습니다.";
@@ -26,7 +25,6 @@ public class ReserveService {
 	}
 
 	public String reservation(ReserveDTO resevedData) {
-
 		int result = userMapper.reservation(resevedData);
 		if (result == 1) {
 			return "예약이 완료되었습니다.";
@@ -34,30 +32,18 @@ public class ReserveService {
 		return "예약이 정상적으로 이루어지지 않았습니다.";
 	}
 
-//	  public void getReservedSeat(Model model, String whichRoom) {
-//		  //System.out.println("getRecentSeat : "+ whichRoom);
-//		  ArrayList<String> reservedSeat = userMapper.getReservedSeat(whichRoom); 
-//		  for(String seat: reservedSeat) {
-//			  //System.out.println("seat : " + seat);
-//		  }
-//		  //System.out.println();
-//		  model.addAttribute("reservedSeat", reservedSeat);
-//	  }
-
 	public ArrayList<String> getReservedSeat(String whichRoom) {
-		// System.out.println("getRecentSeat : "+ whichRoom);
 		ArrayList<String> reservedSeat = userMapper.getReservedSeat(whichRoom);
-		for (String seat : reservedSeat) {
-			System.out.println("seat : " + seat);
-		}
-		System.out.println();
+//		for (String seat : reservedSeat) {
+//			System.out.println("seat : " + seat);
+//		}
+//		System.out.println();
 		return reservedSeat;
 	}
 
-	public void reservedSeatNum(Model model, String whichRoom,  RedirectAttributes ra) {
-		// System.out.println("getRecentSeat : "+ whichRoom);
+	public void reservedSeatNum(Model model, String whichRoom, RedirectAttributes ra) {
 		int reservedNum = userMapper.reservedNum(whichRoom);
-		System.out.println("사용좌석 : "+ reservedNum);
+		System.out.println("사용좌석 : " + reservedNum);
 		model.addAttribute("reservedNum", reservedNum);
 		ra.addAttribute("reservedNum", reservedNum);
 	}
