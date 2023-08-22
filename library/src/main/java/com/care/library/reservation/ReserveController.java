@@ -31,17 +31,12 @@ public class ReserveController {
 	}
 
 	@GetMapping("/reservation/readingRoom1")
-	public String readingRoom1(Model model, RedirectAttributes ra) {
-		String whichRoom = "R1";
-		service.reservedSeatNum(model, whichRoom, ra);
-
+	public String readingRoom1() {
 		return "reservation/readingRoom1";
 	}
 
 	@GetMapping("/reservation/readingRoom2")
-	public String readingRoom2(Model model, RedirectAttributes ra) {
-		String whichRoom = "R2";
-		service.reservedSeatNum(model, whichRoom, ra);
+	public String readingRoom2() {
 		return "reservation/readingRoom2";
 	}
 

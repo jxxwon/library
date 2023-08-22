@@ -41,10 +41,5 @@ public class ReserveService {
 		return reservedSeat;
 	}
 
-	public void reservedSeatNum(Model model, String whichRoom, RedirectAttributes ra) {
-		int reservedNum = userMapper.reservedNum(whichRoom);
-		model.addAttribute("reservedNum", reservedNum);
-		ra.addAttribute("reservedNum", reservedNum);
-	}
 
 }

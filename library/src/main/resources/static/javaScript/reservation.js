@@ -12,7 +12,7 @@ function setButtonColorByURL() {
 		whichRoom = "R1"
 	} else if (currentURL.includes("readingRoom2")) {
 		whichRoom = "R2"
-	} else{
+	} else {
 		whichRoom = "SR"
 	}
 }
@@ -58,10 +58,10 @@ function roomProc() {
 		if (seatXhr.status === 200) {
 			console.log("roomProc2");
 			reservedSeat = JSON.parse(seatXhr.responseText); console.log("roomProc3");
-			
+
 			usingNum = reservedSeat.length;
 			emptyNum = 96 - usingNum;
-			
+
 			updateSeatStatus();
 			console.log("usingNum", usingNum);
 			console.log(typeof emptyNum);
@@ -107,15 +107,13 @@ function activateEach_seat() {
 		if (result) {
 			location.href = "/login";
 			return;
-		} else {
-			location.href = "/main";
-			return;
-		}
+		} 
+		return;
 	}
 
 	//좌석 번호, 아이디, 열람실 이름을 변수에 설정.
 	console.log(this.classList);
-	if(this.classList.contains("using")){
+	if (this.classList.contains("using")) {
 		alert("이미 예약된 좌석입니다.");
 		return;
 	}
@@ -125,7 +123,7 @@ function activateEach_seat() {
 
 	let message = `열람실: ${recentRoom}\n좌석 번호: ${seatNumber}\n이름: ${userName}\n\n예약하시겠습니까?`; // 메시지 구성
 	let isConfirmed = confirm(message); // confirm 다이얼로그 표시
-		console.log("백엔드로 보낼때 룸이름 : ", whichRoom);
+	console.log("백엔드로 보낼때 룸이름 : ", whichRoom);
 	if (isConfirmed) {
 		// 사용자가 확인을 선택한 경우 처리할 내용
 		console.log("사용자가 확인을 선택했습니다.");
