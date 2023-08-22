@@ -83,12 +83,13 @@ function updateSeatStatus() {
 	//console.log(empty_seat );
 	each_seat.forEach(item => {
 		for (let i = 0; i < reservedSeat.length; i++) {
+			console.log(reservedSeat);
 			if (item.textContent === String(reservedSeat[i])) {
 				console.log("이고" + String(reservedSeat[i]));
 				console.log("여기요", i);
 				item.classList.add('using');
-
 			}
+			
 		}
 	});
 }

@@ -25,16 +25,6 @@
 	 <select id="getReservedSeat">
 		SELECT seat_id FROM reservation WHERE room = #{room}
 	</select> 
-	
-	<!-- 열람실 별 예약한 좌석수 -->	
-	 <select id="reservedNum">
-		SELECT count(seat_id) FROM reservation WHERE room = #{room}
-	</select> 
-	
-
-  
-  	
-  
   	
 </mapper>
 
