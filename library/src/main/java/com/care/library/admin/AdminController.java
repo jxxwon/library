@@ -37,14 +37,14 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/admin/memberAuth")
-	public String adminMember(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="memberSelect", required = false)String memberSelect, Model model) {
+	public String adminMember(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="memberSelect", required = false)String memberSelect, @RequestParam(value="searchSelect", required = false)String searchSelect, @RequestParam(value="search", required = false)String search, Model model) {
 		service.selectMember(cp, memberSelect, model);
 		return "admin/memberAuth";
 	}
 	
 	@RequestMapping("/admin/memberList")
 	public String memberList(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="memberSelect", required = false)String memberSelect, Model model) {
-//		service.selectMember(cp, memberSelect, model);
+		service.selectMember(cp, model);
 		return "admin/memberList";
 	}
 	

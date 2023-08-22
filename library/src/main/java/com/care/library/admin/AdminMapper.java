@@ -42,4 +42,6 @@ public interface AdminMapper {
 
 	int countUser(String memberSelect);
 
+	ArrayList<MemberDTO> selectAllMember(int begin, int end);
+
 }

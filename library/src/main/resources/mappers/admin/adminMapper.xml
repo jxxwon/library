@@ -29,6 +29,10 @@
 		SELECT rownum as rn, AAA.* FROM (SELECT * FROM member WHERE status = #{memberSelect} ORDER BY auth_date ASC)AAA
 	</select>
 	
+	<select id = "selectAllMember" resultMap="memberDto">
+		SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM(SELECT * FROM member ORDER BY reg_date ASC)AAA)BBB WHERE BBB.rn BETWEEN #{begin} and #{end}
+	</select>
+	
 	<select id = "selectUser" resultMap="memberDto">
 		SELECT * FROM member WHERE id = #{id}
 	</select>
