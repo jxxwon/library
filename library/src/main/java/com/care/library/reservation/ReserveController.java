@@ -29,10 +29,10 @@ public class ReserveController {
 	}
 	
 	@ResponseBody//return을 jsp가 아닌 응답 데이터를 주는 것이다.
-	 @PostMapping(value = "room", produces = "application/json; charset=UTF-8")
-    public Object room(@RequestBody(required = false) String room) {
-        System.out.println("reservation : " + room);
-        	ArrayList<String> reservedSeat = service.getReservedSeat(room);
+	 @PostMapping(value = "reservation/room", produces = "application/json; charset=UTF-8")
+    public Object room(@RequestBody(required = false) String whichRoom) {
+        System.out.println("reservation : " + whichRoom);
+        	ArrayList<String> reservedSeat = service.getReservedSeat(whichRoom);
         	for(String seat: reservedSeat) {
         		//System.out.println(seat);
         	}
@@ -40,17 +40,17 @@ public class ReserveController {
     }
 	
 	@GetMapping("/reservation/readingRoom1")
-	public String readingRoom1(Model model) {
+	public String readingRoom1(Model model, RedirectAttributes ra) {
 		String whichRoom = "R1";
-		service.reservedSeatNum(model, whichRoom);
+		service.reservedSeatNum(model, whichRoom, ra);
 		
 		return "reservation/readingRoom1";
 	}
 	
 	@GetMapping("/reservation/readingRoom2")
-	public String readingRoom2(Model model) {
+	public String readingRoom2(Model model,  RedirectAttributes ra) {
 		String whichRoom = "R2";
-		service.reservedSeatNum(model,whichRoom);
+		service.reservedSeatNum(model,whichRoom, ra);
 		return "reservation/readingRoom2";
 	}
 	
@@ -64,40 +64,27 @@ public class ReserveController {
 		return "reservation/roomPopUp";
 	}
 	
-	//@ResponseBody
+	@ResponseBody
 	@PostMapping("/reservation/reserveProc")
 	public String reserveProc(@RequestBody ReserveDTO reqData,  RedirectAttributes ra) {
+		//ReserveDTO에 예약 정보 입력.
 		String id = (String)session.getAttribute("id");
+		reqData.setUserId(id);
+		
+		Date nowDate = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); 
+		String strNowDate = simpleDateFormat.format(nowDate); 
+		reqData.setReserveDate(strNowDate);
+		
+		//이미 예약한 좌석이 있는 회원인지 체크.
 		String userCheck = service.userCheck(id);
 		
-		if(userCheck.equals("이미 예약한 좌석이 존재합니다.")) {
-			ra.addFlashAttribute("userCheckMsg", userCheck);
-			return "redirect:/reservation";
+		if(userCheck.equals("이미 다른 좌석을 예약하셨습니다.")) {
+			return userCheck;
 		}
-		 Date nowDate = new Date();
-		 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); 
-     	 //원하는 데이터 포맷 지정
-		 String strNowDate = simpleDateFormat.format(nowDate); 
-     	 //지정한 포맷으로 변환 
-		 reqData.setReserveDate(strNowDate);
-		 
-		 reqData.setUserId(id);
-		System.out.println("팝업에서 져온것 : "+reqData.getRoom());
 		 
 		 String result = service.reservation(reqData);
-		 System.out.println("result : " + result);
-		 ra.addFlashAttribute("reserveMsg", result);
-		 
-		 if(result.equals("예약이 완료되었습니다.")) {
-			 System.out.println(reqData.getRoom());
-			 if(reqData.getRoom().equals("R1")) {
-				 System.out.println("자율 학습실1에 예약");
-				 return "redirect:/reservation/readingRoom1";
-			 }
-			 return "redirect:/reservation/readingRoom2";
-			 
-		 }
-		 return "redirect:/reservation/readingRoom1";
+		 return result;
 	}
 
 }

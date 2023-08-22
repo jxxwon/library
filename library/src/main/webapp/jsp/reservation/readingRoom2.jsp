@@ -7,8 +7,6 @@
 <link href = "/css/reservation.css" rel = "stylesheet" type = "text/css">
 <title>하이미디어 도서관 - 좌석예약</title>
 
-<c:set var="using_seat" value="${reservedNum}" />
-<c:set var="empty_seat" value="${96 - reservedNum}" />
 	<script>
 	        // 메세지 변수를 JavaScript 변수로 변환
 	        let userCheckMsg = "${userCheckMsg}";
@@ -24,6 +22,11 @@
 	    	if("${sessionScope.id}" !== null){
 	    		sessionId = "${sessionScope.id}";
 	    	}
+	    	
+	    	 let userName ="";
+	      	if("${sessionScope.name}" !== null){
+	      		userName = "${sessionScope.name}";
+	      	}
 	</script>  
 <body>
 	<c:import url="/header" />
@@ -48,12 +51,12 @@
 						</div>
 						<div style="background-color: #338cfa; color: white">
 							빈좌석<br>
-							<c:out value="${empty_seat}" />
+							<span class="empty_seat"></span>
 							석
 						</div>
 						<div class="seat_status using">
 							사용중<br>
-							<c:out value="${using_seat}" />
+							<span class="using_seat"></span>
 							석
 						</div>
 						<!-- <div>대기자<br>96석</div> -->

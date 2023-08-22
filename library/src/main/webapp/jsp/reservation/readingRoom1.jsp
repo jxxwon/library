@@ -7,9 +7,6 @@
 <link href="/css/reservation.css" rel="stylesheet" type="text/css">
 <title>하이미디어 도서관 - 좌석예약</title>
 
-	
-<c:set var="using_seat" value="${reservedNum}" />
-<c:set var="empty_seat" value="${96 - reservedNum}" />
 <script>
         // 메세지 변수를 JavaScript 변수로 변환
         let userCheckMsg = "${userCheckMsg}";
@@ -26,6 +23,11 @@
     	if("${sessionScope.id}" !== null){
     		sessionId = "${sessionScope.id}";
     	}
+    	
+    	 let userName ="";
+     	if("${sessionScope.name}" !== null){
+     		userName = "${sessionScope.name}";
+     	}
     </script>  
 <body>
 	<c:import url="/header" />
@@ -50,13 +52,13 @@
 						</div>
 						<div style="background-color: #338cfa; color: white">
 							빈좌석<br>
-							<c:out value="${empty_seat}" />
+							<span class="empty_seat"></span>
 							석
 						</div>
 						<div class="seat_status using">
 							사용중<br>
-							<c:out value="${using_seat}" />
-							석
+							<span class="using_seat"></span>
+							석 
 						</div>
 						<!-- <div>대기자<br>96석</div> -->
 					</div>
@@ -66,18 +68,18 @@
 								<div class="line">
 									<div class="seat_left">
 										<ul>
-											<li class="each_seat"><span>${i}</span></li>
-											<li class="each_seat"><span>${i+1}</span></li>
-											<li class="each_seat"><span>${i+2}</span></li>
-											<li class="each_seat"><span>${i+3}</span></li>
+											<li class="each_seat" data-room="R1" data-seat="${i}"><span>${i}</span></li>
+											<li class="each_seat" data-room="R1" data-seat="${i+1}"><span>${i+1}</span></li>
+											<li class="each_seat" data-room="R1" data-seat="${i+2}"><span>${i+2}</span></li>
+											<li class="each_seat" data-room="R1" data-seat="${i+3}"><span>${i+3}</span></li>
 										</ul>
 									</div>
 									<div class="seat_right">
 										<ul>
-											<li class="each_seat"><span>${i+4}</span></li>
-											<li class="each_seat"><span>${i+5}</span></li>
-											<li class="each_seat"><span>${i+6}</span></li>
-											<li class="each_seat"><span>${i+7}</span></li>
+											<li class="each_seat" data-room="R1" data-seat="${i+4}"><span>${i+4}</span></li>
+											<li class="each_seat" data-room="R1" data-seat="${i+5}"><span>${i+5}</span></li>
+											<li class="each_seat" data-room="R1" data-seat="${i+6}"><span>${i+6}</span></li>
+											<li class="each_seat" data-room="R1" data-seat="${i+7}"><span>${i+7}</span></li>
 										</ul>
 									</div>
 								</div>
