@@ -61,6 +61,12 @@ public class AdminController {
 		return "admin/memberList";
 	}
 	
+	@RequestMapping("/admin/memberDetail")
+	public String memberDetail(String id, Model model) {
+		service.selectUser(id, model);
+		return "admin/memberDetail";
+	}
+	
 	@RequestMapping("/admin/memberConfirm")
 	public String memberConfirm(String id, Model model) {
 		service.selectUser(id, model);

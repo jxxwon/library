@@ -82,7 +82,7 @@
 									<c:otherwise>
 										<c:forEach var="member" items="${members }">
 											<tr <c:if test = "${param.memberSelect == 'R' || param.memberSelect == null}">
-												<tr onclick = "location.href='memberConfirm?id=${member.id }'" style="cursor:pointer;">
+												<tr onclick = "location.href='memberDetail?id=${member.id }'" style="cursor:pointer;">
 												</c:if>>
 												<td>${member.rn }</td>
 												<td>${member.id }</td>
@@ -98,7 +98,10 @@
 														탈퇴회원
 													</c:if>
 													<c:if test = "${member.status == 'R'}">
-														인증신청
+														준회원(인증신청)
+													</c:if>
+													<c:if test = "${member.status == 'M'}">
+														관리자
 													</c:if>
 												</td>
 												<td>
