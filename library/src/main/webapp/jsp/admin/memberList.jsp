@@ -6,17 +6,7 @@
 <link href = "${context }css/main.css" rel = "stylesheet" type = "text/css">
 <link href = "${context }css/admin.css" rel = "stylesheet" type = "text/css">
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const searchButton = document.getElementById('searchBtn');
-    const memberListMenu = document.getElementById('memberListMenu');
-    
-    searchButton.addEventListener('click', function() {
-        memberListMenu.click();
-    });
-
-});
-</script>
+<title>하이미디어 도서관 - 관리자 페이지 : 회원관리</title>
 
 <c:import url = "/header"/>
 <body>
@@ -41,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			<div class="adminMemberContainer">
 				<div id = "memberContainer">
 					<div class="contentBox">
-						<form action="memberList">
+						<form action = "" id = "f">
 							<div class="condition" >
 								<label id="memberLbl" class="memberLbl">회원구분</label>
 								<select id="memberSelect" class="memberSelect" name="memberSelect">
@@ -52,14 +42,13 @@ document.addEventListener('DOMContentLoaded', function() {
 									<option <c:if test="${param.memberSelect == 'W'}">selected='selected'</c:if> value = "W">탈퇴회원</option>
 								</select>
 								<label id="idLbl" class="idLbl">구분</label>
-								<select id="searchSelect" class="searchSelect" name="memberSelect">
-									<option <c:if test="${param.searchSelect == 'all'}">selected='selected'</c:if> value = "all">전체</option>
+								<select id="searchSelect" class="searchSelect" name="searchSelect">
+									<option <c:if test="${param.searchSelect == 'all'}">selected='selected'</c:if> value = "all">선택</option>
 									<option <c:if test="${param.searchSelect == 'id'}">selected='selected'</c:if> value = "id">아이디</option>
 									<option <c:if test="${param.searchSelect == 'name'}">selected='selected'</c:if> value = "name">이름</option>
-									<option <c:if test="${param.searchSelect == 'mobile'}">selected='selected'</c:if> value = "mobile">연락처</option>
 								</select>
 								<input type = "text" placeholder="검색어를 입력하세요." id="search" name = "search">
-								<input type = "submit" value = "조회" id="searchBtn">
+								<input type = "button" value = "조회" id="searchBtn" onclick = "memberSearch()">
 							</div>
 							<table class="selectMember">
 								<tr>
@@ -128,7 +117,6 @@ document.addEventListener('DOMContentLoaded', function() {
 							<div class="memberPage">
 								${result }
 							</div>
-							
 						</form>
 					</div>
 				</div>
