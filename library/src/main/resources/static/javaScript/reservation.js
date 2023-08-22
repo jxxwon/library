@@ -155,6 +155,6 @@ function reserveProc() {
 			console.log('에러: ' + reserveXhr.status);
 		}
 	}
-	//window.location.reload();
+	window.location.reload();
 }
 
