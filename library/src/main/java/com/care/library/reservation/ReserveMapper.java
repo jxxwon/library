@@ -16,6 +16,7 @@ public interface ReserveMapper {
 	
 	int reservedNum(String room);
 	
-	ReserveDTO getMySeat(String id);
-
+	ReserveDTO getSeatById(String id);
+	
+	int DeleteSeatById(String id);
 }

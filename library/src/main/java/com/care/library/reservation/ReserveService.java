@@ -60,7 +60,7 @@ public class ReserveService {
 	}
 	
 	public ReserveDTO getMySeat(String id, Model model) {
-		ReserveDTO mySeat = userMapper.getMySeat(id);
+		ReserveDTO mySeat = userMapper.getSeatById(id);
 		if(mySeat != null) {
 			if(mySeat.getRoom().equals("R1"))
 				mySeat.setRoom("자율 학습실1");
@@ -73,6 +73,13 @@ public class ReserveService {
 		return null;
 	}
 
-
+	public String leaveProc(String id) {
+		int leaveResult = userMapper.DeleteSeatById(id);
+		System.out.println(leaveResult);
+		if(leaveResult != 1) {
+			return "퇴실이 제대로 이루어지지 않았습니다.";
+		}
+		return "퇴실이 완료 되었습니다.";
+	}
 	
 }

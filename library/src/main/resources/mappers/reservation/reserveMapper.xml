@@ -26,10 +26,15 @@
 		SELECT seat_id, user_id FROM reservation WHERE room = #{room}
 	</select> 
 	
-	<!-- 내 좌석 정 -->	
-	 <select id="getMySeat" resultMap="reserveDTO">
+	<!-- 내 좌석 정보 -->	
+	 <select id="getSeatById" resultMap="reserveDTO">
 		SELECT * FROM reservation WHERE user_id = #{id}
 	</select> 
+	
+	<!-- 퇴실하기 -->	
+	 <delete id="DeleteSeatById">
+		DELETE FROM reservation WHERE user_id= #{id}
+	</delete> 
   	
 </mapper>
 

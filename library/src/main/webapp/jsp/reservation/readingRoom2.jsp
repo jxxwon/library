@@ -33,12 +33,23 @@
 	<c:import url="/header" />
 	<div id="customModal" class="modal">
 		<div class="modal-content">
-			<p class="modal_content">
-			<div>열람실 : ${mySeat.room}</div>
-			<div>좌석 : ${mySeat.seatId}번</div>
-			</p>
-			<button id="confirmButton">확인</button>
-			<button id="cancelButton">취소</button>
+				<c:choose>
+					<c:when test="${empty mySeat}">
+						<div>예약한 좌석이 없습니다.</div>
+						<button id="cancelButton">취소</button>
+					</c:when>
+					<c:otherwise>
+						<p class="modal_content">
+							<div>열람실 : ${mySeat.room}</div>
+							<div>좌석 : ${mySeat.seatId}번 </div>
+							<div>이름 : ${sessionScope.name} </div>	
+						</p>
+						<div class="buttonBox">
+							<button id="leaveButton">퇴실</button>
+							<button id="cancelButton">취소</button>
+						</div>
+					</c:otherwise>
+				</c:choose>
 		</div>
 	</div>
 	<div class="reserve_container inner pageContent_mt">
@@ -68,7 +79,7 @@
 							사용중<br> <span class="using_seat"></span> 석
 						</div>
 						<div class="seat_status mine">
-							내 좌석<br> <span class="my_seat"></span>
+							내 좌석<br>정보<!-- <br> <span class="my_seat"></span> -->
 						</div>
 						<!-- <div>대기자<br>96석</div> -->
 					</div>

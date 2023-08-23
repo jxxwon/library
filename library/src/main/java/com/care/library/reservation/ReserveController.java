@@ -55,7 +55,7 @@ public class ReserveController {
 
 	@ResponseBody
 	@PostMapping("/reservation/reserveProc")
-	public String reserveProc(@RequestBody ReserveDTO reqData, RedirectAttributes ra) {
+	public String reserveProc(@RequestBody ReserveDTO reqData) {
 		// ReserveDTO에 예약 정보 입력.
 		String id = (String) session.getAttribute("id");
 		reqData.setUserId(id);
@@ -73,6 +73,14 @@ public class ReserveController {
 		}
 
 		String result = service.reservation(reqData);
+		return result;
+	}
+	
+	@ResponseBody
+	@PostMapping(value = "reservation/leaveProc")
+	public String leaveProc(@RequestBody(required = false) String leaveId) {
+		System.out.println(leaveId);
+		String result = service.leaveProc(leaveId);
 		return result;
 	}
 
