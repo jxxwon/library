@@ -41,6 +41,10 @@ h1{margin-bottom:50px;}
 .notice tr th{padding:5px;}
 .notice tr td{padding:5px; text-align:center; border-bottom:1px solid #ddd;}
 
+.noticePage {margin:40px 0;}
+.noticePage a{display:inline-block; width:30px; height:30px; line-height:30px; font-weight:400; font-size:17px; border:1px solid #ddd; margin-right:5px; color:#000;}
+.noticePage a:last-child{margin-right:0;}
+
 /* 공지사항 등록 */
 .noticeFormContainer {display:flex;}
 .noticeFormContent{padding:50px 0 0 50px; width:1000px;}

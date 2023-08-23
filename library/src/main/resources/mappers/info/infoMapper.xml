@@ -18,6 +18,13 @@
   		INSERT INTO notice (no, title, content, file_name, writer, write_date, hits, image_name) VALUES (#{no}, #{title}, #{content}, #{fileName}, #{writer}, #{writeDate}, #{hits}, #{imageName})
   	</insert>
   	
+  	<select id = "selectAllNotice" resultMap="noticeDto">
+  		SELECT AAA.* FROM (SELECT rownum as rn, notice.* FROM notice ORDER BY no DESC)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end}
+  	</select>
+  	
+  	<select id = "count">
+  		SELECT count(no) FROM notice
+  	</select>
 </mapper>
 
 

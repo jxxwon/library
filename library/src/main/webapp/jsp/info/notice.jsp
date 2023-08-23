@@ -45,37 +45,28 @@
 							<th>제목</th>
 							<th>작성일</th>
 							<th>조회수</th>
-							<th>첨부</th>
 						</tr>
 						<c:choose>
-							<c:when test = "${empty inquiries}">
+							<c:when test = "${empty notices}">
 								<tr>
-									<td colspan = 5 style = "cursor:default; color:#000;">
+									<td colspan = 4 style = "cursor:default; color:#000;">
 										조회된 공지사항이 없습니다.
 									</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
-								<c:forEach var="inquiry" items = "${inquiries}">
-									<tr onclick="location.href='inquiryContent?no=${inquiry.no}'">
-										<td>${inquiry.no}</td>
-										<td>${inquiry.title }</td>
-										<td>
-											<c:if test = "${inquiry.reply == 'N' }">
-												미답변
-											</c:if>
-											<c:if test = "${inquiry.reply == 'Y' }">
-												답변완료
-											</c:if>
-										</td>
-										<td>${inquiry.id }</td>
-										<td>${inquiry.writeDate }</td>
+								<c:forEach var="notice" items = "${notices}">
+									<tr onclick="location.href='noticeContent?no=${notice.no}'">
+										<td>${notice.no}</td>
+										<td>${notice.title }</td>
+										<td>${notice.writeDate }</td>
+										<td>${notice.hits }</td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
 					</table>
-					<div class="inquiryPage">
+					<div class="noticePage">
 						${result }
 					</div>
 				</form>

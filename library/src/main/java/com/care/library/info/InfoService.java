@@ -2,13 +2,18 @@ package com.care.library.info;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.care.library.common.PageService;
+import com.care.library.member.MemberDTO;
 
 @Service
 public class InfoService {
@@ -96,6 +101,29 @@ public class InfoService {
 		notice.setImageName(imageName);
 		
 		mapper.writeNotice(notice);
+	}
+
+	public void selectNotice(String cp, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<NoticeDTO> notices = mapper.selectAllNotice(begin, end);
+		
+		String url = "notice?currentPage=";
+		int totalCount = mapper.count();
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("notices", notices);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
 	}
 
 }

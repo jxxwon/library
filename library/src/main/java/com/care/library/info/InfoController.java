@@ -2,8 +2,10 @@ package com.care.library.info;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -21,7 +23,8 @@ public class InfoController {
 	}
 	
 	@RequestMapping("/info/notice")
-	public String notice() {
+	public String notice(@RequestParam(value="currentPage", required = false)String cp, Model model) {
+		service.selectNotice(cp, model);
 		return "info/notice";
 	}
 	
@@ -54,5 +57,10 @@ public class InfoController {
 		service.noticeWrite(id, title, content, file, image);
 		
 		return "redirect:/info/notice";
+	}
+	
+	@RequestMapping("/info/noticeContent")
+	public String noticeContent() {
+		return "info/noticeContent";
 	}
 }
