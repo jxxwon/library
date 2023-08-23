@@ -128,6 +128,7 @@ public class InfoService {
 
 	public void noticeContent(int no, Model model) {
 		NoticeDTO notice = mapper.selectNoticeContent(no);
+		mapper.updateNoticeHit(no);
 		model.addAttribute("notice", notice);
 		
 	}

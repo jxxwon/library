@@ -17,4 +17,6 @@ public interface InfoMapper {
 
 	NoticeDTO selectNoticeContent(int no);
 
+	void updateNoticeHit(int no);
+
 }

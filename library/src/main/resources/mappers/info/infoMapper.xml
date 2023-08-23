@@ -29,6 +29,10 @@
   	<select id="selectNoticeContent" resultMap="noticeDto">
   		SELECT * FROM notice WHERE no = #{no}
   	</select>
+  	
+  	<update id="updateNoticeHit">
+  		UPDATE notice SET hits = hits+1 WHERE no = #{no}
+  	</update>
 </mapper>
 
 
