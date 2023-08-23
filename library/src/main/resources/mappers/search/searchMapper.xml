@@ -26,7 +26,7 @@
 	
 	<select id="getBookImages">
 		<if test="whichTable == 'popularBook'">
-			SELECT bookImageURL FROM popularBook 
+			SELECT bookImageURL FROM popularBook WHERE no <![CDATA[ <= ]]> 5
 		</if>
 		<if test="whichTable == 'recentBook'">
 			SELECT bookImageURL FROM recentBook

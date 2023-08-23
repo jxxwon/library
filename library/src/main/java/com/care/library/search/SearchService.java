@@ -32,30 +32,55 @@ public class SearchService {
 	@Autowired
 	SearchMapper mapper;
 
-	//주기적으로 받아오는 것은 나중에하쟈...
+	// 주기적으로 받아오는 것은 나중에하쟈...
 	// 초, 분, 시간, 일, 월, 요
 //	@Scheduled(cron = "0/1 * * * * *", zone = "Asia/Seoul")
 //	public void test() {
 //		System.out.println("스케줄");
 //	}
-
-	//@Scheduled(cron = "0 0 0 1 * 0", zone = "Asia/Seoul") // 매월 1일 요일 00:00:00에 실행
-	public String connAPI(String whichDataUrl, String param, String tableName) {
-		System.out.println("API요청");
-		System.out.println("whichDataUrl : " + whichDataUrl);
-		String xmlResponse = "";
-		String key = "";
-
-		// 인기도서(보통은 이달의 인기도서로 하는듯하다.)
-		// 인기도서 loanItemSrch
-		String url = "http://data4library.kr/api/"+whichDataUrl;
+	// 요청 URL 만들
+	public String reqUrlParam(String whichDataAPI, String restParam, int pageNo, int pageSize) {
+		String url = "http://data4library.kr/api/" + whichDataAPI;
 
 		String urlParam = "?authKey=8d6b32bd9b40ff27779c0cd9cd76329dd858b557eff8d78747d43e3845117641";
-		urlParam += "&region=11"; /// 다중 선택 가능 / 서울: 11
-		urlParam += "&dtl_region=11120"; // 은평
-		urlParam += "&pageNo=1&pageSize=5";
-		urlParam += param;
+		urlParam += restParam;
+		urlParam += "&pageNo=" + pageNo;
+		urlParam += "&pageSize=" + pageSize;
 		url = url + urlParam;
+
+		return url;
+	}
+
+	public String reqUrlParam(String whichDataAPI, String restParam) {
+		String url = "http://data4library.kr/api/" + whichDataAPI;
+
+		String urlParam = "?authKey=8d6b32bd9b40ff27779c0cd9cd76329dd858b557eff8d78747d43e3845117641";
+		urlParam += restParam;
+		url = url + urlParam;
+
+		return url;
+	}
+
+	// @Scheduled(cron = "0 0 0 1 * 0", zone = "Asia/Seoul") // 매월 1일 요일 00:00:00에
+	// 실행
+	// connAPI("loanItemSrch", whichTable, url);
+	public String connAPI(String url, String tableName) {
+		System.out.println("API요청");
+//		System.out.println("whichDataUrl : " + whichDataUrl);
+		String xmlResponse = "";
+//		String key = "";
+//
+//		
+//		// 인기도서(보통은 이달의 인기도서로 하는듯하다.)
+//		// 인기도서 loanItemSrch
+//		String url = "http://data4library.kr/api/" + whichDataUrl;
+//
+//		String urlParam = "?authKey=8d6b32bd9b40ff27779c0cd9cd76329dd858b557eff8d78747d43e3845117641";
+//		urlParam += "&region=11"; /// 다중 선택 가능 / 서울: 11
+//		urlParam += "&dtl_region=11120"; // 은평
+//		urlParam += "&pageNo=1&pageSize=5";
+//		urlParam += param;
+//		url = url + urlParam;
 		System.out.println(url);
 		try {
 
@@ -91,17 +116,19 @@ public class SearchService {
 		}
 
 		// xml파일을 db에 저장하기.
-		if(tableName.equals("popularBook")) {
+		if (tableName.equals("popularBook")) {
 			System.out.println("popularBook API 호출");
 			xmlToJson(xmlResponse);
+			return "API 호출 성공";
 		}
-		if(tableName.equals("recentBook"))
+		if (tableName.equals("recentBook")) {
 			System.out.println("recentBook API 호출");
 			recentXmlToJson(xmlResponse);
-		return "API 호출 성공";
-
+			return "API 호출 성공";
+		}
+		return "API 호출 실패";
 	}
-	
+
 	public void recentXmlToJson(String xmlResponse) {
 		List<BookDTO> books = null;
 		try {
@@ -114,7 +141,7 @@ public class SearchService {
 			doc.getDocumentElement().normalize();
 
 			NodeList docList = doc.getElementsByTagName("book");
-			
+
 			books = new ArrayList<>(); // Book 객체들을 저장할 리스트 생성
 
 			for (int i = 0; i < docList.getLength(); i++) {
@@ -127,8 +154,8 @@ public class SearchService {
 					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
 					String publicationYear = docElement.getElementsByTagName("publication_year").item(0)
 							.getTextContent();
-					 //System.out.println(bookName);
-
+					// System.out.println(bookName);
+					System.out.println("recentXmlToJson : " + bookName);
 					BookDTO book = new BookDTO();
 					book.setPublication_year(publicationYear);
 					book.setBookName(bookName);
@@ -139,16 +166,17 @@ public class SearchService {
 					books.add(book); // 리스트에 추가
 				}
 			}
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		recentInsert(books);
 	}
-	
+
 	// xml파일을 db에 저장하기.
 	public void xmlToJson(String xmlResponse) {
+
 		List<BookDTO> books = null;
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -159,8 +187,11 @@ public class SearchService {
 
 			doc.getDocumentElement().normalize();
 
-			NodeList docList = doc.getElementsByTagName("doc");
+			Node loanBooksNode = doc.getElementsByTagName("loanBooks").item(0);
+			NodeList docList = loanBooksNode.getChildNodes();
 
+			// NodeList docList = doc.getElementsByTagName("book");
+			System.out.println("xmlToJson1");
 			books = new ArrayList<>(); // Book 객체들을 저장할 리스트 생성
 
 			for (int i = 0; i < docList.getLength(); i++) {
@@ -175,7 +206,7 @@ public class SearchService {
 					String authors = docElement.getElementsByTagName("authors").item(0).getTextContent();
 					String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
 					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
-					//System.out.println(bookName);
+					System.out.println("xmlToJson : " + bookName);
 
 					BookDTO book = new BookDTO();
 					book.setNo(no);
@@ -205,14 +236,15 @@ public class SearchService {
 
 		// for(BookDTO book : lists) {
 		for (BookDTO book : books) {
-			System.out.println(book.getBookName());
+			// System.out.println(book.getBookName());
 			int result = mapper.jsonInsert(book);
+			System.out.println("popular 디비에 들어깠니? : " + result);
 			if (result == 0)
 				return "데이터 입력 중 오류가 발생했습니다. 다시 시도 하세요.";
 		}
 		return "모든 데이터가 입력되었습니다.";
 	}
-	
+
 	public String recentInsert(List<BookDTO> books) {
 
 		ObjectMapper jsonMapper = new ObjectMapper();
@@ -223,6 +255,7 @@ public class SearchService {
 		for (BookDTO book : books) {
 			System.out.println(book.getBookName());
 			int result = mapper.recentInsert(book);
+			System.out.println("recent 디비에 들어깠니? : " + result);
 			if (result == 0)
 				return "데이터 입력 중 오류가 발생했습니다. 다시 시도 하세요.";
 		}
@@ -230,15 +263,34 @@ public class SearchService {
 	}
 
 	public String getBookImages(Model model, String whichTable) {
-		System.out.println("whichTable ?"+ whichTable);
+		System.out.println("whichTable ?" + whichTable);
 		String modelName = whichTable;
 		ArrayList<String> bookImages = mapper.getBookImages(whichTable);
 		if (bookImages.isEmpty() || bookImages == null) { // null로 구분하면 안됨. 빈 거(isEmpty())랑 null은 다른것임.
+			System.out.println("실패야??");
 			return "이미지 가져오기 실패";
 		}
-
+		for (String name : bookImages) {
+			System.out.println("책 이름 : " + name);
+		}
 		model.addAttribute(modelName, bookImages);
 		return "이미지 가져오기 완료";
+	}
+
+	public void showBookImages(String whichTable, Model model, String url) {
+		String dbResult = getBookImages(model, whichTable);
+		// String tableName = whichTable;
+
+		if (dbResult.equals("이미지 가져오기 실패")) {
+			// String whichDataAPI, String restParam, String pageNo, String pageSize
+			System.out.println("여기야?");
+			String apiResult = connAPI(url, whichTable);
+			if (apiResult.equals("API 호출 성공")) {
+				System.out.println("여기 온거니???????");
+				getBookImages(model, whichTable);
+			}
+			// System.out.println("popApiResult" + apiResult);
+		}
 	}
 
 }

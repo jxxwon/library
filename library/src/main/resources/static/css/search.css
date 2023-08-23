@@ -113,15 +113,43 @@
 }
 
 .search_result{
-	display: flex;
 	border: 2px solid #ddd;
+	display: flex;
+	width: 100%;
 	height: 200px;
+	margin-bottom: 20px;
 }
-.search_result .result_bookImg{
-	border: 2px solid red;
-	width: 200px;
+.bookImgBox{
+	display: flex;
+	align-items: center;
+	width:155px;
+	margin-left:30px;
 }
-.search_result .result_bookContent{
-	border: 2px solid blue;
+.bookImgBox .result_bookImg{
+	width: 120px;
+	height: 150px;
+}
+.bookImgBox .result_bookImg > img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.bookImgBox .result_bookContent{
 	width: 500px;
+	
+}
+.bookContentBox{
+	height: 100%;
+}
+.bookContentBox .title{
+	font-size:20px;
+	font-weight: 500;
+	margin:28px 0 20px 0;
+}
+
+.bookContentBox .bookInfo{
+	font-size:16px;
+	color: #888;
+	font-weight: 400;
 }
