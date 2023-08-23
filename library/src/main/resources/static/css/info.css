@@ -40,3 +40,15 @@ h1{margin-bottom:50px;}
 .notice tr:first-child:hover{cursor:default; color:#000;}
 .notice tr th{padding:5px;}
 .notice tr td{padding:5px; text-align:center; border-bottom:1px solid #ddd;}
+
+/* 공지사항 등록 */
+.noticeFormContainer {display:flex;}
+.noticeFormContent{padding:50px 0 0 50px; width:1000px;}
+
+.noticeContainer .noticeWriteForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
+.noticeContainer .noticeWriteForm tr{border-bottom:1px solid #ddd;}
+.noticeContainer .noticeWriteForm th{padding:10px; border-right:1px solid #ddd;}
+.noticeContainer .noticeWriteForm td{padding:10px;}
+.noticeContainer .noticeWriteForm input[type="text"]{height:30px;}
+
+.noticeBtn {margin:40px 0; text-align:right;}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.care.library.info.InfoMapper">
+  	<resultMap type="com.care.library.info.NoticeDTO" id="noticeDto">
+  		<result column = "original_name" property = "originalName"/>
+  		<result column = "save_name" property = "saveName"/>
+  		<result column = "write_date" property = "writeDate"/>
+  	</resultMap>
+  	
+  	<select id = "findMaxNum">
+  		SELECT MAX(no) FROM notice
+  	</select>
+  	
+  	<insert id = "writeNotice">
+  		INSERT INTO notice (no, title, content, file_name, writer, write_date, hits) VALUES (#{no}, #{title}, #{content}, #{fileName}, #{writer}, #{writeDate}, #{hits})
+  	</insert>
+  	
+</mapper>
+
+
+
+  

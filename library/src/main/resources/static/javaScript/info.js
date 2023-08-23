@@ -22,3 +22,17 @@ function setButtonColorByURL() {
 // 페이지 로드 시 버튼 색상을 설정합니다.
 setButtonColorByURL();
 
+
+function selectFile(inputElement){
+	const selectedFile = inputElement.files[0];
+	
+	// 파일 크기가 10MB를 초과하는 경우
+	if(selectedFile){
+		const fileSize = Math.floor(selectedFile.size / 1024 / 1024);
+		if(fileSize > 10){
+			alert('파일 크기는 최대 10MB까지 가능합니다.');
+			inputElement.value='';
+			return;
+		}
+	}
+}

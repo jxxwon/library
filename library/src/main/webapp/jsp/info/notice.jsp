@@ -34,20 +34,23 @@
 						<input type = "text" placeholder = "검색어를 입력하세요." id = "search">
 						<input type = "submit" value = "검색" id ="searchBtn">
 					</div>
-					<div class="write">
-						<input type = "button" value = "공지사항 등록">
-					</div>
+					<c:if test = "${sessionScope.status == 'M'}">
+						<div class="write">
+							<input type = "button" value = "공지사항 등록" onclick="location.href='noticeWriteForm'">
+						</div>
+					</c:if>
 					<table class="notice">
 						<tr>
 							<th>번호</th>
 							<th>제목</th>
 							<th>작성일</th>
 							<th>조회수</th>
+							<th>첨부</th>
 						</tr>
 						<c:choose>
 							<c:when test = "${empty inquiries}">
 								<tr>
-									<td colspan = 4 style = "cursor:default; color:#000;">
+									<td colspan = 5 style = "cursor:default; color:#000;">
 										조회된 공지사항이 없습니다.
 									</td>
 								</tr>
