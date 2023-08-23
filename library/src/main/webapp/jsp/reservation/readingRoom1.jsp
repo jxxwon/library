@@ -32,26 +32,28 @@
 	}
 </script>
 <body>
-	<c:import url="/header" />
 	<div id="customModal" class="modal">
-		<div class="modal-content">
+		<div class="modal-content contentContainer">
 			<c:choose>
 					<c:when test="${empty mySeat}">
 						<div>예약한 좌석이 없습니다.</div>
 						<button id="cancelButton">취소</button>
 					</c:when>
 					<c:otherwise>
-						<p class="modal_content">
+						<p class="content">
 							<div>열람실 : ${mySeat.room}</div>
 							<div>좌석 : ${mySeat.seatId}번 </div>
 							<div>이름 : ${sessionScope.name} </div>	
 						</p>
-						<button id="leaveButton">퇴실</button>
-						<button id="cancelButton">취소</button>
+						<div class="buttonBox">
+							<button id="leaveButton">퇴실</button>
+							<button id="cancelButton">취소</button>
+						</div>
 					</c:otherwise>
 				</c:choose>
 		</div>
 	</div>
+	<c:import url="/header" />
 	<div class="reserve_container inner pageContent_mt">
 		<div class="reserve_content">
 			<div class="reserve_top">

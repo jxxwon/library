@@ -79,7 +79,6 @@ public class ReserveController {
 	@ResponseBody
 	@PostMapping(value = "reservation/leaveProc")
 	public String leaveProc(@RequestBody(required = false) String leaveId) {
-		System.out.println(leaveId);
 		String result = service.leaveProc(leaveId);
 		return result;
 	}

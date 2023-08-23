@@ -199,7 +199,9 @@ function closeCustomModal() {
 
 customModal.addEventListener('click', function(event) {
     // 클릭된 요소가 모달 내부의 컨텐츠 영역이 아니면 모달을 닫습니다.
+  /*  if (event.target !== modalContent) {*/
         customModal.style.display = 'none';
+   /* }*/
 });
 
 modalContent.addEventListener('click', function(event) {

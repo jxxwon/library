@@ -30,7 +30,6 @@ public class ReserveService {
 
 	public String reservation(ReserveDTO resevedData) {
 		int result = userMapper.reservation(resevedData);
-		System.out.println(resevedData.getRoom());
 		
 		if (result == 1) {
 			String msg = resevedData.getSeatId()+"번 좌석이 예약되었습니다.";
@@ -75,7 +74,6 @@ public class ReserveService {
 
 	public String leaveProc(String id) {
 		int leaveResult = userMapper.DeleteSeatById(id);
-		System.out.println(leaveResult);
 		if(leaveResult != 1) {
 			return "퇴실이 제대로 이루어지지 않았습니다.";
 		}
