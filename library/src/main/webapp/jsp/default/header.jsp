@@ -111,9 +111,9 @@
 						<li><a href="#" class="menu">한 주제 함께 읽기</a></li>
 					</ul>
 	            </li>
-	            <li><a href="${context}info">정보광장</a>
+	            <li><a href="${context}info/notice">정보광장</a>
 	            	<ul class="toggleBox">
-						<li><a href="#" class="menu">공지사항</a></li>
+						<li><a href="${context }info/notice" class="menu">공지사항</a></li>
 						<li><a href="#" class="menu">자주하는 질문</a></li>
 						<li><a href="#" class="menu">자유게시판</a></li>
 						<li><a href="#" class="menu">자원봉사 안내</a></li>

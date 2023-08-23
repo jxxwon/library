@@ -5,14 +5,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class InfoController {
-	@RequestMapping("/info")
-	public String main() {
-		return "info/main";
-	}
-	
+
 	@RequestMapping("subMenuInfo")
 	public String subMenuInfo() {
 		return "info/subMenuInfo";
+	}
+	
+	@RequestMapping("/info/notice")
+	public String notice() {
+		return "info/notice";
 	}
 	
 }
