@@ -8,6 +8,14 @@ public class NoticeDTO {
 	private String writer;
 	private String writeDate;
 	private int hits;
+	private String imageName;
+	
+	public String getImageName() {
+		return imageName;
+	}
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
 	public int getNo() {
 		return no;
 	}

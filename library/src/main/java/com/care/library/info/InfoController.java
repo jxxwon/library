@@ -49,8 +49,9 @@ public class InfoController {
 		String title = multi.getParameter("title");
 		String content = multi.getParameter("content");
 		MultipartFile file = multi.getFile("upfile");
+		MultipartFile image = multi.getFile("noticeImage");
 		
-		service.noticeWrite(id, title, content, file);
+		service.noticeWrite(id, title, content, file, image);
 		
 		return "redirect:/info/notice";
 	}

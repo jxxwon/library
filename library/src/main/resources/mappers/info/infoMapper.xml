@@ -5,8 +5,8 @@
   
 <mapper namespace="com.care.library.info.InfoMapper">
   	<resultMap type="com.care.library.info.NoticeDTO" id="noticeDto">
-  		<result column = "original_name" property = "originalName"/>
-  		<result column = "save_name" property = "saveName"/>
+  		<result column = "file_name" property = "fileName"/>
+  		<result column = "image_name" property = "imageName"/>
   		<result column = "write_date" property = "writeDate"/>
   	</resultMap>
   	
@@ -15,7 +15,7 @@
   	</select>
   	
   	<insert id = "writeNotice">
-  		INSERT INTO notice (no, title, content, file_name, writer, write_date, hits) VALUES (#{no}, #{title}, #{content}, #{fileName}, #{writer}, #{writeDate}, #{hits})
+  		INSERT INTO notice (no, title, content, file_name, writer, write_date, hits, image_name) VALUES (#{no}, #{title}, #{content}, #{fileName}, #{writer}, #{writeDate}, #{hits}, #{imageName})
   	</insert>
   	
 </mapper>

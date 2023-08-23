@@ -18,7 +18,10 @@ public class InfoService {
 	@Value("${upload.path}")
 	private String uploadPath;
 
-	public void noticeWrite(String id, String title, String content, MultipartFile file) {
+	@Value("${img.location}")
+	private String uploadImagePath;
+
+	public void noticeWrite(String id, String title, String content, MultipartFile file, MultipartFile image) {
 		String fileName = file.getOriginalFilename();
 		
 		if(file.getSize() != 0) {
@@ -45,6 +48,32 @@ public class InfoService {
 			fileName = "첨부파일 없음";
 		}
 		
+		String imageName = image.getOriginalFilename();
+		
+		if(image.getSize() != 0) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss-");
+			Calendar cal = Calendar.getInstance();
+			imageName = sdf.format(cal.getTime()) + imageName;
+			
+			//업로드 파일 저장 경로
+			String imageLocation = uploadImagePath;
+			File saveImage = new File(imageLocation, imageName);
+			
+			//폴더 존재 여부 확인
+			if(!saveImage.getParentFile().exists()) {
+				saveImage.getParentFile().mkdir();
+			}
+			
+			//서버가 저장한 업로드 파일은 임시저장경로에 있는데 개발자가 원하는 경로로 이동
+			try {
+				file.transferTo(saveImage);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			imageName = "첨부파일 없음";
+		}
+		
 		NoticeDTO notice = new NoticeDTO();
 		
 		int no;
@@ -64,6 +93,7 @@ public class InfoService {
 		notice.setWriter(id);
 		notice.setWriteDate(writeDate);
 		notice.setHits(0);
+		notice.setImageName(imageName);
 		
 		mapper.writeNotice(notice);
 	}

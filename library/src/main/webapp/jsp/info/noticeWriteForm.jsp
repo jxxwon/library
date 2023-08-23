@@ -47,7 +47,13 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea id = "content" name = "content" rows ="20" cols ="15" style = "resize: none"></textarea></td>
+							<td>
+								<div class = "noticeImage">
+									<label>등록할 이미지 선택 가능</label>
+									<input type = "file" value = "이미지 선택" name = "noticeImage" onchange="selectFile(this)">
+								</div>
+								<textarea id = "content" name = "content" rows ="20" cols ="15" style = "resize: none"></textarea>
+							</td>
 						</tr>
 						<tr>
 							<th>첨부파일</th>
