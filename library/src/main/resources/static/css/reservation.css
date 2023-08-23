@@ -185,6 +185,7 @@ h1 {
 	padding: 10px 20px;
 	border-radius: 5px;
 	cursor: pointer;
+	width: 100px;
 }
 .modal-content #leaveButton{
 	color: white;
