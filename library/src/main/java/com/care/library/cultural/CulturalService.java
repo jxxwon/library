@@ -1,11 +1,9 @@
 package com.care.library.cultural;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
 import org.apache.catalina.mapper.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,15 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import com.care.library.cultural.CulturalDTO;
 import com.care.library.cultural.CulturalMapper;
-
 import ch.qos.logback.core.net.SyslogOutputStream;
 import jakarta.servlet.http.HttpSession;
-
 import com.care.library.common.PageService;
-
 @Service
 public class CulturalService {
     @Autowired
@@ -42,21 +36,17 @@ public class CulturalService {
         } catch (Exception e) {
             currentPage = 1;
         }
-
         int pagePerBlock = 3; // 한 페이지에 보일 데이터의 수
         int pageBlock = 3; // 한 번에 보여줄 페이지 번호들의 그룹 개수
         int end = pagePerBlock * currentPage; // 테이블에서 가져올 마지막 행번호
         int begin = end - pagePerBlock + 1; // 테이블에서 가져올 시작 행번호
-
         ArrayList<CulturalDTO> culturalList = culturalMapper.culturalForm(begin, end);
         int totalCount = culturalMapper.count();
         String url = "culForm?currentPage=";
         String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
-
         model.addAttribute("culturalList", culturalList);
         model.addAttribute("result", result);
         model.addAttribute("currentPage", currentPage);
-
     	System.out.println("culturalForm종료");
     }
 
@@ -127,12 +117,10 @@ public class CulturalService {
 		        e.printStackTrace();
 		    }
 		}
-
 		culturalMapper.culFormWriteProc(cultural);
 		System.out.println("culFormWriteProc종료");
 		return "게시글 작성 완료";
 	}
-
 	/*
 	 * public void culFormWrite(String imagePath, int culId, String title, String
 	 * lectureStart, String lectureEnd, String registrationStart, String

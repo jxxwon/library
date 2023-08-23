@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:url var="context" value="/"/>
 
-<link href = "/css/main.css" rel = "stylesheet" type = "text/css">
-<link href = "/css/admin.css" rel = "stylesheet" type = "text/css">
-<link href = "/css/myLibrary.css" rel = "stylesheet" type = "text/css">
+<link href = "${context }css/main.css" rel = "stylesheet" type = "text/css">
+<link href = "${context }css/admin.css" rel = "stylesheet" type = "text/css">
 
 <title>하이미디어 도서관 - 관리자 페이지 : 1:1문의</title>
 
@@ -25,15 +25,35 @@
 				<form action="" id="f">
 					<div class="inquirySearch">
 						<select class="inqSelect" name = "select" id="inqSelect" onchange="searchChange()">
-							<option value="reply">처리상태</option>
-							<option value="title">제목</option>
+							<option <c:if test="${param.select == 'reply'}">selected='selected'</c:if>value="reply">처리상태</option>
+							<option <c:if test="${param.select == 'title'}">selected='selected'</c:if>value="title">제목</option>
+							<option <c:if test="${param.select == 'writer'}">selected='selected'</c:if>value="writer">작성자</option>
 						</select>
-						<select class = "replySelect" name = "replySelect" id = "replySelect">
-							<option value = "N">미답변</option>
-							<option value = "Y">답변완료</option>
-						</select>
-						<input type = "text" name = "search" id = "search" placeholder ="검색어를 입력하세요" style = "display:none">
-						<input type = "button" id="myInquirySearchBtn" value = "검색" onclick="inquirySearch()" >
+						<c:choose>
+						    <c:when test="${param.select == 'reply' || param.select == null}">
+						        <select class="replySelect" name="replySelect" id="replySelect">
+						            <option <c:if test="${param.replySelect == 'N'}">selected='selected'</c:if>value="N">미답변</option>
+						            <option <c:if test="${param.replySelect == 'Y'}">selected='selected'</c:if>value="Y">답변완료</option>
+						            <option <c:if test="${param.replySelect == 'A'}">selected='selected'</c:if> value="A">전체</option>
+						        </select>
+						    </c:when>
+						    <c:otherwise>
+						        <select class="replySelect" name="replySelect" id="replySelect" style="display:none">
+						            <option value="N">미답변</option>
+						            <option value="Y">답변완료</option>
+						            <option value="A">전체</option>
+						        </select>
+						    </c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test = "${param.select == 'reply' || param.select == null}">
+								<input type = "text" name = "search" id = "search" placeholder ="검색어를 입력하세요" style = "display:none">
+							</c:when>
+							<c:otherwise>
+								<input type = "text" name = "search" id = "search" placeholder ="검색어를 입력하세요" style = "display:inline-block">
+							</c:otherwise>
+						</c:choose>
+						<input type = "submit" id="myInquirySearchBtn" value = "검색" onclick="inquirySearch()" >
 					</div>
 					<table class="inquiry">
 						<tr>
@@ -46,7 +66,7 @@
 						<c:choose>
 							<c:when test = "${empty inquiries}">
 								<tr>
-									<td colspan = 5>
+									<td colspan = 5 style = "cursor:default; color:#000;">
 										등록한 문의가 없습니다.
 									</td>
 								</tr>
@@ -102,14 +122,12 @@
 		var option = inqSelect.options[select].value;
 		
 		var replySelect = document.getElementById('replySelect');
-		console.log(option)
-		if(option == 'title'){
+		if(option == 'title' || option == 'writer'){
 			document.getElementById('replySelect').disabled = true;
-		} else {
+		} else{	
 			document.getElementById('search').disabled=true;
 		}
-			f.submit();
 	}
 </script>
 
-<script src = "/javaScript/admin.js"></script>
+<script src = "${context }javaScript/admin.js"></script>

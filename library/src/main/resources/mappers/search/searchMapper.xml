@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.care.library.search.SearchMapper">
+  	<resultMap type="com.care.library.search.BookDTO" id="bookDto"> <!-- id는 식별자일뿐 -->
+  		<result column = "publication_year" property = "publicationYear"/>
+  	</resultMap>
+  	
+  	<insert id="jsonInsert" parameterType="com.care.library.search.BookDTO">
+		INSERT INTO popularBook VALUES(#{no}, #{ranking}, #{publicationYear},#{bookName}, #{authors}, #{publisher}, #{bookImageURL})
+	</insert>
+	
+	<insert id="recentInsert" parameterType="com.care.library.search.BookDTO">
+		INSERT INTO recentBook VALUES(#{bookName}, #{authors}, #{publisher}, #{bookImageURL},  #{publicationYear})
+	</insert>
+	
+	<delete id="jsonDelete">
+		DELETE FROM popularBook
+	</delete>
+	
+	<delete id="recentDelete">
+		DELETE FROM recentBook
+	</delete>
+	
+	<select id="getBookImages">
+		<if test="whichTable == 'popularBook'">
+			SELECT bookImageURL FROM popularBook 
+		</if>
+		<if test="whichTable == 'recentBook'">
+			SELECT bookImageURL FROM recentBook
+		</if>
+	</select>
+	
+	<!-- 통합검색 -->
+	<!--인기, 신착도서 테이블 합치기-->
+	<select id="unionBooks">
+		SELECT bookName, authors, publisher, bookImageURL, publication_year
+		FROM popularBook
+		UNION
+		SELECT bookName, authors, publisher, bookImageURL, publication_year
+		FROM recentBook; 
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+  

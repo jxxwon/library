@@ -67,7 +67,7 @@ h1 {
 	border-right: none;
 }
 
-.subMenu_reserve ul li.active {
+.subMenu_reserve ul li.active a {
 	background-color: #338cfa;
 	color: #fff;
 }

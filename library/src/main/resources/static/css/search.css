@@ -1,0 +1,127 @@
+.searchContainer {margin-top: 152px;}
+
+.searchContainer .visual .inner, 
+.searchContainer .condition .inner{display: flex; justify-content: space-between;}
+
+.searchContainer .condition {
+	position: relative;
+    /*padding: 50px 0 50px 0;*/
+}
+.searchContainer .condition::before {
+	position: absolute; bottom: 0; left: 0; content: ""; 
+    height: 647px; 
+    width: 100%; 
+    margin: 0 auto;
+    min-width: 1200px;
+    background: url('/image/visual_main2.jpg')no-repeat fixed 50% 40%;
+    background-size: cover;
+    opacity: 0.3;
+}
+
+.searchContainer .condition .inner{
+	position: relative;
+	padding: 50px 0px;
+}
+
+.search_area {
+	position: relative;
+	width: 700px;
+	height: 70px;
+	background-color: white;
+	border:2px solid cornflowerblue;
+	margin:0 auto;
+	border-radius: 60px;
+}
+
+.search_area > input{
+	height: 100%;
+	width: 575px;
+	margin-left:30px;
+	background-color: transparent;
+	border: transparent;
+	font-size: 18px;
+}
+.search_area > input::placeholder{
+	font-size: 18px;
+}
+
+.search_area .search_Btn{
+	position: absolute;
+	right: 7px;
+	top: 6px;
+	background-color: cornflowerblue;
+	border: transparent;
+	border-radius:50% ;
+	width: 60px;
+	height: 60px;
+	padding:13px;
+}
+
+.search_area .search_Btn > img{
+	width: 100%;
+}
+
+.searchContainer .visual{background-color: rgba(0,0,0,0.6);}
+
+.searchContainer .visual{position: relative; z-index: 1; padding: 10px 0;}
+
+.searchContainer .visual .content.left, 
+.searchContainer .visual .content.right{ height: 550px; margin:0; /*border: 1px solid red;*/}
+
+.searchContainer .visual .content.left{width: 100%; display: flex; flex-direction: column;}
+.searchContainer .visual .content.right{width: 35%;}
+
+.visual .content.left .popularBook, .visual .content.left .newBook{
+	/*border: 1px solid red;*/
+	height: 50%; padding-top:20px; 
+	color: white; font-weight: 500; font-size: 20px;
+	}
+
+.popularBook .bookContainer, .newBook .bookContainer{
+	/*border: 1px solid blue;*/
+	display: flex;
+	padding-top:10px;
+}
+.popularBook .bookImageBox, .newBook  .bookImageBox {
+	margin-right: 20px;
+	width: 130px;
+	height: 180px;
+	/*border: 1px solid black;*/
+}
+
+.popularBook .bookImageBox > img, .newBook .bookImageBox > img{
+	width: 100%;
+	height: 100%;
+}
+
+/*통합검색*/
+.searchBox{
+	border: 2px solid #ddd; padding:30px;
+	margin-bottom: 50px;
+}
+.search_area.totalSearch {
+	width: 650px;
+    height: 60px;
+	border-radius: 0;
+	border: 1px solid #666;
+}
+.search_area .search_Btn.totalSearch{
+	background-color:transparent;
+	padding:9px;
+	right: 0;
+    top: 0;
+}
+
+.search_result{
+	display: flex;
+	border: 2px solid #ddd;
+	height: 200px;
+}
+.search_result .result_bookImg{
+	border: 2px solid red;
+	width: 200px;
+}
+.search_result .result_bookContent{
+	border: 2px solid blue;
+	width: 500px;
+}

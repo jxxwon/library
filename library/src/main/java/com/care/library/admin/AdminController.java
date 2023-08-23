@@ -38,8 +38,33 @@ public class AdminController {
 	
 	@RequestMapping("/admin/memberAuth")
 	public String adminMember(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="memberSelect", required = false)String memberSelect, Model model) {
+		if (memberSelect == null) {
+			memberSelect = "R";
+		}
 		service.selectMember(cp, memberSelect, model);
 		return "admin/memberAuth";
+	}
+	
+	@RequestMapping("/admin/memberList")
+	public String memberList(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="memberSelect", required = false)String memberSelect,  @RequestParam(value="searchSelect", required = false)String searchSelect, @RequestParam(value="search", required = false)String search, Model model) {
+		if(memberSelect == null && searchSelect == null && search == null) {
+			service.selectMember(cp, model); // 전체 검색
+		}
+		if(memberSelect == null && searchSelect != null) {
+			service.selectMember(cp, searchSelect, search, model);
+		}
+		if(memberSelect != null && searchSelect != null) {
+			service.selectMember(cp, memberSelect, searchSelect, search, model);
+		} else if(memberSelect != null && searchSelect == null){
+			service.selectMember(cp, memberSelect, model);
+		}
+		return "admin/memberList";
+	}
+	
+	@RequestMapping("/admin/memberDetail")
+	public String memberDetail(String id, Model model) {
+		service.selectUser(id, model);
+		return "admin/memberDetail";
 	}
 	
 	@RequestMapping("/admin/memberConfirm")
@@ -65,25 +90,21 @@ public class AdminController {
 		String id = (String)session.getAttribute("id");
 		String status = service.statusChk(id).getStatus();
 		
-		System.out.println("select : " + select);
-		System.out.println("search : " + search);
-		System.out.println("replySelect : " + replySelect);
-		
 		if(id == null || id.equals("") || (status.equals("M")==false)) {
 			return "redirect:main";
 		}
-		
-		service.selectInquiry(cp, model);
-		
+				
 		//초기 화면 및 검색조건에 제목으로 해놓고 검색어 입력 안 하면 전체 조회
-//		if(select == null || (select.equals("title") && (search==null || search == ""))) {
-//			service.selectInquiry(cp, id, model);
-//		} else if(select.equals("title") && search != null) {
-//			service.selectInquiry(cp, search, id, model);
-//		} else if(select.equals("reply")) {
-//			service.selectInquiry(cp, select, replySelect, id, model);
-//		}
-		
+		if(select == null){
+			replySelect = "N";
+			service.selectInquiryReply(cp, select, replySelect, model);
+		} else if(select.equals("title")) {
+			service.selectInquiryTitle(cp, select, search, model);
+		} else if(select.equals("reply")) {
+			service.selectInquiryReply(cp, select, replySelect, model);
+		} else if(select.equals("writer")) {
+			service.selectInquiryWriter(cp, select, search, model);
+		}
 		return "admin/inquiry";
 	}
 	

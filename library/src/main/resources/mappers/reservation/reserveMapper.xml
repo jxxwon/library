@@ -10,33 +10,27 @@
   		<result column = "reserve_date" property = "reserveDate"/>
   	</resultMap>
   	
+  	<!-- 열람실 좌석 예약 -->	
 	<insert id = "reservation" parameterType="com.care.library.reservation.ReserveDTO">
   		INSERT INTO reservation (seat_id, user_id, reserve_date, room) 
   		VALUES (#{seatId}, #{userId}, #{reserveDate}, #{room})
   	</insert>
-	<!--  마이 라이브러리 회원정보 수정  -->
+  	
+  	<!-- 아이디 중복 예약 체크  -->	
+	 <select id="usingUser">
+		SELECT count(seat_id) FROM reservation WHERE user_id = #{userId}
+	</select> 
+  	
+  	<!-- 열람실 별 예약한 좌석수 -->	
 	 <select id="getReservedSeat">
 		SELECT seat_id FROM reservation WHERE room = #{room}
 	</select> 
 	
-	<!-- <update id="changeMyInfoProc">
-		UPDATE member SET birth = #{birth}, email = #{email}, address = #{address}, mobile = #{mobile}, detail_address = #{detailAddress}, 
-		post_code = #{postCode} WHERE id = #{id}
-	</update> -->
+	<!-- 열람실 별 예약한 좌석수 -->	
+	 <select id="reservedNum">
+		SELECT count(seat_id) FROM reservation WHERE room = #{room}
+	</select> 
 	
-	<!-- <select id="currentPwCheck">
-		SELECT pw FROM member WHERE id = #{id}
-	</select> -->
-	
-	<!-- <update id="updateAuth">
-		UPDATE member SET status = 'R', auth_date = #{authDate} WHERE id = #{id}
-	</update> -->
-	
-	<!-- 회원탈퇴 (게시글 및 리뷰 보존을 위해 아이디를 난수로 변경, 기타 개인정보는 null) -->
-	<!-- <update id = "updateId">
-		UPDATE member SET id = #{delId}, name = '', pro_name = '', birth = '', email = '', post_code = '', address = '', detail_address = '', mobile = '', reg_date='', status = 'W', kakaoid='' WHERE id = #{id}
-	</update> -->
-
 
   
   	
