@@ -74,10 +74,17 @@ public class ReserveService {
 
 	public String leaveProc(String id) {
 		int leaveResult = userMapper.DeleteSeatById(id);
-		if(leaveResult != 1) {
-			return "퇴실이 제대로 이루어지지 않았습니다.";
+		if(leaveResult == 1) {
+			NotifyDTO notification = new NotifyDTO();
+			//String msg = resevedData.getRoom()
+			notification.setId(id);
+			notification.setCategory("열람실");
+			notification.setTitle("퇴실이 완료 되었습니다.");
+			notification.setUrl("/reservation/readingRoom1");
+			notiService.register(notification);
+			return "퇴실이 완료 되었습니다.";
 		}
-		return "퇴실이 완료 되었습니다.";
+		return "퇴실이 제대로 이루어지지 않았습니다.";
 	}
 	
 }
