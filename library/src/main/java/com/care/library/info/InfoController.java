@@ -60,7 +60,8 @@ public class InfoController {
 	}
 	
 	@RequestMapping("/info/noticeContent")
-	public String noticeContent() {
+	public String noticeContent(int no, Model model) {
+		service.noticeContent(no, model);
 		return "info/noticeContent";
 	}
 }

@@ -58,3 +58,9 @@ h1{margin-bottom:50px;}
 .noticeContainer .noticeWriteForm input[type="text"]{height:30px;}
 
 .noticeBtn {margin:40px 0; text-align:right;}
+
+/*공지사항 내용*/
+.noticeContainer .noticeContentForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555; margin:50px 0;}
+.noticeContainer .noticeContentForm tr{border-bottom:1px solid #ddd;}
+.noticeContainer .noticeContentForm th{padding:10px; border-right:1px solid #ddd;}
+.noticeContainer .noticeContentForm td{padding:10px;}

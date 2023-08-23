@@ -126,4 +126,10 @@ public class InfoService {
 		model.addAttribute("currentPage", currentPage);
 	}
 
+	public void noticeContent(int no, Model model) {
+		NoticeDTO notice = mapper.selectNoticeContent(no);
+		model.addAttribute("notice", notice);
+		
+	}
+
 }

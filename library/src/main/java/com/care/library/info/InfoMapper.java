@@ -15,4 +15,6 @@ public interface InfoMapper {
 
 	int count();
 
+	NoticeDTO selectNoticeContent(int no);
+
 }
