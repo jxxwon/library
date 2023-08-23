@@ -38,13 +38,12 @@
 					</tr>
 					<tr>
 						<th>첨부파일</th>
-						<td width="500">
 							<c:choose>
 								<c:when test = "${notice.fileName == '첨부파일 없음' }">
-									첨부파일이 없습니다.
+									<td width="500">첨부파일이 없습니다.</td>
 								</c:when>
 								<c:otherwise>
-									${notice.fileName }
+									<td width="500" onclick="location.href='notice'" style="cursor:pointer">${notice.fileName }</td>
 								</c:otherwise>
 							</c:choose>
 						<th class="reply">작성일</th>
@@ -53,7 +52,12 @@
 					<tr>
 						<th>내용</th>
 						<td>
-							<div>${notice.content}</div>
+							<div>
+								<c:if test = "${notice.imageName != '첨부파일 없음'}">
+									<p><img src="C:/javas/upload/image/${notice.imageName}"></p>
+								</c:if>
+								<p>${notice.content}</p>
+							</div>
 						</td>
 					</tr>
 				</table>
