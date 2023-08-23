@@ -1,93 +1,81 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:url var="context" value="/"/>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <c:url var="context" value="/"/>
+    <head>
+    
+<title>하이디미어 도서관 - 정보광장 : 공지사항</title>
+<link href="${context }css/main.css" rel="stylesheet" type="text/css">
+<link href="${context }css/info.css" rel="stylesheet" type="text/css">
 
-<link href = "${context }css/main.css" rel = "stylesheet" type = "text/css">
-<link href = "${context }css/admin.css" rel = "stylesheet" type = "text/css">
-<script src = "${context }javaScript/admin.js"></script>
-	<title>하이미디어 도서관 - 관리자 페이지 : 회원관리</title>
+<c:import url = "/header"/>
+</head>
 <body>
-	<div class="contentBox">
-		<form action="">
-			<div class="condition" >
-				<label id="memberLbl" class="memberLbl">회원구분</label>
-				<select id="memberSelect" class="memberSelect" name="memberSelect">
-					<option <c:if test="${param.memberSelect == 'R'}">selected='selected'</c:if> value = "R">인증신청</option>
-					<option <c:if test="${param.memberSelect == 'D'}">selected='selected'</c:if> value = "D">준회원</option>
-					<option <c:if test="${param.memberSelect == 'A'}">selected='selected'</c:if> value = "A">정회원</option>
-					<option <c:if test="${param.memberSelect == 'W'}">selected='selected'</c:if> value = "W">탈퇴회원</option>
-				</select>
-				<input type = "submit" value = "조회" id="searchBtn">
-			</div>
-			<table class="selectMember">
-				<tr>
-					<th>번호</th>
-					<th>아이디</th>
-					<th>이름</th>
-					<th>상태</th>
-					<th>
+<div class="infoContainer inner mb_30" >
+	<c:import url = "/subMenuInfo"/>
+	<div class="infoContent">
+		<h1>공지사항</h1>
+		<div class="info_title">
+			<p>여러분의 소중한 공간 하이미디어도서관 정보광장입니다.</p>
+		</div>
+		<div class="mb_30 mt_20">
+			<a href="/main">HOME</a> > 
+			<a href="${context }info/notice">정보광장</a> >
+			<a class="checked" href="${context }info/notice">공지사항</a>
+		</div>
+		<div class="contentBox">
+			<div class="noticeContainer">
+				<form action="" id="f">
+					<div class="condition">
+						<select class="noticeSelect" name = "select" id="inqSelect" onchange="searchChange()">
+							<option <c:if test="${param.select == 'title'}">selected='selected'</c:if>value="title">제목</option>
+							<option <c:if test="${param.select == 'no'}">selected='selected'</c:if>value="no">글번호</option>
+						</select>
+						<input type = "text" placeholder = "검색어를 입력하세요." id = "search">
+						<input type = "submit" value = "검색" id ="searchBtn">
+					</div>
+					<c:if test = "${sessionScope.status == 'M'}">
+						<div class="write">
+							<input type = "button" value = "공지사항 등록" onclick="location.href='noticeWriteForm'">
+						</div>
+					</c:if>
+					<table class="notice">
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성일</th>
+							<th>조회수</th>
+						</tr>
 						<c:choose>
-							<c:when test = "${param.memberSelect == 'D' }">
-								가입일
-							</c:when>
-							<c:when test = "${param.memberSelect == 'W' }">
-								탈퇴일								
-							</c:when>
-							<c:when test = "${param.memberSelect == 'A'}">
-								인증일
+							<c:when test = "${empty notices}">
+								<tr>
+									<td colspan = 4 style = "cursor:default; color:#000;">
+										조회된 공지사항이 없습니다.
+									</td>
+								</tr>
 							</c:when>
 							<c:otherwise>
-								신청일
+								<c:forEach var="notice" items = "${notices}">
+									<tr onclick="location.href='noticeContent?no=${notice.no}'">
+										<td>${notice.no}</td>
+										<td>${notice.title }</td>
+										<td>${notice.writeDate }</td>
+										<td>${notice.hits }</td>
+									</tr>
+								</c:forEach>
 							</c:otherwise>
 						</c:choose>
-					</th>
-				</tr>
-				<c:choose>
-					<c:when test = "${empty members}">
-						<tr style = "color:#000; cursor:default">
-							<td colspan=5> 조회된 회원이 없습니다. </td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach var="member" items="${members }">
-							<tr <c:if test = "${param.memberSelect == 'R' || param.memberSelect == null}">
-								<tr onclick = "location.href='memberConfirm?id=${member.id }'" style="cursor:pointer;">
-								</c:if>>
-								<td>${member.rn }</td>
-								<td>${member.id }</td>
-								<td>${member.name }</td>
-								<td>
-									<c:if test = "${member.status == 'D'}">
-										준회원
-									</c:if>
-									<c:if test = "${member.status == 'A'}">
-										정회원
-									</c:if>
-									<c:if test = "${member.status == 'W'}">
-										탈퇴회원
-									</c:if>
-									<c:if test = "${member.status == 'R'}">
-										인증신청
-									</c:if>
-								</td>
-								<td>
-									<c:if test = "${member.status == 'D'}">
-										${member.regDate }
-									</c:if>
-									<c:if test = "${member.status != 'D'}">
-										${member.authDate }
-									</c:if>
-								</td>
-							</tr>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-			</table>
-			<div class="memberPage">
-				${result }
+					</table>
+					<div class="noticePage">
+						${result }
+					</div>
+				</form>
 			</div>
-			
-		</form>
+		</div>
 	</div>
+</div>
+<c:import url="/footer"/>
 </body>
+<script src = "${context }javaScript/info.js"></script>
+
+
