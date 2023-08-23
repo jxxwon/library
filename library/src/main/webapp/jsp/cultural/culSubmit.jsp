@@ -10,26 +10,12 @@
 <title>하이디미어 도서관 - 문화행사</title>
 <c:url var="context" value="/"/>
 <link href="/css/cultural.css" rel="stylesheet" type="text/css">
+<!-- JavaScript 코드 추가 -->
+<script>
+
+</script>
 
 <style>
-	/* .table-wrapper {
-    	display: flex;
-    	justify-content: center;
-  	}
-
-	.table{
-		margin-top:30px;
-	}
-	
-	.table tr td{
-		padding:10px 10px 10px 0;
-	}
-	
-	.table tr:last-child td {
-	    padding-top: 30px;
-	    padding-bottom: 70px;
-	} */
-    
 	input[type="file"] {
 	    display: none;
 	}
@@ -67,12 +53,7 @@
     input[type="submit"]:hover, input[type="button"]:hover {
         background-color: #256aaa;
     }
-    
-    /* .picture{
-    	font-size: 15px;
-    	padding-right: 0px;
-    } */
-    
+	
     .culBtn {
     	margin-top:30px;
     	margin-bottom:50px;

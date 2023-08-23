@@ -21,4 +21,5 @@ public interface CulturalMapper {
 
 	CulturalDTO culFormWrite(int culId);	//목록에서 culId값 일치하는 데이터 가저오기
 
+
 }

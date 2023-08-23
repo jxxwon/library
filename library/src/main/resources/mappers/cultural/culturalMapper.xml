@@ -35,6 +35,27 @@
 	
 	<!-- cultural 테이블에서 데이터를 가져오는 SQL과 resultMap 설정 -->
 	<select id="culturalForm" resultMap="culturalDto">
+	    SELECT cul_id, title, lecture_start, lecture_end, registration_start,
+	    registration_end, target, image_path, count
+	    FROM (
+	        SELECT CCC.*, ROWNUM as rn FROM (
+	            SELECT cul_id, 
+	            title, lecture_start, 
+	            lecture_end, 
+	            registration_start,
+	            registration_end, 
+	            target, 
+	            image_path, 
+	            count 
+	            FROM cultural
+	            WHERE registration_end >= CURRENT_DATE   <!-- 현재 날짜를 기준으로 필터링 -->
+	            ORDER BY cul_id DESC
+	        ) CCC
+	    )
+	    WHERE rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- <select id="culturalForm" resultMap="culturalDto">
 		SELECT cul_id, title, lecture_start, lecture_end, registration_start,
 		registration_end, target, image_path, count FROM (
 			SELECT CCC.*, ROWNUM as rn FROM (
@@ -49,17 +70,24 @@
 				FROM cultural ORDER BY cul_id DESC
 			) CCC
 		) WHERE rn BETWEEN #{begin} AND #{end}
-	</select>
+	</select> -->
 	
+	<!-- culId랑 일치하는 데이터 보여주는 DB -->
 	<select id="culFormWrite" resultMap="culturalDto">
 	   SELECT
-			image_path,
 			title,
 			lecture_start,
 			lecture_end,
 			registration_start,
 			registration_end,
 			target,
+			lecture_time,
+			lecture_place,
+			lecture_day,
+			lecture_name,
+			cost,
+			lecture_text,
+			image_path,
 			write_date
 		FROM
 			cultural

@@ -60,6 +60,7 @@ public class CulturalService {
     	System.out.println("culturalForm종료");
     }
 
+
 	// 문화행사 신청 데이터를 DB에 저장하는 메서드 추가
     public String culFormWriteProc(MultipartHttpServletRequest multi) {
     	System.out.println("culFormWriteProc실행");
