@@ -51,14 +51,7 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td>
-							<div>
-								<c:if test = "${notice.imageName != '첨부파일 없음'}">
-									<p><img src="C:/javas/upload/image/${notice.imageName}"></p>
-								</c:if>
-								<p>${notice.content}</p>
-							</div>
-						</td>
+						<td><p>${notice.content}</p></td>
 					</tr>
 				</table>
 				<div class="noticeBtn">
