@@ -106,11 +106,11 @@ public class InfoController {
 	}
 	
 	@RequestMapping("/info/faqList")
-	public String faqList(String category, @RequestParam(value="currentPage", required = false)String cp, Model model) {
+	public String faqList(String category, Model model) {
 		if(category == null) {
 			category = "member";
 		}
-		service.selectFaq(category, cp, model);
+		service.selectFaq(category, model);
 		return "info/faqList";
 	}
 	

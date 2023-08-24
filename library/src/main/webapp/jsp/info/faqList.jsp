@@ -7,7 +7,7 @@
 <link href = "${context }css/info.css" rel = "stylesheet" type = "text/css">
 <script src = "${context }javaScript/info.js"></script>
 <body>
-	<div class="contentBox">
+	<div class="contentBox" style="padding-bottom:40px; padding-top:0;">
 		<form action="">
 			<table class="selectFaq">
 				<tr>
