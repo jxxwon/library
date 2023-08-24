@@ -3,6 +3,7 @@ package com.care.library.info;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -75,5 +76,17 @@ public class InfoController {
 	public String noticeUpdate(int no, Model model) {
 		service.noticeUpdate(no, model);
 		return "info/noticeUpdate";
+	}
+
+	@GetMapping("/info/noticeDelete")
+	public String noticeDelete(int no) {
+		service.noticeDelete(no);
+		return "redirect:/info/notice";
+	}
+	
+	@RequestMapping("/info/qna")
+	public String qna(@RequestParam(value="currentPage", required = false)String cp, Model model) {
+//		service.selectNotice(cp, model);
+		return "info/qna";
 	}
 }

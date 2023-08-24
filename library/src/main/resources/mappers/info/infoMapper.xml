@@ -33,6 +33,10 @@
   	<update id="updateNoticeHit">
   		UPDATE notice SET hits = hits+1 WHERE no = #{no}
   	</update>
+  	
+  	<delete id="deleteNotice">
+  		DELETE notice WHERE no = #{no}
+  	</delete>
 </mapper>
 
 

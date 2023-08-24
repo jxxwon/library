@@ -167,5 +167,9 @@ public class InfoService {
 		model.addAttribute("notice", notice);
 	}
 
+	public void noticeDelete(int no) {
+		mapper.deleteNotice(no);
+	}
+
 
 }
