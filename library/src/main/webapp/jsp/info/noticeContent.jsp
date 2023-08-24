@@ -62,8 +62,10 @@
 					</tr>
 				</table>
 				<div class="inquiryBtn">
-					<input type="button" value="수정" onclick="location.href='noticeUpdate?no=${notice.no}'">
-					<input type="button" value="삭제" onclick="delNotice()">
+					<c:if test = "${sessionScope.status == 'M'}">
+						<input type="button" value="수정" onclick="location.href='noticeUpdate?no=${notice.no}'">
+						<input type="button" value="삭제" onclick="delNotice()">
+					</c:if>
 					<input type="button" value="목록" onclick="location.href='notice'">
 				</div>
 			</div>
