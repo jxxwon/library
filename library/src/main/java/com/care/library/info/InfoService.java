@@ -2,11 +2,14 @@ package com.care.library.info;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -159,10 +162,32 @@ public class InfoService {
 
 	public void noticeUpdate(int no, Model model) {
 		NoticeDTO notice = mapper.selectNoticeContent(no);
+		
+		//등록 시 첨부했던 파일 불러오기
+		String fileName = notice.getFileName();
+		if(fileName.equals("첨부파일 없음")==false) {
+			String filePath = "C:\\javas\\upload\\" + fileName;
+			byte[] fileContent;
+			try {
+				fileContent = Files.readAllBytes(Paths.get(filePath));
+				model.addAttribute("fileContent", Base64.getEncoder().encodeToString(fileContent)); // Convert content to Base64 and add to model
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
 		model.addAttribute("notice", notice);
 	}
 
 	public void noticeDelete(int no) {
+		NoticeDTO notice = mapper.selectNoticeContent(no);
+		String fileName = notice.getFileName();
+		String saveDir = "C:\\javas\\upload\\"+fileName;
+		
+		File f = new File(saveDir);
+		if(f.exists() == true){
+			f.delete();
+		}
 		mapper.deleteNotice(no);
 	}
 

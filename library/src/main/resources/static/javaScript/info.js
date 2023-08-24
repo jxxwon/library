@@ -37,6 +37,17 @@ function selectFile(inputElement){
 	}
 }
 
+// 공지사항 수정
+function updateFileName(input){
+	var fileNamePlaceholder = document.getElementById("fileNamePlaceholder");
+    if (input.files.length > 0) {
+        fileNamePlaceholder.textContent = input.files[0].name;
+    } else {
+        fileNamePlaceholder.textContent = "파일 선택";
+    }
+}
+
+
 //공지사항 검색 시 search가 null값이면 parameter 안 넘어가도록
 function noticeSearch(){
 	var search = document.getElementById('search').value;

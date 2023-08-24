@@ -47,17 +47,13 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td>
-								<div class = "noticeImage">
-									<label>등록할 이미지 선택 가능</label>
-									<input type = "file" value = "이미지 선택" name = "noticeImage" onchange="selectFile(this)">
-								</div>
-								<textarea id = "content" name = "content" rows ="20" cols ="15" style = "resize: none">${notice.content }</textarea>
-							</td>
+							<td><textarea id = "content" name = "content" rows ="20" cols ="15" style = "resize: none">${notice.content }</textarea></td>
 						</tr>
 						<tr>
 							<th>첨부파일</th>
-							<td><input type = "file" value = "파일 선택" name = "upfile" onchange="selectFile(this)"></td>
+							<td>
+								<input type = "file" value = "파일 선택" name = "upfile" onchange="updateFileName(this)">
+							</td>
 						</tr>
 					</table>
 					<div class="noticeBtn">
