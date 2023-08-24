@@ -163,6 +163,7 @@
 	align-items: center;
 	width: 155px;
 	margin-left: 30px;
+	cursor: pointer;
 }
 
 .bookImgBox .result_bookImg {
@@ -220,8 +221,8 @@
 
 /*모달*/
 
-.modal {
-	/*display: none;*/
+#searchModal {
+	display: none;
 	position: fixed;
 	top: 0;
 	left: 0;

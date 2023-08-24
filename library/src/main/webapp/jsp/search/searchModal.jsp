@@ -6,7 +6,6 @@
 <link href="${context}css/main.css" rel="stylesheet" type="text/css">
 <link href="${context }css/search.css" rel="stylesheet" type="text/css">
 
-
 <body>
 	<div id="searchModal" class="modal">
 		<div class="modal-content contentContainer">
@@ -14,13 +13,13 @@
 			내용
 			</p>
 			<div class="buttonBox">
-				<button id="leaveButton">퇴실</button>
-				<button class="cancelButton">취소</button>
+				<button id="leaveButton">대여 예약</button>
+				<button id="cancelButton">취소</button>
 			</div>
 
 		</div>
 	</div>
-<script src="${context}javaScript/search.js"></script>
+
 </body>
 
 

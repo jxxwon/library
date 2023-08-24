@@ -12,7 +12,7 @@
 </head>
 <body>
 	<c:import url="${context }header" />
-	<c:import url="/datasearch/searchModal"/>
+	<c:import url="${context }datasearch/searchModal"/>
 	<!-- <div id="searchModal" class="modal">
 		<div class="modal-content contentContainer">
 			<p class="content">
@@ -52,7 +52,7 @@
 				<c:otherwise>
 					<c:forEach var="result" items="${searchResult}">
 						<div class="search_result">
-							<div class="bookImgBox">
+							<div class="bookImgBox" onclick="getBookDetail()">
 								<!-- span>1</span> -->
 								<div class="result_bookImg">
 									<img src="${result.bookImageURL}" alt="이미지 없음" />
@@ -76,7 +76,6 @@
 
 		</div>
 	</div>
-	<c:import url="/datasearch/searchModal"/>
 	<script src="${context }javaScript/search.js"></script>
 	<c:import url="/footer" />
 </body>

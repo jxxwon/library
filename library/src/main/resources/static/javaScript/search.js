@@ -1,4 +1,4 @@
-
+/*
 // 현재 URL을 가져오는 JavaScript 함수
 function getCurrentURL() {
 	return window.location.href;
@@ -13,7 +13,7 @@ function setButtonColorByURL() {
 		document.getElementById("subTotalSearch").classList.add("active");
 		//document.getElementById("subMyBookStatus").classList.remove("active");
 		//document.getElementById("subMyInquiry").classList.remove("active");
-	} /*else if (currentURL.includes("myBookStatus")) {
+	} else if (currentURL.includes("myBookStatus")) {
 		document.getElementById("subMyBookStatus").classList.add("active");
 		document.getElementById("subMyInquiry").classList.remove("active");
 		document.getElementById("subMyInfo").classList.remove("active");
@@ -21,7 +21,7 @@ function setButtonColorByURL() {
 		document.getElementById("subMyInquiry").classList.add("active");
 		document.getElementById("subMyBookStatus").classList.remove("active");
 		document.getElementById("subMyInfo").classList.remove("active");
-	}*/
+	}
 }
 
 // 페이지 로드 시 버튼 색상을 설정합니다.
@@ -30,7 +30,7 @@ setButtonColorByURL();
 // 페이지 URL이 변경될 때마다 버튼 색상을 업데이트합니다.
 window.onpopstate = function() {
 	setButtonColorByURL();
-};
+};*/
 
 
 function showMyLibSub(menu) {
@@ -65,54 +65,37 @@ title.innerHTML = highlightedTitle;
 */
 
 // 책 정보 모달
-const customModal = null;
-const modalContent = null;
-const leaveButton = null;
-const cancelButton = null;
-const bookDtlButton = null;
-
-function getBookDetail(){
-
-if (customModal !== null)
-	customModal = document.getElementById('searchModal');
-if (modalContent !== null)
-	modalContent = document.querySelector('.modal-content');
-if (leaveButton !== null)
-	leaveButton = document.getElementById('leaveButton');
-if (cancelButton !== null)
-	cancelButton = document.querySelector('.cancelButton');
-	
-	bookDtlButton =  document.querySelector('.bookDtlButton');
-	
-	
-	
-}
 
 
-function openCustomModal() {
-	customModal.style.display = 'flex';
+
+//내  자리 클릭시에 뜨는 모달창.
+const searchModal = document.getElementById('searchModal');
+console.log(searchModal);
+const modalContent = document.querySelector('.modal-content');
+const leaveButton = document.getElementById('leaveButton');
+const cancelButton = document.getElementById('cancelButton');
+
+
+function getBookDetail() {
+	searchModal.style.display = 'flex';
 }
 
 function closeCustomModal() {
-	customModal.style.display = 'none';
+	searchModal.style.display = 'none';
 }
 
-if (customModal !== null){
-	customModal.addEventListener('click', function(event) {
-		// 클릭된 요소가 모달 내부의 컨텐츠 영역이 아니면 모달을 닫습니다.
-		/*  if (event.target !== modalContent) {*/
-		customModal.style.display = 'none';
-		/* }*/
-	});
-	
-}
+searchModal.addEventListener('click', function(event) {
+	// 클릭된 요소가 모달 내부의 컨텐츠 영역이 아니면 모달을 닫습니다.
+	if (event.target !== modalContent) {
+		searchModal.style.display = 'none';
+	}
+});
 
-if (modalContent !== null){
-	
-	modalContent.addEventListener('click', function(event) {
-		event.stopPropagation();
-	});
-}
+
+
+modalContent.addEventListener('click', function(event) {
+	event.stopPropagation();
+});
 
 
 let leaveXhr;
@@ -143,7 +126,7 @@ function leaveSeatProc() {
 }
 
 //퇴실 버튼
-/*if (leaveButton !== null)
-	leaveButton.addEventListener('click', leaveSeat);*/
+if (leaveButton !== null)
+	leaveButton.addEventListener('click', leaveSeat);
 if (cancelButton !== null)
 	cancelButton.addEventListener('click', closeCustomModal);
