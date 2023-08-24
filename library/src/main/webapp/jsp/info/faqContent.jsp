@@ -9,10 +9,10 @@
 <title>하이미디어 도서관 - 정보광장 : 자주하는 질문</title>
 
 <script>
-	function delNotice() {
-		if (confirm('해당 공지사항을 삭제하시겠습니까?') == true) {
-			alert('공지사항이 삭제되었습니다.');
-			location.href = 'noticeDelete?no=${notice.no}';
+	function delFaq() {
+		if (confirm('해당 자주하는 질문을 삭제하시겠습니까?') == true) {
+			alert('자주하는 질문이 삭제되었습니다.');
+			location.href = 'faqDelete?no=${faq.no}';
 		}
 	}
 </script>
@@ -58,7 +58,7 @@
 				<div class="noticeBtn">
 					<c:if test = "${sessionScope.status == 'M'}">
 						<input type="button" value="수정" onclick="location.href='faqUpdate?no=${faq.no}'">
-						<input type="button" value="삭제" onclick="delNotice()">
+						<input type="button" value="삭제" onclick="delFaq()">
 					</c:if>
 					<input type="button" value="목록" onclick="location.href='faq'">
 				</div>
