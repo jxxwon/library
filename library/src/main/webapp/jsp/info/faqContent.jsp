@@ -10,7 +10,7 @@
 
 <script>
 	function delFaq() {
-		if (confirm('해당 자주하는 질문을 삭제하시겠습니까?') == true) {
+		if (confirm('자주하는 질문을 삭제하시겠습니까?') == true) {
 			alert('자주하는 질문이 삭제되었습니다.');
 			location.href = 'faqDelete?no=${faq.no}';
 		}

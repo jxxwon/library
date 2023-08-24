@@ -63,9 +63,13 @@
   		SELECT * FROM faq WHERE no = #{no}
   	</select>
   	
-  	<update id = "faqUpdate" parameterType="com.care.library.info.FaqDTO">
+  	<update id = "updateFaq" parameterType="com.care.library.info.FaqDTO">
   		UPDATE faq SET category = #{category}, title = #{title}, content = #{content} WHERE no = #{no}
   	</update>
+  	
+  	<delete id = "deleteFaq">
+  		DELETE faq WHERE no = #{no}
+  	</delete>
 </mapper>
 
 

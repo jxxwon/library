@@ -159,4 +159,10 @@ public class InfoController {
 		service.faqUpdate(no, category, title, content);
 		return "redirect:/info/faq";
 	}
+	
+	@RequestMapping("/info/faqDelete")
+	public String faqDelete(int no) {
+		service.faqDelete(no);
+		return "redirect:/info/faq";
+	}
 }

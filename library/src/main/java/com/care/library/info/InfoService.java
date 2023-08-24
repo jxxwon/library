@@ -227,7 +227,12 @@ public class InfoService {
 		faq.setCategory(category);
 		faq.setTitle(title);
 		faq.setContent(content);
-		mapper.faqUpdate(faq);
+		mapper.updateFaq(faq);
+	}
+
+	public void faqDelete(int no) {
+		FaqDTO faq = mapper.selectFaqContent(no);
+		mapper.deleteFaq(no);
 	}
 
 
