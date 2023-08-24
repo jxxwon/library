@@ -8,6 +8,7 @@ public class BookDTO {
 	private String authors;
 	private String publisher;
 	private String bookImageURL;
+	private String vol;
 
 	public String getNo() {
 		return no;
@@ -64,5 +65,13 @@ public class BookDTO {
 
 	public void setPublicationYear(String publicationYear) {
 		this.publicationYear = publicationYear;
+	}
+
+	public String getVol() {
+		return vol;
+	}
+
+	public void setVol(String vol) {
+		this.vol = vol;
 	}
 }

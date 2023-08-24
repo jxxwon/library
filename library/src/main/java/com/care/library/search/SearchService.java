@@ -13,8 +13,10 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -42,6 +44,17 @@ public class SearchService {
 //		System.out.println("스케줄");
 //	}
 	// 요청 URL 만들
+	
+	@Async
+    public CompletableFuture<String> asyncMethod() {
+		String url = reqUrlParam( "extends/libSrch",  "&libCode=111042" , 1, 50);
+		System.out.println("asyncMethod : "+ url);
+		String apiResult = connAPI(url);
+		if(apiResult != null) {
+			 ArrayList<BookDTO> searchResult = totalXmlParse(apiResult);
+		}
+        return CompletableFuture.completedFuture("Async result");
+    }
 	public String reqUrlParam(String whichDataAPI, String restParam, int pageNo, int pageSize) {
 		String url = "http://data4library.kr/api/" + whichDataAPI;
 
@@ -186,6 +199,8 @@ public class SearchService {
 					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
 					String publicationYear = docElement.getElementsByTagName("publication_year").item(0)
 							.getTextContent();
+					String vol = docElement.getElementsByTagName("vol").item(0)
+							.getTextContent();
 					System.out.println(bookName);
 					BookDTO book = new BookDTO();
 					book.setPublicationYear(publicationYear);
@@ -193,6 +208,7 @@ public class SearchService {
 					book.setAuthors(authors);
 					book.setPublisher(publisher);
 					book.setBookImageURL(bookImageURL);
+					book.setVol(vol);
 					// 생성
 					books.add(book); // 리스트에 추가
 				}
@@ -235,6 +251,9 @@ public class SearchService {
 					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
 					String publicationYear = docElement.getElementsByTagName("publication_year").item(0)
 							.getTextContent();
+					String vol = docElement.getElementsByTagName("vol").item(0)
+							.getTextContent();
+					
 					// System.out.println(bookName);
 					BookDTO book = new BookDTO();
 					book.setPublicationYear(publicationYear);
@@ -242,6 +261,7 @@ public class SearchService {
 					book.setAuthors(authors);
 					book.setPublisher(publisher);
 					book.setBookImageURL(bookImageURL);
+					book.setVol(vol);
 					// 생성
 					books.add(book); // 리스트에 추가
 				}
@@ -285,7 +305,8 @@ public class SearchService {
 					String authors = docElement.getElementsByTagName("authors").item(0).getTextContent();
 					String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
 					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
-
+					String vol = docElement.getElementsByTagName("vol").item(0)
+							.getTextContent();
 					BookDTO book = new BookDTO();
 					book.setNo(no);
 					book.setRanking(ranking);
@@ -294,6 +315,7 @@ public class SearchService {
 					book.setAuthors(authors);
 					book.setPublisher(publisher);
 					book.setBookImageURL(bookImageURL);
+					book.setVol(vol);
 					// 생성
 					books.add(book); // 리스트에 추가
 				}

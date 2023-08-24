@@ -9,11 +9,11 @@
   	</resultMap>
   	
   	<insert id="jsonInsert" parameterType="com.care.library.search.BookDTO">
-		INSERT INTO popularBook VALUES(#{no}, #{ranking}, #{publicationYear},#{bookName}, #{authors}, #{publisher}, #{bookImageURL})
+		INSERT INTO popularBook VALUES(#{no}, #{ranking}, #{publicationYear},#{bookName}, #{authors}, #{publisher}, #{bookImageURL}, #{vol})
 	</insert>
 	
 	<insert id="recentInsert" parameterType="com.care.library.search.BookDTO">
-		INSERT INTO recentBook VALUES(#{bookName}, #{authors}, #{publisher}, #{bookImageURL},  #{publicationYear})
+		INSERT INTO recentBook VALUES(#{bookName}, #{authors}, #{publisher}, #{bookImageURL},  #{publicationYear},  #{vol})
 	</insert>
 	
 	<delete id="jsonDelete">

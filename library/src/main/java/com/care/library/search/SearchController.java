@@ -4,8 +4,11 @@ package com.care.library.search;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @EnableScheduling
+@EnableAsync
 @Controller
 public class SearchController {
 	
@@ -38,10 +42,20 @@ public class SearchController {
 		service.showMainImages("popularBook", model, popUrl);
 		
 		//신착도서 대출
-		String recentParam = "";
+		String recentParam = "&libCode=111042";
 		String recentUrl = service.reqUrlParam("extends/libSrch", recentParam, 1, 10);
 		System.out.println("recentUrl : " + recentUrl);
 		service.showMainImages("recentBook", model, recentUrl);
+		
+		//도서관 전체 정보(일단 50권만 넣을 예정)
+		CompletableFuture<String> future = service.asyncMethod();
+
+        future.thenAccept(result -> {
+            // 작업이 완료되었을 때 처리할 내용
+            System.out.println("Async result: " + result);
+        });
+		
+		
 		return "search/searchMain";
 	}
 
@@ -94,6 +108,12 @@ public class SearchController {
 	public String subMenuSearch() {
 		// TODO Auto-generated method stub
 		return "search/subMenuSearch";
+	}
+	
+	@GetMapping("/datasearch/searchModal")
+	public String searchModal() {
+		// TODO Auto-generated method stub
+		return "search/searchModal";
 	}
 
 }
