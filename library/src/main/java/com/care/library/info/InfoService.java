@@ -103,7 +103,7 @@ public class InfoService {
 		mapper.writeNotice(notice);
 	}
 
-	public void selectNotice(String cp, Model model) {
+	public void selectAllNotice(String cp, Model model) {
 		int currentPage = 1;
 		try{
 			currentPage = Integer.parseInt(cp);
@@ -124,6 +124,30 @@ public class InfoService {
 		model.addAttribute("notices", notices);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
+	}
+
+	public void selectNotice(String cp, String select, String search, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<NoticeDTO> notices = mapper.selectNotice(select, search, begin, end);
+		
+		String url = "notice?select="+select+"&search="+search+"&currentPage=";
+		int totalCount = mapper.count();
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("notices", notices);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+		
 	}
 
 	public void noticeContent(int no, Model model) {

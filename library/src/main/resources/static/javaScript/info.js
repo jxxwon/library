@@ -37,6 +37,17 @@ function selectFile(inputElement){
 	}
 }
 
+//공지사항 검색 시 search가 null값이면 parameter 안 넘어가도록
+function noticeSearch(){
+	var search = document.getElementById('search').value;
+	
+	if(search == ""){
+		document.getElementById('noticeSelect').disabled = true;
+		document.getElementById('search').disabled = true;
+	}
+	f.submit();
+}
+
 //faq 목록
 function submitMenuItem(value) {
     // Set the value of the hidden input field

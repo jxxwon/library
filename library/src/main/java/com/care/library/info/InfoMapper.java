@@ -15,6 +15,8 @@ public interface InfoMapper {
 
 	int count();
 
+	ArrayList<NoticeDTO> selectNotice(String select, String search, int begin, int end);
+
 	NoticeDTO selectNoticeContent(int no);
 
 	void updateNoticeHit(int no);
@@ -26,5 +28,6 @@ public interface InfoMapper {
 	void writeFaq(FaqDTO faq);
 
 	ArrayList<FaqDTO> selectFaq(String category);
+
 
 }

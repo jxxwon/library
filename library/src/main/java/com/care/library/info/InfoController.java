@@ -26,8 +26,12 @@ public class InfoController {
 	}
 	
 	@RequestMapping("/info/notice")
-	public String notice(@RequestParam(value="currentPage", required = false)String cp, Model model) {
-		service.selectNotice(cp, model);
+	public String notice(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="select", required = false)String select, @RequestParam(value="search", required = false)String search, Model model) {
+		if(select == null && search == null) {
+			service.selectAllNotice(cp, model);
+		} else {
+			service.selectNotice(cp, select, search, model);
+		}
 		return "info/notice";
 	}
 	
