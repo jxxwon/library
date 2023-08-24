@@ -77,14 +77,15 @@ public class SearchService {
 			HttpURLConnection conn = (HttpURLConnection) requestUrl.openConnection();
 			conn.setRequestMethod("GET"); // GET 요청 설정
 			conn.setRequestProperty("Accept", "application/xml"); // Accept 헤더 설정 (응답 형식 지정)
-
+			
 			int responseCode = conn.getResponseCode(); // 요청 보내고 응답 코드 받기
+			System.out.println("responseCode : " +responseCode);
 			if (responseCode == HttpURLConnection.HTTP_OK) { // 성공적인 응답
 				BufferedReader in = new BufferedReader(
 						new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
 				String inputLine;
 				StringBuilder response = new StringBuilder();
-
+				System.out.println("API response : "+ response);
 				while ((inputLine = in.readLine()) != null) {
 					response.append(inputLine);
 				}
@@ -93,6 +94,7 @@ public class SearchService {
 
 				// xml을 문자열로 바꿈
 				xmlResponse = response.toString();
+				System.out.println("xmlResponse : "+xmlResponse);
 			} else {
 				System.out.println("GET request failed");
 			}
@@ -100,9 +102,9 @@ public class SearchService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("성공적");
-		totalXmlParse(xmlResponse);
-		return "API 호출 성공";
+		//System.out.println("xmlResponse : "+xmlResponse);
+		//totalXmlParse(xmlResponse);
+		return xmlResponse;
 	}
 
 	// @Scheduled(cron = "0 0 0 1 * 0", zone = "Asia/Seoul") // 매월 1일 요일 00:00:00에
@@ -186,7 +188,7 @@ public class SearchService {
 							.getTextContent();
 					System.out.println(bookName);
 					BookDTO book = new BookDTO();
-					book.setPublication_year(publicationYear);
+					book.setPublicationYear(publicationYear);
 					book.setBookName(bookName);
 					book.setAuthors(authors);
 					book.setPublisher(publisher);
@@ -235,7 +237,7 @@ public class SearchService {
 							.getTextContent();
 					// System.out.println(bookName);
 					BookDTO book = new BookDTO();
-					book.setPublication_year(publicationYear);
+					book.setPublicationYear(publicationYear);
 					book.setBookName(bookName);
 					book.setAuthors(authors);
 					book.setPublisher(publisher);
@@ -287,7 +289,7 @@ public class SearchService {
 					BookDTO book = new BookDTO();
 					book.setNo(no);
 					book.setRanking(ranking);
-					book.setPublication_year(publicationYear);
+					book.setPublicationYear(publicationYear);
 					book.setBookName(bookName);
 					book.setAuthors(authors);
 					book.setPublisher(publisher);

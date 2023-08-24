@@ -31,24 +31,33 @@
 					</button>
 				</form>
 			</div>
-			<div class="search_result">
-				<div class="bookImgBox">
-					<!-- span>1</span> -->
-					<div class="result_bookImg">
-						<img src="/image/bookExam.jpeg" />
-					</div>
-				</div>
-				<div class="result_bookContent">
-					<div class="bookContentBox">
-						<div class="title">하늘이 기다려</div>
-						<div class="bookInfo">
-							<span>마리-캐스틸 멘션-솨아 감독</span> |
-							<span>미디어룩[제작]]</span> |
-							<span>2018</span>
+			<c:choose>
+				<c:when test="${empty searchResult}">
+					<span>0개의 검색 결과가 존재합니다.</span>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="result" items="${searchResult}">
+						<div class="search_result">
+							<div class="bookImgBox">
+								<!-- span>1</span> -->
+								<div class="result_bookImg">
+									<img src="${result.bookImageURL}" />
+								</div>
+							</div>
+							<div class="result_bookContent">
+								<div class="bookContentBox">
+									<div class="title">${result.bookName}</div>
+									<div class="bookInfo">
+										<span>${result.authors}</span> | <span>${result.publisher}</span>
+										| <span>${result.publicationYear}</span>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-			</div>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+
 		</div>
 	</div>
 	<script src="/javaScript/search.js"></script>
