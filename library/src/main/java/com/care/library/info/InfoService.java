@@ -217,5 +217,10 @@ public class InfoService {
 		model.addAttribute("faqs", faqs);
 	}
 
+	public void faqContent(int no, Model model) {
+		FaqDTO faq = mapper.selectFaqContent(no);
+		model.addAttribute("faq", faq);
+	}
+
 
 }

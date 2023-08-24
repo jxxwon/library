@@ -58,6 +58,10 @@
   	<select id = "selectFaq" resultType = "com.care.library.info.FaqDTO">
   		SELECT rownum as rn, AAA.* FROM (SELECT * FROM faq WHERE category = #{category})AAA
   	</select>
+  	
+  	<select id = "selectFaqContent" resultType = "com.care.library.info.FaqDTO">
+  		SELECT * FROM faq WHERE no = #{no}
+  	</select>
 </mapper>
 
 

@@ -141,4 +141,10 @@ public class InfoController {
 		service.faqWrite(category, title, content);
 		return "redirect:/info/faq";
 	}
+	
+	@RequestMapping("/info/faqContent")
+	public String faqContent(int no, Model model) {
+		service.faqContent(no, model);
+		return "info/faqContent";
+	}
 }

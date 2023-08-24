@@ -29,5 +29,7 @@ public interface InfoMapper {
 
 	ArrayList<FaqDTO> selectFaq(String category);
 
+	FaqDTO selectFaqContent(int no);
+
 
 }

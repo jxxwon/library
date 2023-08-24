@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
             
             var value = this.getAttribute("value");
-            console.log("Value of clicked li:", value);
             
             // Remove the existing content and update with new content
             var contentBox = document.querySelector('.contentBox');

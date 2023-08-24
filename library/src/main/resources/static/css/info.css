@@ -107,3 +107,10 @@ h1{margin-bottom:50px;}
 .faqContainer .faqWriteForm input[type="text"]{height:30px;}
 
 .noticeBtn {margin:40px 0; text-align:right;}
+
+/*자주하는 질문 내용*/
+.faqContainer .faqContentForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555; margin:50px 0;}
+.faqContainer .faqContentForm tr{border-bottom:1px solid #ddd;}
+.faqContainer .faqContentForm th{padding:10px; border-right:1px solid #ddd;}
+.faqContainer .faqContentForm th:first-child {width:150px;}
+.faqContainer .faqContentForm td{padding:10px;}
