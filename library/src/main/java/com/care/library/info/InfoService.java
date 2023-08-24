@@ -1,13 +1,16 @@
 package com.care.library.info;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.tomcat.util.file.ConfigurationSource.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -56,9 +59,6 @@ public class InfoService {
 		String imageName = image.getOriginalFilename();
 		
 		if(image.getSize() != 0) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss-");
-			Calendar cal = Calendar.getInstance();
-			imageName = sdf.format(cal.getTime()) + imageName;
 			
 			//업로드 파일 저장 경로
 			String imageLocation = uploadImagePath;
@@ -132,5 +132,40 @@ public class InfoService {
 		model.addAttribute("notice", notice);
 		
 	}
+
+	public void noticeFileDownload(int no) {
+		NoticeDTO notice = mapper.selectNoticeContent(no);
+		String fileName = notice.getFileName();
+			
+		String saveDir = "C:\\Users\\hi\\Downloads";
+			
+		File f = new File(saveDir);
+		
+//		Resource resource = new InputStremResource(Files.newInputStream(path));
+//		FileInputStream fis = new FileInputStream(f);
+//		response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+//				
+//		out.clear();
+//		out = pageContext.pushBody();
+//
+//		OutputStream os = response.getOutputStream();
+//			
+//		byte [] b = new byte[1024];
+//		while(true){
+//			int currentSize = fis.read(b, 0, b.length);
+//			if(currentSize == -1){
+//				break;
+//			}
+//			os.write(b, 0, currentSize);
+//		}
+//			
+//		fis.close();
+	}
+
+	public void noticeUpdate(int no, Model model) {
+		NoticeDTO notice = mapper.selectNoticeContent(no);
+		model.addAttribute("notice", notice);
+	}
+
 
 }

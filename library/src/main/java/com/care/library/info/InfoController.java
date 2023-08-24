@@ -64,4 +64,16 @@ public class InfoController {
 		service.noticeContent(no, model);
 		return "info/noticeContent";
 	}
+	
+	@RequestMapping("/info/noticeFileDownload")
+	public String noticeFileDownload(int no) {
+		service.noticeFileDownload(no);
+		return "info/noticeContent";
+	}
+	
+	@RequestMapping("/info/noticeUpdate")
+	public String noticeUpdate(int no, Model model) {
+		service.noticeUpdate(no, model);
+		return "info/noticeUpdate";
+	}
 }

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.infoContainer {display:flex; margin-top:225px !important;  margin-top:165px !important;}
+.infoContainer {display:flex; margin-top:70px !important; }
 h1{margin-bottom:50px;}
 .checked{font-weight: 600;}
 
@@ -64,3 +64,12 @@ h1{margin-bottom:50px;}
 .noticeContainer .noticeContentForm tr{border-bottom:1px solid #ddd;}
 .noticeContainer .noticeContentForm th{padding:10px; border-right:1px solid #ddd;}
 .noticeContainer .noticeContentForm td{padding:10px;}
+
+/*공지사항 수정*/
+.noticeContainer .noticeUpdateForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
+.noticeContainer .noticeUpdateForm tr{border-bottom:1px solid #ddd;}
+.noticeContainer .noticeUpdateForm th{padding:10px; border-right:1px solid #ddd;}
+.noticeContainer .noticeUpdateForm td{padding:10px;}
+.noticeContainer .noticeUpdateForm .noticeImage{height:45px; line-height:45px;}
+.noticeContainer .noticeUpdateForm .noticeImage label{margin-right:10px; font-size:15px;}
+.noticeContainer .noticeUpdateForm input[type="text"]{height:30px;}

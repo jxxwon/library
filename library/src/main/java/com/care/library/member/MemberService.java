@@ -2,15 +2,19 @@ package com.care.library.member;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import jakarta.servlet.http.HttpSession;
 
 import com.care.library.common.NotifyDTO;
 import com.care.library.common.NotifyService;
+import com.care.library.info.InfoMapper;
+import com.care.library.info.NoticeDTO;
 import com.care.library.user.InquiryDTO;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -183,6 +187,17 @@ public class MemberService {
 	}
 	public MemberDTO emailExists(String kakaoEmail) {
 		return mapper.emailCheck(kakaoEmail);
+	}
+
+	@Autowired InfoMapper infoMapper;
+	public void mainNotice(Model model) {
+		int end = infoMapper.count();
+		int begin = end - 4;
+		if (begin <= 1) {
+			begin = 1;
+		}
+		ArrayList<NoticeDTO> notices = infoMapper.selectAllNotice(begin, end);
+		model.addAttribute("notices", notices);
 	}
 
 }

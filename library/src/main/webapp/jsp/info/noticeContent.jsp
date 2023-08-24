@@ -43,7 +43,7 @@
 									<td width="500">첨부파일이 없습니다.</td>
 								</c:when>
 								<c:otherwise>
-									<td width="500" onclick="location.href='notice'" style="cursor:pointer">${notice.fileName }</td>
+									<td width="500" onclick="location.href='noticeFileDownload?no=${notice.no}'" style="cursor:pointer">${notice.fileName }</td>
 								</c:otherwise>
 							</c:choose>
 						<th class="reply">작성일</th>
@@ -61,7 +61,7 @@
 						</td>
 					</tr>
 				</table>
-				<div class="inquiryBtn">
+				<div class="noticeBtn">
 					<c:if test = "${sessionScope.status == 'M'}">
 						<input type="button" value="수정" onclick="location.href='noticeUpdate?no=${notice.no}'">
 						<input type="button" value="삭제" onclick="delNotice()">
