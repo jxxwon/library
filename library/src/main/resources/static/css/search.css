@@ -247,14 +247,14 @@
 }
 
 
-.modal-content #leaveButton, .modal-content #cancelButton{
+.modal-content #loanButton, .modal-content #cancelButton{
 	border:transparent;  
 	padding: 10px 20px;
 	border-radius: 5px;
 	cursor: pointer;
 	width: 100px;
 }
-.modal-content #leaveButton{
+.modal-content #loanButton{
 	color: white;
 	background-color:#338cfa;
 	margin-right:10px;

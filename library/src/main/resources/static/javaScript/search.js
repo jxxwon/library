@@ -1,4 +1,4 @@
-/*
+
 // 현재 URL을 가져오는 JavaScript 함수
 function getCurrentURL() {
 	return window.location.href;
@@ -13,15 +13,7 @@ function setButtonColorByURL() {
 		document.getElementById("subTotalSearch").classList.add("active");
 		//document.getElementById("subMyBookStatus").classList.remove("active");
 		//document.getElementById("subMyInquiry").classList.remove("active");
-	} else if (currentURL.includes("myBookStatus")) {
-		document.getElementById("subMyBookStatus").classList.add("active");
-		document.getElementById("subMyInquiry").classList.remove("active");
-		document.getElementById("subMyInfo").classList.remove("active");
-	} else if (currentURL.includes("myInquiry")) {
-		document.getElementById("subMyInquiry").classList.add("active");
-		document.getElementById("subMyBookStatus").classList.remove("active");
-		document.getElementById("subMyInfo").classList.remove("active");
-	}
+	} 
 }
 
 // 페이지 로드 시 버튼 색상을 설정합니다.
@@ -30,7 +22,7 @@ setButtonColorByURL();
 // 페이지 URL이 변경될 때마다 버튼 색상을 업데이트합니다.
 window.onpopstate = function() {
 	setButtonColorByURL();
-};*/
+};
 
 
 function showMyLibSub(menu) {
@@ -72,7 +64,7 @@ title.innerHTML = highlightedTitle;
 const searchModal = document.getElementById('searchModal');
 console.log(searchModal);
 const modalContent = document.querySelector('.modal-content');
-const leaveButton = document.getElementById('leaveButton');
+const loanButton = document.getElementById('loanButton');
 const cancelButton = document.getElementById('cancelButton');
 
 
@@ -98,18 +90,18 @@ modalContent.addEventListener('click', function(event) {
 });
 
 
-let leaveXhr;
-function leaveSeat() {
-	let result = confirm("퇴실하시겠습니까?");
+let loanXhr;
+function laonBook() {
+	let result = confirm("대여하시겠습니까?");
 	if (result) {
-		leaveXhr = new XMLHttpRequest();
-		//leaveXhr.open('POST', "leaveProc");
-		//leaveXhr.send(sessionId);
-		//leaveXhr.onreadystatechange = leaveSeatProc;
+		loanXhr = new XMLHttpRequest();
+		loanXhr.open('POST', "loanProc");
+		loanXhr.send(sessionId);
+		loanXhr.onreadystatechange = loanProc;
 	}
 }
 
-function leaveSeatProc() {
+function loanProc() {
 	if (leaveXhr.readyState === 4) {
 		if (leaveXhr.status === 200) {
 			//showReservedSeat(whichRoom);
@@ -126,7 +118,7 @@ function leaveSeatProc() {
 }
 
 //퇴실 버튼
-if (leaveButton !== null)
-	leaveButton.addEventListener('click', leaveSeat);
+if (loanButton !== null)
+	loanButton.addEventListener('click', laonBook);
 if (cancelButton !== null)
 	cancelButton.addEventListener('click', closeCustomModal);

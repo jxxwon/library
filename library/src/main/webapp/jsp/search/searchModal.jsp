@@ -13,7 +13,7 @@
 			내용
 			</p>
 			<div class="buttonBox">
-				<button id="leaveButton">대여 예약</button>
+				<button id="loanButton">대여 예약</button>
 				<button id="cancelButton">취소</button>
 			</div>
 

@@ -33,6 +33,12 @@
 		</if>
 	</select>
 	
+	<!-- 대여하기 -->	
+	<!-- 	관리자 테이블에 들어가야겠지-->
+	<!-- <insert id="jsonInsert" parameterType="com.care.library.search.BookDTO">
+		INSERT INTO loanBook VALUES(#{no}, #{ranking}, #{publicationYear},#{bookName}, #{authors}, #{publisher}, #{bookImageURL}, #{vol})
+	</insert> -->
+	
 	
 </mapper>
 
