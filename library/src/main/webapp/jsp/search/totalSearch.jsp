@@ -24,7 +24,7 @@
 			</div>
 			<div class="searchBox">
 				<form class="search_area totalSearch" action="totalSearchProc"
-					method="post">
+					method="post" accept-charset="UTF-8">
 					<input name="totalSearch" placeholder="검색어를 입력하세요.">
 					<button class="search_Btn totalSearch">
 						<img src="/image/search.png">

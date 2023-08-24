@@ -33,16 +33,7 @@
 		</if>
 	</select>
 	
-	<!-- 통합검색 -->
-	<!--인기, 신착도서 테이블 합치기-->
-	<select id="unionBooks">
-		SELECT bookName, authors, publisher, bookImageURL, publication_year
-		FROM popularBook
-		UNION
-		SELECT bookName, authors, publisher, bookImageURL, publication_year
-		FROM recentBook; 
-	</select>
-
+	
 </mapper>
 
 

@@ -2,8 +2,10 @@ package com.care.library.search;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
@@ -22,6 +24,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -60,27 +63,53 @@ public class SearchService {
 
 		return url;
 	}
+	public String connAPI(String url) {
+		System.out.println("API요청");
+		String xmlResponse = "";
+
+		System.out.println(url);
+		try {
+
+			// 인기 대출 도서 조회하기 (loanItemSrch)
+
+			URL requestUrl = new URL(url);
+
+			HttpURLConnection conn = (HttpURLConnection) requestUrl.openConnection();
+			conn.setRequestMethod("GET"); // GET 요청 설정
+			conn.setRequestProperty("Accept", "application/xml"); // Accept 헤더 설정 (응답 형식 지정)
+
+			int responseCode = conn.getResponseCode(); // 요청 보내고 응답 코드 받기
+			if (responseCode == HttpURLConnection.HTTP_OK) { // 성공적인 응답
+				BufferedReader in = new BufferedReader(
+						new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
+				String inputLine;
+				StringBuilder response = new StringBuilder();
+
+				while ((inputLine = in.readLine()) != null) {
+					response.append(inputLine);
+				}
+				// System.out.println("response : "+response);
+				in.close();
+
+				// xml을 문자열로 바꿈
+				xmlResponse = response.toString();
+			} else {
+				System.out.println("GET request failed");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("성공적");
+		totalXmlParse(xmlResponse);
+		return "API 호출 성공";
+	}
 
 	// @Scheduled(cron = "0 0 0 1 * 0", zone = "Asia/Seoul") // 매월 1일 요일 00:00:00에
-	// 실행
-	// connAPI("loanItemSrch", whichTable, url);
 	public String connAPI(String url, String tableName) {
 		System.out.println("API요청");
-//		System.out.println("whichDataUrl : " + whichDataUrl);
 		String xmlResponse = "";
-//		String key = "";
-//
-//		
-//		// 인기도서(보통은 이달의 인기도서로 하는듯하다.)
-//		// 인기도서 loanItemSrch
-//		String url = "http://data4library.kr/api/" + whichDataUrl;
-//
-//		String urlParam = "?authKey=8d6b32bd9b40ff27779c0cd9cd76329dd858b557eff8d78747d43e3845117641";
-//		urlParam += "&region=11"; /// 다중 선택 가능 / 서울: 11
-//		urlParam += "&dtl_region=11120"; // 은평
-//		urlParam += "&pageNo=1&pageSize=5";
-//		urlParam += param;
-//		url = url + urlParam;
+
 		System.out.println(url);
 		try {
 
@@ -117,16 +146,66 @@ public class SearchService {
 
 		// xml파일을 db에 저장하기.
 		if (tableName.equals("popularBook")) {
-			System.out.println("popularBook API 호출");
 			xmlToJson(xmlResponse);
 			return "API 호출 성공";
 		}
 		if (tableName.equals("recentBook")) {
-			System.out.println("recentBook API 호출");
 			recentXmlToJson(xmlResponse);
 			return "API 호출 성공";
 		}
-		return "API 호출 실패";
+		/*
+		 * else { totalXmlParse(xmlResponse); }
+		 */
+		return "API 호출 성공";
+	}
+	
+	public  ArrayList<BookDTO> totalXmlParse(String xmlResponse) {
+		ArrayList<BookDTO> books = null;
+		try {
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder;
+
+			dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(new InputSource(new StringReader(xmlResponse)));
+
+			doc.getDocumentElement().normalize();
+
+			NodeList docList = doc.getElementsByTagName("doc");
+
+			books = new ArrayList<BookDTO>(); // Book 객체들을 저장할 리스트 생성
+
+			for (int i = 0; i < docList.getLength(); i++) {
+				Node docNode = docList.item(i);
+				if (docNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element docElement = (Element) docNode;
+					String bookName = docElement.getElementsByTagName("bookname").item(0).getTextContent();
+					String authors = docElement.getElementsByTagName("authors").item(0).getTextContent();
+					String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
+					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
+					String publicationYear = docElement.getElementsByTagName("publication_year").item(0)
+							.getTextContent();
+					System.out.println(bookName);
+					BookDTO book = new BookDTO();
+					book.setPublication_year(publicationYear);
+					book.setBookName(bookName);
+					book.setAuthors(authors);
+					book.setPublisher(publisher);
+					book.setBookImageURL(bookImageURL);
+					// 생성
+					books.add(book); // 리스트에 추가
+				}
+			}
+
+		} catch (ParserConfigurationException pce) {
+		    pce.printStackTrace(); // Handle ParserConfigurationException
+		} catch (SAXException se) {
+		    se.printStackTrace(); // Handle SAXException
+		} catch (IOException ioe) {
+		    ioe.printStackTrace(); // Handle IOException
+		} catch (Exception e) {
+		    e.printStackTrace(); // Handle other exceptions
+		}
+		return books;
 	}
 
 	public void recentXmlToJson(String xmlResponse) {
@@ -155,7 +234,6 @@ public class SearchService {
 					String publicationYear = docElement.getElementsByTagName("publication_year").item(0)
 							.getTextContent();
 					// System.out.println(bookName);
-					System.out.println("recentXmlToJson : " + bookName);
 					BookDTO book = new BookDTO();
 					book.setPublication_year(publicationYear);
 					book.setBookName(bookName);
@@ -191,7 +269,6 @@ public class SearchService {
 			NodeList docList = loanBooksNode.getChildNodes();
 
 			// NodeList docList = doc.getElementsByTagName("book");
-			System.out.println("xmlToJson1");
 			books = new ArrayList<>(); // Book 객체들을 저장할 리스트 생성
 
 			for (int i = 0; i < docList.getLength(); i++) {
@@ -206,7 +283,6 @@ public class SearchService {
 					String authors = docElement.getElementsByTagName("authors").item(0).getTextContent();
 					String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
 					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
-					System.out.println("xmlToJson : " + bookName);
 
 					BookDTO book = new BookDTO();
 					book.setNo(no);
@@ -253,9 +329,7 @@ public class SearchService {
 
 		// for(BookDTO book : lists) {
 		for (BookDTO book : books) {
-			System.out.println(book.getBookName());
 			int result = mapper.recentInsert(book);
-			System.out.println("recent 디비에 들어깠니? : " + result);
 			if (result == 0)
 				return "데이터 입력 중 오류가 발생했습니다. 다시 시도 하세요.";
 		}
@@ -263,30 +337,22 @@ public class SearchService {
 	}
 
 	public String getBookImages(Model model, String whichTable) {
-		System.out.println("whichTable ?" + whichTable);
 		String modelName = whichTable;
 		ArrayList<String> bookImages = mapper.getBookImages(whichTable);
 		if (bookImages.isEmpty() || bookImages == null) { // null로 구분하면 안됨. 빈 거(isEmpty())랑 null은 다른것임.
-			System.out.println("실패야??");
 			return "이미지 가져오기 실패";
-		}
-		for (String name : bookImages) {
-			System.out.println("책 이름 : " + name);
 		}
 		model.addAttribute(modelName, bookImages);
 		return "이미지 가져오기 완료";
 	}
 
-	public void showBookImages(String whichTable, Model model, String url) {
+	public void showMainImages(String whichTable, Model model, String url) {
 		String dbResult = getBookImages(model, whichTable);
-		// String tableName = whichTable;
 
 		if (dbResult.equals("이미지 가져오기 실패")) {
 			// String whichDataAPI, String restParam, String pageNo, String pageSize
-			System.out.println("여기야?");
 			String apiResult = connAPI(url, whichTable);
 			if (apiResult.equals("API 호출 성공")) {
-				System.out.println("여기 온거니???????");
 				getBookImages(model, whichTable);
 			}
 			// System.out.println("popApiResult" + apiResult);
