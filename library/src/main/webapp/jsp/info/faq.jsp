@@ -11,20 +11,43 @@
 <c:import url = "/header"/>
 <script>
 //탭 클릭 시 active 추가
-	document.addEventListener('DOMContentLoaded', function() {
-	    const subMenuItems = document.querySelectorAll('.info_menu');
-	    subMenuItems[0].classList.add('active');
-	
-	    subMenuItems.forEach(item => {
-	        item.addEventListener('click', function() {
-	            subMenuItems.forEach(item => {
-	                item.classList.remove('active');
-	            });
-	
-	            this.classList.add('active');
-	        });
-	    });
-	});
+document.addEventListener('DOMContentLoaded', function() {
+    const subMenuItems = document.querySelectorAll('.info_menu');
+    subMenuItems[0].classList.add('active');
+
+    subMenuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            subMenuItems.forEach(item => {
+                item.classList.remove('active');
+            });
+
+            this.classList.add('active');
+            
+            var value = this.getAttribute("value");
+            console.log("Value of clicked li:", value);
+            
+            // Remove the existing content and update with new content
+            var contentBox = document.querySelector('.contentBox');
+            contentBox.innerHTML = ''; // Clear existing content
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        contentBox.innerHTML = xhr.responseText; // Update with new content
+                    } else {
+                        console.log("Error:", xhr.status);
+                    }
+                }
+            };
+            
+            xhr.open('POST', '/info/faqList', true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("category=" + encodeURIComponent(value));
+        });
+    });
+});
+
 </script>
 </head>
 <body>
@@ -42,18 +65,19 @@
 			<a href="${context }info/notice">정보광장</a> >
 			<a class="checked" href="${context }info/faq">자주하는 질문</a>
 		</div>
-		<div class = "subMenu_info" id = "subMenu_info">
-			<ul>
-				<li class = "info_menu active" onclick="showFaq('faqMember')">회원가입 및 탈퇴</li>
-				<li class = "info_menu" id="memberListMenu">도서열람</li>
-				<li class = "info_menu" id="memberListMenu" onclick="location.href='memberList'">도서관 이용</li>
-				<li class = "info_menu" id="memberListMenu" onclick="location.href='memberList'">사이트 이용</li>
-			</ul>
-		</div>
-		<div class="contentBox" style = "padding-top:0;">
-			<div class="noticeContainer" style = "border-top:none; padding-top:0;">
-				<c:import url = "${context }info/faqMember"/>
+		<form id = "f" action="" method="post">
+			<div class = "subMenu_info" id = "subMenu_info">
+				<ul id = "info_menu">
+					<li class = "info_menu active" value="member">회원가입 및 탈퇴</li>
+					<li class = "info_menu" id="memberListMenu" value = "book">도서열람</li>
+					<li class = "info_menu" id="memberListMenu" value = "library">도서관 이용</li>
+					<li class = "info_menu" id="memberListMenu" value = "site">사이트 이용</li>
+				</ul>
 			</div>
+			<input type="hidden" id="menuItemValue" name="category" value="">
+		</form>
+		<div class="noticeContainer" style = "border-top:none; padding-top:0;">
+			<c:import url = "${context }info/faqList"/>
 			<c:if test = "${sessionScope.status == 'M'}">
 				<div class="write">
 					<input type = "button" value = "등록" onclick="location.href='faqWriteForm'">

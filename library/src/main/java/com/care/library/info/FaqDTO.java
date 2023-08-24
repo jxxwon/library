@@ -5,6 +5,14 @@ public class FaqDTO {
 	private String category;
 	private String title;
 	private String content;
+	private int rn;
+	
+	public int getRn() {
+		return rn;
+	}
+	public void setRn(int rn) {
+		this.rn = rn;
+	}
 	public int getNo() {
 		return no;
 	}

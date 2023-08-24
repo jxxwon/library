@@ -37,19 +37,15 @@ function selectFile(inputElement){
 	}
 }
 
-// faq 탭 클릭 시 화면 전환
-function showFaq(menu){
-	var url = "/info/"+ menu;
-	const memberContainer = document.getElementById('memberContainer');
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            memberContainer.innerHTML = xhr.responseText;
-          }
-        };
-        xhr.send();
+//faq 목록
+function submitMenuItem(value) {
+    // Set the value of the hidden input field
+    document.getElementById('menuItemValue').value = value;
+    
+    // Submit the form
+    document.getElementById('f').submit();
 }
+
 
 //faq 등록
 function faqWriteChk(){
@@ -71,3 +67,4 @@ function faqWriteChk(){
 		f.submit();
 	}
 }
+

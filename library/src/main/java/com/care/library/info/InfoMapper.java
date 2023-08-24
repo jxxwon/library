@@ -25,4 +25,6 @@ public interface InfoMapper {
 
 	void writeFaq(FaqDTO faq);
 
+	ArrayList<FaqDTO> selectFaq(String category, int begin, int end);
+
 }

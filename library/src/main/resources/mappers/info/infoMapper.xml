@@ -45,6 +45,10 @@
   	<insert id="writeFaq">
   		INSERT INTO faq (no, category, title, content) VALUES (#{no}, #{category}, #{title}, #{content})
   	</insert>
+  	
+  	<select id = "selectFaq" resultType = "com.care.library.info.FaqDTO">
+  		SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM (SELECT * FROM faq WHERE category = #{category})AAA)BBB WHERE rn BETWEEN #{begin} AND #{end}
+  	</select>
 </mapper>
 
 

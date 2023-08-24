@@ -84,6 +84,20 @@ h1{margin-bottom:50px;}
 
 .subMenu_info ul li:hover{background-color:#338cfa; color:#fff; cursor:pointer;}
 
+/*자주하는 질문 목록*/
+.selectFaq {overflow:hidden; width:100%; text-align:center;}
+.selectFaq tr:first-child{border-bottom:2px solid #555;}
+.selectFaq tr:hover{cursor:pointer; color:blue;}
+.selectFaq tr:first-child:hover{cursor:default; color:#000;}
+.selectFaq tr th{padding:5px;}
+.selectFaq tr td{padding:5px; text-align:center; border-bottom:1px solid #ddd;}
+.selectFaq tr td:first-child {width:50px;}
+
+.faqPage {margin:40px 0;}
+.faqPage a{display:inline-block; width:30px; height:30px; line-height:30px; font-weight:400; font-size:17px; border:1px solid #ddd; margin-right:5px; color:#000;}
+.faq a:last-child{margin-right:0;}
+
+
 /*자주하는 질문 등록*/
 .faqFormContainer {display:flex;}
 .faqFormContent{padding:50px 0 0 50px; width:1000px;}

@@ -10,7 +10,7 @@
 
 </script>
 
-<title>하이미디어 도서관 - 정보광장 : 자주묻는 질문 등록</title>
+<title>하이미디어 도서관 - 정보광장 : 자주하는 질문 등록</title>
 
 <body>
 	<c:import url = "/header"/>
@@ -18,11 +18,11 @@
 		<c:import url = "/subMenuInfo"/>
 		<div class = "faqFormContent">
 			<div class = "notice header">
-				<h1>자주묻는 질문</h1>
+				<h1>자주하는 질문</h1>
 				<div class="mb_30 mt_20">
 					<a href="/main">HOME</a> > 
 					<a href="${context }info/notice">정보광장</a> >
-					<a class="checked" href="${context }info/faq">자주묻는 질문</a>
+					<a class="checked" href="${context }info/faq">자주하는 질문</a>
 				</div>
 			</div>
 			<div class="faqContainer">

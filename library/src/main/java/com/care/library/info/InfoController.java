@@ -5,8 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -99,16 +101,19 @@ public class InfoController {
 	}
 	
 	@RequestMapping("/info/faq")
-	public String faq(@RequestParam(value="currentPage", required = false)String cp, Model model) {
-//		service.selectNotice(cp, model);
+	public String faq() {
 		return "info/faq";
 	}
 	
-	@RequestMapping("/info/faqMember")
-	public String faqMember() {
-		return "info/faqMember";
+	@RequestMapping("/info/faqList")
+	public String faqList(String category, @RequestParam(value="currentPage", required = false)String cp, Model model) {
+		if(category == null) {
+			category = "member";
+		}
+		service.selectFaq(category, cp, model);
+		return "info/faqList";
 	}
-
+	
 	@RequestMapping("/info/faqWriteForm")
 	public String faqWriteForm() {
 		String id = (String)session.getAttribute("id");
