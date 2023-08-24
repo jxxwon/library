@@ -17,18 +17,9 @@ public interface CulturalMapper {
 
 	int count();
 
-	/* ArrayList<CulturalDTO> culForm(HashMap<String, Integer> map); */
-
 	void culFormWriteProc(CulturalDTO cultural);
-	
-	CulturalDTO culModifyId(String culId);
-	void culModifyProc(CulturalDTO cultural);
-	
-	/*
-	 * void culFormWrite(String imagePath, int culId, String title, String
-	 * lectureStart, String lectureEnd, String registrationStart, String
-	 * registrationEnd, String target, String writeDate);
-	 */
+
+	CulturalDTO culFormWrite(int culId);	//목록에서 culId값 일치하는 데이터 가저오기
 
 
 }

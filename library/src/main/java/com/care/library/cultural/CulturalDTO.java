@@ -7,11 +7,18 @@ public class CulturalDTO {
     private String lectureEnd;
     private String registrationStart;
     private String registrationEnd;
+    private String lectureTime;
+    private String lecturePlace;
+    private String lectureDay;
+    private String lectureName;
+    private String cost;
+    private String lectureText;
     private String target;
     private String imagePath; // 이미지 파일의 경로를 저장하는 필드
     private String writeDate;
     private String count;
 	/* private byte[] image; */
+    
 	public int getCulId() {
 		return culId;
 	}
@@ -48,6 +55,42 @@ public class CulturalDTO {
 	public void setRegistrationEnd(String registrationEnd) {
 		this.registrationEnd = registrationEnd;
 	}
+	public String getLectureTime() {
+		return lectureTime;
+	}
+	public void setLectureTime(String lectureTime) {
+		this.lectureTime = lectureTime;
+	}
+	public String getLecturePlace() {
+		return lecturePlace;
+	}
+	public void setLecturePlace(String lecturePlace) {
+		this.lecturePlace = lecturePlace;
+	}
+	public String getLectureDay() {
+		return lectureDay;
+	}
+	public void setLectureDay(String lectureDay) {
+		this.lectureDay = lectureDay;
+	}
+	public String getLectureName() {
+		return lectureName;
+	}
+	public void setLectureName(String lectureName) {
+		this.lectureName = lectureName;
+	}
+	public String getCost() {
+		return cost;
+	}
+	public void setCost(String cost) {
+		this.cost = cost;
+	}
+	public String getLectureText() {
+		return lectureText;
+	}
+	public void setLectureText(String lectureText) {
+		this.lectureText = lectureText;
+	}
 	public String getTarget() {
 		return target;
 	}
@@ -73,4 +116,5 @@ public class CulturalDTO {
 		this.count = count;
 	}
 
+    
 }

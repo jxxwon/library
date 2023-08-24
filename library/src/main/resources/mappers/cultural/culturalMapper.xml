@@ -1,59 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.care.library.cultural.CulturalMapper">
-    <!-- culturalDto 객체와 매핑되는 resultMap 설정 -->
-    <resultMap id="culturalDto" type="com.care.library.cultural.CulturalDTO">
-        <id property="culId" column="cul_id"/>
-        <result property="title" column="title"/>
-        <result property="lectureStart" column="lecture_start"/>
-        <result property="lectureEnd" column="lecture_end"/>
-        <result property="registrationStart" column="registration_start"/>
-        <result property="registrationEnd" column="registration_end"/>
-        <result property="target" column="target"/>
-        <result property="imagePath" column="image_path"/>
-        <result property="writeDate" column="write_date"/>
-        <result property="count" column="count"/>
-    </resultMap>
+	<!-- culturalDto 객체와 매핑되는 resultMap 설정 -->
+	<resultMap id="culturalDto" type="com.care.library.cultural.CulturalDTO">
+	    <id property="culId" column="cul_id"/>
+	    <result property="title" column="title"/>
+	    <result property="lectureStart" column="lecture_start"/>
+	    <result property="lectureEnd" column="lecture_end"/>
+	    <result property="registrationStart" column="registration_start"/>
+	    <result property="registrationEnd" column="registration_end"/>
+	    <result property="target" column="target"/>
+	    <result property="lectureTime" column="lecture_time"/>
+	    <result property="lecturePlace" column="lecture_place"/>
+	    <result property="lectureDay" column="lecture_day"/>
+	    <result property="lectureName" column="lecture_name"/>
+	    <result property="cost" column="cost"/>
+	    <result property="lectureText" column="lecture_text"/>
+	    <result property="imagePath" column="image_path"/>
+	    <result property="writeDate" column="write_date"/>
+	    <result property="count" column="count"/>
+	</resultMap>
+	<!-- cultural 테이블의 데이터 개수를 가져오는 SQL -->
+	<select id="count">
+	    SELECT COUNT(*) FROM cultural
+	</select>
+		
+	<!-- cultural 테이블에 데이터를 삽입하는 SQL -->
+	<insert id="culFormWriteProc" parameterType="com.care.library.cultural.CulturalDTO">
+		INSERT INTO cultural (title, lecture_start, lecture_end, registration_start, registration_end, target, lecture_time, lecture_place, lecture_day, lecture_name, cost, lecture_text, image_path, write_date) 
+		VALUES (#{title}, #{lectureStart}, #{lectureEnd}, #{registrationStart}, #{registrationEnd}, #{target}, #{lectureTime} , #{lecturePlace} , #{lectureDay} , #{lectureName} , #{cost} , #{lectureText}, #{imagePath}, #{writeDate})
+	</insert>
 
-    <!-- cultural 테이블의 데이터 개수를 가져오는 SQL -->
-    <select id="count">
-        SELECT COUNT(*) FROM cultural
-    </select>
+	<!-- cultural 테이블에서 데이터를 가져오는 SQL과 resultMap 설정 -->
+	<select id="culturalForm" resultMap="culturalDto">
+	    SELECT cul_id, title, lecture_start, lecture_end, registration_start,
+	    registration_end, target, image_path, count
+	    FROM (
+	        SELECT CCC.*, ROWNUM as rn FROM (
+	            SELECT cul_id, 
+	            title, lecture_start, 
+	            lecture_end, 
+	            registration_start,
+	            registration_end, 
+	            target, 
+	            image_path, 
+	            count 
+	            FROM cultural
+	            WHERE registration_end >= CURRENT_DATE   <!-- 현재 날짜를 기준으로 필터링 -->
+	            ORDER BY cul_id DESC
+	        ) CCC
+	    )
+	    WHERE rn BETWEEN #{begin} AND #{end}
+	</select>
 
-    <!-- cultural 테이블에 데이터를 삽입하는 SQL -->
-    <insert id="culFormWriteProc" parameterType="com.care.library.cultural.CulturalDTO">
-        INSERT INTO cultural (title, lecture_start, lecture_end, registration_start, registration_end, target, image_path, write_date) 
-        VALUES (#{title}, #{lectureStart}, #{lectureEnd}, #{registrationStart}, #{registrationEnd}, #{target}, #{imagePath}, #{writeDate})
-    </insert>
+	<!-- <select id="culturalForm" resultMap="culturalDto">
+		SELECT cul_id, title, lecture_start, lecture_end, registration_start,
+		registration_end, target, image_path, count FROM (
+			SELECT CCC.*, ROWNUM as rn FROM (
+				SELECT cul_id, 
+				title, lecture_start, 
+				lecture_end, 
+				registration_start,
+				registration_end, 
+				target, 
+				image_path, 
+				count 
+				FROM cultural ORDER BY cul_id DESC
+			) CCC
+		) WHERE rn BETWEEN #{begin} AND #{end}
+	</select>
+	</select> -->
 
-    <!-- cultural 테이블에서 데이터를 가져오는 SQL과 resultMap 설정 -->
-    <select id="culturalForm" resultMap="culturalDto">
-        SELECT cul_id, title, lecture_start, lecture_end, registration_start,
-        registration_end, target, image_path, count FROM (
-            SELECT CCC.*, ROWNUM as rn FROM (
-                SELECT cul_id, 
-                title, lecture_start, 
-                lecture_end, 
-                registration_start,
-                registration_end, 
-                target, 
-                image_path, 
-                count 
-                FROM cultural ORDER BY cul_id DESC
-            ) CCC
-        ) WHERE rn BETWEEN #{begin} AND #{end}
-    </select>
-
-    <select id="culFormWrite" resultMap="culturalDto">
-        SELECT * FROM cultural WHERE cul_id = #{culId}
-    </select>
-
-    <!-- culModifyId 쿼리 이름 -->
-    <select id="culModifyId" parameterType="String" resultMap="culturalDto">
-        SELECT *
-        FROM cultural
-        WHERE cul_id = #{culId}
-    </select>
-
+	<!-- culId랑 일치하는 데이터 보여주는 DB -->
+	<select id="culFormWrite" resultMap="culturalDto">
+	   SELECT
+			image_path,
+			title,
+			lecture_start,
+			lecture_end,
+			registration_start,
+			registration_end,
+			target,
+			lecture_time,
+			lecture_place,
+			lecture_day,
+			lecture_name,
+			cost,
+			lecture_text,
+			image_path,
+			write_date
+		FROM
+			cultural
+		WHERE
+			cul_id = #{culId}
+	</select>
 </mapper>

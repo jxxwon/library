@@ -40,7 +40,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping("main")
-	public String main() {
+	public String main(Model model) {
+		service.mainNotice(model);
 		return "default/main";
 	}
 	

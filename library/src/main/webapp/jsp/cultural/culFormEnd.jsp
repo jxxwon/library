@@ -3,7 +3,7 @@
 <%@ page import="com.care.library.common.PageService" %>
 <title>하이디미어 도서관 - 문화행사</title>
 <c:url var="context" value="/" />
-<link href="${context }css/cultural.css" rel="stylesheet" type="text/css">
+<link href="/css/cultural.css" rel="stylesheet" type="text/css">
 
 <script>
   	document.addEventListener('DOMContentLoaded', function() {	
@@ -101,4 +101,4 @@
 
 <c:import url="/footer" />
 
-<script src="${context }javaScript/subCulTop.js"></script>
+<script src="/javaScript/subCulTop.js"></script>

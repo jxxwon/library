@@ -47,13 +47,23 @@ public class CulturalController {
 	 * registrationStart, registrationEnd, target, writeDate); return
 	 * "cultural/culWrite"; // 뷰 페이지로 이동 }
 	 */
-   
-    @RequestMapping("culModify")
-	public String culModify(String id) {
-		service.culModify(id);
-    	System.out.println("CulturalController_culWrite 확인");
-    	return "cultural/culModify"; // 뷰 페이지로 이동
-	}
+	/*
+	 * @RequestMapping("culWrite") public String culWrite(CulturalDTO cultural) {
+	 * service.culFormWrite(cultural);
+	 * System.out.println("CulturalController_culWrite 확인"); return
+	 * "cultural/culWrite"; // 뷰 페이지로 이동 }
+	 */
+    @RequestMapping("culWrite")
+    public String getCultural(@RequestParam("culId") int culId, Model model) {
+    	CulturalDTO cultural = service.culFormWrite(culId); // 데이터 가져오기
+        model.addAttribute("cultural", cultural); // JSP로 데이터 전달
+        return "cultural/culWrite"; // 뷰 페이지로 이동
+    }
+	/*
+	 * @RequestMapping("culModify") public String culModify(String id) {
+	 * service.culModify(id); System.out.println("CulturalController_culWrite 확인");
+	 * return "cultural/culModify"; // 뷰 페이지로 이동 }
+	 */
     
     public String culModify(@ModelAttribute("cultural") CulturalDTO culturalDTO, Model model) {
         model.addAttribute("cultural", culturalDTO);
@@ -84,19 +94,15 @@ public class CulturalController {
 	}
     
     @PostMapping("culFormWriteProc")
-    public String culFormWriteProc(Model model, MultipartHttpServletRequest multi,
-                                   @RequestParam("lectureStart") String lectureStart,
-                                   @RequestParam("lectureEnd") String lectureEnd,
-                                   @RequestParam("registrationStart") String registrationStart,
-                                   @RequestParam("registrationEnd") String registrationEnd) {
-        String msg = service.culFormWriteProc(multi, lectureStart, lectureEnd, registrationStart, registrationEnd);
-        
+    public String culFormWriteProc(Model model, MultipartHttpServletRequest multi){
+        String msg = service.culFormWriteProc(multi);
 		System.out.println("culFormWriteProc_Controller_Start");
-		if("로그인".equals(msg))
-			return "redirect:login";
-		
-		if("게시글 작성 완료".equals(msg))
+		System.out.println("multi : " + multi);
+	
+		if(msg.equals("게시글 작성 완료")) {
+			System.out.println("게시글 작성 완료");
 			return "redirect:culForm";
+		}
 		
 		model.addAttribute("msg", msg);
 		System.out.println("culFormWriteProc_Controller_End");
