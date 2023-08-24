@@ -171,5 +171,22 @@ public class InfoService {
 		mapper.deleteNotice(no);
 	}
 
+	public void faqWrite(String category, String title, String content) {
+		FaqDTO faq = new FaqDTO();
+		int no;
+		
+		try {
+			no = mapper.findMaxNumFaq();
+		} catch (Exception e) {
+			no = 0;
+		}
+		
+		faq.setNo(no+1);
+		faq.setCategory(category);
+		faq.setTitle(title);
+		faq.setContent(content);
+		mapper.writeFaq(faq);
+	}
+
 
 }

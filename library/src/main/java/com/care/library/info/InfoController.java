@@ -74,19 +74,62 @@ public class InfoController {
 	
 	@RequestMapping("/info/noticeUpdate")
 	public String noticeUpdate(int no, Model model) {
+		String id = (String)session.getAttribute("id");
+		String status = (String)session.getAttribute("status");
+		
+		if(id.isEmpty() || id == null || (status.equals("M")==false)) {
+			return "redirect:/info/notice";
+		}
+		
 		service.noticeUpdate(no, model);
 		return "info/noticeUpdate";
 	}
 
 	@GetMapping("/info/noticeDelete")
 	public String noticeDelete(int no) {
+		String id = (String)session.getAttribute("id");
+		String status = (String)session.getAttribute("status");
+		
+		if(id.isEmpty() || id == null || (status.equals("M")==false)) {
+			return "redirect:/info/notice";
+		}
+		
 		service.noticeDelete(no);
 		return "redirect:/info/notice";
 	}
 	
-	@RequestMapping("/info/qna")
-	public String qna(@RequestParam(value="currentPage", required = false)String cp, Model model) {
+	@RequestMapping("/info/faq")
+	public String faq(@RequestParam(value="currentPage", required = false)String cp, Model model) {
 //		service.selectNotice(cp, model);
-		return "info/qna";
+		return "info/faq";
+	}
+	
+	@RequestMapping("/info/faqMember")
+	public String faqMember() {
+		return "info/faqMember";
+	}
+
+	@RequestMapping("/info/faqWriteForm")
+	public String faqWriteForm() {
+		String id = (String)session.getAttribute("id");
+		String status = (String)session.getAttribute("status");
+		
+		if(id.isEmpty() || id == null || (status.equals("M")==false)) {
+			return "redirect:/info/faq";
+		}
+		return "info/faqWriteForm";
+	}
+	
+	@RequestMapping("/info/faqWriteProc")
+	public String faqWriteProc(String category, String title, String content) {
+		String id = (String)session.getAttribute("id");
+		String status = (String)session.getAttribute("status");
+		
+		if(id.isEmpty() || id == null || (status.equals("M")==false)) {
+			return "redirect:/info/faq";
+		}
+		
+		service.faqWrite(category, title, content);
+		return "redirect:/info/faq";
 	}
 }

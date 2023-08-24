@@ -6,7 +6,7 @@ h1{margin-bottom:50px;}
 
 .infoContent{padding:50px 0 0 50px; width:1000px; min-height:600px;}
 
-.infoContent .info_title{margin:50px 0;}
+.infoContent .info_title{margin:50px 0; line-height:145%;}
 .infoContent .info_title p{font-weight:500; font-size:20px;}
 
 .subMenu_info{border-bottom:2px solid #ddd; margin-top:45px;}
@@ -73,3 +73,27 @@ h1{margin-bottom:50px;}
 .noticeContainer .noticeUpdateForm .noticeImage{height:45px; line-height:45px;}
 .noticeContainer .noticeUpdateForm .noticeImage label{margin-right:10px; font-size:15px;}
 .noticeContainer .noticeUpdateForm input[type="text"]{height:30px;}
+
+/*자주하는 질문*/
+.subMenu_info{border-bottom:2px solid #ddd; margin-top:45px;}
+.subMenu_info ul{display:table; border:1px solid #ddd; border-bottom:none;}
+.subMenu_info ul li{display:table-cell; width:150px; height:40px; line-height:40px; text-align:center; border-right:1px solid #ddd;}
+.subMenu_info ul li:last-child{border-right:none;}
+
+.subMenu_info ul li.active{background-color:#338cfa; color:#fff; cursor:pointer;}
+
+.subMenu_info ul li:hover{background-color:#338cfa; color:#fff; cursor:pointer;}
+
+/*자주하는 질문 등록*/
+.faqFormContainer {display:flex;}
+.faqFormContent{padding:50px 0 0 50px; width:1000px;}
+
+.faqContainer .faqWriteForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
+.faqContainer .faqWriteForm tr{border-bottom:1px solid #ddd;}
+.faqContainer .faqWriteForm th{padding:10px; border-right:1px solid #ddd;}
+.faqContainer .faqWriteForm td{padding:10px;}
+.faqContainer .faqWriteForm .noticeImage{height:45px; line-height:45px;}
+.faqContainer .faqWriteForm .noticeImage label{margin-right:10px; font-size:15px;}
+.faqContainer .faqWriteForm input[type="text"]{height:30px;}
+
+.noticeBtn {margin:40px 0; text-align:right;}

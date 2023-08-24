@@ -37,6 +37,14 @@
   	<delete id="deleteNotice">
   		DELETE notice WHERE no = #{no}
   	</delete>
+  	
+  	<select id = "findMaxNumFaq">
+  		SELECT MAX(no) FROM faq
+  	</select>
+  	
+  	<insert id="writeFaq">
+  		INSERT INTO faq (no, category, title, content) VALUES (#{no}, #{category}, #{title}, #{content})
+  	</insert>
 </mapper>
 
 

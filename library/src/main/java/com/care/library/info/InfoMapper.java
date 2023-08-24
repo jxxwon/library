@@ -20,5 +20,9 @@ public interface InfoMapper {
 	void updateNoticeHit(int no);
 
 	void deleteNotice(int no);
+	
+	int findMaxNumFaq();
+
+	void writeFaq(FaqDTO faq);
 
 }

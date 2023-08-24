@@ -14,7 +14,7 @@ function setButtonColorByURL() {
   // 원하는 URL 패턴에 따라 버튼 색상을 변경합니다.
   if (currentURL.includes("notice") && subNoticeElement) {
       subNoticeElement.classList.add("active");
-  } else if(currentURL.includes("qna") && subQnaElement){
+  } else if(currentURL.includes("faq") && subQnaElement){
 	  subQnaElement.classList.add("active");
   }
 }
@@ -37,3 +37,37 @@ function selectFile(inputElement){
 	}
 }
 
+// faq 탭 클릭 시 화면 전환
+function showFaq(menu){
+	var url = "/info/"+ menu;
+	const memberContainer = document.getElementById('memberContainer');
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            memberContainer.innerHTML = xhr.responseText;
+          }
+        };
+        xhr.send();
+}
+
+//faq 등록
+function faqWriteChk(){
+	var category = document.getElementById('category');
+	var categoryValue = category.options[category.selectedIndex].value;
+	
+	var title = document.getElementById('title').value;
+	var content = document.getElementById('content').value;
+	
+	if(categoryValue == ""){
+		alert('구분을 선택하세요.');
+	} else if(title == "" || title.trim().length == 0){
+		alert('제목을 입력하세요.');
+	} else if(content == "" || content.trim().length == 0){
+		alert('내용을 입력하세요.');
+	} else {
+		alert('자주묻는 질문이 등록되었습니다.');
+		var f = document.getElementById('f');
+		f.submit();
+	}
+}
