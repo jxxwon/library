@@ -73,9 +73,29 @@ function faqWriteChk(){
 	} else if(content == "" || content.trim().length == 0){
 		alert('내용을 입력하세요.');
 	} else {
-		alert('자주묻는 질문이 등록되었습니다.');
+		alert('자주하는 질문이 등록되었습니다.');
 		var f = document.getElementById('f');
 		f.submit();
 	}
 }
 
+//faq 수정
+function faqUpdateChk(){
+	var category = document.getElementById('category');
+	var categoryValue = category.options[category.selectedIndex].value;
+	
+	var title = document.getElementById('title').value;
+	var content = document.getElementById('content').value;
+	
+	if(categoryValue == ""){
+		alert('구분을 선택하세요.');
+	} else if(title == "" || title.trim().length == 0){
+		alert('제목을 입력하세요.');
+	} else if(content == "" || content.trim().length == 0){
+		alert('내용을 입력하세요.');
+	} else {
+		alert('자주하는 질문이 수정되었습니다.');
+		var f = document.getElementById('f');
+		f.submit();
+	}
+}

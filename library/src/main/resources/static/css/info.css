@@ -96,7 +96,7 @@ h1{margin-bottom:50px;}
 
 /*자주하는 질문 등록*/
 .faqFormContainer {display:flex;}
-.faqFormContent{padding-bottom: 50px; width:1000px;}
+.faqFormContent{padding:50px 0 0 50px; width:1000px;}
 
 .faqContainer .faqWriteForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
 .faqContainer .faqWriteForm tr{border-bottom:1px solid #ddd;}

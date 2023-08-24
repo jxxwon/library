@@ -62,6 +62,10 @@
   	<select id = "selectFaqContent" resultType = "com.care.library.info.FaqDTO">
   		SELECT * FROM faq WHERE no = #{no}
   	</select>
+  	
+  	<update id = "faqUpdate" parameterType="com.care.library.info.FaqDTO">
+  		UPDATE faq SET category = #{category}, title = #{title}, content = #{content} WHERE no = #{no}
+  	</update>
 </mapper>
 
 

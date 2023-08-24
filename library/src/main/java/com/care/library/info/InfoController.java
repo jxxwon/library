@@ -147,4 +147,16 @@ public class InfoController {
 		service.faqContent(no, model);
 		return "info/faqContent";
 	}
+	
+	@RequestMapping("/info/faqUpdate")
+	public String faqUpdate(int no, Model model) {
+		service.faqContent(no, model);
+		return "info/faqUpdate";
+	}
+	
+	@PostMapping("/info/faqUpdateProc")
+	public String faqUpdateProc(int no, String category, String title, String content) {
+		service.faqUpdate(no, category, title, content);
+		return "redirect:/info/faq";
+	}
 }

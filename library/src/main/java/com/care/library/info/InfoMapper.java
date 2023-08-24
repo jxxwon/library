@@ -31,5 +31,7 @@ public interface InfoMapper {
 
 	FaqDTO selectFaqContent(int no);
 
+	void faqUpdate(FaqDTO faq);
+
 
 }

@@ -222,5 +222,14 @@ public class InfoService {
 		model.addAttribute("faq", faq);
 	}
 
+	public void faqUpdate(int no, String category, String title, String content) {
+		FaqDTO faq = mapper.selectFaqContent(no);
+		faq.setCategory(category);
+		faq.setTitle(title);
+		faq.setContent(content);
+		mapper.faqUpdate(faq);
+	}
+
+
 
 }
