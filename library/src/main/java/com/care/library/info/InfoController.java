@@ -1,17 +1,20 @@
 package com.care.library.info;
 
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -72,9 +75,8 @@ public class InfoController {
 	}
 	
 	@RequestMapping("/info/noticeFileDownload")
-	public String noticeFileDownload(int no) {
-		service.noticeFileDownload(no);
-		return "info/noticeContent";
+	public void noticeFileDownload(int no, HttpServletResponse response) {
+		service.fileDownload(no, response);
 	}
 	
 	@RequestMapping("/info/noticeUpdate")

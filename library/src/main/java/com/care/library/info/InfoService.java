@@ -1,6 +1,9 @@
 package com.care.library.info;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.care.library.common.PageService;
 import com.care.library.member.MemberDTO;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Service
 public class InfoService {
 	
@@ -25,9 +30,6 @@ public class InfoService {
 	
 	@Value("${upload.path}")
 	private String uploadPath;
-
-	@Value("${img.location}")
-	private String uploadImagePath;
 
 	public void noticeWrite(String id, String title, String content, MultipartFile file) {
 		String fileName = file.getOriginalFilename();
@@ -131,36 +133,28 @@ public class InfoService {
 		NoticeDTO notice = mapper.selectNoticeContent(no);
 		mapper.updateNoticeHit(no);
 		model.addAttribute("notice", notice);
-		
 	}
-
-	public void noticeFileDownload(int no) {
+	
+	public void fileDownload(int no, HttpServletResponse response) {
 		NoticeDTO notice = mapper.selectNoticeContent(no);
 		String fileName = notice.getFileName();
-			
-		String saveDir = "C:\\Users\\hi\\Downloads";
-			
-		File f = new File(saveDir);
+		String filePath = "C:\\javas\\upload\\" + fileName;
 		
-//		Resource resource = new InputStremResource(Files.newInputStream(path));
-//		FileInputStream fis = new FileInputStream(f);
-//		response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
-//				
-//		out.clear();
-//		out = pageContext.pushBody();
-//
-//		OutputStream os = response.getOutputStream();
-//			
-//		byte [] b = new byte[1024];
-//		while(true){
-//			int currentSize = fis.read(b, 0, b.length);
-//			if(currentSize == -1){
-//				break;
-//			}
-//			os.write(b, 0, currentSize);
-//		}
-//			
-//		fis.close();
+		try (FileInputStream fis = new FileInputStream(filePath);
+				OutputStream os = response.getOutputStream()) {
+			
+			response.setContentType("application/octet-stream");
+			response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+			
+			byte[] buffer = new byte[1024];
+			int bytesRead;
+			
+			while ((bytesRead = fis.read(buffer)) != -1) {
+				os.write(buffer, 0, bytesRead);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void noticeUpdate(int no, Model model) {
@@ -211,7 +205,5 @@ public class InfoService {
 		FaqDTO faq = mapper.selectFaqContent(no);
 		mapper.deleteFaq(no);
 	}
-
-
 
 }
