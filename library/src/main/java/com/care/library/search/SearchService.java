@@ -273,6 +273,7 @@ public class SearchService {
 		}
 		recentInsert(books);
 	}
+	
 
 	// xml파일을 db에 저장하기.
 	public void xmlToJson(String xmlResponse) {
@@ -382,5 +383,44 @@ public class SearchService {
 			// System.out.println("popApiResult" + apiResult);
 		}
 	}
+
+	
+	// xml파일을 db에 저장하기.
+//	public LibInfoDTO InsertlibInfo(String xmlResponse) {
+//	    LibInfoDTO libInfo = new LibInfoDTO();
+//	    try {
+//	        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+//	        DocumentBuilder dBuilder;
+//
+//	        dBuilder = dbFactory.newDocumentBuilder();
+//	        Document doc = dBuilder.parse(new InputSource(new StringReader(xmlResponse)));
+//
+//	        doc.getDocumentElement().normalize();
+//
+//	        NodeList docList = doc.getElementsByTagName("libInfo");
+//
+//	        if (docList.getLength() == 1) { 
+//	            Node docNode = docList.item(0);
+//	            Element element = (Element) docNode;
+//	            
+//	            String closed = element.getAttribute("closed");
+//	            String operatingTime = element.getAttribute("operatingTime");
+//	            libInfo.setClosedDay(closed);
+//	            libInfo.setOperatingTime(operatingTime);
+//	        }
+//
+//	    } catch (Exception e) {
+//	        // Handle exceptions
+//	    }
+//	    
+//	    //db에 도서관 정보 삽입.
+//	    mapper.getLibInfo(libInfo);
+//	    return libInfo;
+//	}
+
+
+
+
+
 
 }
