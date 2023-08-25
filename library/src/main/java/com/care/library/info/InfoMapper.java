@@ -62,6 +62,10 @@ public interface InfoMapper {
 
 	ArrayList<ReplyDTO> selectNoticeReply(int no);
 
+	int countReply(int freeNo);
+
+	void updateFreeReply(int freeNo, int replies);
+
 
 
 

@@ -349,10 +349,13 @@ public class InfoService {
 		
 		mapper.writeFreeReply(reply);
 		
-		NotifyDTO notification = new NotifyDTO();
-		
 		FreeDTO free = mapper.selectFreeContent(freeNo);
-		notification.setId(free.getWriter());
+		String freeWriter = free.getWriter();
+		int replies = mapper.countReply(freeNo);
+		mapper.updateFreeReply(freeNo, replies);
+
+		NotifyDTO notification = new NotifyDTO();
+		notification.setId(freeWriter);
 		notification.setCategory("게시판");
 		notification.setTitle("댓글이 등록되었습니다.");
 		notification.setUrl("/info/free");

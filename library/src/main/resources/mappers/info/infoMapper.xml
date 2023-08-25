@@ -131,6 +131,15 @@
   	<select id="selectNoticeReply" resultMap="replyDto">
   		SELECT * FROM reply WHERE free_no = #{no}
   	</select>
+  	
+  	<select id = "countReply">
+  		SELECT count(no) FROM reply WHERE free_no = #{freeNo} 
+  	</select>
+  	
+  	<update id="updateFreeReply">
+  		UPDATE free SET replies = #{replies} WHERE no = #{freeNo}
+  	</update>
+  	
 </mapper>
 
 
