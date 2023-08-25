@@ -241,6 +241,7 @@ public class InfoService {
 
 	public void faqContent(int no, Model model) {
 		FaqDTO faq = mapper.selectFaqContent(no);
+		
 		model.addAttribute("faq", faq);
 	}
 
@@ -306,7 +307,11 @@ public class InfoService {
 	public void freeContent(int no, Model model) {
 		FreeDTO free = mapper.selectFreeContent(no);
 		mapper.updateFreeHits(no);
+		
+		ArrayList<ReplyDTO> replies = mapper.selectNoticeReply(no);
+		
 		model.addAttribute("free", free);
+		model.addAttribute("replies", replies);
 	}
 
 	public void freeUpdateProc(int no, String title, String content) {
@@ -340,7 +345,6 @@ public class InfoService {
 		reply.setFreeNo(freeNo);
 		
 		mapper.writeFreeReply(reply);
-		
 	}
 
 

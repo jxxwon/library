@@ -50,10 +50,28 @@
 					</tr>
 				</table>
 				<form action="replyWriteProc?no=${free.no }" class="replyContentForm" id = "replyContentForm" method="post">
-					<table>
-						<tr>
-							<td colspan=2>댓글 나오게 해야 함 ^^ 신난다..</td>
-						</tr>
+					<table class="reply">
+						<tr><td>댓글</td></tr>
+						<c:choose>
+							<c:when test = "${empty replies}">
+								<tr>
+									<td style = "cursor:default; color:#000; text-align:center">
+										댓글이 없습니다.<br>
+										첫 댓글을 작성해 보세요.
+									</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="reply" items = "${replies}">
+									<tr>
+										<td>
+											<span>${reply.writer }&nbsp;&nbsp;${reply.writeDate }</span><br>
+											${reply.content }
+										</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</table>
 					<div class="freeReply">
 						<textarea id = "reply" name = "reply" rows ="2" cols ="15" style = "resize: none; text-align:left;" placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요."></textarea>

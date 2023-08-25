@@ -127,6 +127,10 @@
   	<insert id="writeFreeReply" parameterType="com.care.library.info.ReplyDTO">
   		INSERT INTO reply (no, content, writer, write_date, free_no) VALUES (#{no}, #{content}, #{writer}, #{writeDate}, #{freeNo})
   	</insert>
+  	
+  	<select id="selectNoticeReply" resultMap="replyDto">
+  		SELECT * FROM reply WHERE free_no = #{no}
+  	</select>
 </mapper>
 
 

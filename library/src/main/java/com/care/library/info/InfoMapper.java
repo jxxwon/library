@@ -60,6 +60,9 @@ public interface InfoMapper {
 
 	void writeFreeReply(ReplyDTO reply);
 
+	ArrayList<ReplyDTO> selectNoticeReply(int no);
+
+
 
 
 }
