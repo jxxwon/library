@@ -53,6 +53,8 @@ public interface InfoMapper {
 
 	void updateFree(FreeDTO free);
 
+	void deleteFree(int no);
+
 
 
 }

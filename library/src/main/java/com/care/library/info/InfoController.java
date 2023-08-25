@@ -211,4 +211,10 @@ public class InfoController {
 		service.freeUpdateProc(no, title, content);
 		return "redirect:/info/free";
 	}
+	
+	@RequestMapping("/info/freeDelete")
+	public String freeDelete(int no) {
+		service.freeDelete(no);
+		return "redirect:/info/free";
+	}
 }

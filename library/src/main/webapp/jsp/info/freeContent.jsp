@@ -7,6 +7,15 @@
 
 <title>하이미디어 도서관 - 정보광장 : 자유게시판</title>
 
+<script>
+	function delFree() {
+		if (confirm('해당 게시글을 삭제하시겠습니까?') == true) {
+			alert('게시글이 삭제되었습니다.');
+			location.href = 'freeDelete?no=${free.no}';
+		}
+	}
+</script>
+
 <body>
 	<c:import url = "/header"/>
 	<div class="infoContainer inner mb_30" >
@@ -53,10 +62,10 @@
 				<div class="freeBtn">
 					<c:if test = "${sessionScope.id == free.writer}">
 						<input type = "button" value = "수정" onclick="location.href='freeUpdate?no=${free.no}'">
-						<input type = "button" value = "삭제" onclick="location.href='free'">
+						<input type = "button" value = "삭제" onclick="delFree()">
 					</c:if>
 					<c:if test = "${sessionScope.status == 'M'}">
-						<input type = "button" value = "삭제" onclick="location.href='free'">
+						<input type = "button" value = "삭제" onclick="delFree()">
 					</c:if>
 					<input type = "button" value = "목록" onclick="location.href='free'">
 				</div>

@@ -110,6 +110,10 @@
   	<update id="updateFree" parameterType="com.care.library.info.FreeDTO">
   		UPDATE free SET title = #{title}, content = #{content} WHERE no = #{no}
   	</update>
+  	
+  	<delete id = "deleteFree">
+  		DELETE free WHERE no = #{no}
+  	</delete>
 </mapper>
 
 

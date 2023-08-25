@@ -323,5 +323,9 @@ public class InfoService {
 		mapper.updateFree(free);
 	}
 
+	public void freeDelete(int no) {
+		mapper.deleteFree(no);
+	}
+
 
 }
