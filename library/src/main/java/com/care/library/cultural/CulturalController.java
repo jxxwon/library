@@ -33,6 +33,15 @@ public class CulturalController {
         service.culturalForm(cp, model);
         return "cultural/culForm"; // 뷰 이름 설정
     }
+    
+    @RequestMapping("culFormEnd")
+    public String culFormEnd(
+            @RequestParam(value="currentPage", required = false) String cp,
+            Model model) {
+    	System.out.println("culFormEnd호출");
+        service.culturalForm(cp, model);
+        return "cultural/culFormEnd"; // 뷰 이름 설정
+    }
 	
 	/*
 	 * @RequestMapping("culWrite") public String culWrite() { return

@@ -6,7 +6,7 @@ h1{margin-bottom:50px;}
 
 .infoContent{padding:50px 0 0 50px; width:1000px; min-height:600px;}
 
-.infoContent .info_title{margin:50px 0;}
+.infoContent .info_title{margin:50px 0; line-height:145%;}
 .infoContent .info_title p{font-weight:500; font-size:20px;}
 
 .subMenu_info{border-bottom:2px solid #ddd; margin-top:45px;}
@@ -73,3 +73,70 @@ h1{margin-bottom:50px;}
 .noticeContainer .noticeUpdateForm .noticeImage{height:45px; line-height:45px;}
 .noticeContainer .noticeUpdateForm .noticeImage label{margin-right:10px; font-size:15px;}
 .noticeContainer .noticeUpdateForm input[type="text"]{height:30px;}
+
+/*자주하는 질문*/
+.subMenu_info{border-bottom:2px solid #ddd; margin-top:45px;}
+.subMenu_info ul{display:table; border:1px solid #ddd; border-bottom:none;}
+.subMenu_info ul li{display:table-cell; width:150px; height:40px; line-height:40px; text-align:center; border-right:1px solid #ddd;}
+.subMenu_info ul li:last-child{border-right:none;}
+
+.subMenu_info ul li.active{background-color:#338cfa; color:#fff; cursor:pointer;}
+
+.subMenu_info ul li:hover{background-color:#338cfa; color:#fff; cursor:pointer;}
+
+/*자주하는 질문 목록*/
+.selectFaq {overflow:hidden; width:100%; text-align:center;}
+.selectFaq tr:first-child{border-bottom:2px solid #555;}
+.selectFaq tr:hover{cursor:pointer; color:blue;}
+.selectFaq tr:first-child:hover{cursor:default; color:#000;}
+.selectFaq tr th{padding:5px;}
+.selectFaq tr th:first-child {width:50px;}
+
+.selectFaq tr td{padding:5px; text-align:center; border-bottom:1px solid #ddd;}
+
+/*자주하는 질문 등록*/
+.faqFormContainer {display:flex;}
+.faqFormContent{padding:50px 0 0 50px; width:1000px;}
+
+.faqContainer .faqWriteForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
+.faqContainer .faqWriteForm tr{border-bottom:1px solid #ddd;}
+.faqContainer .faqWriteForm th{padding:10px; border-right:1px solid #ddd;}
+.faqContainer .faqWriteForm td{padding:10px;}
+.faqContainer .faqWriteForm .noticeImage{height:45px; line-height:45px;}
+.faqContainer .faqWriteForm .noticeImage label{margin-right:10px; font-size:15px;}
+.faqContainer .faqWriteForm input[type="text"]{height:30px;}
+
+.noticeBtn {margin:40px 0; text-align:right;}
+
+/*자주하는 질문 내용*/
+.faqContainer .faqContentForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555; margin:50px 0;}
+.faqContainer .faqContentForm tr{border-bottom:1px solid #ddd;}
+.faqContainer .faqContentForm th{padding:10px; border-right:1px solid #ddd;}
+.faqContainer .faqContentForm th:first-child {width:150px;}
+.faqContainer .faqContentForm td{padding:10px;}
+
+/*자유게시판 목록*/
+.freeInfo {width:100%-10px; border:1px solid #ddd; margin:40px 0; padding:15px; line-height:145%; text-align:left;}
+.freeContainer{text-align:center; border-top:1px solid #ddd;}
+
+.free {overflow:hidden; width:100%; margin-bottom:20px;}
+.free tr:first-child{border-bottom:2px solid #555;}
+.free tr:hover{cursor:pointer; color:blue;}
+.free tr:first-child:hover{cursor:default; color:#000;}
+.free tr th{padding:5px;}
+.free tr td{padding:5px; text-align:center; border-bottom:1px solid #ddd;}
+
+.freeContainer .writeBtn{text-align:right;}
+
+.freePage {margin:40px 0;}
+.freePage a{display:inline-block; width:30px; height:30px; line-height:30px; font-weight:400; font-size:17px; border:1px solid #ddd; margin-right:5px; color:#000;}
+.freePage a:last-child{margin-right:0;}
+
+/*자유게시판 내용*/
+.freeContainer .freeContentForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
+.freeContainer .freeContentForm tr{border-bottom:1px solid #ddd;}
+.freeContainer .freeContentForm th{padding:10px; border-right:1px solid #ddd; width:200px;}
+.freeContainer .freeContentForm th.right{border-left:1px solid #ddd;}
+.freeContainer .freeContentForm td{padding:10px;}
+
+.freeContainer .freeBtn{text-align:right;}

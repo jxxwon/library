@@ -27,12 +27,12 @@
 			<div class="noticeContainer">
 				<form action="" id="f">
 					<div class="condition">
-						<select class="noticeSelect" name = "select" id="inqSelect" onchange="searchChange()">
+						<select class="noticeSelect" name = "select" id="noticeSelect" onchange="searchChange()">
 							<option <c:if test="${param.select == 'title'}">selected='selected'</c:if>value="title">제목</option>
 							<option <c:if test="${param.select == 'no'}">selected='selected'</c:if>value="no">글번호</option>
 						</select>
-						<input type = "text" placeholder = "검색어를 입력하세요." id = "search">
-						<input type = "submit" value = "검색" id ="searchBtn">
+						<input type = "text" placeholder = "검색어를 입력하세요." id="search" name="search">
+						<input type = "button" value = "검색" id ="searchBtn" onclick="noticeSearch()">
 					</div>
 					<c:if test = "${sessionScope.status == 'M'}">
 						<div class="write">

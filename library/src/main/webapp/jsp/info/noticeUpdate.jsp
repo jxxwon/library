@@ -7,7 +7,7 @@
 <link href = "${context }css/info.css" rel = "stylesheet" type = "text/css">
 
 <script>
-	function writeChk(){
+	function updateChk(){
 		var title = document.getElementById('title').value;
 		var content = document.getElementById('content').value;
 		
@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div class="noticeContainer">
-				<form action="noticeUpdateProc" method="post" id="f" class="noticeUpdate" enctype="multipart/form-data">
+				<form action="noticeUpdateProc?no=${notice.no }" method="post" id="f" class="noticeUpdate" enctype="multipart/form-data">
 					<table class="noticeWriteForm">
 						<tr>
 							<th>제목</th>
@@ -47,21 +47,17 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td>
-								<div class = "noticeImage">
-									<label>등록할 이미지 선택 가능</label>
-									<input type = "file" value = "이미지 선택" name = "noticeImage" onchange="selectFile(this)">
-								</div>
-								<textarea id = "content" name = "content" rows ="20" cols ="15" style = "resize: none">${notice.content }</textarea>
-							</td>
+							<td><textarea id = "content" name = "content" rows ="20" cols ="15" style = "resize: none">${notice.content }</textarea></td>
 						</tr>
 						<tr>
 							<th>첨부파일</th>
-							<td><input type = "file" value = "파일 선택" name = "upfile" onchange="selectFile(this)"></td>
+							<td>
+								<span name = "oldFileName">${notice.fileName}</span><input type = "file" value = "파일 선택" name = "upfile" onchange="updateFileName(this)">
+							</td>
 						</tr>
 					</table>
 					<div class="noticeBtn">
-						<input type = "button" value = "수정" onclick="writeChk()" >
+						<input type = "button" value = "수정" onclick="updateChk()" >
 						<input type = "button" value = "돌아가기" onclick="location.href='noticeContent?no=${notice.no}'">
 					</div>
 				</form>

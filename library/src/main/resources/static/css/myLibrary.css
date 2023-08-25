@@ -124,6 +124,9 @@ h1{margin-bottom:50px;}
 .inquiryContainer .inquiryWriteForm td{padding:10px;}
 .inquiryContainer .inquiryWriteForm input[type="text"]{height:30px;}
 
+.inquiryContainer .inquiryInfo a{font-weight:500;}
+.inquiryContainer .inquiryInfo a:hover{color:#338cfa;}
+
 /*1:1문의 - 내용*/
 .inquiryContainer .inquiryContentForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
 .inquiryContainer .inquiryContentForm tr{border-bottom:1px solid #ddd;}

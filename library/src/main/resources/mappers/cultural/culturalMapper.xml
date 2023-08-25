@@ -52,6 +52,12 @@
 	    )
 	    WHERE rn BETWEEN #{begin} AND #{end}
 	</select>
+	
+	<!-- countAfterDate에 대한 SQL 쿼리 -->
+	<select id="countAfterDate" parameterType="String" resultType="int">
+	    SELECT COUNT(*) FROM cultural
+	    WHERE registration_end > #{format}
+	</select>
 
 	<!-- <select id="culturalForm" resultMap="culturalDto">
 		SELECT cul_id, title, lecture_start, lecture_end, registration_start,
