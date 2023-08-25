@@ -148,6 +148,10 @@
   		DELETE reply WHERE no = #{no}
   	</delete>
   	
+  	<delete id = "deleteAllReply">
+  		DELETE reply WHERE free_no = #{no}
+  	</delete>
+  	
 </mapper>
 
 

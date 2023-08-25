@@ -44,7 +44,7 @@
 				<div class = "subMenu_member" id = "subMenu_member">
 					<ul class = "admin_member">
 						<li class = "admin_menu" onclick="showMember('memberAuth')">인증 승인/반려</li>
-						<li class = "admin_menu"><a href = "#">회원 제재</a></li>
+						<li class = "admin_menu" onclick="location.href='memberSanction'">회원 제재</li>
 						<li class = "admin_menu" id="memberListMenu" onclick="location.href='memberList'">회원 목록 조회</li>
 					</ul>
 				</div>

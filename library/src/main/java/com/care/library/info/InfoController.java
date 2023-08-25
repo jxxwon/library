@@ -216,6 +216,7 @@ public class InfoController {
 	
 	@RequestMapping("/info/freeDelete")
 	public String freeDelete(int no) {
+		service.freeReplyAllDelete(no);
 		service.freeDelete(no);
 		return "redirect:/info/free";
 	}

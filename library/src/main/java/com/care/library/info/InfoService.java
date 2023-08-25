@@ -388,6 +388,10 @@ public class InfoService {
 		mapper.deleteReply(no);
 	}
 
+	public void freeReplyAllDelete(int no) {
+		mapper.deleteAllReply(no);
+	}
+
 
 
 }

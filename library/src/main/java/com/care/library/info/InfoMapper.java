@@ -70,6 +70,8 @@ public interface InfoMapper {
 
 	ArrayList<FreeDTO> selectFree(String select, String search, int begin, int end);
 
+	void deleteAllReply(int no);
+
 
 
 
