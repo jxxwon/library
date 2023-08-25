@@ -44,15 +44,7 @@ public class SearchController {
 		String paintRecent =service.showMainImages(recentTable, model, recentUrl, recentXmlTagName);
 		System.out.println("paintRecent : "+paintRecent);
 		
-		//도서관 전체 정보(일단 50권만 넣을 예정)
-		CompletableFuture<String> future = service.asyncMethod();
-
-        future.thenAccept(result -> {
-            // 작업이 완료되었을 때 처리할 내용
-            System.out.println("Async result: " + result);
-        });
-		
-		
+		service.checkTotalDB();
 		return "search/searchMain";
 	}
 

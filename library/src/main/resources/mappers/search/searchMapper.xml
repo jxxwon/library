@@ -9,11 +9,15 @@
   	</resultMap>
   	
   	<insert id="popularInsert" parameterType="com.care.library.search.BookDTO">
-		INSERT INTO popularBook VALUES(#{no}, #{ranking}, #{publicationYear},#{bookName}, #{authors}, #{publisher}, #{bookImageURL}, #{vol})
+		INSERT INTO popularBook VALUES(#{no}, #{ranking}, #{publicationYear},#{bookName}, #{authors}, #{publisher}, #{bookImageURL},  #{vol, jdbcType=VARCHAR})
 	</insert>
 	
 	<insert id="recentInsert" parameterType="com.care.library.search.BookDTO">
-		INSERT INTO recentBook VALUES(#{bookName}, #{authors}, #{publisher}, #{bookImageURL},  #{publicationYear},  #{vol})
+		INSERT INTO recentBook VALUES(#{bookName}, #{authors}, #{publisher}, #{bookImageURL},  #{publicationYear},   #{vol, jdbcType=VARCHAR})
+	</insert>
+	
+	<insert id="insertTotal" parameterType="com.care.library.search.BookDTO">
+		INSERT INTO totalBook (bookName, authors, publisher, bookImageURL, publication_year ,vol) VALUES(#{bookName},#{authors}, #{publisher}, #{bookImageURL}, #{publicationYear},  #{vol, jdbcType=VARCHAR})
 	</insert>
 	
 	<delete id="deleteData">
@@ -22,6 +26,9 @@
 		</if>
 		<if test="whichTable == 'recentBook'">
 			DELETE FROM recentBook
+		</if>
+		<if test="whichTable == 'totalBook'">
+			DELETE FROM totalBook
 		</if>
 	</delete>
 	
@@ -37,11 +44,24 @@
 	
 	<!-- 대여하기 -->	
 	<!-- 	관리자 테이블에 들어가야겠지-->
-	<!-- <insert id="jsonInsert" parameterType="com.care.library.search.BookDTO">
-		INSERT INTO loanBook VALUES(#{no}, #{ranking}, #{publicationYear},#{bookName}, #{authors}, #{publisher}, #{bookImageURL}, #{vol})
-	</insert> -->
 	
 	
+	<!-- <select id="checkTotalDB">
+		SELECT count(ROWNUM) FROM totalBook
+	</select> -->
+	<select id="checkTotalDB">
+	    SELECT COUNT(*) FROM totalBook
+	</select>
+	
+	<select id="getTable" resultMap="bookDto">
+		<if test="whichTable == 'popularBook'">
+			<!-- SELECT bookImageURL FROM popularBook WHERE no <![CDATA[ <= ]]> 5 -->
+			SELECT * FROM popularBook
+		</if>
+		<if test="whichTable == 'recentBook'">
+			SELECT * FROM recentBook
+		</if>
+	</select>
 </mapper>
 
 

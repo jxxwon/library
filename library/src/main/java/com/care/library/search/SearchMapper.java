@@ -13,8 +13,15 @@ public interface SearchMapper {
 	
 	int recentInsert(BookDTO book);
 
+	int insertTotal(BookDTO book);
+	
 	void deleteData(String whichTable);
 	
 	ArrayList<String> getBookImages(String whichTable);
+	
+	
+	int checkTotalDB();
+	
+	ArrayList<BookDTO> getTable(String whichTable);
 
 }
