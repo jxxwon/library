@@ -60,9 +60,8 @@
 						</tr>
 					</table>
 					<div class="inquiryBtn">
-						<input type = "button" value = "목록" onclick="location.href='myInquiry'">
 						<input type = "button" value = "등록" onclick="writeChk()" >
-						<input type = "reset" value = "취소">
+						<input type = "button" value = "목록" onclick="location.href='myInquiry'">
 					</div>
 				</form>
 			</div>

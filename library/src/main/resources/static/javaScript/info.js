@@ -112,3 +112,4 @@ function faqUpdateChk(){
 		f.submit();
 	}
 }
+

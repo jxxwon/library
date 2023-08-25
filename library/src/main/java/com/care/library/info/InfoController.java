@@ -174,4 +174,13 @@ public class InfoController {
 	public String free() {
 		return "info/free";
 	}
+	
+	@RequestMapping("/info/freeWriteForm")
+	public String freeWriteForm() {
+		String id = (String)session.getAttribute("id");
+		if(id == null) {
+			return "redirect:/info/free";
+		}
+		return "info/freeWriteForm";
+	}
 }
