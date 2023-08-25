@@ -92,7 +92,7 @@
 		    <table class="inquiryContainer">
 		        <tr>
 		            <td colspan="2" class="inquiryWriteForm">
-		                <table width="100%">
+		                <table width="850px">
 		                    <tr>
 		                        <th width="100px">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</th>
 		                        <td><span class="title">${cultural.title}</span></td>

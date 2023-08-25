@@ -27,6 +27,8 @@
   	}
   	.subMenu .active{background-color:#338cfa;}
 	.subMenu .active a{color:#fff;}
+	
+	
 </style>
 
 <c:import url="/header" />
@@ -69,7 +71,7 @@
 		
 		<div class="cul-list">
 			<ul class="teach_list">
-	            <c:forEach var="cultural" items="${culturalList}">
+	            <c:forEach var="cultural" items="${upcomingCulturalList}">
 	                <li class="ever_one">
 	                    <div class="thumb">
 	                        <a href="${context}culWrite?culId=${cultural.culId}">

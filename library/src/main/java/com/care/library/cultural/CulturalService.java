@@ -1,6 +1,8 @@
 package com.care.library.cultural;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,29 +28,93 @@ public class CulturalService {
     
     // 페이지 넘기기
     public void culturalForm(String cp, Model model) {
-    	CulturalDTO cultural = new CulturalDTO();
-    	
-    	System.out.println("culturalForm실행");
-    	System.out.println("Image Path: " + cultural.getImagePath());
-        int currentPage = 1;
-        try {
-            currentPage = Integer.parseInt(cp);
-        } catch (Exception e) {
-            currentPage = 1;
-        }
-        int pagePerBlock = 3; // 한 페이지에 보일 데이터의 수
-        int pageBlock = 3; // 한 번에 보여줄 페이지 번호들의 그룹 개수
-        int end = pagePerBlock * currentPage; // 테이블에서 가져올 마지막 행번호
-        int begin = end - pagePerBlock + 1; // 테이블에서 가져올 시작 행번호
-        ArrayList<CulturalDTO> culturalList = culturalMapper.culturalForm(begin, end);
-        int totalCount = culturalMapper.count();
-        String url = "culForm?currentPage=";
-        String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
-        model.addAttribute("culturalList", culturalList);
-        model.addAttribute("result", result);
-        model.addAttribute("currentPage", currentPage);
-    	System.out.println("culturalForm종료");
+	    LocalDate currentDate = LocalDate.now();
+	    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+	    System.out.println("culturalForm 실행");
+	    
+	    int currentPage = 1;
+	    try {
+	        currentPage = Integer.parseInt(cp);
+	    } catch (Exception e) {
+	        currentPage = 1;
+	    }
+	    
+	    int pagePerBlock = 9; // 한 페이지에 보일 데이터의 수
+	    
+	    int totalCount = culturalMapper.count(); // 전체 데이터 개수를 가져옴
+	    int upcomingCount = culturalMapper.countAfterDate(currentDate.format(dateFormatter));
+	    int pastCount = totalCount - upcomingCount;
+	    
+	    // 현재 페이지 계산
+	    int end = pagePerBlock * currentPage;
+	    int begin = end - pagePerBlock + 1;
+
+	    ArrayList<CulturalDTO> culturalList = culturalMapper.culturalForm(begin, end);
+	    ArrayList<CulturalDTO> upcomingCulturalList = new ArrayList<>();
+	    ArrayList<CulturalDTO> pastCulturalList = new ArrayList<>();
+
+	    for (CulturalDTO culturalItem : culturalList) {
+	        String registrationEndStr = culturalItem.getRegistrationEnd();
+	        LocalDate registrationEnd = LocalDate.parse(registrationEndStr, dateFormatter);
+
+	        if (registrationEnd.isAfter(currentDate)) {
+	            upcomingCulturalList.add(culturalItem);
+	        } 
+	        else if (registrationEnd.isBefore(currentDate)) { 
+	            pastCulturalList.add(culturalItem);
+	        }
+	    }
+
+	    // 페이징 관련 로직
+	    int pageBlock = 9; // 한 번에 보여줄 페이지 번호들의 그룹 개수
+	    String url = "culForm?currentPage=";
+	    String result = PageService.printPage(url, currentPage, upcomingCount, pageBlock);
+	    model.addAttribute("result", result);
+	    model.addAttribute("currentPage", currentPage);
+	    
+	    model.addAttribute("upcomingCulturalList", upcomingCulturalList); // 진행중
+	    model.addAttribute("pastCulturalList", pastCulturalList); // 종료
+	    
+	    System.out.println("culturalForm 종료");
     }
+
+		/*
+		 * CulturalDTO cultural = new CulturalDTO(); LocalDate currentDate =
+		 * LocalDate.now(); DateTimeFormatter dateFormatter =
+		 * DateTimeFormatter.ofPattern("yyyy-MM-dd"); // 날짜 포맷에 맞게 변경
+		 * 
+		 * System.out.println("culturalForm실행"); System.out.println("Image Path: " +
+		 * cultural.getImagePath()); int currentPage = 1; try { currentPage =
+		 * Integer.parseInt(cp); } catch (Exception e) { currentPage = 1; } int
+		 * pagePerBlock = 9; // 한 페이지에 보일 데이터의 수 int pageBlock = 9; // 한 번에 보여줄 페이지 번호들의
+		 * 그룹 개수 int end = pagePerBlock * currentPage; // 테이블에서 가져올 마지막 행번호 int begin =
+		 * end - pagePerBlock + 1; // 테이블에서 가져올 시작 행번호
+		 * 
+		 * ArrayList<CulturalDTO> culturalList = culturalMapper.culturalForm(begin,
+		 * end); ArrayList<CulturalDTO> upcomingCulturalList = new ArrayList<>();
+		 * ArrayList<CulturalDTO> pastCulturalList = new ArrayList<>();
+		 * 
+		 * int totalCount = culturalMapper.count(); String url = "culForm?currentPage=";
+		 * String result = PageService.printPage(url, currentPage, totalCount,
+		 * pageBlock); model.addAttribute("result", result);
+		 * model.addAttribute("currentPage", currentPage);
+		 * 
+		 * for (CulturalDTO culturalItem : culturalList) { String registrationEndStr =
+		 * culturalItem.getRegistrationEnd(); // CulturalDTO에서 날짜 문자열을 가져옴 LocalDate
+		 * registrationEnd = LocalDate.parse(registrationEndStr, dateFormatter); // 문자열을
+		 * LocalDate로 변환
+		 * 
+		 * if (registrationEnd.isAfter(currentDate)) { // registrationEnd가 현재 날짜보다 이후인
+		 * 경우 /진행중 upcomingCulturalList.add(culturalItem); } if
+		 * (registrationEnd.isBefore(currentDate)) { // registrationEnd가 현재 날짜와 같거나 이전인
+		 * 경우 /종료 pastCulturalList.add(culturalItem); } }
+		 * 
+		 * model.addAttribute("upcomingCulturalList", upcomingCulturalList); //진행중
+		 * model.addAttribute("pastCulturalList", pastCulturalList); //종료
+		 * System.out.println("culturalForm종료");
+		 
+    }*/
 
 
 	// 문화행사 신청 데이터를 DB에 저장하는 메서드 추가
