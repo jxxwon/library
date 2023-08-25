@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.care.library.common.NotifyDTO;
+import com.care.library.common.NotifyService;
 import com.care.library.common.PageService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,6 +26,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class InfoService {
 	
 	@Autowired InfoMapper mapper;
+	@Autowired NotifyService notiService;
 	
 	@Value("${upload.path}")
 	private String uploadPath;
@@ -241,6 +244,7 @@ public class InfoService {
 
 	public void faqContent(int no, Model model) {
 		FaqDTO faq = mapper.selectFaqContent(no);
+		
 		model.addAttribute("faq", faq);
 	}
 
@@ -303,10 +307,36 @@ public class InfoService {
 		model.addAttribute("currentPage", currentPage);
 	}
 
+	public void selectFree(String cp, String select, String search, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<FreeDTO> frees = mapper.selectFree(select, search, begin, end);
+		
+		String url = "free?currentPage=";
+		int totalCount = mapper.countFreeAll();
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("frees", frees);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+	}
 	public void freeContent(int no, Model model) {
 		FreeDTO free = mapper.selectFreeContent(no);
 		mapper.updateFreeHits(no);
+		
+		ArrayList<ReplyDTO> replies = mapper.selectNoticeReply(no);
+		
 		model.addAttribute("free", free);
+		model.addAttribute("replies", replies);
 	}
 
 	public void freeUpdateProc(int no, String title, String content) {
@@ -319,6 +349,49 @@ public class InfoService {
 	public void freeDelete(int no) {
 		mapper.deleteFree(no);
 	}
+
+	public void freeReplyWrite(String id, String content, int freeNo) {
+		ReplyDTO reply = new ReplyDTO();
+		
+		int no;
+		try {
+			no = mapper.findMaxNumFreeReply();
+		} catch (Exception e) {
+			no = 0;
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    String writeDate = sdf.format(new Date());
+		
+		reply.setNo(no+1);
+		reply.setContent(content);
+		reply.setWriteDate(writeDate);
+		reply.setWriter(id);
+		reply.setFreeNo(freeNo);
+		
+		mapper.writeFreeReply(reply);
+		
+		FreeDTO free = mapper.selectFreeContent(freeNo);
+		String freeWriter = free.getWriter();
+		int replies = mapper.countReply(freeNo);
+		mapper.updateFreeReply(freeNo, replies);
+
+		NotifyDTO notification = new NotifyDTO();
+		notification.setId(freeWriter);
+		notification.setCategory("게시판");
+		notification.setTitle("댓글이 등록되었습니다.");
+		notification.setUrl("/info/free");
+		notiService.register(notification);
+	}
+
+	public void freeReplyDelete(int no) {
+		mapper.deleteReply(no);
+	}
+
+	public void freeReplyAllDelete(int no) {
+		mapper.deleteAllReply(no);
+	}
+
 
 
 }

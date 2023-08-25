@@ -45,6 +45,23 @@ public class AdminController {
 		return "admin/memberAuth";
 	}
 	
+	@RequestMapping("/admin/memberSanction")
+	public String memberSanction(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="memberSelect", required = false)String memberSelect,  @RequestParam(value="searchSelect", required = false)String searchSelect, @RequestParam(value="search", required = false)String search, Model model) {
+		if(memberSelect == null && searchSelect == null && search == null) {
+			service.selectMember(cp, model); // 전체 검색
+		}
+		if(memberSelect == null && searchSelect != null) {
+			service.selectMember(cp, searchSelect, search, model);
+		}
+		if(memberSelect != null && searchSelect != null) {
+			service.selectMember(cp, memberSelect, searchSelect, search, model);
+		} else if(memberSelect != null && searchSelect == null){
+			service.selectMember(cp, memberSelect, model);
+		}
+		
+		return "admin/memberSanction";
+	}
+	
 	@RequestMapping("/admin/memberList")
 	public String memberList(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="memberSelect", required = false)String memberSelect,  @RequestParam(value="searchSelect", required = false)String searchSelect, @RequestParam(value="search", required = false)String search, Model model) {
 		if(memberSelect == null && searchSelect == null && search == null) {

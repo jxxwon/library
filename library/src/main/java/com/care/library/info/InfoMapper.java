@@ -3,6 +3,7 @@ package com.care.library.info;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface InfoMapper {
@@ -54,6 +55,23 @@ public interface InfoMapper {
 	void updateFree(FreeDTO free);
 
 	void deleteFree(int no);
+
+	int findMaxNumFreeReply();
+
+	void writeFreeReply(ReplyDTO reply);
+
+	ArrayList<ReplyDTO> selectNoticeReply(int no);
+
+	int countReply(int freeNo);
+
+	void updateFreeReply(int freeNo, int replies);
+
+	void deleteReply(int no);
+
+	ArrayList<FreeDTO> selectFree(String select, String search, int begin, int end);
+
+	void deleteAllReply(int no);
+
 
 
 

@@ -14,6 +14,7 @@
 			location.href = 'freeDelete?no=${free.no}';
 		}
 	}
+	
 </script>
 
 <body>
@@ -49,25 +50,55 @@
 						<td colspan="2">${free.content}</td>
 					</tr>
 				</table>
-				<table>
-					<tr>
-						<th>댓글</th>
-						<td colspan="2">댓글 나오게 해야 함 ^^ 신난다..</td>
-					</tr>
-					<tr>
-						<th>댓글 작성</th>
-						<td colspan="2"><textarea id = "reply" name = "reply" rows ="1" cols ="15" style = "resize: none"></textarea></td>
-					</tr>
-				</table>
+				<form action="replyWriteProc?no=${free.no }" class="replyContentForm" id = "replyContentForm" method="post">
+					<table class="reply">
+						<tr><td>댓글</td></tr>
+						<c:choose>
+							<c:when test = "${empty replies}">
+								<tr>
+									<td style = "cursor:default; color:#000; text-align:center">
+										댓글이 없습니다.<br>
+										첫 댓글을 작성해 보세요.
+									</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="reply" items = "${replies}">
+									<tr>
+										<td>
+											<span>${reply.writer }&nbsp;&nbsp;${reply.writeDate }</span><br>
+											<textarea style = "resize: none; height:auto; border:none; padding:5 0 0 0;" readonly="readonly">${reply.content }</textarea>
+										</td>
+										<c:if test = "${sessionScope.id eq reply.writer }">
+											<td align="right">
+												<input type = "button" value = "삭제" onclick="location.href='replyDelete?no=${reply.no}&freeNo=${free.no}'">
+											</td>
+										</c:if>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</table>
+					<div class="freeReply">
+						<textarea id = "reply" name = "reply" rows ="2" cols ="15" style = "resize: none; text-align:left;" placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요."></textarea>
+						<input type = "button" value = "댓글등록" onclick="replyChk()">
+					</div>
+				</form>
 				<div class="freeBtn">
-					<c:if test = "${sessionScope.id == free.writer}">
-						<input type = "button" value = "수정" onclick="location.href='freeUpdate?no=${free.no}'">
-						<input type = "button" value = "삭제" onclick="delFree()">
-					</c:if>
-					<c:if test = "${sessionScope.status == 'M'}">
-						<input type = "button" value = "삭제" onclick="delFree()">
-					</c:if>
-					<input type = "button" value = "목록" onclick="location.href='free'">
+					<c:choose>
+						<c:when test = "${sessionScope.id eq free.writer}">
+							<input type = "button" value = "목록" onclick="location.href='free'">
+							<input type = "button" value = "수정" onclick="location.href='freeUpdate?no=${free.no}'">
+							<input type = "button" value = "삭제" onclick="delFree()">
+						</c:when>
+						<c:when test = "${sessionScope.status == 'M' }">
+							<input type = "button" value = "목록" onclick="location.href='free'">
+							<input type = "button" value = "삭제" onclick="delFree()">
+						</c:when>
+						<c:otherwise>
+							<input type = "button" value = "목록" onclick="location.href='free'">
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>
