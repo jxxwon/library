@@ -223,7 +223,7 @@ public class InfoController {
 		String id = (String)session.getAttribute("id");
 		String content = reply;
 		int freeNo = no;
-		service.freeReplyWrite(id, reply, freeNo);
+		service.freeReplyWrite(id, content, freeNo);
 		return "redirect:/info/free";
 	}
 }
