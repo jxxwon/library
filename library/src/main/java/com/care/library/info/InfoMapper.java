@@ -39,6 +39,10 @@ public interface InfoMapper {
 
 	void updateNoticeFile(NoticeDTO notice);
 
+	int findMaxNumFree();
+
+	void writeFree(FreeDTO free);
+
 
 
 }

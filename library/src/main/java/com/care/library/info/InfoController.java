@@ -183,4 +183,11 @@ public class InfoController {
 		}
 		return "info/freeWriteForm";
 	}
+	
+	@PostMapping("/info/freeWriteProc")
+	public String freeWriteProc(String title, String content) {
+		String id = (String)session.getAttribute("id");
+		service.freeWrite(title, content, id);
+		return "redirect:/info/free";
+	}
 }

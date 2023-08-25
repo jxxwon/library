@@ -9,6 +9,10 @@
   		<result column = "image_name" property = "imageName"/>
   		<result column = "write_date" property = "writeDate"/>
   	</resultMap>
+
+  	<resultMap type="com.care.library.info.FreeDTO" id="freeDto">
+  		<result column = "write_date" property = "writeDate"/>
+  	</resultMap>
   	
   	<select id = "findMaxNum">
   		SELECT MAX(no) FROM notice
@@ -78,6 +82,14 @@
   	<delete id = "deleteFaq">
   		DELETE faq WHERE no = #{no}
   	</delete>
+  	
+  	<select id="findMaxNumFree">
+  		SELECT MAX(no) FROM free
+  	</select>
+  	
+  	<insert id ="writeFree">
+  		INSERT INTO free (no, title, content, writer, write_date, hits, replies) VALUES (#{no}, #{title}, #{content}, #{writer}, #{writeDate}, #{hits}, #{replies})
+  	</insert>
 </mapper>
 
 

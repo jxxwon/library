@@ -267,5 +267,28 @@ public class InfoService {
 		mapper.deleteFaq(no);
 	}
 
+	public void freeWrite(String title, String content, String id) {
+		FreeDTO free = new FreeDTO();
+		
+		int no;
+		try {
+			no = mapper.findMaxNumFree();
+		} catch (Exception e) {
+			no = 0;
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    String writeDate = sdf.format(new Date());
+		
+		free.setNo(no+1);
+		free.setTitle(title);
+		free.setContent(content);
+		free.setWriter(id);
+		free.setWriteDate(writeDate);
+		free.setHits(0);
+		free.setReplies(0);
+		mapper.writeFree(free);
+	}
+
 
 }
