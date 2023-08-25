@@ -199,4 +199,16 @@ public class InfoController {
 		service.freeContent(no, model);
 		return "info/freeContent";
 	}
+	
+	@RequestMapping("/info/freeUpdate")
+	public String freeUpdate(int no, Model model) {
+		service.freeContent(no, model);
+		return "info/freeUpdate";
+	}
+	
+	@PostMapping("/info/freeUpdateProc")
+	public String freeUpdateProc(@RequestParam(value="no", required=false)int no, String title, String content) {
+		service.freeUpdateProc(no, title, content);
+		return "redirect:/info/free";
+	}
 }

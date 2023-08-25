@@ -316,5 +316,12 @@ public class InfoService {
 		model.addAttribute("free", free);
 	}
 
+	public void freeUpdateProc(int no, String title, String content) {
+		FreeDTO free = mapper.selectFreeContent(no);
+		free.setTitle(title);
+		free.setContent(content);
+		mapper.updateFree(free);
+	}
+
 
 }

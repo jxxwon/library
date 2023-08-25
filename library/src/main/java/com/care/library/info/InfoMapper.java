@@ -51,6 +51,8 @@ public interface InfoMapper {
 
 	void updateFreeHits(int no);
 
+	void updateFree(FreeDTO free);
+
 
 
 }
