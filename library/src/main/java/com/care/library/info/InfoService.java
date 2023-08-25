@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.care.library.common.NotifyDTO;
+import com.care.library.common.NotifyService;
 import com.care.library.common.PageService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,6 +26,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class InfoService {
 	
 	@Autowired InfoMapper mapper;
+	@Autowired NotifyService notiService;
 	
 	@Value("${upload.path}")
 	private String uploadPath;
@@ -345,6 +348,15 @@ public class InfoService {
 		reply.setFreeNo(freeNo);
 		
 		mapper.writeFreeReply(reply);
+		
+		NotifyDTO notification = new NotifyDTO();
+		
+		FreeDTO free = mapper.selectFreeContent(freeNo);
+		notification.setId(free.getWriter());
+		notification.setCategory("게시판");
+		notification.setTitle("댓글이 등록되었습니다.");
+		notification.setUrl("/info/free");
+		notiService.register(notification);
 	}
 
 
