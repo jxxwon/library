@@ -99,6 +99,10 @@
   	<select id="selectAllFree" resultMap="freeDto">
   		SELECT BBB.* FROM(SELECT rownum as rn, AAA.* FROM(SELECT * FROM free ORDER BY no DESC)AAA)BBB WHERE rn BETWEEN #{begin} AND #{end}
   	</select>
+
+  	<select id="selectFree" resultMap="freeDto">
+  		SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM (SELECT * FROM free WHERE ${select} like '%'||#{search}||'%' ORDER BY no DESC)AAA)BBB WHERE rn BETWEEN #{begin} AND #{end}
+  	</select>
   	
   	<select id="countFreeAll">
   		SELECT count(no) FROM free

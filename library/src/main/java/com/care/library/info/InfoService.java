@@ -307,6 +307,28 @@ public class InfoService {
 		model.addAttribute("currentPage", currentPage);
 	}
 
+	public void selectFree(String cp, String select, String search, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<FreeDTO> frees = mapper.selectFree(select, search, begin, end);
+		
+		String url = "free?currentPage=";
+		int totalCount = mapper.countFreeAll();
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("frees", frees);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+	}
 	public void freeContent(int no, Model model) {
 		FreeDTO free = mapper.selectFreeContent(no);
 		mapper.updateFreeHits(no);
@@ -365,6 +387,7 @@ public class InfoService {
 	public void freeReplyDelete(int no) {
 		mapper.deleteReply(no);
 	}
+
 
 
 }

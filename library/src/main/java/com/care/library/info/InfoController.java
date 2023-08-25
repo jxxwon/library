@@ -174,6 +174,8 @@ public class InfoController {
 	public String free(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="select", required = false)String select, @RequestParam(value="search", required = false)String search, Model model) {
 		if(select == null && search == null) {
 			service.selectAllFree(cp, model);
+		} else {
+			service.selectFree(cp, select, search, model);
 		}
 		return "info/free";
 	}
