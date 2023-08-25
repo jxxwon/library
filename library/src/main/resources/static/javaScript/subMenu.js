@@ -30,10 +30,10 @@
         document.getElementById("subRegister").classList.remove("active");
         document.getElementById("subFindMemberId").classList.remove("active");
 	  }
-        else if (currentURL.includes("cultural")) {
+        else if (currentURL.includes("culForm")) {
         document.getElementById("cultural").classList.add("active");
         document.getElementById("cullist").classList.remove("active");
-      } else if (currentURL.includes("cullist")) {
+      } else if (currentURL.includes("culForm")) {
         document.getElementById("cullist").classList.add("active");
         document.getElementById("cultural").classList.remove("active");
       }

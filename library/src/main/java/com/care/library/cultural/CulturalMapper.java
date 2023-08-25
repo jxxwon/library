@@ -1,5 +1,6 @@
 package com.care.library.cultural;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,5 +22,6 @@ public interface CulturalMapper {
 
 	CulturalDTO culFormWrite(int culId);	//목록에서 culId값 일치하는 데이터 가저오기
 
+	int countAfterDate(String format);
 
 }
