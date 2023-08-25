@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.care.library.common.PageService;
 import com.care.library.member.MemberDTO;
@@ -162,21 +163,56 @@ public class InfoService {
 
 	public void noticeUpdate(int no, Model model) {
 		NoticeDTO notice = mapper.selectNoticeContent(no);
-		
-		//등록 시 첨부했던 파일 불러오기
-		String fileName = notice.getFileName();
-		if(fileName.equals("첨부파일 없음")==false) {
-			String filePath = "C:\\javas\\upload\\" + fileName;
-			byte[] fileContent;
-			try {
-				fileContent = Files.readAllBytes(Paths.get(filePath));
-				model.addAttribute("fileContent", Base64.getEncoder().encodeToString(fileContent)); // Convert content to Base64 and add to model
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
 		model.addAttribute("notice", notice);
+	}
+
+	public void noticeUpdateProc(int no, MultipartHttpServletRequest multi, MultipartFile file) {
+		String title = multi.getParameter("title");
+		String content = multi.getParameter("content");
+		
+		String fileName = file.getOriginalFilename(); //새로운 파일
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss-");
+		Calendar cal = Calendar.getInstance();
+		fileName = sdf.format(cal.getTime()) + fileName;
+		
+		NoticeDTO notice = mapper.selectNoticeContent(no);
+		String oldFile = notice.getFileName();
+		
+		if(oldFile.equals("첨부파일 없음")) {
+			mapper.updateNotice(no, title, content);
+		} else {
+			if(oldFile.equals(fileName) == false) {
+				// 예전 파일 삭제
+				String saveDir = "C:\\javas\\upload\\"+ oldFile;
+				
+				File f = new File(saveDir); 
+				if(f.exists() == true){
+					f.delete();
+				}
+				
+				//업로드 파일 저장 경로
+				String fileLocation = uploadPath;
+				File save = new File(fileLocation, fileName);
+				
+				//폴더 존재 여부 확인
+				if(!save.getParentFile().exists()) {
+					save.getParentFile().mkdir();
+				}
+				
+				//서버가 저장한 업로드 파일은 임시저장경로에 있는데 개발자가 원하는 경로로 이동
+				try {
+					file.transferTo(save);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				notice.setFileName(fileName);
+			}
+			notice.setTitle(title);
+			notice.setContent(content);
+			mapper.updateNoticeFile(notice);
+			
+			
+		}
 	}
 
 	public void noticeDelete(int no) {
@@ -230,5 +266,6 @@ public class InfoService {
 		FaqDTO faq = mapper.selectFaqContent(no);
 		mapper.deleteFaq(no);
 	}
+
 
 }

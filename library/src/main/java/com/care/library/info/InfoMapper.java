@@ -23,6 +23,8 @@ public interface InfoMapper {
 
 	void deleteNotice(int no);
 	
+	void updateNotice(int no, String title, String content);
+
 	int findMaxNumFaq();
 
 	void writeFaq(FaqDTO faq);
@@ -34,6 +36,9 @@ public interface InfoMapper {
 	void updateFaq(FaqDTO faq);
 
 	void deleteFaq(int no);
+
+	void updateNoticeFile(NoticeDTO notice);
+
 
 
 }

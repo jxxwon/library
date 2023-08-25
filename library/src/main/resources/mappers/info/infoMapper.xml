@@ -47,6 +47,14 @@
   		DELETE notice WHERE no = #{no}
   	</delete>
   	
+  	<update id = "updateNotice">
+  		UPDATE notice SET title = #{title}, content = #{content} WHERE no = #{no}
+  	</update>
+  	
+  	<update id = "updateNoticeFile" parameterType="com.care.library.info.NoticeDTO">
+  		UPDATE notice SET title = #{title}, content = #{content}, file_name = #{fileName} WHERE no = #{no}
+  	</update>
+  	
   	<select id = "findMaxNumFaq">
   		SELECT MAX(no) FROM faq
   	</select>

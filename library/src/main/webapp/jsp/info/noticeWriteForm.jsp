@@ -55,9 +55,8 @@
 						</tr>
 					</table>
 					<div class="noticeBtn">
-						<input type = "button" value = "목록" onclick="location.href='notice'">
+						<input type = "button" value = "돌아가기" onclick="location.href='notice'">
 						<input type = "button" value = "등록" onclick="writeChk()" >
-						<input type = "reset" value = "취소">
 					</div>
 				</form>
 			</div>

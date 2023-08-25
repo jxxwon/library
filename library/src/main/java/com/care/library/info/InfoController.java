@@ -91,6 +91,13 @@ public class InfoController {
 		service.noticeUpdate(no, model);
 		return "info/noticeUpdate";
 	}
+	
+	@PostMapping("/info/noticeUpdateProc")
+	public String noticeUpdateProc(@RequestParam(value="no", required=false)int no, MultipartHttpServletRequest multi) {
+		MultipartFile file = multi.getFile("upfile");
+		service.noticeUpdateProc(no, multi, file);
+		return "redirect:/info/notice";
+	}
 
 	@GetMapping("/info/noticeDelete")
 	public String noticeDelete(int no) {
