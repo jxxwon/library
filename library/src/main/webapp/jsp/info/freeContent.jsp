@@ -49,25 +49,32 @@
 						<td colspan="2">${free.content}</td>
 					</tr>
 				</table>
-				<table>
-					<tr>
-						<th>댓글</th>
-						<td colspan="2">댓글 나오게 해야 함 ^^ 신난다..</td>
-					</tr>
-					<tr>
-						<th>댓글 작성</th>
-						<td colspan="2"><textarea id = "reply" name = "reply" rows ="1" cols ="15" style = "resize: none"></textarea></td>
-					</tr>
-				</table>
+				<form action="replyWriteProc?no=${free.no }" class="replyContentForm" id = "replyContentForm" method="post">
+					<table>
+						<tr>
+							<td colspan=2>댓글 나오게 해야 함 ^^ 신난다..</td>
+						</tr>
+					</table>
+					<div class="freeReply">
+						<textarea id = "reply" name = "reply" rows ="2" cols ="15" style = "resize: none; text-align:left;" placeholder="인터넷은 우리가 함께 만들어가는 소중한 공간입니다. 댓글 작성 시 타인에 대한 배려와 책임을 담아주세요."></textarea>
+						<input type = "button" value = "댓글등록" onclick="replyChk()">
+					</div>
+				</form>
 				<div class="freeBtn">
-					<c:if test = "${sessionScope.id == free.writer}">
-						<input type = "button" value = "수정" onclick="location.href='freeUpdate?no=${free.no}'">
-						<input type = "button" value = "삭제" onclick="delFree()">
-					</c:if>
-					<c:if test = "${sessionScope.status == 'M'}">
-						<input type = "button" value = "삭제" onclick="delFree()">
-					</c:if>
-					<input type = "button" value = "목록" onclick="location.href='free'">
+					<c:choose>
+						<c:when test = "${sessionScopoe.id eq free.writer}">
+							<input type = "button" value = "목록" onclick="location.href='free'">
+						</c:when>
+						<c:when test = "${sessionScope.status == 'M' }">
+							<input type = "button" value = "목록" onclick="location.href='free'">
+							<input type = "button" value = "삭제" onclick="delFree()">
+						</c:when>
+						<c:otherwise>
+							<input type = "button" value = "목록" onclick="location.href='free'">
+							<input type = "button" value = "수정" onclick="location.href='freeUpdate?no=${free.no}'">
+							<input type = "button" value = "삭제" onclick="delFree()">
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>

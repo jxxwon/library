@@ -128,3 +128,16 @@ function freeSearch(){
 	var f = document.getElementById('f');
 	f.submit();
 }
+
+//자유게시판 댓글 등록
+function replyChk(){
+		var reply = document.getElementById('reply').value;
+		
+		if(reply == "" || reply.trim().length == 0){
+			alert('내용을 입력하세요.');
+		} else {
+			alert('댓글이 등록되었습니다.');
+			var f = document.getElementById('replyContentForm');
+			f.submit();
+	}
+}

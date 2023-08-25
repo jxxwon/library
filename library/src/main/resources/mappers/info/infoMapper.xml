@@ -13,6 +13,11 @@
   	<resultMap type="com.care.library.info.FreeDTO" id="freeDto">
   		<result column = "write_date" property = "writeDate"/>
   	</resultMap>
+
+  	<resultMap type="com.care.library.info.ReplyDTO" id="replyDto">
+  		<result column = "write_date" property = "writeDate"/>
+  		<result column = "free_no" property = "freeNo"/>
+  	</resultMap>
   	
   	<select id = "findMaxNum">
   		SELECT MAX(no) FROM notice
@@ -114,6 +119,14 @@
   	<delete id = "deleteFree">
   		DELETE free WHERE no = #{no}
   	</delete>
+  	
+  	<select id="findMaxNumFreeReply">
+  		SELECT MAX(no) FROM reply
+  	</select>
+  	
+  	<insert id="writeFreeReply" parameterType="com.care.library.info.ReplyDTO">
+  		INSERT INTO reply (no, content, writer, write_date, free_no) VALUES (#{no}, #{content}, #{writer}, #{writeDate}, #{freeNo})
+  	</insert>
 </mapper>
 
 

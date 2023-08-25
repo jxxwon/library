@@ -320,5 +320,28 @@ public class InfoService {
 		mapper.deleteFree(no);
 	}
 
+	public void freeReplyWrite(String id, String content, int freeNo) {
+		ReplyDTO reply = new ReplyDTO();
+		
+		int no;
+		try {
+			no = mapper.findMaxNumFreeReply();
+		} catch (Exception e) {
+			no = 0;
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    String writeDate = sdf.format(new Date());
+		
+		reply.setNo(no+1);
+		reply.setContent(content);
+		reply.setWriteDate(writeDate);
+		reply.setWriter(id);
+		reply.setFreeNo(freeNo);
+		
+		mapper.writeFreeReply(reply);
+		
+	}
+
 
 }

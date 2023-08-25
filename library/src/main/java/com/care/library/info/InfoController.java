@@ -217,4 +217,13 @@ public class InfoController {
 		service.freeDelete(no);
 		return "redirect:/info/free";
 	}
+	
+	@RequestMapping("/info/replyWriteProc")
+	public String replyWriteProc(@RequestParam(value="no", required=false)int no, String reply) {
+		String id = (String)session.getAttribute("id");
+		String content = reply;
+		int freeNo = no;
+		service.freeReplyWrite(id, reply, freeNo);
+		return "redirect:/info/free";
+	}
 }
