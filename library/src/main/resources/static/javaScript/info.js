@@ -113,3 +113,18 @@ function faqUpdateChk(){
 	}
 }
 
+//자유게시판 검색 시 search가 null값이면 parameter 안 넘어가도록
+function freeSearch(){
+	var freeSelect = document.getElementById('freeSelect');
+	var frSelect = document.getElementById('freeSelect').options.selectedIndex;
+	var freeOption = freeSelect.options[frSelect].value;
+
+	var search = document.getElementById('search').value;
+	
+	if(search == ""){
+		document.getElementById('freeSelect').disabled = true;
+		document.getElementById('search').disabled = true;
+	}
+	var f = document.getElementById('f');
+	f.submit();
+}

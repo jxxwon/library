@@ -29,13 +29,14 @@
 			<div class="freeContainer">
 				<form action="" id="f">
 					<div class="condition">
-						<select class="noticeSelect" name = "select" id="noticeSelect" onchange="searchChange()">
+						<select class="noticeSelect" name = "select" id="freeSelect" onchange="searchChange()">
+							<option <c:if test="${param.select == ''}">selected='selected'</c:if>value="">선택</option>
 							<option <c:if test="${param.select == 'title'}">selected='selected'</c:if>value="title">제목</option>
 							<option <c:if test="${param.select == 'content'}">selected='selected'</c:if>value="content">내용</option>
 							<option <c:if test="${param.select == 'writer'}">selected='selected'</c:if>value="writer">작성자</option>
 						</select>
 						<input type = "text" placeholder = "검색어를 입력하세요." id="search" name="search">
-						<input type = "button" value = "검색" id ="searchBtn" onclick="noticeSearch()">
+						<input type = "button" value = "검색" id ="searchBtn" onclick="freeSearch()">
 					</div>
 					<table class="free">
 						<tr>
