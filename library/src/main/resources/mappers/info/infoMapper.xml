@@ -9,6 +9,10 @@
   		<result column = "image_name" property = "imageName"/>
   		<result column = "write_date" property = "writeDate"/>
   	</resultMap>
+
+  	<resultMap type="com.care.library.info.FreeDTO" id="freeDto">
+  		<result column = "write_date" property = "writeDate"/>
+  	</resultMap>
   	
   	<select id = "findMaxNum">
   		SELECT MAX(no) FROM notice
@@ -77,6 +81,38 @@
   	
   	<delete id = "deleteFaq">
   		DELETE faq WHERE no = #{no}
+  	</delete>
+  	
+  	<select id="findMaxNumFree">
+  		SELECT MAX(no) FROM free
+  	</select>
+  	
+  	<insert id ="writeFree">
+  		INSERT INTO free (no, title, content, writer, write_date, hits, replies) VALUES (#{no}, #{title}, #{content}, #{writer}, #{writeDate}, #{hits}, #{replies})
+  	</insert>
+  	
+  	<select id="selectAllFree" resultMap="freeDto">
+  		SELECT BBB.* FROM(SELECT rownum as rn, AAA.* FROM(SELECT * FROM free ORDER BY no DESC)AAA)BBB WHERE rn BETWEEN #{begin} AND #{end}
+  	</select>
+  	
+  	<select id="countFreeAll">
+  		SELECT count(no) FROM free
+  	</select>
+  	
+  	<select id="selectFreeContent" resultMap="freeDto">
+  		SELECT * FROM free WHERE no = #{no}
+  	</select>
+  	
+  	<update id="updateFreeHits">
+  		UPDATE free SET hits = hits+1 WHERE no = #{no}
+  	</update>
+  	
+  	<update id="updateFree" parameterType="com.care.library.info.FreeDTO">
+  		UPDATE free SET title = #{title}, content = #{content} WHERE no = #{no}
+  	</update>
+  	
+  	<delete id = "deleteFree">
+  		DELETE free WHERE no = #{no}
   	</delete>
 </mapper>
 

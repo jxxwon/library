@@ -123,7 +123,6 @@ public class InfoService {
 		model.addAttribute("notices", notices);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
-		
 	}
 
 	public void noticeContent(int no, Model model) {
@@ -203,8 +202,6 @@ public class InfoService {
 			notice.setTitle(title);
 			notice.setContent(content);
 			mapper.updateNoticeFile(notice);
-			
-			
 		}
 	}
 
@@ -258,6 +255,69 @@ public class InfoService {
 	public void faqDelete(int no) {
 		FaqDTO faq = mapper.selectFaqContent(no);
 		mapper.deleteFaq(no);
+	}
+
+	public void freeWrite(String title, String content, String id) {
+		FreeDTO free = new FreeDTO();
+		
+		int no;
+		try {
+			no = mapper.findMaxNumFree();
+		} catch (Exception e) {
+			no = 0;
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    String writeDate = sdf.format(new Date());
+		
+		free.setNo(no+1);
+		free.setTitle(title);
+		free.setContent(content);
+		free.setWriter(id);
+		free.setWriteDate(writeDate);
+		free.setHits(0);
+		free.setReplies(0);
+		mapper.writeFree(free);
+	}
+
+	public void selectAllFree(String cp, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<FreeDTO> frees = mapper.selectAllFree(begin, end);
+		
+		String url = "free?currentPage=";
+		int totalCount = mapper.countFreeAll();
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("frees", frees);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+	}
+
+	public void freeContent(int no, Model model) {
+		FreeDTO free = mapper.selectFreeContent(no);
+		mapper.updateFreeHits(no);
+		model.addAttribute("free", free);
+	}
+
+	public void freeUpdateProc(int no, String title, String content) {
+		FreeDTO free = mapper.selectFreeContent(no);
+		free.setTitle(title);
+		free.setContent(content);
+		mapper.updateFree(free);
+	}
+
+	public void freeDelete(int no) {
+		mapper.deleteFree(no);
 	}
 
 

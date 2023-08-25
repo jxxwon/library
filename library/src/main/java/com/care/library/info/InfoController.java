@@ -1,9 +1,5 @@
 package com.care.library.info;
 
-import java.io.FileInputStream;
-import java.io.OutputStream;
-import java.net.URLEncoder;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -172,5 +168,53 @@ public class InfoController {
 	public String faqDelete(int no) {
 		service.faqDelete(no);
 		return "redirect:/info/faq";
+	}
+	
+	@RequestMapping("/info/free")
+	public String free(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="select", required = false)String select, @RequestParam(value="search", required = false)String search, Model model) {
+		if(select == null && search == null) {
+			service.selectAllFree(cp, model);
+		}
+		return "info/free";
+	}
+	
+	@RequestMapping("/info/freeWriteForm")
+	public String freeWriteForm() {
+		String id = (String)session.getAttribute("id");
+		if(id == null) {
+			return "redirect:/info/free";
+		}
+		return "info/freeWriteForm";
+	}
+	
+	@PostMapping("/info/freeWriteProc")
+	public String freeWriteProc(String title, String content) {
+		String id = (String)session.getAttribute("id");
+		service.freeWrite(title, content, id);
+		return "redirect:/info/free";
+	}
+	
+	@RequestMapping("/info/freeContent")
+	public String freeContent(int no, Model model) {
+		service.freeContent(no, model);
+		return "info/freeContent";
+	}
+	
+	@RequestMapping("/info/freeUpdate")
+	public String freeUpdate(int no, Model model) {
+		service.freeContent(no, model);
+		return "info/freeUpdate";
+	}
+	
+	@PostMapping("/info/freeUpdateProc")
+	public String freeUpdateProc(@RequestParam(value="no", required=false)int no, String title, String content) {
+		service.freeUpdateProc(no, title, content);
+		return "redirect:/info/free";
+	}
+	
+	@RequestMapping("/info/freeDelete")
+	public String freeDelete(int no) {
+		service.freeDelete(no);
+		return "redirect:/info/free";
 	}
 }
