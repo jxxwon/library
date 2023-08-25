@@ -12,8 +12,11 @@ public interface ReserveMapper {
 	
 	int usingUser(String userId);
 	
-	ArrayList<String> getReservedSeat(String room);
+	ArrayList<ReserveDTO> getReservedSeat(String room);
 	
 	int reservedNum(String room);
-
+	
+	ReserveDTO getSeatById(String id);
+	
+	int DeleteSeatById(String id);
 }

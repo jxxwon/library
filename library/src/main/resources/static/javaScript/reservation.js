@@ -12,7 +12,7 @@ function setButtonColorByURL() {
 		whichRoom = "R1"
 	} else if (currentURL.includes("readingRoom2")) {
 		whichRoom = "R2"
-	} else{
+	} else {
 		whichRoom = "SR"
 	}
 }
@@ -24,7 +24,6 @@ setButtonColorByURL();
 window.onpopstate = function() {
 	setButtonColorByURL();
 };
-console.log("url에 따른 룸 이름 : ", whichRoom)
 
 
 
@@ -33,18 +32,16 @@ let each_seat = document.querySelectorAll('.each_seat');
 each_seat.forEach(item => item.addEventListener('click', activateEach_seat));
 
 
-// 탭 클릭 시에 좌석 상태 업데이트
+// 좌석 상태 업데이트 관련
 var reservedSeat = [];
 let seatXhr;
 let emptyNum;
 let usingNum;
-let empty_seat = document.querySelector('.empty_seat').textContent;
-let using_seat = document.querySelector('.using_seat').textContent;
+
 showReservedSeat(whichRoom);
 
-//선택한 좌석에 className 추가하기.(안하면 새로고침시 다 사라짐.)
+// 예약된 좌석 리스트 가져오기.
 function showReservedSeat(whichRoom) {
-	console.log(whichRoom);
 	seatXhr = new XMLHttpRequest();
 	seatXhr.open('POST', "room");
 	seatXhr.send(whichRoom);
@@ -52,19 +49,14 @@ function showReservedSeat(whichRoom) {
 }
 
 function roomProc() {
-	console.log("roomProc");
 	if (seatXhr.readyState === 4) {
-		console.log("roomProc1");
 		if (seatXhr.status === 200) {
-			console.log("roomProc2");
-			reservedSeat = JSON.parse(seatXhr.responseText); console.log("roomProc3");
-			
+			reservedSeat = JSON.parse(seatXhr.responseText);
 			usingNum = reservedSeat.length;
 			emptyNum = 96 - usingNum;
 			
+			//사용중인 좌석 색 바꾸기.
 			updateSeatStatus();
-			console.log("usingNum", usingNum);
-			console.log(typeof emptyNum);
 		} else {
 			console.log('에러: ' + seatXhr.status);
 		}
@@ -73,62 +65,86 @@ function roomProc() {
 
 
 // 초기 로딩 시 좌석 상태 업데이트
-updateSeatStatus();
+//updateSeatStatus();
 
-// 좌석 상태 업데이트 함수
 
+// 현재 좌석 상태 업데이트 함수
 function updateSeatStatus() {
+	if(sessionId == ""){
+		document.querySelector('.seat_status.mine').style.display = "none";
+	}else{
+		document.querySelector('.seat_status.mine').style.display = "block";
+	}
+
 	document.querySelector('.empty_seat').textContent = emptyNum;
 	document.querySelector('.using_seat').textContent = usingNum;
-	//console.log(empty_seat );
+	
 	each_seat.forEach(item => {
 		for (let i = 0; i < reservedSeat.length; i++) {
-			if (item.textContent === String(reservedSeat[i])) {
-				console.log("이고" + String(reservedSeat[i]));
-				console.log("여기요", i);
+			if (item.textContent === String(reservedSeat[i].seatId)) {
+				//사용중인 좌석에 className 추가하기.(안하면 새로고침시 다 사라짐.)
 				item.classList.add('using');
-
+			
+				if(sessionId ==  String(reservedSeat[i].userId)){
+					//'내 좌석'상태에 번호 표기
+					//document.querySelector('.my_seat').textContent = reservedSeat[i].seatId+"번";
+					// 내가 예약한 좌석 색 보라색으로 바꾸기.
+					item.classList.add('mine');
+				}else{
+				}
 			}
 		}
 	});
+
 }
 
-//팝업으로 좌석 예약하기
+//각 좌석 클릭시 예약하는 로직 함수.
 let popupWindow;
 //let popupForm;
 let seatNumber;
-
+let recentRoom;
 let reserveXhr;
 
-function activateEach_seat() {
+function nonLoginAlert(){
+		//비로그인시 처리.
+	result = confirm("로그인 후 이용해주세요.");
+	if (result) {
+		location.href = "/login";
+		return;
+	}
+	return;
+}
 
+function activateEach_seat() {
 	if (sessionId == "") {
-		result = confirm("로그인 후 이용해주세요.")
-		if (result) {
-			location.href = "/login";
-			return;
-		} else {
-			location.href = "/main";
+		nonLoginAlert();
+		return;
+	}
+	
+	//선택한 좌석 번호, 열람실 이름을 변수에 설정.
+	seatNumber = this.textContent;
+	
+	let roomDiv = document.querySelector('.whichRoom');
+	recentRoom = roomDiv.innerText.split('\n')[0];
+	
+	if (this.classList.contains("using")) {
+		if(this.classList.contains("mine")){
+			if (sessionId == "") {
+				nonLoginAlert();
+				return;
+			}
+			// 내 좌석 정보 보기 모달창 열기.
+			mySeatProc();
 			return;
 		}
-	}
-
-	//좌석 번호, 아이디, 열람실 이름을 변수에 설정.
-	console.log(this.classList);
-	if(this.classList.contains("using")){
 		alert("이미 예약된 좌석입니다.");
 		return;
 	}
-	seatNumber = this.textContent;
-	let roomDiv = document.querySelector('.whichRoom');
-	recentRoom = roomDiv.innerText.split('\n')[0];
 
 	let message = `열람실: ${recentRoom}\n좌석 번호: ${seatNumber}\n이름: ${userName}\n\n예약하시겠습니까?`; // 메시지 구성
-	let isConfirmed = confirm(message); // confirm 다이얼로그 표시
-		console.log("백엔드로 보낼때 룸이름 : ", whichRoom);
+	let isConfirmed = confirm(message);
 	if (isConfirmed) {
-		// 사용자가 확인을 선택한 경우 처리할 내용
-		console.log("사용자가 확인을 선택했습니다.");
+		// 사용자가 확인을 선택한 경우 서버에 좌석번호, 열람실 정보를 보냄.
 		var reqData = { seatId: seatNumber, room: whichRoom }
 		reqData = JSON.stringify(reqData);
 		reserveXhr = new XMLHttpRequest();
@@ -139,24 +155,89 @@ function activateEach_seat() {
 
 	}
 }
-
+//예약 요청했을 때, 예약 성공 여부를 서버에서 받아옴.
 function reserveProc() {
-	console.log("reserveProc");
 	if (reserveXhr.readyState === 4) {
 		if (reserveXhr.status === 200) {
-			console.log(whichRoom);
 			showReservedSeat(whichRoom);
 
 			let response = reserveXhr.responseText;
-			console.log(response);
-			console.log(whichRoom);
-			console.log(seatNumber);
 			alert(response);
-
+			return;
 		} else {
 			console.log('에러: ' + reserveXhr.status);
 		}
 	}
-	//window.location.reload();
+	//좌석 예약 알람 기능을 바로 적용하기 위해 새로고침 적용.
+	window.location.reload();
 }
 
+//내 좌석(상태표시, 좌석) 클릭시 좌석 정보를 보여주고 퇴실 여부 묻는 모달창.
+let mySeat = document.querySelector('.mine');
+mySeat.addEventListener('click', mySeatProc);
+
+function mySeatProc(){
+	console.log("내 자리");
+	openCustomModal();
+	//let message = `열람실: ${recentRoom}\n좌석 번호: ${seatNumber}\n이름: ${userName}\n\n예약하시겠습니까?`; // 메시지 구성
+	//let isConfirmed = confirm(message); // confirm 다이얼로그 표시
+}
+
+//내  자리 클릭시에 뜨는 모달창.
+const customModal = document.getElementById('customModal');
+const modalContent = document.querySelector('.modal-content');
+const leaveButton = document.getElementById('leaveButton');
+const cancelButton = document.getElementById('cancelButton');
+
+function openCustomModal() {
+  customModal.style.display = 'flex';
+}
+
+function closeCustomModal() {
+  customModal.style.display = 'none';
+}
+
+customModal.addEventListener('click', function(event) {
+    // 클릭된 요소가 모달 내부의 컨텐츠 영역이 아니면 모달을 닫습니다.
+  /*  if (event.target !== modalContent) {*/
+        customModal.style.display = 'none';
+   /* }*/
+});
+
+modalContent.addEventListener('click', function(event) {
+    event.stopPropagation();
+});
+
+
+let leaveXhr;
+function leaveSeat() {
+  let result = confirm("퇴실하시겠습니까?");
+  if(result){
+		leaveXhr = new XMLHttpRequest();
+		leaveXhr.open('POST', "leaveProc");
+		leaveXhr.send(sessionId);
+		leaveXhr.onreadystatechange = leaveSeatProc;
+  }
+}
+
+function leaveSeatProc() {
+	if (leaveXhr.readyState === 4) {
+		if (leaveXhr.status === 200) {
+			//showReservedSeat(whichRoom);
+			//updateSeatStatus();
+			let response = leaveXhr.responseText;
+			alert(response);
+			//closeCustomModal();
+		} else {
+			console.log('에러: ' + leaveXhr.status);
+		}
+	}
+	//좌석 예약 알람 기능을 바로 적용하기 위해 새로고침 적용.
+	window.location.reload();
+}
+
+//퇴실 버튼
+if(leaveButton !== null )
+	leaveButton.addEventListener('click', leaveSeat);
+if(cancelButton !== null )
+	cancelButton.addEventListener('click', closeCustomModal);

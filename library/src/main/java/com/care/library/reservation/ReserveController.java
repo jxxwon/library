@@ -26,22 +26,25 @@ public class ReserveController {
 	@ResponseBody // return을 jsp가 아닌 응답 데이터를 주는 것이다.
 	@PostMapping(value = "reservation/room", produces = "application/json; charset=UTF-8")
 	public Object room(@RequestBody(required = false) String whichRoom) {
-		ArrayList<String> reservedSeat = service.getReservedSeat(whichRoom);
+		ArrayList<ReserveDTO> reservedSeat = service.getReservedSeat(whichRoom);
 		return reservedSeat;
 	}
 
 	@GetMapping("/reservation/readingRoom1")
-	public String readingRoom1(Model model, RedirectAttributes ra) {
-		String whichRoom = "R1";
-		service.reservedSeatNum(model, whichRoom, ra);
-
+	public String readingRoom1(Model model) {
+		String id = (String) session.getAttribute("id");
+		if(id != null) {
+			service.getMySeat(id, model);
+		}
 		return "reservation/readingRoom1";
 	}
 
 	@GetMapping("/reservation/readingRoom2")
-	public String readingRoom2(Model model, RedirectAttributes ra) {
-		String whichRoom = "R2";
-		service.reservedSeatNum(model, whichRoom, ra);
+	public String readingRoom2(Model model) {
+		String id = (String) session.getAttribute("id");
+		if(id != null) {
+			service.getMySeat(id, model);
+		}
 		return "reservation/readingRoom2";
 	}
 
@@ -52,7 +55,7 @@ public class ReserveController {
 
 	@ResponseBody
 	@PostMapping("/reservation/reserveProc")
-	public String reserveProc(@RequestBody ReserveDTO reqData, RedirectAttributes ra) {
+	public String reserveProc(@RequestBody ReserveDTO reqData) {
 		// ReserveDTO에 예약 정보 입력.
 		String id = (String) session.getAttribute("id");
 		reqData.setUserId(id);
@@ -70,6 +73,13 @@ public class ReserveController {
 		}
 
 		String result = service.reservation(reqData);
+		return result;
+	}
+	
+	@ResponseBody
+	@PostMapping(value = "reservation/leaveProc")
+	public String leaveProc(@RequestBody(required = false) String leaveId) {
+		String result = service.leaveProc(leaveId);
 		return result;
 	}
 

@@ -29,7 +29,7 @@
 							</div>
 							<div class="bookContainer">
 								<c:forEach var="image" items="${popularBook}">
-									<div class="bookImageBox"><img src="${image}"></div>
+										<div class="bookImageBox"><img src="${image}"></div>
 								</c:forEach>
 							</div>
 						</div>
