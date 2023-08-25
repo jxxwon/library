@@ -8,14 +8,7 @@ public class FreeDTO {
 	public String writeDate;
 	public int hits;
 	public int replies;
-	public int rn;
 	
-	public int getRn() {
-		return rn;
-	}
-	public void setRn(int rn) {
-		this.rn = rn;
-	}
 	public int getNo() {
 		return no;
 	}

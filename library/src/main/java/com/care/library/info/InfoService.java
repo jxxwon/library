@@ -310,5 +310,11 @@ public class InfoService {
 		model.addAttribute("currentPage", currentPage);
 	}
 
+	public void freeContent(int no, Model model) {
+		FreeDTO free = mapper.selectFreeContent(no);
+		mapper.updateFreeHits(no);
+		model.addAttribute("free", free);
+	}
+
 
 }

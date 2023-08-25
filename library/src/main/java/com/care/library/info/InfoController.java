@@ -193,4 +193,10 @@ public class InfoController {
 		service.freeWrite(title, content, id);
 		return "redirect:/info/free";
 	}
+	
+	@RequestMapping("/info/freeContent")
+	public String freeContent(int no, Model model) {
+		service.freeContent(no, model);
+		return "info/freeContent";
+	}
 }

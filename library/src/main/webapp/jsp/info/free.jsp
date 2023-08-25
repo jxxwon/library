@@ -57,8 +57,10 @@
 							<c:otherwise>
 								<c:forEach var="free" items = "${frees}">
 									<tr onclick="location.href='freeContent?no=${free.no}'">
-										<td>${free.rn}</td>
-										<td>${free.title } (${free.replies })</td>
+										<td>${free.no}</td>
+										<td>${free.title }
+											<c:if test = "${free.replies > 0}"> (${free.replies })</c:if>
+										</td>
 										<td>${free.writer }</td>
 										<td>${free.writeDate }</td>
 										<td>${free.hits }</td>

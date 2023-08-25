@@ -47,6 +47,10 @@ public interface InfoMapper {
 
 	int countFreeAll();
 
+	FreeDTO selectFreeContent(int no);
+
+	void updateFreeHits(int no);
+
 
 
 }

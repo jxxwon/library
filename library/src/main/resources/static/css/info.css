@@ -132,4 +132,11 @@ h1{margin-bottom:50px;}
 .freePage a{display:inline-block; width:30px; height:30px; line-height:30px; font-weight:400; font-size:17px; border:1px solid #ddd; margin-right:5px; color:#000;}
 .freePage a:last-child{margin-right:0;}
 
-/*자유게시판 등록*/
+/*자유게시판 내용*/
+.freeContainer .freeContentForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
+.freeContainer .freeContentForm tr{border-bottom:1px solid #ddd;}
+.freeContainer .freeContentForm th{padding:10px; border-right:1px solid #ddd; width:200px;}
+.freeContainer .freeContentForm th.right{border-left:1px solid #ddd;}
+.freeContainer .freeContentForm td{padding:10px;}
+
+.freeContainer .freeBtn{text-align:right;}

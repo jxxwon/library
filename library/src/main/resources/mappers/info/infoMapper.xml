@@ -98,6 +98,14 @@
   	<select id="countFreeAll">
   		SELECT count(no) FROM free
   	</select>
+  	
+  	<select id="selectFreeContent" resultMap="freeDto">
+  		SELECT * FROM free WHERE no = #{no}
+  	</select>
+  	
+  	<update id="updateFreeHits">
+  		UPDATE free SET hits = hits+1 WHERE no = #{no}
+  	</update>
 </mapper>
 
 
