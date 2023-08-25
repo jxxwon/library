@@ -140,3 +140,13 @@ h1{margin-bottom:50px;}
 .freeContainer .freeContentForm td{padding:10px;}
 
 .freeContainer .freeBtn{text-align:right;}
+
+/*자유게시판 댓글*/
+.freeContainer .replyContentForm{width:100%; margin-bottom:40px;}
+.freeReply {display:flex; margin-top:40px;}
+
+.reply {width:100%; margin-top:10px;}
+.reply tr{border-bottom:1px solid #ddd;}
+.reply tr:first-child{border-bottom:1px solid #555;}
+.reply tr td{font-size:15px; line-height:145%; padding:10px 0;}
+.reply tr td span{color:#aaa;}

@@ -13,6 +13,11 @@
   	<resultMap type="com.care.library.info.FreeDTO" id="freeDto">
   		<result column = "write_date" property = "writeDate"/>
   	</resultMap>
+
+  	<resultMap type="com.care.library.info.ReplyDTO" id="replyDto">
+  		<result column = "write_date" property = "writeDate"/>
+  		<result column = "free_no" property = "freeNo"/>
+  	</resultMap>
   	
   	<select id = "findMaxNum">
   		SELECT MAX(no) FROM notice
@@ -94,6 +99,10 @@
   	<select id="selectAllFree" resultMap="freeDto">
   		SELECT BBB.* FROM(SELECT rownum as rn, AAA.* FROM(SELECT * FROM free ORDER BY no DESC)AAA)BBB WHERE rn BETWEEN #{begin} AND #{end}
   	</select>
+
+  	<select id="selectFree" resultMap="freeDto">
+  		SELECT BBB.* FROM (SELECT rownum as rn, AAA.* FROM (SELECT * FROM free WHERE ${select} like '%'||#{search}||'%' ORDER BY no DESC)AAA)BBB WHERE rn BETWEEN #{begin} AND #{end}
+  	</select>
   	
   	<select id="countFreeAll">
   		SELECT count(no) FROM free
@@ -114,6 +123,35 @@
   	<delete id = "deleteFree">
   		DELETE free WHERE no = #{no}
   	</delete>
+  	
+  	<select id="findMaxNumFreeReply">
+  		SELECT MAX(no) FROM reply
+  	</select>
+  	
+  	<insert id="writeFreeReply" parameterType="com.care.library.info.ReplyDTO">
+  		INSERT INTO reply (no, content, writer, write_date, free_no) VALUES (#{no}, #{content}, #{writer}, #{writeDate}, #{freeNo})
+  	</insert>
+  	
+  	<select id="selectNoticeReply" resultMap="replyDto">
+  		SELECT * FROM reply WHERE free_no = #{no} ORDER BY no ASC
+  	</select>
+  	
+  	<select id = "countReply">
+  		SELECT count(no) FROM reply WHERE free_no = #{freeNo} 
+  	</select>
+  	
+  	<update id="updateFreeReply">
+  		UPDATE free SET replies = #{replies} WHERE no = #{freeNo}
+  	</update>
+  	
+  	<delete id = "deleteReply">
+  		DELETE reply WHERE no = #{no}
+  	</delete>
+  	
+  	<delete id = "deleteAllReply">
+  		DELETE reply WHERE free_no = #{no}
+  	</delete>
+  	
 </mapper>
 
 

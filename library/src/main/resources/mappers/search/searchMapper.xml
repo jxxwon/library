@@ -8,32 +8,60 @@
   		<result column = "publication_year" property = "publicationYear"/>
   	</resultMap>
   	
-  	<insert id="jsonInsert" parameterType="com.care.library.search.BookDTO">
-		INSERT INTO popularBook VALUES(#{no}, #{ranking}, #{publicationYear},#{bookName}, #{authors}, #{publisher}, #{bookImageURL})
+  	<insert id="popularInsert" parameterType="com.care.library.search.BookDTO">
+		INSERT INTO popularBook VALUES(#{no}, #{ranking}, #{publicationYear},#{bookName}, #{authors}, #{publisher}, #{bookImageURL},  #{vol, jdbcType=VARCHAR})
 	</insert>
 	
 	<insert id="recentInsert" parameterType="com.care.library.search.BookDTO">
-		INSERT INTO recentBook VALUES(#{bookName}, #{authors}, #{publisher}, #{bookImageURL},  #{publicationYear})
+		INSERT INTO recentBook VALUES(#{bookName}, #{authors}, #{publisher}, #{bookImageURL},  #{publicationYear},   #{vol, jdbcType=VARCHAR})
 	</insert>
 	
-	<delete id="jsonDelete">
-		DELETE FROM popularBook
-	</delete>
+	<insert id="insertTotal" parameterType="com.care.library.search.BookDTO">
+		INSERT INTO totalBook (bookName, authors, publisher, bookImageURL, publication_year ,vol) VALUES(#{bookName},#{authors}, #{publisher}, #{bookImageURL}, #{publicationYear},  #{vol, jdbcType=VARCHAR})
+	</insert>
 	
-	<delete id="recentDelete">
-		DELETE FROM recentBook
+	<delete id="deleteData">
+		<if test="whichTable == 'popularBook'">
+			DELETE FROM popularBook
+		</if>
+		<if test="whichTable == 'recentBook'">
+			DELETE FROM recentBook
+		</if>
+		<if test="whichTable == 'totalBook'">
+			DELETE FROM totalBook
+		</if>
 	</delete>
 	
 	<select id="getBookImages">
 		<if test="whichTable == 'popularBook'">
-			SELECT bookImageURL FROM popularBook WHERE no <![CDATA[ <= ]]> 5
+			<!-- SELECT bookImageURL FROM popularBook WHERE no <![CDATA[ <= ]]> 5 -->
+			SELECT bookImageURL FROM (SELECT bookImageURL, ROWNUM AS rn FROM popularBook ORDER BY TO_NUMBER(ranking) ASC)A WHERE A.rn <![CDATA[ <= ]]> 5
 		</if>
 		<if test="whichTable == 'recentBook'">
 			SELECT bookImageURL FROM recentBook
 		</if>
 	</select>
 	
+	<!-- 대여하기 -->	
+	<!-- 	관리자 테이블에 들어가야겠지-->
 	
+	
+	<!-- <select id="checkTotalDB">
+		SELECT count(ROWNUM) FROM totalBook
+	</select> -->
+	<select id="checkTotalDB">
+	    SELECT COUNT(*) FROM totalBook
+	</select>
+	
+	<select id="getTable" resultMap="bookDto">
+		<if test="whichTable == 'popularBook'">
+			<!-- SELECT bookImageURL FROM popularBook WHERE no <![CDATA[ <= ]]> 5 -->
+			SELECT * FROM popularBook
+		</if>
+		<if test="whichTable == 'recentBook'">
+			SELECT * FROM recentBook
+		</if>
+	</select>
 </mapper>
 
 

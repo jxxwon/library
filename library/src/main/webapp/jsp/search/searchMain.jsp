@@ -13,10 +13,12 @@
 		<div class = "searchContainer pageContent_mt">
 			<div class="condition">
 				<div class="inner">
-					<div class="search_area">
-						<input placeholder="검색어를 입력하세요.">
-						<button class="search_Btn"><img src="/image/search.png"></button>
-					</div>
+					<form class="search_area" action="totalSearchProc"
+					method="post" accept-charset="UTF-8">
+						<input class="searchInput" name="totalSearch"  placeholder="검색어를 입력하세요.">
+						 <input type="hidden" name="gotoSearchMain" value="1">
+						<button type="submit" class="search_Btn"><img src="/image/search.png"></button>
+					</form>
 				</div>
 			</div>
 			<div class="visual" >

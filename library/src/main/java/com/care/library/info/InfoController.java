@@ -174,6 +174,8 @@ public class InfoController {
 	public String free(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="select", required = false)String select, @RequestParam(value="search", required = false)String search, Model model) {
 		if(select == null && search == null) {
 			service.selectAllFree(cp, model);
+		} else {
+			service.selectFree(cp, select, search, model);
 		}
 		return "info/free";
 	}
@@ -214,7 +216,23 @@ public class InfoController {
 	
 	@RequestMapping("/info/freeDelete")
 	public String freeDelete(int no) {
+		service.freeReplyAllDelete(no);
 		service.freeDelete(no);
 		return "redirect:/info/free";
+	}
+	
+	@RequestMapping("/info/replyWriteProc")
+	public String replyWriteProc(@RequestParam(value="no", required=false)int no, String reply) {
+		String id = (String)session.getAttribute("id");
+		String content = reply;
+		int freeNo = no;
+		service.freeReplyWrite(id, content, freeNo);
+		return "redirect:/info/free";
+	}
+	
+	@RequestMapping("/info/replyDelete")
+	public String replyDelete(@RequestParam(value="no", required=false)int no,@RequestParam(value="freeNo", required=false)int freeNo) {
+		service.freeReplyDelete(no);
+		return "redirect:/info/freeContent?no="+freeNo;
 	}
 }

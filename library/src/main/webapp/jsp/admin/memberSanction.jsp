@@ -23,8 +23,8 @@
 				<div class = "subMenu_member" id = "subMenu_member">
 					<ul class = "admin_member">
 						<li class = "admin_menu" onclick="location.href='${context }admin/member'">인증 승인/반려</li>
-						<li class = "admin_menu" onclick="location.href='memberSanction'">회원 제재</li>
-						<li class = "admin_menu active" id="memberListMenu" onclick="location.href='memberList'">회원 목록 조회</li>
+						<li class = "admin_menu active" onclick="location.href='memberSanction'">회원 제재</li>
+						<li class = "admin_menu" id="memberListMenu" onclick="location.href='memberList'">회원 목록 조회</li>
 					</ul>
 				</div>
 			</div>
