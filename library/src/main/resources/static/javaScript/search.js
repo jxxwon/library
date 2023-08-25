@@ -13,15 +13,7 @@ function setButtonColorByURL() {
 		document.getElementById("subTotalSearch").classList.add("active");
 		//document.getElementById("subMyBookStatus").classList.remove("active");
 		//document.getElementById("subMyInquiry").classList.remove("active");
-	} /*else if (currentURL.includes("myBookStatus")) {
-		document.getElementById("subMyBookStatus").classList.add("active");
-		document.getElementById("subMyInquiry").classList.remove("active");
-		document.getElementById("subMyInfo").classList.remove("active");
-	} else if (currentURL.includes("myInquiry")) {
-		document.getElementById("subMyInquiry").classList.add("active");
-		document.getElementById("subMyBookStatus").classList.remove("active");
-		document.getElementById("subMyInfo").classList.remove("active");
-	}*/
+	} 
 }
 
 // 페이지 로드 시 버튼 색상을 설정합니다.
@@ -49,3 +41,84 @@ function showMyLibSub(menu) {
 	};
 	xhr.send();
 }
+
+// 검색어에 해당하는 글씨 색 바꾸기
+/*const title = document.querySelector(".title");
+const searchInput = document.querySelector(".searchInput").value;
+
+// 검색어를 정규식 패턴으로 변환하여, 대소문자 구분 없이 검색어를 찾습니다.
+const regex = new RegExp(searchInput, "gi");
+
+// 제목 내에서 검색어와 일치하는 부분을 찾아 강조 표시합니다.
+const highlightedTitle = title.innerHTML.replace(regex, match => `<span class="highlight">${match}</span>`);
+
+// 강조 표시한 결과를 제목에 적용합니다.
+title.innerHTML = highlightedTitle;
+*/
+
+// 책 정보 모달
+
+
+
+//내  자리 클릭시에 뜨는 모달창.
+const searchModal = document.getElementById('searchModal');
+console.log(searchModal);
+const modalContent = document.querySelector('.modal-content');
+const loanButton = document.getElementById('loanButton');
+const cancelButton = document.getElementById('cancelButton');
+
+
+function getBookDetail() {
+	searchModal.style.display = 'flex';
+}
+
+function closeCustomModal() {
+	searchModal.style.display = 'none';
+}
+
+searchModal.addEventListener('click', function(event) {
+	// 클릭된 요소가 모달 내부의 컨텐츠 영역이 아니면 모달을 닫습니다.
+	if (event.target !== modalContent) {
+		searchModal.style.display = 'none';
+	}
+});
+
+
+
+modalContent.addEventListener('click', function(event) {
+	event.stopPropagation();
+});
+
+
+let loanXhr;
+function laonBook() {
+	let result = confirm("대여하시겠습니까?");
+	if (result) {
+		loanXhr = new XMLHttpRequest();
+		loanXhr.open('POST', "loanProc");
+		loanXhr.send(sessionId);
+		loanXhr.onreadystatechange = loanProc;
+	}
+}
+
+function loanProc() {
+	if (leaveXhr.readyState === 4) {
+		if (leaveXhr.status === 200) {
+			//showReservedSeat(whichRoom);
+			//updateSeatStatus();
+			let response = leaveXhr.responseText;
+			alert(response);
+			//closeCustomModal();
+		} else {
+			console.log('에러: ' + leaveXhr.status);
+		}
+	}
+	//좌석 예약 알람 기능을 바로 적용하기 위해 새로고침 적용.
+	window.location.reload();
+}
+
+//퇴실 버튼
+if (loanButton !== null)
+	loanButton.addEventListener('click', laonBook);
+if (cancelButton !== null)
+	cancelButton.addEventListener('click', closeCustomModal);

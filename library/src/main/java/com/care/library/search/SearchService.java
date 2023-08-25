@@ -13,8 +13,10 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -42,6 +44,17 @@ public class SearchService {
 //		System.out.println("스케줄");
 //	}
 	// 요청 URL 만들
+	
+	@Async
+    public CompletableFuture<String> asyncMethod() {
+		String url = reqUrlParam( "extends/libSrch",  "&libCode=111042" , 1, 50);
+		System.out.println("asyncMethod : "+ url);
+		String apiResult = connAPI(url);
+		if(apiResult != null) {
+			 ArrayList<BookDTO> searchResult = totalXmlParse(apiResult);
+		}
+        return CompletableFuture.completedFuture("Async result");
+    }
 	public String reqUrlParam(String whichDataAPI, String restParam, int pageNo, int pageSize) {
 		String url = "http://data4library.kr/api/" + whichDataAPI;
 
@@ -63,6 +76,7 @@ public class SearchService {
 
 		return url;
 	}
+	
 	public String connAPI(String url) {
 		System.out.println("API요청");
 		String xmlResponse = "";
@@ -77,14 +91,15 @@ public class SearchService {
 			HttpURLConnection conn = (HttpURLConnection) requestUrl.openConnection();
 			conn.setRequestMethod("GET"); // GET 요청 설정
 			conn.setRequestProperty("Accept", "application/xml"); // Accept 헤더 설정 (응답 형식 지정)
-
+			
 			int responseCode = conn.getResponseCode(); // 요청 보내고 응답 코드 받기
+			System.out.println("responseCode : " +responseCode);
 			if (responseCode == HttpURLConnection.HTTP_OK) { // 성공적인 응답
 				BufferedReader in = new BufferedReader(
 						new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
 				String inputLine;
 				StringBuilder response = new StringBuilder();
-
+				System.out.println("API response : "+ response);
 				while ((inputLine = in.readLine()) != null) {
 					response.append(inputLine);
 				}
@@ -93,6 +108,7 @@ public class SearchService {
 
 				// xml을 문자열로 바꿈
 				xmlResponse = response.toString();
+				System.out.println("xmlResponse : "+xmlResponse);
 			} else {
 				System.out.println("GET request failed");
 			}
@@ -100,13 +116,13 @@ public class SearchService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("성공적");
-		totalXmlParse(xmlResponse);
-		return "API 호출 성공";
+		//System.out.println("xmlResponse : "+xmlResponse);
+		//totalXmlParse(xmlResponse);
+		return xmlResponse;
 	}
 
 	// @Scheduled(cron = "0 0 0 1 * 0", zone = "Asia/Seoul") // 매월 1일 요일 00:00:00에
-	public String connAPI(String url, String tableName) {
+	public String connAPI(String url, String tableName, String XmlTagName) {
 		System.out.println("API요청");
 		String xmlResponse = "";
 
@@ -144,18 +160,7 @@ public class SearchService {
 			e.printStackTrace();
 		}
 
-		// xml파일을 db에 저장하기.
-		if (tableName.equals("popularBook")) {
-			xmlToJson(xmlResponse);
-			return "API 호출 성공";
-		}
-		if (tableName.equals("recentBook")) {
-			recentXmlToJson(xmlResponse);
-			return "API 호출 성공";
-		}
-		/*
-		 * else { totalXmlParse(xmlResponse); }
-		 */
+		xmltoDTO(xmlResponse, XmlTagName ,tableName);
 		return "API 호출 성공";
 	}
 	
@@ -184,13 +189,16 @@ public class SearchService {
 					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
 					String publicationYear = docElement.getElementsByTagName("publication_year").item(0)
 							.getTextContent();
+					String vol = docElement.getElementsByTagName("vol").item(0)
+							.getTextContent();
 					System.out.println(bookName);
 					BookDTO book = new BookDTO();
-					book.setPublication_year(publicationYear);
+					book.setPublicationYear(publicationYear);
 					book.setBookName(bookName);
 					book.setAuthors(authors);
 					book.setPublisher(publisher);
 					book.setBookImageURL(bookImageURL);
+					book.setVol(vol);
 					// 생성
 					books.add(book); // 리스트에 추가
 				}
@@ -207,135 +215,92 @@ public class SearchService {
 		}
 		return books;
 	}
+	
+	public void xmltoDTO(String xmlResponse, String tagName ,String tableName) {
+	    List<BookDTO> books = null;
+	    try {
+	        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder dBuilder;
 
-	public void recentXmlToJson(String xmlResponse) {
-		List<BookDTO> books = null;
-		try {
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder;
+	        dBuilder = dbFactory.newDocumentBuilder();
+	        Document doc = dBuilder.parse(new InputSource(new StringReader(xmlResponse)));
 
-			dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(new InputSource(new StringReader(xmlResponse)));
-
-			doc.getDocumentElement().normalize();
-
-			NodeList docList = doc.getElementsByTagName("book");
-
-			books = new ArrayList<>(); // Book 객체들을 저장할 리스트 생성
-
-			for (int i = 0; i < docList.getLength(); i++) {
-				Node docNode = docList.item(i);
-				if (docNode.getNodeType() == Node.ELEMENT_NODE) {
-					Element docElement = (Element) docNode;
-					String bookName = docElement.getElementsByTagName("bookname").item(0).getTextContent();
-					String authors = docElement.getElementsByTagName("authors").item(0).getTextContent();
-					String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
-					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
-					String publicationYear = docElement.getElementsByTagName("publication_year").item(0)
-							.getTextContent();
-					// System.out.println(bookName);
-					BookDTO book = new BookDTO();
-					book.setPublication_year(publicationYear);
-					book.setBookName(bookName);
-					book.setAuthors(authors);
-					book.setPublisher(publisher);
-					book.setBookImageURL(bookImageURL);
-					// 생성
-					books.add(book); // 리스트에 추가
-				}
-			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		recentInsert(books);
-	}
-
-	// xml파일을 db에 저장하기.
-	public void xmlToJson(String xmlResponse) {
-
-		List<BookDTO> books = null;
-		try {
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder;
-
-			dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(new InputSource(new StringReader(xmlResponse)));
-
-			doc.getDocumentElement().normalize();
-
-			Node loanBooksNode = doc.getElementsByTagName("loanBooks").item(0);
+	        doc.getDocumentElement().normalize();
+	        
+	        Node loanBooksNode = doc.getElementsByTagName(tagName).item(0);
 			NodeList docList = loanBooksNode.getChildNodes();
+	        books = new ArrayList<>(); // Book 객체들을 저장할 리스트 생성
 
-			// NodeList docList = doc.getElementsByTagName("book");
-			books = new ArrayList<>(); // Book 객체들을 저장할 리스트 생성
+	        for (int i = 0; i < docList.getLength(); i++) {
+	            Node docNode = docList.item(i);
+	            if (docNode.getNodeType() == Node.ELEMENT_NODE) {
+	                Element docElement = (Element) docNode;
+	                BookDTO book = new BookDTO();
+	                NodeList noNodes = docElement.getElementsByTagName("no");
+	                if (noNodes != null && noNodes.getLength() > 0) {
+	                    String no = noNodes.item(0).getTextContent();
+	                    book.setNo(no);
+	                }
 
-			for (int i = 0; i < docList.getLength(); i++) {
-				Node docNode = docList.item(i);
-				if (docNode.getNodeType() == Node.ELEMENT_NODE) {
-					Element docElement = (Element) docNode;
-					String no = docElement.getElementsByTagName("no").item(0).getTextContent();
-					String ranking = docElement.getElementsByTagName("ranking").item(0).getTextContent();
-					String publicationYear = docElement.getElementsByTagName("publication_year").item(0)
-							.getTextContent();
-					String bookName = docElement.getElementsByTagName("bookname").item(0).getTextContent();
-					String authors = docElement.getElementsByTagName("authors").item(0).getTextContent();
-					String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
-					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
+	                NodeList rankingNodes = docElement.getElementsByTagName("ranking");
+	                if (rankingNodes != null && rankingNodes.getLength() > 0) {
+	                    String ranking = rankingNodes.item(0).getTextContent();
+	                    book.setRanking(ranking);
+	                }
+	                String publicationYear = docElement.getElementsByTagName("publication_year").item(0).getTextContent();
+	                String bookName = docElement.getElementsByTagName("bookname").item(0).getTextContent();
+	                String authors = docElement.getElementsByTagName("authors").item(0).getTextContent();
+	                String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
+	                String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
+	                String vol = docElement.getElementsByTagName("vol").item(0).getTextContent();
+	                
+	                book.setPublicationYear(publicationYear);
+	                book.setBookName(bookName);
+	                book.setAuthors(authors);
+	                book.setPublisher(publisher);
+	                book.setBookImageURL(bookImageURL);
+	                book.setVol(vol);
+	                
+	                // 생성
+	                books.add(book); // 리스트에 추가
+	            }
+	        }
 
-					BookDTO book = new BookDTO();
-					book.setNo(no);
-					book.setRanking(ranking);
-					book.setPublication_year(publicationYear);
-					book.setBookName(bookName);
-					book.setAuthors(authors);
-					book.setPublisher(publisher);
-					book.setBookImageURL(bookImageURL);
-					// 생성
-					books.add(book); // 리스트에 추가
-				}
-			}
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		jsonInsert(books);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    
+	    insertBooks(books, tableName);
 	}
+	
+	
+	public String insertBooks(List<BookDTO> books, String tableName) {
+	    String resultMessage = "모든 데이터가 입력되었습니다.";
+	    
+	    try {
+	        mapper.deleteData(tableName);
 
-	public String jsonInsert(List<BookDTO> books) {
-
-		ObjectMapper jsonMapper = new ObjectMapper();
-//					//ObjectMapper는 JSON과 Java 객체 간의 변환을 처리하는 역할.
-		mapper.jsonDelete();
-
-		// for(BookDTO book : lists) {
-		for (BookDTO book : books) {
-			// System.out.println(book.getBookName());
-			int result = mapper.jsonInsert(book);
-			System.out.println("popular 디비에 들어깠니? : " + result);
-			if (result == 0)
-				return "데이터 입력 중 오류가 발생했습니다. 다시 시도 하세요.";
-		}
-		return "모든 데이터가 입력되었습니다.";
+	        for (BookDTO book : books) {
+	            int result = 0;
+	            
+	            if ("popularBook".equals(tableName)) {
+	                result = mapper.popularInsert(book);
+	            } else if ("recentBook".equals(tableName)) {
+	                result = mapper.recentInsert(book);
+	            }
+	            
+	            if (result == 0) {
+	                resultMessage = "데이터 입력 중 오류가 발생했습니다. 다시 시도하세요.";
+	                break;  // Stop processing if an error occurs
+	            }
+	        }
+	    } catch (Exception e) {
+	        resultMessage = "데이터 입력 중 오류가 발생했습니다. 다시 시도하세요.";
+	    }
+	    
+	    return resultMessage;
 	}
-
-	public String recentInsert(List<BookDTO> books) {
-
-		ObjectMapper jsonMapper = new ObjectMapper();
-//					//ObjectMapper는 JSON과 Java 객체 간의 변환을 처리하는 역할.
-		mapper.recentDelete();
-
-		// for(BookDTO book : lists) {
-		for (BookDTO book : books) {
-			int result = mapper.recentInsert(book);
-			if (result == 0)
-				return "데이터 입력 중 오류가 발생했습니다. 다시 시도 하세요.";
-		}
-		return "모든 데이터가 입력되었습니다.";
-	}
-
+	
 	public String getBookImages(Model model, String whichTable) {
 		String modelName = whichTable;
 		ArrayList<String> bookImages = mapper.getBookImages(whichTable);
@@ -346,12 +311,12 @@ public class SearchService {
 		return "이미지 가져오기 완료";
 	}
 
-	public void showMainImages(String whichTable, Model model, String url) {
+	public void showMainImages(String whichTable, Model model, String url, String xmlTagName) {
 		String dbResult = getBookImages(model, whichTable);
 
 		if (dbResult.equals("이미지 가져오기 실패")) {
 			// String whichDataAPI, String restParam, String pageNo, String pageSize
-			String apiResult = connAPI(url, whichTable);
+			String apiResult = connAPI(url, whichTable, xmlTagName);
 			if (apiResult.equals("API 호출 성공")) {
 				getBookImages(model, whichTable);
 			}

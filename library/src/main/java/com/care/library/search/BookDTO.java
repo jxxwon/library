@@ -8,6 +8,7 @@ public class BookDTO {
 	private String authors;
 	private String publisher;
 	private String bookImageURL;
+	private String vol;
 
 	public String getNo() {
 		return no;
@@ -25,13 +26,6 @@ public class BookDTO {
 		this.ranking = ranking;
 	}
 	
-	public String getPublication_year() {
-		return publicationYear;
-	}
-
-	public void setPublication_year(String publicationYear) {
-		this.publicationYear = publicationYear;
-	}
 	
 	public String getBookName() {
 		return bookName;
@@ -63,5 +57,21 @@ public class BookDTO {
 
 	public void setBookImageURL(String bookImageURL) {
 		this.bookImageURL = bookImageURL;
+	}
+
+	public String getPublicationYear() {
+		return publicationYear;
+	}
+
+	public void setPublicationYear(String publicationYear) {
+		this.publicationYear = publicationYear;
+	}
+
+	public String getVol() {
+		return vol;
+	}
+
+	public void setVol(String vol) {
+		this.vol = vol;
 	}
 }

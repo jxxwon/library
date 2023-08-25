@@ -1,24 +1,33 @@
-.searchContainer {margin-top: 152px;}
+.searchContainer {
+	margin-top: 152px;
+}
 
-.searchContainer .visual .inner, 
-.searchContainer .condition .inner{display: flex; justify-content: space-between;}
+.searchContainer .visual .inner,
+.searchContainer .condition .inner {
+	display: flex;
+	justify-content: space-between;
+}
 
 .searchContainer .condition {
 	position: relative;
-    /*padding: 50px 0 50px 0;*/
-}
-.searchContainer .condition::before {
-	position: absolute; top: -165px; left: 0; content: ""; 
-    height: 908px; 
-    width: 100%; 
-    margin: 0 auto;
-    min-width: 1200px;
-    background: url('/image/search_background1.jpg')no-repeat fixed 50% 40%;
-    background-size: cover;
-    opacity: 0.3;
+	/*padding: 50px 0 50px 0;*/
 }
 
-.searchContainer .condition .inner{
+.searchContainer .condition::before {
+	position: absolute;
+	top: -165px;
+	left: 0;
+	content: "";
+	height: 908px;
+	width: 100%;
+	margin: 0 auto;
+	min-width: 1200px;
+	background: url('/image/search_background1.jpg')no-repeat fixed 50% 40%;
+	background-size: cover;
+	opacity: 0.3;
+}
+
+.searchContainer .condition .inner {
 	position: relative;
 	padding: 50px 0px;
 }
@@ -28,128 +37,225 @@
 	width: 700px;
 	height: 70px;
 	background-color: white;
-	border:2px solid cornflowerblue;
-	margin:0 auto;
+	border: 2px solid cornflowerblue;
+	margin: 0 auto;
 	border-radius: 60px;
 }
 
-.search_area > input{
+.search_area>input {
 	height: 100%;
 	width: 575px;
-	margin-left:30px;
+	margin-left: 30px;
 	background-color: transparent;
 	border: transparent;
 	font-size: 18px;
 }
-.search_area > input::placeholder{
+
+.search_area>input::placeholder {
 	font-size: 18px;
 }
 
-.search_area .search_Btn{
+.search_area .search_Btn {
 	position: absolute;
 	right: 7px;
 	top: 6px;
 	background-color: cornflowerblue;
 	border: transparent;
-	border-radius:50% ;
+	border-radius: 50%;
 	width: 60px;
 	height: 60px;
-	padding:13px;
+	padding: 13px;
 }
 
-.search_area .search_Btn > img{
+.search_area .search_Btn>img {
 	width: 100%;
 }
 
-.searchContainer .visual{background-color: rgba(0,0,0,0.6);}
+.searchContainer .visual {
+	background-color: rgba(0, 0, 0, 0.6);
+}
 
-.searchContainer .visual{position: relative; z-index: 1; padding: 10px 0;}
+.searchContainer .visual {
+	position: relative;
+	z-index: 1;
+	padding: 10px 0;
+}
 
-.searchContainer .visual .content.left, 
-.searchContainer .visual .content.right{ height: 550px; margin:0; /*border: 1px solid red;*/}
-
-.searchContainer .visual .content.left{width: 100%; display: flex; flex-direction: column;}
-.searchContainer .visual .content.right{width: 35%;}
-
-.visual .content.left .popularBook, .visual .content.left .newBook{
+.searchContainer .visual .content.left,
+.searchContainer .visual .content.right {
+	height: 550px;
+	margin: 0;
 	/*border: 1px solid red;*/
-	height: 50%; padding-top:20px; 
-	color: white; font-weight: 500; font-size: 20px;
-	}
+}
 
-.popularBook .bookContainer, .newBook .bookContainer{
+.searchContainer .visual .content.left {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.searchContainer .visual .content.right {
+	width: 35%;
+}
+
+.visual .content.left .popularBook,
+.visual .content.left .newBook {
+	/*border: 1px solid red;*/
+	height: 50%;
+	padding-top: 20px;
+	color: white;
+	font-weight: 500;
+	font-size: 20px;
+}
+
+.popularBook .bookContainer,
+.newBook .bookContainer {
 	/*border: 1px solid blue;*/
 	display: flex;
-	padding-top:10px;
+	padding-top: 10px;
 }
-.popularBook .bookImageBox, .newBook  .bookImageBox {
+
+.popularBook .bookImageBox,
+.newBook .bookImageBox {
 	margin-right: 20px;
 	width: 130px;
 	height: 180px;
 	/*border: 1px solid black;*/
 }
 
-.popularBook .bookImageBox > img, .newBook .bookImageBox > img{
+.popularBook .bookImageBox>img,
+.newBook .bookImageBox>img {
 	width: 100%;
 	height: 100%;
 }
 
 /*통합검색*/
-.searchBox{
-	border: 2px solid #ddd; padding:30px;
+.searchBox {
+	border: 2px solid #ddd;
+	padding: 30px;
 	margin-bottom: 50px;
 }
+
 .search_area.totalSearch {
 	width: 650px;
-    height: 60px;
+	height: 60px;
 	border-radius: 0;
 	border: 1px solid #666;
 }
-.search_area .search_Btn.totalSearch{
-	background-color:transparent;
-	padding:9px;
+
+.search_area .search_Btn.totalSearch {
+	background-color: transparent;
+	padding: 9px;
 	right: 0;
-    top: 0;
+	top: 0;
 }
 
-.search_result{
+.search_result {
 	border: 2px solid #ddd;
 	display: flex;
 	width: 100%;
 	height: 200px;
 	margin-bottom: 20px;
 }
-.bookImgBox{
+
+.bookImgBox {
 	display: flex;
 	align-items: center;
-	width:155px;
-	margin-left:30px;
+	width: 155px;
+	margin-left: 30px;
+	cursor: pointer;
 }
-.bookImgBox .result_bookImg{
+
+.bookImgBox .result_bookImg {
 	width: 120px;
 	height: 150px;
+	cursor: pointer;
 }
-.bookImgBox .result_bookImg > img{
+
+.bookImgBox .result_bookImg>img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 }
 
-.bookImgBox .result_bookContent{
-	width: 500px;
-	
-}
-.bookContentBox{
+.bookImgBox .result_bookContent {
 	height: 100%;
-}
-.bookContentBox .title{
-	font-size:20px;
-	font-weight: 500;
-	margin:28px 0 20px 0;
+	width: 500px;
+
 }
 
-.bookContentBox .bookInfo{
-	font-size:16px;
+.bookContentBox {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 150px;
+	margin-top: 28px;
+}
+
+.bookContentBox .title {
+	font-size: 20px;
+	font-weight: 500;
+	margin: 0 0 20px 0;
+}
+
+.bookContentBox .bookInfo {
+	font-size: 16px;
 	color: #888;
 	font-weight: 400;
+}
+
+.bookContentBox .bookInfo>span {
+	margin-bottom: 20px;
+}
+
+
+.bookContentBox .bookDtlButton {
+	background-color: cornflowerblue;
+	color: white;
+	width: 124px;
+	height: 38px;
+	line-height: 38px;
+	text-align: center;
+	cursor: pointer;
+}
+
+/*모달*/
+
+#searchModal {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	justify-content: center;
+	align-items: center;
+	z-index: 50;
+}
+
+.modal-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	width: 300px;
+	height: 300px;
+	background-color: white;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+.modal-content #loanButton, .modal-content #cancelButton{
+	border:transparent;  
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 100px;
+}
+.modal-content #loanButton{
+	color: white;
+	background-color:#338cfa;
+	margin-right:10px;
 }
