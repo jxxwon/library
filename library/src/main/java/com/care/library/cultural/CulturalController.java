@@ -25,21 +25,21 @@ public class CulturalController {
     @Autowired 
     private HttpSession session;
 
-    @RequestMapping("culForm")
-    public String culForm(
-            @RequestParam(value="currentPage", required = false) String cp,
+    @RequestMapping("culturalForm")
+    public String culturalForm(
+            @RequestParam(value = "currentPage", required = false) String cp,
             Model model) {
-    	System.out.println("culFrom호출");
-        service.culturalForm(cp, model);
-        return "cultural/culForm"; // 뷰 이름 설정
+        System.out.println("culturalForm 호출");
+        service.culturalForm(cp, model, "upcoming");
+        return "cultural/culturalForm"; // 뷰 이름 설정
     }
-    
+
     @RequestMapping("culFormEnd")
     public String culFormEnd(
-            @RequestParam(value="currentPage", required = false) String cp,
+            @RequestParam(value = "currentPage", required = false) String cp,
             Model model) {
-    	System.out.println("culFormEnd호출");
-        service.culturalForm(cp, model);
+        System.out.println("culFormEnd 호출");
+        service.culturalForm(cp, model, "past");
         return "cultural/culFormEnd"; // 뷰 이름 설정
     }
 	

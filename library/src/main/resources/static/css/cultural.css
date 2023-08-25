@@ -195,11 +195,11 @@
 
 .resultMenu ul li a{display:block;}
 
-.resultMenu ul li.active{background-color:#338cfa;}
-.resultMenu ul li.active a{color:#fff;}
+.top-menu ul li.active{background-color:#338cfa;}
+.top-menu ul li.active a{color:#fff;}
 
-.resultMenu ul li:hover{background-color:#338cfa;}
-.resultMenu ul li:hover a{color:#fff;}
+.top-menu ul li:hover{background-color:#338cfa;}
+.top-menu ul li:hover a{color:#fff;}
 
 /*페이지 처리*/
 .culturalContainer .paging{margin-top:20px;}

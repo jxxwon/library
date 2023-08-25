@@ -3,7 +3,7 @@
 <%@ page import="com.care.library.common.PageService" %>
 <title>하이디미어 도서관 - 문화행사</title>
 <c:url var="context" value="/" />
-<link href="/css/cultural.css" rel="stylesheet" type="text/css">
+<link href="${context }css/cultural.css" rel="stylesheet" type="text/css">
 
 <script>
   	document.addEventListener('DOMContentLoaded', function() {	
@@ -27,6 +27,8 @@
   	}
   	.subMenu .active{background-color:#338cfa;}
 	.subMenu .active a{color:#fff;}
+	
+	
 </style>
 
 <c:import url="/header" />
@@ -55,10 +57,10 @@
 		</div>
 		
  		<div class="top-menu">
-			<ul>
-				<li class="menu-item" id="menu1"><a href="${context}culForm"><span>접수중 / 예정행사</span></a></li>
-				<li class="menu-item" id="menu2"><a href="${context}culFormEnd"><span>접수마감된 행사</span></a></li>
-			</ul>
+		    <ul>
+		        <li class="menu-item" id="menu1"><a href="${context}culturalForm"><span>접수중 / 예정행사</span></a></li>
+		        <li class="menu-item  active" id="menu2"><a href="${context}culFormEnd"><span>접수마감된 행사</span></a></li>
+		    </ul>
 		</div>
 	
 		<div class="apply" id="apply" style="display:none">
@@ -68,31 +70,31 @@
 		</div>
 		
 		<div class="cul-list">
-		    <ul class="teach_list">
-		        <c:forEach var="cultural" items="${pastCulturalList}">
-		            <li class="ever_one">
-		                <div class="thumb">
-		                    <a href="${context}culWrite?culId=${cultural.culId}">
-		                        <img src="${cultural.imagePath}" alt="image" class="teach_img" style="width:280px; height: 385px;">
-		                    </a>
-		                </div>
-		                <div class="list_area">
-		                    <div class="title_area">
-		                        <a href="${context}culWrite?culId=${cultural.culId}">
-		                            <b class="title">${cultural.title}</b>
-		                        </a>
-		                    </div>
-		                    <ul class="con2">
-		                        <li><span class="tit">강의기간</span>${cultural.lectureStart} ~ ${cultural.lectureEnd}</li>
-		                        <li><span class="tit">접수기간</span>${cultural.registrationStart} ~ ${cultural.registrationEnd}</li>
-		                        <li><span class="tit">대상</span>${cultural.target}</li>
-		                    </ul>
-		                </div>
-		            </li>
-		        </c:forEach>
-		    </ul>
-		</div>
-
+			<ul class="teach_list">
+	            <c:forEach var="cultural" items="${pastCulturalList}">
+	                <li class="ever_one">
+	                    <div class="thumb">
+	                        <a href="${context}culWrite?culId=${cultural.culId}">
+	                            <img url="${cultural.imagePath}" alt="image" class="teach_img" style="width:280px; height: 385px;">
+	                        </a>
+	                    </div>
+	                    <div class="list_area">
+	                        <div class="title_area">
+	                            <a href="${context}culWrite?culId=${cultural.culId}">
+	                           <%--  <a href="${context}culWrite/${cultural.culId}"> --%>
+	                                <b class="title">${cultural.title}</b>
+	                            </a>
+	                        </div>
+	                        <ul class="con2">
+	                            <li><span class="tit">강의기간</span>${cultural.lectureStart} ~ ${cultural.lectureEnd}</li>
+	                            <li><span class="tit">접수기간</span>${cultural.registrationStart} ~ ${cultural.registrationEnd}</li>
+	                            <li><span class="tit">대&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상</span>${cultural.target}</li>
+	                        </ul>
+	                    </div>
+	                </li>
+	            </c:forEach>
+			</ul>
+	    </div>
 		<div class="paging">	
             ${result}
         </div>
@@ -101,4 +103,4 @@
 
 <c:import url="/footer" />
 
-<script src="/javaScript/subCulTop.js"></script>
+<script src="${context }javaScript/subCulTop.js"></script>

@@ -46,18 +46,46 @@
 	            image_path, 
 	            count 
 	            FROM cultural
-	            WHERE registration_end >= CURRENT_DATE   <!-- 현재 날짜를 기준으로 필터링 -->
+	            WHERE registration_end >= CURRENT_DATE
 	            ORDER BY cul_id DESC
 	        ) CCC
 	    )
 	    WHERE rn BETWEEN #{begin} AND #{end}
 	</select>
 	
-	<!-- countAfterDate에 대한 SQL 쿼리 -->
+	<!-- cultural 테이블에서 데이터를 가져오는 SQL과 resultMap 설정 -->
+	<select id="culturalFormEnd" resultMap="culturalDto">
+	    SELECT cul_id, title, lecture_start, lecture_end, registration_start,
+	    registration_end, target, image_path, count
+	    FROM (
+	        SELECT CCC.*, ROWNUM as rn FROM (
+	            SELECT cul_id, 
+	            title, lecture_start, 
+	            lecture_end, 
+	            registration_start,
+	            registration_end, 
+	            target, 
+	            image_path, 
+	            count 
+	            FROM cultural
+	            WHERE CURRENT_DATE >= registration_end 
+	            ORDER BY cul_id DESC
+	        ) CCC
+	    )
+	    WHERE rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<!-- countAfterDate에 대한 SQL 쿼리 접수기간 이내 -->
 	<select id="countAfterDate" parameterType="String" resultType="int">
 	    SELECT COUNT(*) FROM cultural
-	    WHERE registration_end > #{format}
+	    WHERE registration_end >= #{today}
 	</select>
+	
+	<!-- countBeforeDate에 대한 SQL 쿼리 접수기간 이내 -->
+	<!-- <select id="countBeforeDate" parameterType="String" resultType="int">
+	    SELECT COUNT(*) FROM cultural
+	    WHERE #{today} > registration_end
+	</select> -->
 
 	<!-- <select id="culturalForm" resultMap="culturalDto">
 		SELECT cul_id, title, lecture_start, lecture_end, registration_start,

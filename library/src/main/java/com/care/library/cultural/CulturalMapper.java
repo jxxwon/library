@@ -15,6 +15,7 @@ public interface CulturalMapper {
 	void insertCultural(CulturalDTO culturalDTO);
 
 	ArrayList<CulturalDTO> culturalForm(@Param("begin") int begin, @Param("end") int end);
+	ArrayList<CulturalDTO> culturalFormEnd(@Param("begin") int begin, @Param("end") int end);
 
 	int count();
 
@@ -22,6 +23,6 @@ public interface CulturalMapper {
 
 	CulturalDTO culFormWrite(int culId);	//목록에서 culId값 일치하는 데이터 가저오기
 
-	int countAfterDate(String format);
-
+	 int countAfterDate(String today); 
+		/* int countBeforeDate(String today); */
 }
