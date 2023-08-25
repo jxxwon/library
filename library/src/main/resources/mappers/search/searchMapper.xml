@@ -62,6 +62,13 @@
 			SELECT * FROM recentBook
 		</if>
 	</select>
+	
+	<!--통합검색-->
+	<select id="totalSearch" resultMap="bookDto">
+		SELECT * FROM totalBook WHERE LOWER(bookName) LIKE LOWER('%'||#{search}||'%')
+		<!--SELECT * FROM totoalBook WHERE LOWER(bookName) LIKE LOWER(CONCAT('%', #{keyword}, '%'))-->
+	</select>
+	
 </mapper>
 
 

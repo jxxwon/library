@@ -51,11 +51,11 @@ public class SearchService {
 		if (numberOftotal < 40) {
 			"recentBook".equals("totalBook");
 			ArrayList<BookDTO> popData = mapper.getTable("popularBook");
-			if(popData != null)
-				insertBooks(popData, "totalBook");
 			ArrayList<BookDTO> recentData = mapper.getTable("recentBook");
-			if(recentData != null)
+			if(popData != null && recentData != null) {
+				insertBooks(popData, "totalBook");
 				insertBooks(recentData, "totalBook");
+			}
 		}
 	}
 
@@ -359,4 +359,14 @@ public class SearchService {
 	// 도서관 전체 정보(일단 50권만 넣을 예정)
 
 	return Msg;
-}}
+	}
+	
+	public ArrayList<BookDTO> totalSearch(String search) {
+		
+		ArrayList<BookDTO> searchResult = mapper.totalSearch(search);
+		if(searchResult != null)
+			return searchResult;
+		return null;
+	}
+	
+}

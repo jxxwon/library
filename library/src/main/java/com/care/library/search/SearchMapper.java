@@ -23,5 +23,7 @@ public interface SearchMapper {
 	int checkTotalDB();
 	
 	ArrayList<BookDTO> getTable(String whichTable);
+	
+	ArrayList<BookDTO> totalSearch(String search);
 
 }

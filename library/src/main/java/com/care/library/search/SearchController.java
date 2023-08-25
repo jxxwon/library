@@ -44,6 +44,7 @@ public class SearchController {
 		String paintRecent =service.showMainImages(recentTable, model, recentUrl, recentXmlTagName);
 		System.out.println("paintRecent : "+paintRecent);
 		
+		//전체 도서 db만들기
 		service.checkTotalDB();
 		return "search/searchMain";
 	}
@@ -69,21 +70,22 @@ public class SearchController {
 		
 		 String encodedSearch="";
 		 ArrayList<BookDTO> searchResult = null;
-		try {
-			encodedSearch = URLEncoder.encode(totalSearch, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//String totalParam = "&keyword="+encodedSearch;
-		String totalParam = "&title="+encodedSearch;
-		String totalUrl = service.reqUrlParam("srchBooks", totalParam, 1, 10);
-		String apiResult = service.connAPI(totalUrl);
-		if(apiResult != null) {
-			 searchResult = service.totalXmlParse(apiResult);
+		 searchResult = service.totalSearch(totalSearch);
+//		try {
+//			encodedSearch = URLEncoder.encode(totalSearch, "UTF-8");
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		//String totalParam = "&keyword="+encodedSearch;
+//		String totalParam = "&title="+encodedSearch;
+//		String totalUrl = service.reqUrlParam("srchBooks", totalParam, 1, 10);
+//		String apiResult = service.connAPI(totalUrl);
+//		if(apiResult != null) {
+//			 searchResult = service.totalXmlParse(apiResult);
 			 ra.addFlashAttribute("searchResult",searchResult);
-			 //model.addAttribute("searchResult",searchResult);
-		}
+//			 //model.addAttribute("searchResult",searchResult);
+//		}
 		
 		return "redirect:/datasearch/totalSearch";
 	}
