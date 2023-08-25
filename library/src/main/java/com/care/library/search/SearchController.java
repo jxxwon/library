@@ -32,8 +32,8 @@ public class SearchController {
 		String popUrl = service.reqUrlParam("extends/loanItemSrchByLib", popParam);
 		String popTable = "popularBook";
 		String popXmlTagName = "loanBooks";
-		service.showMainImages(popTable, model, popUrl, popXmlTagName);
-		
+		String paintPop = service.showMainImages(popTable, model, popUrl, popXmlTagName);
+		System.out.println("paintPop : "+paintPop);
 		
 		//신착도서 대출
 		String recentParam = "&libCode=111042";
@@ -41,7 +41,8 @@ public class SearchController {
 		System.out.println("recentUrl"+ recentUrl);
 		String recentTable = "recentBook";
 		String recentXmlTagName = "newBooks";
-		service.showMainImages(recentTable, model, recentUrl, recentXmlTagName);
+		String paintRecent =service.showMainImages(recentTable, model, recentUrl, recentXmlTagName);
+		System.out.println("paintRecent : "+paintRecent);
 		
 		//도서관 전체 정보(일단 50권만 넣을 예정)
 		CompletableFuture<String> future = service.asyncMethod();

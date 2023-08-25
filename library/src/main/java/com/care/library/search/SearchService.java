@@ -47,6 +47,7 @@ public class SearchService {
 	
 	@Async
     public CompletableFuture<String> asyncMethod() {
+		
 		String url = reqUrlParam( "extends/libSrch",  "&libCode=111042" , 1, 50);
 		System.out.println("asyncMethod : "+ url);
 		String apiResult = connAPI(url);
@@ -124,7 +125,7 @@ public class SearchService {
 	// @Scheduled(cron = "0 0 0 1 * 0", zone = "Asia/Seoul") // 매월 1일 요일 00:00:00에
 	public String connAPI(String url, String tableName, String XmlTagName) {
 		System.out.println("API요청");
-		String xmlResponse = "";
+		String xmlResponse = null;
 
 		System.out.println(url);
 		try {
@@ -160,8 +161,9 @@ public class SearchService {
 			e.printStackTrace();
 		}
 
-		xmltoDTO(xmlResponse, XmlTagName ,tableName);
-		return "API 호출 성공";
+//		xmltoArrayList(xmlResponse, XmlTagName ,tableName);
+//		return "API 호출 성공";
+		return xmlResponse;
 	}
 	
 	public  ArrayList<BookDTO> totalXmlParse(String xmlResponse) {
@@ -216,8 +218,8 @@ public class SearchService {
 		return books;
 	}
 	
-	public void xmltoDTO(String xmlResponse, String tagName ,String tableName) {
-	    List<BookDTO> books = null;
+	public ArrayList<BookDTO> xmltoArrayList(String xmlResponse, String tagName ,String tableName) {
+		ArrayList<BookDTO> books = null;
 	    try {
 	        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	        DocumentBuilder dBuilder;
@@ -270,7 +272,8 @@ public class SearchService {
 	        e.printStackTrace();
 	    }
 	    
-	    insertBooks(books, tableName);
+	    //insertBooks(books, tableName);
+	    return books;
 	}
 	
 	
@@ -311,17 +314,32 @@ public class SearchService {
 		return "이미지 가져오기 완료";
 	}
 
-	public void showMainImages(String whichTable, Model model, String url, String xmlTagName) {
+	public String showMainImages(String whichTable, Model model, String url, String xmlTagName) {
 		String dbResult = getBookImages(model, whichTable);
-
+		String Msg = "";
 		if (dbResult.equals("이미지 가져오기 실패")) {
 			// String whichDataAPI, String restParam, String pageNo, String pageSize
 			String apiResult = connAPI(url, whichTable, xmlTagName);
-			if (apiResult.equals("API 호출 성공")) {
-				getBookImages(model, whichTable);
-			}
+//			if (apiResult.equals("API 호출 성공")) {
+//				getBookImages(model, whichTable);
+//			}
 			// System.out.println("popApiResult" + apiResult);
+			if(apiResult != null) {
+				ArrayList<BookDTO> bookList = xmltoArrayList(apiResult, xmlTagName ,whichTable);
+				if(bookList != null) {
+					String insertResult = insertBooks(bookList, whichTable);
+					if(insertResult.equals("모든 데이터가 입력되었습니다.")) {
+						getBookImages(model, whichTable);
+						return Msg = "모든 데이터가 입력되었습니다.";
+					}
+				}else {
+					return Msg = "xml파일을 리스트화 시키지 못했습니다.";
+				}
+			}else {
+				return Msg = "api 연결이 제대로 이루어 지지 않았습니다.";
+			}
+			
 		}
+		return Msg;
 	}
-
 }
