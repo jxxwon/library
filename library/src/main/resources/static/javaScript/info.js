@@ -16,6 +16,8 @@ function setButtonColorByURL() {
       subNoticeElement.classList.add("active");
   } else if(currentURL.includes("faq") && subQnaElement){
 	  subQnaElement.classList.add("active");
+  } else if(currentURL.includes("free") && subFreeElement){
+	  subFreeElement.classList.add("active");
   }
 }
 

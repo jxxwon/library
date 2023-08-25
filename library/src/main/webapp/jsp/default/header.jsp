@@ -115,7 +115,7 @@
 	            	<ul class="toggleBox">
 						<li><a href="${context }info/notice" class="menu">공지사항</a></li>
 						<li><a href="${context }info/faq" class="menu">자주하는 질문</a></li>
-						<li><a href="#" class="menu">자유게시판</a></li>
+						<li><a href="${context }info/free" class="menu">자유게시판</a></li>
 						<li><a href="#" class="menu">자원봉사 안내</a></li>
 					</ul>
 	            </li>

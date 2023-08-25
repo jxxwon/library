@@ -114,3 +114,20 @@ h1{margin-bottom:50px;}
 .faqContainer .faqContentForm th{padding:10px; border-right:1px solid #ddd;}
 .faqContainer .faqContentForm th:first-child {width:150px;}
 .faqContainer .faqContentForm td{padding:10px;}
+
+/*자유게시판 목록*/
+.freeInfo {width:100%-10px; border:1px solid #ddd; margin:40px 0; padding:15px; line-height:145%; text-align:left;}
+.freeContainer{text-align:center; border-top:1px solid #ddd;}
+
+.free {overflow:hidden; width:100%; margin-bottom:20px;}
+.free tr:first-child{border-bottom:2px solid #555;}
+.free tr:hover{cursor:pointer; color:blue;}
+.free tr:first-child:hover{cursor:default; color:#000;}
+.free tr th{padding:5px;}
+.free tr td{padding:5px; text-align:center; border-bottom:1px solid #ddd;}
+
+.freeContainer .writeBtn{text-align:right;}
+
+.freePage {margin:40px 0;}
+.freePage a{display:inline-block; width:30px; height:30px; line-height:30px; font-weight:400; font-size:17px; border:1px solid #ddd; margin-right:5px; color:#000;}
+.freePage a:last-child{margin-right:0;}

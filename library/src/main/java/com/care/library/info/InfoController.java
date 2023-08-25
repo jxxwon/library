@@ -1,9 +1,5 @@
 package com.care.library.info;
 
-import java.io.FileInputStream;
-import java.io.OutputStream;
-import java.net.URLEncoder;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -172,5 +168,10 @@ public class InfoController {
 	public String faqDelete(int no) {
 		service.faqDelete(no);
 		return "redirect:/info/faq";
+	}
+	
+	@RequestMapping("/info/free")
+	public String free() {
+		return "info/free";
 	}
 }
