@@ -130,7 +130,6 @@ public class InfoService {
 		model.addAttribute("notices", notices);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
-		
 	}
 
 	public void noticeContent(int no, Model model) {
@@ -210,8 +209,6 @@ public class InfoService {
 			notice.setTitle(title);
 			notice.setContent(content);
 			mapper.updateNoticeFile(notice);
-			
-			
 		}
 	}
 
@@ -288,6 +285,29 @@ public class InfoService {
 		free.setHits(0);
 		free.setReplies(0);
 		mapper.writeFree(free);
+	}
+
+	public void selectAllFree(String cp, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<FreeDTO> frees = mapper.selectAllFree(begin, end);
+		
+		String url = "free?currentPage=";
+		int totalCount = mapper.countFreeAll();
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("frees", frees);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
 	}
 
 

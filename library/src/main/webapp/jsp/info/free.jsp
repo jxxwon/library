@@ -31,7 +31,8 @@
 					<div class="condition">
 						<select class="noticeSelect" name = "select" id="noticeSelect" onchange="searchChange()">
 							<option <c:if test="${param.select == 'title'}">selected='selected'</c:if>value="title">제목</option>
-							<option <c:if test="${param.select == 'no'}">selected='selected'</c:if>value="no">글번호</option>
+							<option <c:if test="${param.select == 'content'}">selected='selected'</c:if>value="content">내용</option>
+							<option <c:if test="${param.select == 'writer'}">selected='selected'</c:if>value="writer">작성자</option>
 						</select>
 						<input type = "text" placeholder = "검색어를 입력하세요." id="search" name="search">
 						<input type = "button" value = "검색" id ="searchBtn" onclick="noticeSearch()">
@@ -40,24 +41,26 @@
 						<tr>
 							<th>번호</th>
 							<th>제목</th>
+							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회수</th>
 						</tr>
 						<c:choose>
-							<c:when test = "${empty notices}">
+							<c:when test = "${empty frees}">
 								<tr>
-									<td colspan = 4 style = "cursor:default; color:#000;">
-										조회된 공지사항이 없습니다.
+									<td colspan = 5 style = "cursor:default; color:#000;">
+										조회된 게시글이 없습니다.
 									</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
-								<c:forEach var="notice" items = "${notices}">
-									<tr onclick="location.href='noticeContent?no=${notice.no}'">
-										<td>${notice.no}</td>
-										<td>${notice.title }</td>
-										<td>${notice.writeDate }</td>
-										<td>${notice.hits }</td>
+								<c:forEach var="free" items = "${frees}">
+									<tr onclick="location.href='freeContent?no=${free.no}'">
+										<td>${free.rn}</td>
+										<td>${free.title } (${free.replies })</td>
+										<td>${free.writer }</td>
+										<td>${free.writeDate }</td>
+										<td>${free.hits }</td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>

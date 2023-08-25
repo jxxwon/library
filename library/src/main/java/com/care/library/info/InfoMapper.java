@@ -43,6 +43,10 @@ public interface InfoMapper {
 
 	void writeFree(FreeDTO free);
 
+	ArrayList<FreeDTO> selectAllFree(int begin, int end);
+
+	int countFreeAll();
+
 
 
 }

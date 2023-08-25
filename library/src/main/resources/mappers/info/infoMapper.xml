@@ -90,6 +90,14 @@
   	<insert id ="writeFree">
   		INSERT INTO free (no, title, content, writer, write_date, hits, replies) VALUES (#{no}, #{title}, #{content}, #{writer}, #{writeDate}, #{hits}, #{replies})
   	</insert>
+  	
+  	<select id="selectAllFree" resultMap="freeDto">
+  		SELECT BBB.* FROM(SELECT rownum as rn, AAA.* FROM(SELECT * FROM free ORDER BY no DESC)AAA)BBB WHERE rn BETWEEN #{begin} AND #{end}
+  	</select>
+  	
+  	<select id="countFreeAll">
+  		SELECT count(no) FROM free
+  	</select>
 </mapper>
 
 
