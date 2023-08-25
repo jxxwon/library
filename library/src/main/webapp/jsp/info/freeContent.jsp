@@ -14,6 +14,7 @@
 			location.href = 'freeDelete?no=${free.no}';
 		}
 	}
+	
 </script>
 
 <body>
@@ -66,8 +67,13 @@
 									<tr>
 										<td>
 											<span>${reply.writer }&nbsp;&nbsp;${reply.writeDate }</span><br>
-											${reply.content }
+											<textarea style = "resize: none; height:auto; border:none; padding:5 0 0 0;" readonly="readonly">${reply.content }</textarea>
 										</td>
+										<c:if test = "${sessionScope.id eq reply.writer }">
+											<td align="right">
+												<input type = "button" value = "삭제" onclick="location.href='replyDelete?no=${reply.no}&freeNo=${free.no}'">
+											</td>
+										</c:if>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
@@ -80,8 +86,10 @@
 				</form>
 				<div class="freeBtn">
 					<c:choose>
-						<c:when test = "${sessionScopoe.id eq free.writer}">
+						<c:when test = "${sessionScope.id eq free.writer}">
 							<input type = "button" value = "목록" onclick="location.href='free'">
+							<input type = "button" value = "수정" onclick="location.href='freeUpdate?no=${free.no}'">
+							<input type = "button" value = "삭제" onclick="delFree()">
 						</c:when>
 						<c:when test = "${sessionScope.status == 'M' }">
 							<input type = "button" value = "목록" onclick="location.href='free'">
@@ -89,8 +97,6 @@
 						</c:when>
 						<c:otherwise>
 							<input type = "button" value = "목록" onclick="location.href='free'">
-							<input type = "button" value = "수정" onclick="location.href='freeUpdate?no=${free.no}'">
-							<input type = "button" value = "삭제" onclick="delFree()">
 						</c:otherwise>
 					</c:choose>
 				</div>

@@ -226,4 +226,10 @@ public class InfoController {
 		service.freeReplyWrite(id, content, freeNo);
 		return "redirect:/info/free";
 	}
+	
+	@RequestMapping("/info/replyDelete")
+	public String replyDelete(@RequestParam(value="no", required=false)int no,@RequestParam(value="freeNo", required=false)int freeNo) {
+		service.freeReplyDelete(no);
+		return "redirect:/info/freeContent?no="+freeNo;
+	}
 }

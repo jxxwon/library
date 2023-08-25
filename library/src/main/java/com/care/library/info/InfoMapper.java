@@ -66,6 +66,8 @@ public interface InfoMapper {
 
 	void updateFreeReply(int freeNo, int replies);
 
+	void deleteReply(int no);
+
 
 
 

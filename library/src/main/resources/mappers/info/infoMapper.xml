@@ -129,7 +129,7 @@
   	</insert>
   	
   	<select id="selectNoticeReply" resultMap="replyDto">
-  		SELECT * FROM reply WHERE free_no = #{no}
+  		SELECT * FROM reply WHERE free_no = #{no} ORDER BY no ASC
   	</select>
   	
   	<select id = "countReply">
@@ -139,6 +139,10 @@
   	<update id="updateFreeReply">
   		UPDATE free SET replies = #{replies} WHERE no = #{freeNo}
   	</update>
+  	
+  	<delete id = "deleteReply">
+  		DELETE reply WHERE no = #{no}
+  	</delete>
   	
 </mapper>
 

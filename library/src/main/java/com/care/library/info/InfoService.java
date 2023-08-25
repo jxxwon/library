@@ -362,5 +362,9 @@ public class InfoService {
 		notiService.register(notification);
 	}
 
+	public void freeReplyDelete(int no) {
+		mapper.deleteReply(no);
+	}
+
 
 }
