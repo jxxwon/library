@@ -42,6 +42,7 @@ public class MemberController {
 	@RequestMapping("main")
 	public String main(Model model) {
 		service.mainNotice(model);
+		service.mainReadingRoom(model);
 		return "default/main";
 	}
 	

@@ -8,7 +8,7 @@
   		<result column = "publication_year" property = "publicationYear"/>
   	</resultMap>
   	
-  	<insert id="jsonInsert" parameterType="com.care.library.search.BookDTO">
+  	<insert id="popularInsert" parameterType="com.care.library.search.BookDTO">
 		INSERT INTO popularBook VALUES(#{no}, #{ranking}, #{publicationYear},#{bookName}, #{authors}, #{publisher}, #{bookImageURL}, #{vol})
 	</insert>
 	
@@ -16,17 +16,19 @@
 		INSERT INTO recentBook VALUES(#{bookName}, #{authors}, #{publisher}, #{bookImageURL},  #{publicationYear},  #{vol})
 	</insert>
 	
-	<delete id="jsonDelete">
-		DELETE FROM popularBook
-	</delete>
-	
-	<delete id="recentDelete">
-		DELETE FROM recentBook
+	<delete id="deleteData">
+		<if test="whichTable == 'popularBook'">
+			DELETE FROM popularBook
+		</if>
+		<if test="whichTable == 'recentBook'">
+			DELETE FROM recentBook
+		</if>
 	</delete>
 	
 	<select id="getBookImages">
 		<if test="whichTable == 'popularBook'">
-			SELECT bookImageURL FROM popularBook WHERE no <![CDATA[ <= ]]> 5
+			<!-- SELECT bookImageURL FROM popularBook WHERE no <![CDATA[ <= ]]> 5 -->
+			SELECT bookImageURL FROM (SELECT bookImageURL, ROWNUM AS rn FROM popularBook ORDER BY TO_NUMBER(ranking) ASC)A WHERE A.rn <![CDATA[ <= ]]> 5
 		</if>
 		<if test="whichTable == 'recentBook'">
 			SELECT bookImageURL FROM recentBook

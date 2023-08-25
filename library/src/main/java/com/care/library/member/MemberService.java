@@ -15,6 +15,9 @@ import com.care.library.common.NotifyDTO;
 import com.care.library.common.NotifyService;
 import com.care.library.info.InfoMapper;
 import com.care.library.info.NoticeDTO;
+import com.care.library.reservation.ReserveDTO;
+import com.care.library.reservation.ReserveMapper;
+import com.care.library.reservation.ReserveService;
 import com.care.library.user.InquiryDTO;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -198,6 +201,17 @@ public class MemberService {
 		}
 		ArrayList<NoticeDTO> notices = infoMapper.selectAllNotice(begin, end);
 		model.addAttribute("notices", notices);
+	}
+	
+	@Autowired ReserveService reserveService;
+	public void mainReadingRoom(Model model) {
+		
+		ArrayList<ReserveDTO> R1 = reserveService.getReservedSeat("R1");
+		ArrayList<ReserveDTO> R2 = reserveService.getReservedSeat("R2");
+		int R1Seat = 96- R1.size();
+		int R2Seat = 96- R2.size();
+		model.addAttribute("R1Seat", R1Seat);
+		model.addAttribute("R2Seat", R2Seat);
 	}
 
 }

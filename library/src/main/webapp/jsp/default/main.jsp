@@ -88,7 +88,28 @@
 						</div>
 					</div>
 				</div>
-				<div class="readingRoom">열람실 현황</div>
+				<div class="readingRoom">
+					<div class="readingRoomTitle">열람실 현황</div>
+					<div class="restSeat">
+						금일 열람실 현황(잔여 좌석수)
+					</div>
+					<div class="roomStatus">
+						<ul>
+							<li><a href="${context}reservation/readingRoom1">
+								<span>1열람실</span>
+								<div>${R1Seat}석</div>
+							</a></li>
+							<li><a href="${context}reservation/readingRoom1">
+								<span>2열람실</span>
+								<div>${R2Seat}석</div>
+							</a></li>
+							<li><a href="#">
+								<span>스터디룸</span>
+								<div>0석</div>
+							</a></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

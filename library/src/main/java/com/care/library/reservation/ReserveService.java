@@ -16,20 +16,20 @@ import jakarta.servlet.http.HttpSession;
 public class ReserveService {
 
 	@Autowired
-	ReserveMapper userMapper;
+	ReserveMapper reserveMapper;
 	@Autowired
 	HttpSession session;
 	@Autowired NotifyService notiService;
 
 	public String userCheck(String id) {
-		int usingUser = userMapper.usingUser(id);
+		int usingUser = reserveMapper.usingUser(id);
 		if (usingUser >= 1)
 			return "이미 다른 좌석을 예약하셨습니다.";
 		return "예약 가능한 회원입니다.";
 	}
 
 	public String reservation(ReserveDTO resevedData) {
-		int result = userMapper.reservation(resevedData);
+		int result = reserveMapper.reservation(resevedData);
 		
 		if (result == 1) {
 			String msg = resevedData.getSeatId()+"번 좌석이 예약되었습니다.";
@@ -49,7 +49,7 @@ public class ReserveService {
 	}
 
 	public ArrayList<ReserveDTO> getReservedSeat(String whichRoom) {
-		ArrayList<ReserveDTO> reservedSeat = userMapper.getReservedSeat(whichRoom);
+		ArrayList<ReserveDTO> reservedSeat = reserveMapper.getReservedSeat(whichRoom);
 //		for (ReserveDTO seat : reservedSeat) {
 //			System.out.println("seat : " + seat.getSeatId());
 //			System.out.println("seat : " + seat.getUserId());
@@ -59,7 +59,7 @@ public class ReserveService {
 	}
 	
 	public ReserveDTO getMySeat(String id, Model model) {
-		ReserveDTO mySeat = userMapper.getSeatById(id);
+		ReserveDTO mySeat = reserveMapper.getSeatById(id);
 		if(mySeat != null) {
 			if(mySeat.getRoom().equals("R1"))
 				mySeat.setRoom("자율 학습실1");
@@ -73,7 +73,7 @@ public class ReserveService {
 	}
 
 	public String leaveProc(String id) {
-		int leaveResult = userMapper.DeleteSeatById(id);
+		int leaveResult = reserveMapper.DeleteSeatById(id);
 		if(leaveResult == 1) {
 			NotifyDTO notification = new NotifyDTO();
 			//String msg = resevedData.getRoom()
