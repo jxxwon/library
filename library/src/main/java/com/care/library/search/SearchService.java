@@ -365,10 +365,6 @@ public class SearchService {
 		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
 		
 		ArrayList<BookDTO> totalBook = mapper.getTotal(begin, end);
-		for(BookDTO book: totalBook) {
-			System.out.println(book.getPublicationYear());
-			System.out.println(book.getBookName());
-		}
 		
 		String url = "totalSearch?currentPage=";
 		int totalCount = mapper.checkTotalDB();
@@ -377,6 +373,13 @@ public class SearchService {
 		model.addAttribute("searchResult", totalBook);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
+	}
+	
+	public String insertLoan(BookLoanDTO loanData) {
+		int result = mapper.insertLoan(loanData);
+		if(result == 1)
+			return "대출 예약이 정상적으로 이루어졌습니다.";
+		return "대출 예약 도중 오류가 발생했습니다.";
 	}
 	
 }

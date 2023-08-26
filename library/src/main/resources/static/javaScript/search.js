@@ -82,13 +82,9 @@ function bookDetailProc() {
 		}
 	}
 }*/
-
-let loanBookBtn = document.querySelector('#detailContent')
-if (loanBookBtn !== null)
-	loanBookBtn.addEventListener('click', loanBook);
-
 let loanXhr;
 function loanBook(bookName, isbn) {
+	console.log("클");
 	const currentDate = new Date();
 	const startDate = currentDate.toISOString().slice(0, 10);
 

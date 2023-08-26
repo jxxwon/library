@@ -1,12 +1,4 @@
-.searchContainer {display:flex;}
-h1{margin-bottom:50px;}
-.checked{font-weight: 600;}
 
-.searchContent{padding:50px 0 0 50px; width:1000px;}
-
-.searchContainer {
-	margin-top: 152px;
-}
 
 h1 {
 	margin-bottom: 50px;
@@ -150,6 +142,16 @@ h1 {
 }
 
 /*통합검색*/
+
+.search_totalContainer {display:flex;}
+h1{margin-bottom:50px;}
+.checked{font-weight: 600;}
+
+.searchContent{padding:50px 0 0 50px; width:1000px;}
+
+.searchContainer {
+	margin-top: 152px;
+}
 .searchBox {
 	border: 2px solid #ddd;
 	padding: 30px;
@@ -268,6 +270,7 @@ h1 {
 }
 
 /*책 소장 정보*/
+.search_detailContainer {display:flex;}
 .bookStatus_Container{
 	/*display: flex;*/	
 	justify-content: center;
@@ -344,10 +347,9 @@ h1 {
 
 .detail_description {
 	position: relative;
-	pointer-events: none;
 }
 
-.detail_description>div {
+.detail_description .desc_title {
 	font-size: 17px;
 	font-weight: 400;
 	margin: 50px 0 20px;
@@ -358,35 +360,33 @@ h1 {
 	line-height: 140%;
 }
 
-.detail_description::after {
-	content: "";
+.detail_loanBox{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	position: absolute;
-	width: 48px;
-	height: 48px;
-	bottom: 0;
 	right: 0;
+	bottom:-60px;
+	z-index: 10;
+}
+.detail_loan {
+	width: 60px;
+	height: 60px;
+	cursor: pointer;
+}
+.detail_loan >img {
+	width: 100%;
 	border-radius: 50%;
-	background: #338cfa url(/image/loanBook.png) center;
-	background-size: 59px;
-	pointer-events: all;
+	background-size: 60px;
 	cursor: pointer;
 }
 
-.detail_description::after:hover {
+.detail_loan:hover {
 	opacity: 0.8;
 }
 
-.detail_description::before {
-	content: "도서 예약 하기";
-	position: absolute;
-	width: 107px;
+.detail_loanBox > span{
 	font-size: 17px;
 	font-weight: 500;
-	height: 48px;
-	bottom: -57px;
-	right: -39px;
-}
-
-.detail_description::before:hover {
-	opacity: 0.8;
+	color: #338cfa;
 }

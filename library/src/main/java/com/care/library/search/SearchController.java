@@ -20,6 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.care.library.reservation.ReserveDTO;
 
+import jakarta.servlet.http.HttpSession;
+
 @EnableScheduling
 @EnableAsync
 @Controller
@@ -29,6 +31,8 @@ public class SearchController {
 	SearchService service;
 	@Autowired
 	SearchMapper mapper;
+	@Autowired
+	HttpSession session;
 
 	@RequestMapping("/datasearch")
 	public String datasearch(Model model) {
@@ -125,11 +129,12 @@ public class SearchController {
 	
 	@ResponseBody // return을 jsp가 아닌 응답 데이터를 주는 것이다.
 	@RequestMapping(value = "datasearch/bookLoanProc",  produces = "application/json; charset=UTF-8")
-	public String bookDetailProc(@RequestBody(required = false) String bookName) {
-	System.out.println("bookName : "+ bookName);
-	System.out.println("isbn : "+ isbn);
-	System.out.println("userId : "+ userId);
-		return "대출 예약 신청이 완료었습니다." ;
+	public String bookDetailProc(@RequestBody(required = false) BookLoanDTO loanData) {
+		String id = (String)session.getAttribute("id");
+		loanData.setUserId(id);
+		String result = service.insertLoan(loanData);
+		
+		return result ;
 	}
 
 }

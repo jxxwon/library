@@ -1,14 +1,11 @@
 package com.care.library.search;
 
 public class BookLoanDTO {
+	private String userId;
 	private String bookName;
-	private String authors;
-	private String publisher;
-	private String publicationYear;
-	private String bookImageURL;
 	private String isbn;
-	private String description;
-	private String className;
+	private String startDate;
+	private String endDate;
 
 	public String getBookName() {
 		return bookName;
@@ -16,38 +13,6 @@ public class BookLoanDTO {
 
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
-	}
-
-	public String getAuthors() {
-		return authors;
-	}
-
-	public void setAuthors(String authors) {
-		this.authors = authors;
-	}
-
-	public String getPublisher() {
-		return publisher;
-	}
-
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
-
-	public String getBookImageURL() {
-		return bookImageURL;
-	}
-
-	public void setBookImageURL(String bookImageURL) {
-		this.bookImageURL = bookImageURL;
-	}
-
-	public String getPublicationYear() {
-		return publicationYear;
-	}
-
-	public void setPublicationYear(String publicationYear) {
-		this.publicationYear = publicationYear;
 	}
 
 	public String getIsbn() {
@@ -58,19 +23,27 @@ public class BookLoanDTO {
 		this.isbn = isbn;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getClassName() {
-		return className;
+	public String getStartDate() {
+		return startDate;
 	}
 
-	public void setClassName(String className) {
-		this.className = className;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 }

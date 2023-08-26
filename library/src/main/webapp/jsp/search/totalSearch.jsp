@@ -14,7 +14,7 @@
 <body>
 	<c:import url="${context }header" />
 	<%-- <c:import url="${context }datasearch/searchModal" /> --%>
-	<div class="searchContainer inner pageContent_mt">
+	<div class="search_totalContainer inner pageContent_mt">
 		<c:import url="/datasearch/subMenuSearch" />
 		<div class="searchContent">
 			<div>

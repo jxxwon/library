@@ -29,5 +29,7 @@ public interface SearchMapper {
 	ArrayList<BookDTO> totalSearch(String search, int begin, int end);
 	
 	ArrayList<BookDTO> getTotal(int begin, int end);
+	
+	int insertLoan(BookLoanDTO loanData);
 
 }
