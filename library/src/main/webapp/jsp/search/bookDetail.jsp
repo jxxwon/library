@@ -12,7 +12,7 @@
 
 </head>
 <body>
-	
+
 	<c:import url="${context }header" />
 	<%-- <c:import url="${context }datasearch/searchModal" /> --%>
 	<div class="myLibraryContainer inner pageContent_mt">
@@ -25,27 +25,32 @@
 						class="checked" href="/datasearch/totalSearch">통합검색</a>
 				</div>
 			</div>
-				<div class="detail_contentBox">
-					<div class="detailImgBox">
-						<img src="${detail.bookImageURL}" />
+			<div class="detail_contentBox">
+				<div class="detailImgBox">
+					<img src="${detail.bookImageURL}" />
+				</div>
+				<div class="detailContent">
+					<h2>${detail.bookName}</h2>
+					<div class="detail_info">
+						<span>${detail.authors}</span> | <span>${detail.publisher}</span>
+						| <span>${detail.publicationYear}</span>
 					</div>
-					<div class="detailContent">
-						<h2>${detail.bookName}</h2>
-						<div class="detail_info">
-							<span>${detail.authors}</span> | <span>${detail.publisher}</span> |
-							<span>${detail.publicationYear}</span>
-						</div>
-						<div class="detail_class"><span>한국십진분류</span>${detail.className}</div>
-						<div>책 소개
-							<c:if test="${empty detail.description}">
-								<span>제공된 책 정보가 없습니다.</span>
-							</c:if>
-							<c:if test="${not empty detail.description}">
-								<p>${detail.description}</p>
-							</c:if>
-						</div>
+					<div class="detail_class">
+						<c:if test="${not empty detail.className}">
+							<span>한국십진분류</span>${detail.className}
+						</c:if>
+					</div>
+					<div class="detail_description">
+						<div>책 소개</div>
+						<c:if test="${empty detail.description}">
+							<span>제공된 책 정보가 없습니다.</span>
+						</c:if>
+						<c:if test="${not empty detail.description}">
+							<p>${detail.description}</p>
+						</c:if>
 					</div>
 				</div>
+			</div>
 		</div>
 	</div>
 	<script src="${context }javaScript/search.js"></script>

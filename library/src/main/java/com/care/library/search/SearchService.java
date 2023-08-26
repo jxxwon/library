@@ -223,6 +223,7 @@ public class SearchService {
 					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
 					String isbn = docElement.getElementsByTagName("isbn13").item(0).getTextContent();
 					String className = docElement.getElementsByTagName("class_nm").item(0).getTextContent();
+					String description = docElement.getElementsByTagName("description").item(0).getTextContent();
 					
 					book.setPublicationYear(publicationYear);
 					book.setBookName(bookName);
@@ -231,6 +232,7 @@ public class SearchService {
 					book.setBookImageURL(bookImageURL);
 					book.setIsbn(isbn);
 					book.setClassName(className);
+					book.setDescription(description);
 
 					// 생성
 					books.add(book); // 리스트에 추가
