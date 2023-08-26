@@ -1,3 +1,9 @@
+.searchContainer {display:flex;}
+h1{margin-bottom:50px;}
+.checked{font-weight: 600;}
+
+.searchContent{padding:50px 0 0 50px; width:1000px;}
+
 .searchContainer {
 	margin-top: 152px;
 }
@@ -163,13 +169,17 @@ h1 {
 	right: 0;
 	top: 0;
 }
+.search_Container{
+	border: 2px solid #ddd;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+}
 
 .search_result {
-	border: 2px solid #ddd;
 	display: flex;
 	width: 100%;
-	height: 200px;
-	margin-bottom: 20px;
+	/*height: 200px;*/
+	
 }
 
 .bookImgBox {
@@ -223,13 +233,16 @@ h1 {
 }
 
 
-.bookContentBox .bookDtlButton {
+.bookContentBox .bookDtlButton,
+.bookContentBox .bookStatusButton {
+	display: inline-block;
 	background-color: #338cfa;
 	color: white;
 	width: 124px;
-	height: 38px;
+	height: 40px;
 	line-height: 38px;
 	text-align: center;
+	margin-right: 10px;
 	cursor: pointer;
 }
 
@@ -254,19 +267,126 @@ h1 {
 	margin-right: 0;
 }
 
+/*책 소장 정보*/
+.bookStatus_Container{
+	/*display: flex;*/	
+	justify-content: center;
+	display: none;
+	margin-top:20px;
+	width: 100%;
+	
+}
+.bookStatus_Container > table{
+	text-align: center;
+	border: 1px solid #ddd;
+	width: 80%;
+	margin:0 auto;
+}
+.bookStatus_Container > table >thead{
+	background-color: #ddd;
+	width: 50%;
+}
 
+.bookStatus_Container > table td, 
+.bookStatus_Container > table th{
+	border: 1px solid #888;
+}
+
+.bookStatus_Container > table .possible{
+	color:blue;
+}
+.bookStatus_Container .bookStatus_loanBook{
+	background-color: #58ACFA;
+	color:white;
+	cursor: pointer;
+}
 /*책 상세 페이지*/
-.detail_contentBox{display: flex; border-top:1px solid #ddd; padding:30px 0 50px;}
-.detailImgBox{width:200px; margin-right:35px;}
-.detailImgBox > img {width: 100%;}
+.detail_contentBox {
+	display: flex;
+	border-top: 1px solid #ddd;
+	padding: 30px 0 50px;
+}
 
-.detailContent .detail_info{margin-bottom:15px; font-size: 16px; color: #777; font-weight: 500;}
-.detailContent > h2{margin-bottom:15px;}
-.detailContent .detail_class{font-size: 17px; color: #000;margin-bottom:15px;}
-.detail_class > span{display: inline-block;
-font-size:16px; color:#338cfa; border:1px solid #338cfa; 
-padding:3px; margin-right:10px;}
+.detailImgBox {
+	width: 200px;
+	margin-right: 35px;
+}
 
-.detail_description > div{font-size:17px; font-weight: 400; 
-margin:50px 0 20px;}
-.detail_description > p{width: 600px; line-height: 140%;}
+.detailImgBox>img {
+	width: 100%;
+}
+
+.detailContent .detail_info {
+	margin-bottom: 15px;
+	font-size: 16px;
+	color: #777;
+	font-weight: 500;
+}
+
+.detailContent>h2 {
+	margin-bottom: 15px;
+}
+
+.detailContent .detail_class {
+	font-size: 17px;
+	color: #000;
+	margin-bottom: 15px;
+}
+
+.detail_class>span {
+	display: inline-block;
+	font-size: 16px;
+	color: #338cfa;
+	border: 1px solid #338cfa;
+	padding: 3px;
+	margin-right: 10px;
+}
+
+.detail_description {
+	position: relative;
+	pointer-events: none;
+}
+
+.detail_description>div {
+	font-size: 17px;
+	font-weight: 400;
+	margin: 50px 0 20px;
+}
+
+.detail_description>p {
+	width: 600px;
+	line-height: 140%;
+}
+
+.detail_description::after {
+	content: "";
+	position: absolute;
+	width: 48px;
+	height: 48px;
+	bottom: 0;
+	right: 0;
+	border-radius: 50%;
+	background: #338cfa url(/image/loanBook.png) center;
+	background-size: 59px;
+	pointer-events: all;
+	cursor: pointer;
+}
+
+.detail_description::after:hover {
+	opacity: 0.8;
+}
+
+.detail_description::before {
+	content: "도서 예약 하기";
+	position: absolute;
+	width: 107px;
+	font-size: 17px;
+	font-weight: 500;
+	height: 48px;
+	bottom: -57px;
+	right: -39px;
+}
+
+.detail_description::before:hover {
+	opacity: 0.8;
+}

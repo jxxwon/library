@@ -10,8 +10,8 @@
 	</resultMap>
 
 	<!-- 검색 전 모든 책 보여주기 -->
-	<select id="getTotal">
-		SELECT * FROM (SELECT * FROM totalBook ORDER BY book_id)A WHERE A.book_id BETWEEN #{begin} AND #{end}
+	<select id="getTotal" resultMap="bookDto">
+		SELECT A.* FROM (SELECT * FROM totalBook ORDER BY book_id ASC)A WHERE A.book_id BETWEEN #{begin} AND #{end}
 	</select>
 
 

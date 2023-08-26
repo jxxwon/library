@@ -123,12 +123,13 @@ public class SearchController {
 	    return "search/bookDetail";
 	}
 	
-//	@ResponseBody // return을 jsp가 아닌 응답 데이터를 주는 것이다.
-//	@RequestMapping(value = "datasearch/bookDetailProc",  produces = "application/json; charset=UTF-8")
-//	public ArrayList<BookDetailDTO> bookDetailProc(@RequestBody(required = false) String isbn) {
-//		
-//		return detail ;
-//	}
-	
+	@ResponseBody // return을 jsp가 아닌 응답 데이터를 주는 것이다.
+	@RequestMapping(value = "datasearch/bookLoanProc",  produces = "application/json; charset=UTF-8")
+	public String bookDetailProc(@RequestBody(required = false) String bookName) {
+	System.out.println("bookName : "+ bookName);
+	System.out.println("isbn : "+ isbn);
+	System.out.println("userId : "+ userId);
+		return "대출 예약 신청이 완료었습니다." ;
+	}
 
 }

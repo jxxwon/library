@@ -13,7 +13,7 @@ function setButtonColorByURL() {
 		document.getElementById("subTotalSearch").classList.add("active");
 		//document.getElementById("subMyBookStatus").classList.remove("active");
 		//document.getElementById("subMyInquiry").classList.remove("active");
-	} 
+	}
 }
 
 // 페이지 로드 시 버튼 색상을 설정합니다.
@@ -63,7 +63,7 @@ title.innerHTML = highlightedTitle;
 //책 상세 페이지로 이동
 
 let detailXhr;
-function getBookDetail(isbn) {
+/*function getBookDetail(isbn) {
 	detailXhr = new XMLHttpRequest();
 	detailXhr.open('POST', "bookDetailProc");
 	detailXhr.send(isbn);
@@ -81,6 +81,58 @@ function bookDetailProc() {
 			console.log('에러: ' + detailXhr.status);
 		}
 	}
+}*/
+
+let loanBookBtn = document.querySelector('#detailContent')
+if (loanBookBtn !== null)
+	loanBookBtn.addEventListener('click', loanBook);
+
+let loanXhr;
+function loanBook(bookName, isbn) {
+	const currentDate = new Date();
+	const startDate = currentDate.toISOString().slice(0, 10);
+
+	const futureDate = new Date(currentDate);
+	futureDate.setDate(currentDate.getDate() + 14);
+	const endDate = futureDate.toISOString().slice(0, 10);
+
+	    
+	let message = `도서명 : ${bookName}\n대출 신청 일자 : ${startDate}\n도서 반납 일자 : ${endDate}\n\n대출 신청 하시겠습니까?`; // 메시지 구성
+	let isConfirmed = confirm(message);
+	if (isConfirmed) {
+		let reqData = { bookName, isbn, startDate, endDate};
+		reqData = JSON.stringify(reqData);
+		
+		loanXhr = new XMLHttpRequest();
+		loanXhr.open('POST', "bookLoanProc");
+		loanXhr.setRequestHeader('content-type', 'application/json');
+		loanXhr.send(reqData);
+		loanXhr.onreadystatechange = loanProc;
+		}
 }
 
+function loanProc() {
+	if (loanXhr.readyState === 4) {
+		if (loanXhr.status === 200) {
+			let response = loanXhr.responseText;
+			alert(response);
+			return;
+		} else {
+			console.log('에러: ' + loanXhr.status);
+		}
+	}
+	//좌석 예약 알람 기능을 바로 적용하기 위해 새로고침 적용.
+	window.location.reload();
+}
 
+/*책 소장 정보*/
+function toggleBookStatusPopup(popupId) {
+	const popup = document.getElementById(popupId);
+	if (popup) {
+		if (popup.style.display === "block") {
+			popup.style.display = "none"; // Hide the popup if it's already open
+		} else {
+			popup.style.display = "block"; // Show the popup if it's closed
+		}
+	}
+}

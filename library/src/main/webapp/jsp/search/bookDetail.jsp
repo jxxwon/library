@@ -7,17 +7,15 @@
 
 <link href="${context }css/main.css" rel="stylesheet" type="text/css">
 <link href="${context }css/search.css" rel="stylesheet" type="text/css">
-<link href="${context }css/myLibrary.css" rel="stylesheet"
-	type="text/css">
 
 </head>
 <body>
 
 	<c:import url="${context }header" />
 	<%-- <c:import url="${context }datasearch/searchModal" /> --%>
-	<div class="myLibraryContainer inner pageContent_mt">
+	<div class="searchContainer inner pageContent_mt">
 		<c:import url="/datasearch/subMenuSearch" />
-		<div class="myLibraryContent">
+		<div class="searchContent">
 			<div>
 				<h1>통합검색</h1>
 				<div class="mb_30 mt_20">
@@ -29,7 +27,7 @@
 				<div class="detailImgBox">
 					<img src="${detail.bookImageURL}" />
 				</div>
-				<div class="detailContent">
+				<div class="detailContent" >
 					<h2>${detail.bookName}</h2>
 					<div class="detail_info">
 						<span>${detail.authors}</span> | <span>${detail.publisher}</span>
@@ -40,7 +38,7 @@
 							<span>한국십진분류</span>${detail.className}
 						</c:if>
 					</div>
-					<div class="detail_description">
+					<div class="detail_description"  id="detailContent">
 						<div>책 소개</div>
 						<c:if test="${empty detail.description}">
 							<span>제공된 책 정보가 없습니다.</span>

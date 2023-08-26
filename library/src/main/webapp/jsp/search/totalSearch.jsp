@@ -14,9 +14,9 @@
 <body>
 	<c:import url="${context }header" />
 	<%-- <c:import url="${context }datasearch/searchModal" /> --%>
-	<div class="myLibraryContainer inner pageContent_mt">
+	<div class="searchContainer inner pageContent_mt">
 		<c:import url="/datasearch/subMenuSearch" />
-		<div class="myLibraryContent">
+		<div class="searchContent">
 			<div>
 				<h1>통합검색</h1>
 				<div class="search_title">
@@ -43,23 +43,61 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="result" items="${searchResult}">
-						<div class="search_result">
-							<div class="bookImgBox" onclick="getBookDetail()">
-								<!-- span>1</span> -->
-								<div class="result_bookImg">
-									<img src="${result.bookImageURL}" alt="이미지 없음" />
+						<div class="search_Container">
+							<div class="search_result">
+								<div class="bookImgBox" onclick="getBookDetail()">
+									<!-- span>1</span> -->
+									<div class="result_bookImg">
+										<img src="${result.bookImageURL}" alt="이미지 없음" />
+									</div>
+								</div>
+								<div class="result_bookContent">
+									<div class="bookContentBox">
+										<div>
+											<div class="title search ">${result.bookName}</div>
+											<div class="bookInfo">
+												<span>${result.authors} |</span> <span>${result.publisher}
+													|</span> <span>${result.publicationYear}</span>
+											</div>
+										</div>
+										<div>
+											<span class="bookStatusButton"
+												onclick="toggleBookStatusPopup('bookStatusPopup${result.isbn}')">소장
+												정보</span> <span class="bookDtlButton"
+												onclick="location.href='/datasearch/bookDetail?isbn=${result.isbn}'">도서
+												정보</span>
+										</div>
+
+									</div>
 								</div>
 							</div>
-							<div class="result_bookContent">
-								<div class="bookContentBox">
-									<div class="title search ">${result.bookName}</div>
-									<div class="bookInfo">
-										<span>${result.authors} |</span> <span>${result.publisher}
-											|</span> <span>${result.publicationYear}</span>
-									</div>
-									<div class="bookDtlButton" onclick="location.href='/datasearch/bookDetail?isbn=${result.isbn}'">도서
-										정보</div>
-								</div>
+							<div class="bookStatus_Container"
+								id="bookStatusPopup${result.isbn}">
+								<table>
+									<thead>
+										<tr>
+											<th>도서관</th>
+											<th>대출상태</th>
+											<th>isbn</th>
+											<th>예약</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>은평구립도서관</td>
+											<td><span class="possible">1(대출가능)</span> / 3</td>
+											<td>1111111111111</td>
+											<c:choose>
+												<c:when test="${empty sessionScope.id }">
+													<td>로그인 필요</td>
+												</c:when>
+												<c:otherwise>
+													<td class="bookStatus_loanBook" onclick="loanBook('${result.bookName}', '${result.isbn}')">대출 하기</td>
+												</c:otherwise>
+											</c:choose>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</c:forEach>
