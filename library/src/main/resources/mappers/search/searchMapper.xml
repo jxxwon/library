@@ -11,10 +11,7 @@
 
 	<!-- 검색 전 모든 책 보여주기 -->
 	<select id="getTotal">
-		<!--SELECT * FROM totalBook -->
-		<!--SELECT AAA.* FROM (SELECT rownum as rn, notice.* FROM totalBook ORDER 
-			BY book_id DESC)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end} -->
-		SELECT * FROM totalBook WHERE book_id BETWEEN #{begin} AND #{end}
+		SELECT * FROM (SELECT * FROM totalBook ORDER BY book_id)A WHERE A.book_id BETWEEN #{begin} AND #{end}
 	</select>
 
 
@@ -22,22 +19,22 @@
 		parameterType="com.care.library.search.BookDTO">
 		INSERT INTO popularBook VALUES(#{no}, #{ranking},
 		#{publicationYear},#{bookName}, #{authors}, #{publisher},
-		#{bookImageURL}, #{vol, jdbcType=VARCHAR})
+		#{bookImageURL}, #{vol, jdbcType=VARCHAR}, #{isbn})
 	</insert>
 
 	<insert id="recentInsert"
 		parameterType="com.care.library.search.BookDTO">
 		INSERT INTO recentBook VALUES(#{bookName}, #{authors},
 		#{publisher}, #{bookImageURL}, #{publicationYear}, #{vol,
-		jdbcType=VARCHAR})
+		jdbcType=VARCHAR}, #{isbn})
 	</insert>
 
 	<insert id="insertTotal"
 		parameterType="com.care.library.search.BookDTO">
 		INSERT INTO totalBook (bookName, authors, publisher,
-		bookImageURL, publication_year ,vol) VALUES(#{bookName},#{authors},
+		bookImageURL, publication_year ,vol, isbn) VALUES(#{bookName},#{authors},
 		#{publisher}, #{bookImageURL}, #{publicationYear}, #{vol,
-		jdbcType=VARCHAR})
+		jdbcType=VARCHAR}, #{isbn})
 	</insert>
 
 	<delete id="deleteData">

@@ -84,51 +84,8 @@ public class SearchService {
 		return url;
 	}
 
-	public String connAPI(String url) {
-		System.out.println("API요청");
-		String xmlResponse = "";
-
-		System.out.println(url);
-		try {
-
-			// 인기 대출 도서 조회하기 (loanItemSrch)
-
-			URL requestUrl = new URL(url);
-
-			HttpURLConnection conn = (HttpURLConnection) requestUrl.openConnection();
-			conn.setRequestMethod("GET"); // GET 요청 설정
-			conn.setRequestProperty("Accept", "application/xml"); // Accept 헤더 설정 (응답 형식 지정)
-
-			int responseCode = conn.getResponseCode(); // 요청 보내고 응답 코드 받기
-			System.out.println("responseCode : " + responseCode);
-			if (responseCode == HttpURLConnection.HTTP_OK) { // 성공적인 응답
-				BufferedReader in = new BufferedReader(
-						new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-				String inputLine;
-				StringBuilder response = new StringBuilder();
-				System.out.println("API response : " + response);
-				while ((inputLine = in.readLine()) != null) {
-					response.append(inputLine);
-				}
-				// System.out.println("response : "+response);
-				in.close();
-
-				// xml을 문자열로 바꿈
-				xmlResponse = response.toString();
-			} else {
-				System.out.println("GET request failed");
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		// System.out.println("xmlResponse : "+xmlResponse);
-		// totalXmlParse(xmlResponse);
-		return xmlResponse;
-	}
-
 	// @Scheduled(cron = "0 0 0 1 * 0", zone = "Asia/Seoul") // 매월 1일 요일 00:00:00에
-	public String connAPI(String url, String tableName, String XmlTagName) {
+	public String connAPI(String url) {
 		System.out.println("API요청");
 		String xmlResponse = null;
 
@@ -166,64 +123,10 @@ public class SearchService {
 			e.printStackTrace();
 		}
 
-//		xmltoArrayList(xmlResponse, XmlTagName ,tableName);
-//		return "API 호출 성공";
 		return xmlResponse;
 	}
 
-	public ArrayList<BookDTO> totalXmlParse(String xmlResponse) {
-		ArrayList<BookDTO> books = null;
-		try {
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder;
-
-			dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(new InputSource(new StringReader(xmlResponse)));
-
-			doc.getDocumentElement().normalize();
-
-			NodeList docList = doc.getElementsByTagName("doc");
-
-			books = new ArrayList<BookDTO>(); // Book 객체들을 저장할 리스트 생성
-
-			for (int i = 0; i < docList.getLength(); i++) {
-				Node docNode = docList.item(i);
-				if (docNode.getNodeType() == Node.ELEMENT_NODE) {
-					Element docElement = (Element) docNode;
-					String bookName = docElement.getElementsByTagName("bookname").item(0).getTextContent();
-					String authors = docElement.getElementsByTagName("authors").item(0).getTextContent();
-					String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
-					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
-					String publicationYear = docElement.getElementsByTagName("publication_year").item(0)
-							.getTextContent();
-					String vol = docElement.getElementsByTagName("vol").item(0).getTextContent();
-					//System.out.println(bookName);
-					
-					BookDTO book = new BookDTO();
-					book.setPublicationYear(publicationYear);
-					book.setBookName(bookName);
-					book.setAuthors(authors);
-					book.setPublisher(publisher);
-					book.setBookImageURL(bookImageURL);
-					book.setVol(vol);
-					// 생성
-					books.add(book); // 리스트에 추가
-				}
-			}
-
-		} catch (ParserConfigurationException pce) {
-			pce.printStackTrace(); // Handle ParserConfigurationException
-		} catch (SAXException se) {
-			se.printStackTrace(); // Handle SAXException
-		} catch (IOException ioe) {
-			ioe.printStackTrace(); // Handle IOException
-		} catch (Exception e) {
-			e.printStackTrace(); // Handle other exceptions
-		}
-		return books;
-	}
-
-	public ArrayList<BookDTO> xmltoArrayList(String xmlResponse, String tagName, String tableName) {
+	public ArrayList<BookDTO> xmltoArrayList(String xmlResponse, String tagName) {
 		ArrayList<BookDTO> books = null;
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -254,12 +157,6 @@ public class SearchService {
 						String ranking = rankingNodes.item(0).getTextContent();
 						book.setRanking(ranking);
 					}
-					String publicationYear = docElement.getElementsByTagName("publication_year").item(0)
-							.getTextContent();
-					String bookName = docElement.getElementsByTagName("bookname").item(0).getTextContent();
-					String authors = docElement.getElementsByTagName("authors").item(0).getTextContent();
-					String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
-					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
 					
 					NodeList volNodes = docElement.getElementsByTagName("vol");
 					if (volNodes != null && volNodes.getLength() > 0) {
@@ -268,12 +165,21 @@ public class SearchService {
 							book.setVol("0");
 						book.setVol(vol);
 					}
-
+					
+					String publicationYear = docElement.getElementsByTagName("publication_year").item(0)
+							.getTextContent();
+					String bookName = docElement.getElementsByTagName("bookname").item(0).getTextContent();
+					String authors = docElement.getElementsByTagName("authors").item(0).getTextContent();
+					String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
+					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
+					String isbn = docElement.getElementsByTagName("isbn13").item(0).getTextContent();
+					
 					book.setPublicationYear(publicationYear);
 					book.setBookName(bookName);
 					book.setAuthors(authors);
 					book.setPublisher(publisher);
 					book.setBookImageURL(bookImageURL);
+					book.setIsbn(isbn);
 
 					// 생성
 					books.add(book); // 리스트에 추가
@@ -287,6 +193,59 @@ public class SearchService {
 		// insertBooks(books, tableName);
 		return books;
 	}
+	
+	public ArrayList<BookDetailDTO> detailXmltoList(String xmlResponse, String tagName) {
+		ArrayList<BookDetailDTO> books = null;
+		try {
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder;
+
+			dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(new InputSource(new StringReader(xmlResponse)));
+
+			doc.getDocumentElement().normalize();
+
+			Node loanBooksNode = doc.getElementsByTagName(tagName).item(0);
+			NodeList docList = loanBooksNode.getChildNodes();
+			books = new ArrayList<>(); // Book 객체들을 저장할 리스트 생성
+
+			for (int i = 0; i < docList.getLength(); i++) {
+				Node docNode = docList.item(i);
+				if (docNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element docElement = (Element) docNode;
+					BookDetailDTO book = new BookDetailDTO();
+					
+					String bookName = docElement.getElementsByTagName("bookname").item(0).getTextContent();
+					String authors = docElement.getElementsByTagName("authors").item(0).getTextContent();
+					String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
+					String publicationYear = docElement.getElementsByTagName("publication_year").item(0)
+							.getTextContent();
+					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
+					String isbn = docElement.getElementsByTagName("isbn13").item(0).getTextContent();
+					String className = docElement.getElementsByTagName("class_nm").item(0).getTextContent();
+					
+					book.setPublicationYear(publicationYear);
+					book.setBookName(bookName);
+					book.setAuthors(authors);
+					book.setPublisher(publisher);
+					book.setBookImageURL(bookImageURL);
+					book.setIsbn(isbn);
+					book.setClassName(className);
+
+					// 생성
+					books.add(book); // 리스트에 추가
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// insertBooks(books, tableName);
+		return books;
+	}
+	
+	
 
 	public String insertBooks(ArrayList<BookDTO> books, String tableName) {
 		String resultMessage = "모든 데이터가 입력되었습니다.";
@@ -337,9 +296,9 @@ public class SearchService {
 		String Msg = "";
 		
 		if (dbResult.equals("이미지 가져오기 실패")) {
-			String apiResult = connAPI(url, whichTable, xmlTagName);
+			String apiResult = connAPI(url);
 			if (apiResult != null) {
-				ArrayList<BookDTO> bookList = xmltoArrayList(apiResult, xmlTagName, whichTable);
+				ArrayList<BookDTO> bookList = xmltoArrayList(apiResult, xmlTagName);
 				if (bookList != null) {
 					String insertResult = insertBooks(bookList, whichTable);
 					if (insertResult.equals("모든 데이터가 입력되었습니다.")) {
@@ -381,8 +340,6 @@ public class SearchService {
 		
 		String url = "totalSearch?totalSearch="+ search+ "&currentPage=";
 		int totalCount = mapper.checkSearchCount(search);
-		System.out.println(search);
-		System.out.println(totalCount);
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		
 		

@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<head>
+<title>하이미디어 도서관 - 통합검색</title>
+<c:url var="context" value="/" />
+
+<link href="${context }css/main.css" rel="stylesheet" type="text/css">
+<link href="${context }css/search.css" rel="stylesheet" type="text/css">
+<link href="${context }css/myLibrary.css" rel="stylesheet"
+	type="text/css">
+
+</head>
+<body>
+	
+	<c:import url="${context }header" />
+	<%-- <c:import url="${context }datasearch/searchModal" /> --%>
+	<div class="myLibraryContainer inner pageContent_mt">
+		<c:import url="/datasearch/subMenuSearch" />
+		<div class="myLibraryContent">
+			<div>
+				<h1>통합검색</h1>
+				<div class="mb_30 mt_20">
+					<a href="/main">HOME</a> > <a href="/datasearch">자료검색</a> > <a
+						class="checked" href="/datasearch/totalSearch">통합검색</a>
+				</div>
+			</div>
+				<div class="detail_contentBox">
+					<div class="detailImgBox">
+						<img src="${detail.bookImageURL}" />
+					</div>
+					<div class="detailContent">
+						<h2>${detail.bookName}</h2>
+						<div class="detail_info">
+							<span>${detail.authors}</span> | <span>${detail.publisher}</span> |
+							<span>${detail.publicationYear}</span>
+						</div>
+						<div class="detail_class"><span>한국십진분류</span>${detail.className}</div>
+						<div>책 소개
+							<c:if test="${empty detail.description}">
+								<span>제공된 책 정보가 없습니다.</span>
+							</c:if>
+							<c:if test="${not empty detail.description}">
+								<p>${detail.description}</p>
+							</c:if>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+	<script src="${context }javaScript/search.js"></script>
+	<c:import url="/footer" />
+</body>

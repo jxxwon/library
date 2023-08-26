@@ -1,5 +1,8 @@
 package com.care.library.search;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.care.library.reservation.ReserveDTO;
 
 @EnableScheduling
 @EnableAsync
@@ -78,11 +85,50 @@ public class SearchController {
 		// TODO Auto-generated method stub
 		return "search/subMenuSearch";
 	}
+//
+//	@GetMapping("/datasearch/searchModal")
+//	public String searchModal() {
+//		// TODO Auto-generated method stub
+//		return "search/searchModal";
+//	}
+	
+	@RequestMapping("/datasearch/bookDetail")
+	public String bookDetail(String isbn, Model model) {
+		System.out.println("bookDetailProc : " + isbn);
+	    String detailParam = "&isbn13=" + isbn; // 이미 숫자로 된 문자열이므로 인코딩할 필요 없음
 
-	@GetMapping("/datasearch/searchModal")
-	public String searchModal() {
-		// TODO Auto-generated method stub
-		return "search/searchModal";
+	    ArrayList<BookDetailDTO> detail = null;
+	    String detailUrl = service.reqUrlParam("srchDtlList", detailParam);
+	    System.out.println(detailUrl);
+	    BookDetailDTO bookDTO = new BookDetailDTO();
+	    
+	    String xmlResponse = service.connAPI(detailUrl);
+	    String XmlTagName = "detail";
+	    if (xmlResponse != null) {
+	        detail = service.detailXmltoList(xmlResponse, XmlTagName);
+	        for (BookDetailDTO info : detail) {
+	        	bookDTO.setBookName(info.getBookName());
+	        	bookDTO.setAuthors(info.getAuthors());
+	        	bookDTO.setPublisher(info.getPublisher());
+	        	bookDTO.setPublicationYear(info.getPublicationYear());
+	        	bookDTO.setBookImageURL(info.getBookImageURL());
+	        	bookDTO.setIsbn(info.getIsbn());
+	        	bookDTO.setDescription(info.getDescription());
+	        	System.out.println(info.getDescription());
+	        	bookDTO.setClassName(info.getClassName());
+	        }
+	    }
+	    model.addAttribute("detail", bookDTO);
+	    System.out.println("bookDetail : " + isbn);
+	    return "search/bookDetail";
 	}
+	
+//	@ResponseBody // return을 jsp가 아닌 응답 데이터를 주는 것이다.
+//	@RequestMapping(value = "datasearch/bookDetailProc",  produces = "application/json; charset=UTF-8")
+//	public ArrayList<BookDetailDTO> bookDetailProc(@RequestBody(required = false) String isbn) {
+//		
+//		return detail ;
+//	}
+	
 
 }

@@ -60,65 +60,27 @@ title.innerHTML = highlightedTitle;
 
 
 
-//내  자리 클릭시에 뜨는 모달창.
-const searchModal = document.getElementById('searchModal');
-console.log(searchModal);
-const modalContent = document.querySelector('.modal-content');
-const loanButton = document.getElementById('loanButton');
-const cancelButton = document.getElementById('cancelButton');
+//책 상세 페이지로 이동
 
-
-function getBookDetail() {
-	searchModal.style.display = 'flex';
+let detailXhr;
+function getBookDetail(isbn) {
+	detailXhr = new XMLHttpRequest();
+	detailXhr.open('POST', "bookDetailProc");
+	detailXhr.send(isbn);
+	detailXhr.onreadystatechange = bookDetailProc;
 }
 
-function closeCustomModal() {
-	searchModal.style.display = 'none';
-}
-
-searchModal.addEventListener('click', function(event) {
-	// 클릭된 요소가 모달 내부의 컨텐츠 영역이 아니면 모달을 닫습니다.
-	if (event.target !== modalContent) {
-		searchModal.style.display = 'none';
-	}
-});
-
-
-
-modalContent.addEventListener('click', function(event) {
-	event.stopPropagation();
-});
-
-
-let loanXhr;
-function laonBook() {
-	let result = confirm("대여하시겠습니까?");
-	if (result) {
-		loanXhr = new XMLHttpRequest();
-		loanXhr.open('POST', "loanProc");
-		loanXhr.send(sessionId);
-		loanXhr.onreadystatechange = loanProc;
-	}
-}
-
-function loanProc() {
-	if (leaveXhr.readyState === 4) {
-		if (leaveXhr.status === 200) {
-			//showReservedSeat(whichRoom);
-			//updateSeatStatus();
-			let response = leaveXhr.responseText;
-			alert(response);
-			//closeCustomModal();
+function bookDetailProc() {
+	if (detailXhr.readyState === 4) {
+		if (detailXhr.status === 200) {
+			let resData = detailXhr.responseText;
+			resData = JSON.parse(resData);
+			console.log(resData);
+			//location.href="/datasearch/bookDetail";
 		} else {
-			console.log('에러: ' + leaveXhr.status);
+			console.log('에러: ' + detailXhr.status);
 		}
 	}
-	//좌석 예약 알람 기능을 바로 적용하기 위해 새로고침 적용.
-	window.location.reload();
 }
 
-//퇴실 버튼
-if (loanButton !== null)
-	loanButton.addEventListener('click', laonBook);
-if (cancelButton !== null)
-	cancelButton.addEventListener('click', closeCustomModal);
+

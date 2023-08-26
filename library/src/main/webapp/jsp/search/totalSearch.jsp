@@ -13,19 +13,7 @@
 </head>
 <body>
 	<c:import url="${context }header" />
-	<c:import url="${context }datasearch/searchModal" />
-	<!-- <div id="searchModal" class="modal">
-		<div class="modal-content contentContainer">
-			<p class="content">
-			내용
-			</p>
-			<div class="buttonBox">
-				<button id="leaveButton">퇴실</button>
-				<button class="cancelButton">취소</button>
-			</div>
-
-		</div>
-	</div> -->
+	<%-- <c:import url="${context }datasearch/searchModal" /> --%>
 	<div class="myLibraryContainer inner pageContent_mt">
 		<c:import url="/datasearch/subMenuSearch" />
 		<div class="myLibraryContent">
@@ -69,7 +57,7 @@
 										<span>${result.authors} |</span> <span>${result.publisher}
 											|</span> <span>${result.publicationYear}</span>
 									</div>
-									<div class="bookDtlButton" onclick="getBookDetail()">도서
+									<div class="bookDtlButton" onclick="location.href='/datasearch/bookDetail?isbn=${result.isbn}'">도서
 										정보</div>
 								</div>
 							</div>

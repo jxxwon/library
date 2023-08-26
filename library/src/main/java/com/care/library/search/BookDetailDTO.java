@@ -1,33 +1,15 @@
 package com.care.library.search;
 
-public class BookDTO {
-	private String no;
-	private String ranking;
-	private String publicationYear;
+public class BookDetailDTO {
 	private String bookName;
 	private String authors;
 	private String publisher;
+	private String publicationYear;
 	private String bookImageURL;
-	private String vol;
 	private String isbn;
+	private String description;
+	private String className;
 
-	public String getNo() {
-		return no;
-	}
-
-	public void setNo(String no) {
-		this.no = no;
-	}
-	
-	public String getRanking() {
-		return ranking;
-	}
-
-	public void setRanking(String ranking) {
-		this.ranking = ranking;
-	}
-	
-	
 	public String getBookName() {
 		return bookName;
 	}
@@ -68,19 +50,27 @@ public class BookDTO {
 		this.publicationYear = publicationYear;
 	}
 
-	public String getVol() {
-		return vol;
-	}
-
-	public void setVol(String vol) {
-		this.vol = vol;
-	}
-
 	public String getIsbn() {
 		return isbn;
 	}
 
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
 	}
 }
