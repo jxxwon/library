@@ -55,7 +55,7 @@ public class SearchService {
 			"recentBook".equals("totalBook");
 			ArrayList<BookDTO> popData = mapper.getTable("popularBook");
 			ArrayList<BookDTO> recentData = mapper.getTable("recentBook");
-			if(popData != null && recentData != null) {
+			if (popData != null && recentData != null) {
 				insertBooks(popData, "totalBook");
 				insertBooks(recentData, "totalBook");
 			}
@@ -157,15 +157,20 @@ public class SearchService {
 						String ranking = rankingNodes.item(0).getTextContent();
 						book.setRanking(ranking);
 					}
-					
+
 					NodeList volNodes = docElement.getElementsByTagName("vol");
 					if (volNodes != null && volNodes.getLength() > 0) {
 						String vol = volNodes.item(0).getTextContent();
-						if(vol.equals("null"))
-							book.setVol("0");
-						book.setVol(vol);
+						if(vol == "") {
+							book.setVol("10"); //null이 너무 많아서 10으로 임의로 두겠다.
+						}else {
+							book.setVol(vol);
+						}
 					}
 					
+						
+					
+
 					String publicationYear = docElement.getElementsByTagName("publication_year").item(0)
 							.getTextContent();
 					String bookName = docElement.getElementsByTagName("bookname").item(0).getTextContent();
@@ -173,7 +178,7 @@ public class SearchService {
 					String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
 					String bookImageURL = docElement.getElementsByTagName("bookImageURL").item(0).getTextContent();
 					String isbn = docElement.getElementsByTagName("isbn13").item(0).getTextContent();
-					
+
 					book.setPublicationYear(publicationYear);
 					book.setBookName(bookName);
 					book.setAuthors(authors);
@@ -193,7 +198,7 @@ public class SearchService {
 		// insertBooks(books, tableName);
 		return books;
 	}
-	
+
 	public ArrayList<BookDetailDTO> detailXmltoList(String xmlResponse, String tagName) {
 		ArrayList<BookDetailDTO> books = null;
 		try {
@@ -214,7 +219,7 @@ public class SearchService {
 				if (docNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element docElement = (Element) docNode;
 					BookDetailDTO book = new BookDetailDTO();
-					
+
 					String bookName = docElement.getElementsByTagName("bookname").item(0).getTextContent();
 					String authors = docElement.getElementsByTagName("authors").item(0).getTextContent();
 					String publisher = docElement.getElementsByTagName("publisher").item(0).getTextContent();
@@ -224,7 +229,7 @@ public class SearchService {
 					String isbn = docElement.getElementsByTagName("isbn13").item(0).getTextContent();
 					String className = docElement.getElementsByTagName("class_nm").item(0).getTextContent();
 					String description = docElement.getElementsByTagName("description").item(0).getTextContent();
-					
+
 					book.setPublicationYear(publicationYear);
 					book.setBookName(bookName);
 					book.setAuthors(authors);
@@ -246,8 +251,6 @@ public class SearchService {
 		// insertBooks(books, tableName);
 		return books;
 	}
-	
-	
 
 	public String insertBooks(ArrayList<BookDTO> books, String tableName) {
 		String resultMessage = "모든 데이터가 입력되었습니다.";
@@ -260,17 +263,24 @@ public class SearchService {
 			for (BookDTO book : books) {
 				int result = 0;
 				
+//				int no;
+//				try {
+//					no = mapper.findMaxNum();
+//				} catch (Exception e) {
+//					no = 0;
+//				}
+
 				if ("popularBook".equals(tableName)) {
 					result = mapper.popularInsert(book);
-					
+
 				}
 				if ("recentBook".equals(tableName)) {
 					result = mapper.recentInsert(book);
-				} 
-				if("totalBook".equals(tableName)){
+				}
+				if ("totalBook".equals(tableName)) {
 					result = mapper.insertTotal(book);
 				}
-				
+
 				if (result == 0) {
 					resultMessage = "데이터 입력 중 오류가 발생했습니다. 다시 시도하세요.";
 					break; // Stop processing if an error occurs
@@ -296,7 +306,7 @@ public class SearchService {
 	public String showMainImages(String whichTable, Model model, String url, String xmlTagName) {
 		String dbResult = getBookImages(model, whichTable);
 		String Msg = "";
-		
+
 		if (dbResult.equals("이미지 가져오기 실패")) {
 			String apiResult = connAPI(url);
 			if (apiResult != null) {
@@ -305,81 +315,84 @@ public class SearchService {
 					String insertResult = insertBooks(bookList, whichTable);
 					if (insertResult.equals("모든 데이터가 입력되었습니다.")) {
 						getBookImages(model, whichTable);
-							// 전체 테이블에 넣기(비동기적으로...는 언젠가 해보자)
-							
-							Msg = "모든 데이터가 입력되었습니다.";
-						}
-					
+						// 전체 테이블에 넣기(비동기적으로...는 언젠가 해보자)
+
+						Msg = "모든 데이터가 입력되었습니다.";
+					}
+
 				} else {
-					 Msg = "xml파일을 리스트화 시키지 못했습니다.";
+					Msg = "xml파일을 리스트화 시키지 못했습니다.";
 				}
 			} else {
-				
-				 Msg = "api 연결이 제대로 이루어 지지 않았습니다.";
+
+				Msg = "api 연결이 제대로 이루어 지지 않았습니다.";
 			}
 
 		}
 //		checkTotalDB();
-	// 도서관 전체 정보(일단 50권만 넣을 예정)
+		// 도서관 전체 정보(일단 50권만 넣을 예정)
 
-	return Msg;
+		return Msg;
 	}
-	
+
 	public ArrayList<BookDTO> totalSearch(String search, String cp, Model model) {
-		
+
 		int currentPage = 1;
-		try{
+		try {
 			currentPage = Integer.parseInt(cp);
-		}catch(Exception e){
+		} catch (Exception e) {
 			currentPage = 1;
 		}
-		
-		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수
 		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
 		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
-		
-		ArrayList<BookDTO> searchResult = mapper.totalSearch(search ,begin, end);
-		
-		String url = "totalSearch?totalSearch="+ search+ "&currentPage=";
+
+		ArrayList<BookDTO> searchResult = mapper.totalSearch(search, begin, end);
+
+		String url = "totalSearch?totalSearch=" + search + "&currentPage=";
 		int totalCount = mapper.checkSearchCount(search);
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
-		
-		
+
 		model.addAttribute("searchResult", searchResult);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
-	
+
 		return null;
 	}
-	
+
 	public void getAllTotal(String cp, Model model) {
 		int currentPage = 1;
-		try{
+		try {
 			currentPage = Integer.parseInt(cp);
-		}catch(Exception e){
+		} catch (Exception e) {
 			currentPage = 1;
 		}
-		
-		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수
 		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
 		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
-		
+
 		ArrayList<BookDTO> totalBook = mapper.getTotal(begin, end);
-		
+
 		String url = "totalSearch?currentPage=";
 		int totalCount = mapper.checkTotalDB();
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
-		
+
 		model.addAttribute("searchResult", totalBook);
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
 	}
-	
+
 	public String insertLoan(BookLoanDTO loanData) {
+		int rest = mapper.checkRestVol(loanData.getIsbn());
+		if (rest < 1) {
+			return "대출 가능한 도서가 남아있지 않습니다.";
+		}
 		int result = mapper.insertLoan(loanData);
-		if(result == 1)
+		if (result == 1)
 			return "대출 예약이 정상적으로 이루어졌습니다.";
 		return "대출 예약 도중 오류가 발생했습니다.";
 	}
-	
+
 }

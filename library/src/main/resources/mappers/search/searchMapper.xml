@@ -9,6 +9,10 @@
 		<result column="publication_year" property="publicationYear" />
 	</resultMap>
 
+	<select id = "findMaxNum">
+  		SELECT MAX(book_id) FROM totalBook
+  	</select>
+  	
 	<!-- 검색 전 모든 책 보여주기 -->
 	<select id="getTotal" resultMap="bookDto">
 		SELECT A.* FROM (SELECT * FROM totalBook ORDER BY book_id ASC)A WHERE A.book_id BETWEEN #{begin} AND #{end}
@@ -32,9 +36,9 @@
 	<insert id="insertTotal"
 		parameterType="com.care.library.search.BookDTO">
 		INSERT INTO totalBook (bookName, authors, publisher,
-		bookImageURL, publication_year ,vol, isbn) VALUES(#{bookName},#{authors},
+		bookImageURL, publication_year ,vol, isbn, rest_vol) VALUES(#{bookName},#{authors},
 		#{publisher}, #{bookImageURL}, #{publicationYear}, #{vol,
-		jdbcType=VARCHAR}, #{isbn})
+		jdbcType=VARCHAR}, #{isbn}, #{vol, jdbcType=VARCHAR})
 	</insert>
 
 	<delete id="deleteData">
@@ -100,6 +104,11 @@
 		INSERT INTO bookLoan (user_id, bookName, isbn, start_date, end_date) 
 		values(#{userId}, #{bookName}, #{isbn}, #{startDate}, #{endDate})
 	</insert>
+	
+	<!-- isbn으로 대출한 책 권수 찾기 -->
+	<select id="checkRestVol">
+		SELECT count(rest_vol) FROM totalBook WHERE isbn=#{isbn}
+	</select>
 </mapper>
 
 

@@ -89,12 +89,6 @@ public class SearchController {
 		// TODO Auto-generated method stub
 		return "search/subMenuSearch";
 	}
-//
-//	@GetMapping("/datasearch/searchModal")
-//	public String searchModal() {
-//		// TODO Auto-generated method stub
-//		return "search/searchModal";
-//	}
 	
 	@RequestMapping("/datasearch/bookDetail")
 	public String bookDetail(String isbn, Model model) {
@@ -118,12 +112,10 @@ public class SearchController {
 	        	bookDTO.setBookImageURL(info.getBookImageURL());
 	        	bookDTO.setIsbn(info.getIsbn());
 	        	bookDTO.setDescription(info.getDescription());
-	        	System.out.println(info.getDescription());
 	        	bookDTO.setClassName(info.getClassName());
 	        }
 	    }
 	    model.addAttribute("detail", bookDTO);
-	    System.out.println("bookDetail : " + isbn);
 	    return "search/bookDetail";
 	}
 	

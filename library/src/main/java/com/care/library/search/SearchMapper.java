@@ -8,7 +8,9 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface SearchMapper {
-
+	
+	int findMaxNum();
+	
 	int popularInsert(BookDTO book);
 	
 	int recentInsert(BookDTO book);
@@ -30,6 +32,12 @@ public interface SearchMapper {
 	
 	ArrayList<BookDTO> getTotal(int begin, int end);
 	
+	// 대출 하기 버튼 클릭시
 	int insertLoan(BookLoanDTO loanData);
+	
+	int checkRestVol(String isbn);
+	
+	
+	
 
 }
