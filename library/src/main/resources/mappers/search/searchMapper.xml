@@ -2,24 +2,44 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.care.library.search.SearchMapper">
-  	<resultMap type="com.care.library.search.BookDTO" id="bookDto"> <!-- id는 식별자일뿐 -->
-  		<result column = "publication_year" property = "publicationYear"/>
-  	</resultMap>
-  	
-  	<insert id="popularInsert" parameterType="com.care.library.search.BookDTO">
-		INSERT INTO popularBook VALUES(#{no}, #{ranking}, #{publicationYear},#{bookName}, #{authors}, #{publisher}, #{bookImageURL},  #{vol, jdbcType=VARCHAR})
+	<resultMap type="com.care.library.search.BookDTO"
+		id="bookDto"> <!-- id는 식별자일뿐 -->
+		<result column="publication_year" property="publicationYear" />
+	</resultMap>
+
+	<!-- 검색 전 모든 책 보여주기 -->
+	<select id="getTotal">
+		<!--SELECT * FROM totalBook -->
+		<!--SELECT AAA.* FROM (SELECT rownum as rn, notice.* FROM totalBook ORDER 
+			BY book_id DESC)AAA WHERE AAA.rn BETWEEN #{begin} AND #{end} -->
+		SELECT * FROM totalBook WHERE book_id BETWEEN #{begin} AND #{end}
+	</select>
+
+
+	<insert id="popularInsert"
+		parameterType="com.care.library.search.BookDTO">
+		INSERT INTO popularBook VALUES(#{no}, #{ranking},
+		#{publicationYear},#{bookName}, #{authors}, #{publisher},
+		#{bookImageURL}, #{vol, jdbcType=VARCHAR})
 	</insert>
-	
-	<insert id="recentInsert" parameterType="com.care.library.search.BookDTO">
-		INSERT INTO recentBook VALUES(#{bookName}, #{authors}, #{publisher}, #{bookImageURL},  #{publicationYear},   #{vol, jdbcType=VARCHAR})
+
+	<insert id="recentInsert"
+		parameterType="com.care.library.search.BookDTO">
+		INSERT INTO recentBook VALUES(#{bookName}, #{authors},
+		#{publisher}, #{bookImageURL}, #{publicationYear}, #{vol,
+		jdbcType=VARCHAR})
 	</insert>
-	
-	<insert id="insertTotal" parameterType="com.care.library.search.BookDTO">
-		INSERT INTO totalBook (bookName, authors, publisher, bookImageURL, publication_year ,vol) VALUES(#{bookName},#{authors}, #{publisher}, #{bookImageURL}, #{publicationYear},  #{vol, jdbcType=VARCHAR})
+
+	<insert id="insertTotal"
+		parameterType="com.care.library.search.BookDTO">
+		INSERT INTO totalBook (bookName, authors, publisher,
+		bookImageURL, publication_year ,vol) VALUES(#{bookName},#{authors},
+		#{publisher}, #{bookImageURL}, #{publicationYear}, #{vol,
+		jdbcType=VARCHAR})
 	</insert>
-	
+
 	<delete id="deleteData">
 		<if test="whichTable == 'popularBook'">
 			DELETE FROM popularBook
@@ -31,28 +51,31 @@
 			DELETE FROM totalBook
 		</if>
 	</delete>
-	
+
 	<select id="getBookImages">
 		<if test="whichTable == 'popularBook'">
 			<!-- SELECT bookImageURL FROM popularBook WHERE no <![CDATA[ <= ]]> 5 -->
-			SELECT bookImageURL FROM (SELECT bookImageURL, ROWNUM AS rn FROM popularBook ORDER BY TO_NUMBER(ranking) ASC)A WHERE A.rn <![CDATA[ <= ]]> 5
+			SELECT bookImageURL FROM (SELECT bookImageURL, ROWNUM AS rn FROM
+			popularBook ORDER BY TO_NUMBER(ranking) ASC)A WHERE A.rn <![CDATA[ <= ]]>
+			5
 		</if>
 		<if test="whichTable == 'recentBook'">
 			SELECT bookImageURL FROM recentBook
 		</if>
 	</select>
-	
-	<!-- 대여하기 -->	
-	<!-- 	관리자 테이블에 들어가야겠지-->
-	
-	
-	<!-- <select id="checkTotalDB">
-		SELECT count(ROWNUM) FROM totalBook
-	</select> -->
+
+	<!-- 대여하기 -->
+	<!-- 관리자 테이블에 들어가야겠지 -->
+
 	<select id="checkTotalDB">
-	    SELECT COUNT(*) FROM totalBook
+		SELECT COUNT(*) FROM totalBook
 	</select>
-	
+
+	<select id="checkSearchCount">
+		SELECT COUNT(A.id) FROM (SELECT book_id AS id FROM totalBook WHERE
+		LOWER(bookName) LIKE LOWER('%'||#{search}||'%'))A
+	</select>
+
 	<select id="getTable" resultMap="bookDto">
 		<if test="whichTable == 'popularBook'">
 			<!-- SELECT bookImageURL FROM popularBook WHERE no <![CDATA[ <= ]]> 5 -->
@@ -62,13 +85,15 @@
 			SELECT * FROM recentBook
 		</if>
 	</select>
-	
-	<!--통합검색-->
+
+	<!--통합검색 -->
 	<select id="totalSearch" resultMap="bookDto">
-		SELECT * FROM totalBook WHERE LOWER(bookName) LIKE LOWER('%'||#{search}||'%')
-		<!--SELECT * FROM totoalBook WHERE LOWER(bookName) LIKE LOWER(CONCAT('%', #{keyword}, '%'))-->
+<!--		SELECT A.* FROM (SELECT rownum as rn, AAA.* FROM totalBook WHERE LOWER(bookName) LIKE LOWER('%'||#{search}||'%'))A WHERE A.id BETWEEN #{begin} AND #{end}
+-->		<!--SELECT * FROM totoalBook WHERE LOWER(bookName) LIKE LOWER(CONCAT('%', 
+			#{keyword}, '%')) -->
+  		SELECT BBB.* FROM(SELECT ROWNUM as rn, AAA.* FROM(SELECT * FROM totalBook WHERE LOWER(bookName) LIKE LOWER('%'||#{search}||'%') ORDER BY book_id ASC)AAA)BBB WHERE rn BETWEEN #{begin} AND #{end}
+	    
 	</select>
-	
 </mapper>
 
 

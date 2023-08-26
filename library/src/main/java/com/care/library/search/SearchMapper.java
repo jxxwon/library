@@ -19,11 +19,15 @@ public interface SearchMapper {
 	
 	ArrayList<String> getBookImages(String whichTable);
 	
-	
 	int checkTotalDB();
+	
+	int checkSearchCount(String search);
 	
 	ArrayList<BookDTO> getTable(String whichTable);
 	
-	ArrayList<BookDTO> totalSearch(String search);
+//	통합검색 결과
+	ArrayList<BookDTO> totalSearch(String search, int begin, int end);
+	
+	ArrayList<BookDTO> getTotal(int begin, int end);
 
 }

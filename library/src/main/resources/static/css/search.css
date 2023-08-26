@@ -2,6 +2,20 @@
 	margin-top: 152px;
 }
 
+h1 {
+	margin-bottom: 50px;
+}
+
+.search_title {
+	margin: 50px 0;
+	line-height: 145%;
+}
+
+.search_title p {
+	font-weight: 500;
+	font-size: 20px;
+}
+
 .searchContainer .visual .inner,
 .searchContainer .condition .inner {
 	display: flex;
@@ -219,6 +233,27 @@
 	cursor: pointer;
 }
 
+.totalSearchPage {
+	text-align: center;
+	margin: 40px 0;
+}
+
+.totalSearchPage a {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	font-weight: 400;
+	font-size: 17px;
+	border: 1px solid #ddd;
+	margin-right: 5px;
+	color: #000;
+}
+
+.totalSearchPage a:last-child {
+	margin-right: 0;
+}
+
 /*모달*/
 
 #searchModal {
@@ -247,15 +282,17 @@
 }
 
 
-.modal-content #loanButton, .modal-content #cancelButton{
-	border:transparent;  
+.modal-content #loanButton,
+.modal-content #cancelButton {
+	border: transparent;
 	padding: 10px 20px;
 	border-radius: 5px;
 	cursor: pointer;
 	width: 100px;
 }
-.modal-content #loanButton{
+
+.modal-content #loanButton {
 	color: white;
-	background-color:#338cfa;
-	margin-right:10px;
+	background-color: #338cfa;
+	margin-right: 10px;
 }

@@ -21,6 +21,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -28,6 +29,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import com.care.library.common.PageService;
+import com.care.library.info.NoticeDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @EnableScheduling
@@ -361,12 +364,56 @@ public class SearchService {
 	return Msg;
 	}
 	
-	public ArrayList<BookDTO> totalSearch(String search) {
+	public ArrayList<BookDTO> totalSearch(String search, String cp, Model model) {
 		
-		ArrayList<BookDTO> searchResult = mapper.totalSearch(search);
-		if(searchResult != null)
-			return searchResult;
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<BookDTO> searchResult = mapper.totalSearch(search ,begin, end);
+		
+		String url = "totalSearch?totalSearch="+ search+ "&currentPage=";
+		int totalCount = mapper.checkSearchCount(search);
+		System.out.println(search);
+		System.out.println(totalCount);
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		
+		model.addAttribute("searchResult", searchResult);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+	
 		return null;
+	}
+	
+	public void getAllTotal(String cp, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<BookDTO> totalBook = mapper.getTotal(begin, end);
+		
+		String url = "totalSearch?currentPage=";
+		int totalCount = mapper.checkTotalDB();
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("searchResult", totalBook);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
 	}
 	
 }

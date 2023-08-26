@@ -1,10 +1,6 @@
 package com.care.library.search;
 
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -14,37 +10,41 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @EnableScheduling
 @EnableAsync
 @Controller
 public class SearchController {
-	
-	@Autowired SearchService service;
-	
+
+	@Autowired
+	SearchService service;
+	@Autowired
+	SearchMapper mapper;
+
 	@RequestMapping("/datasearch")
 	public String datasearch(Model model) {
 		// 공공 API를 사용하여 xml형태의 데이터 받아오기. 매월 1일에 받아오기.
-		
-		//인기도서 대출
+
+		// 인기도서 대출
 		String popParam = "&libCode=111042";
 		String popUrl = service.reqUrlParam("extends/loanItemSrchByLib", popParam);
 		String popTable = "popularBook";
 		String popXmlTagName = "loanBooks";
 		String paintPop = service.showMainImages(popTable, model, popUrl, popXmlTagName);
-		System.out.println("paintPop : "+paintPop);
-		
-		//신착도서 대출
+		System.out.println("paintPop : " + paintPop);
+
+		// 신착도서 대출
 		String recentParam = "&libCode=111042";
 		String recentUrl = service.reqUrlParam("extends/libSrch", recentParam, 1, 10);
-		System.out.println("recentUrl"+ recentUrl);
+		System.out.println("recentUrl" + recentUrl);
 		String recentTable = "recentBook";
 		String recentXmlTagName = "newBooks";
-		String paintRecent =service.showMainImages(recentTable, model, recentUrl, recentXmlTagName);
-		System.out.println("paintRecent : "+paintRecent);
-		
-		//전체 도서 db만들기
+		String paintRecent = service.showMainImages(recentTable, model, recentUrl, recentXmlTagName);
+		System.out.println("paintRecent : " + paintRecent);
+
+		// 전체 도서 db만들기
 		service.checkTotalDB();
 		return "search/searchMain";
 	}
@@ -54,48 +54,31 @@ public class SearchController {
 
 		return "search/searchMain";
 	}
-	
+
 	@GetMapping("/datasearch/totalSearch")
-	public String totalSearch() {
-		// TODO Auto-generated method stub
+	public String totalSearch(@RequestParam(value = "currentPage", required = false) String cp,
+			@RequestParam(required = false) String totalSearch, Model model) {
+		// 모든 책을 보여줌
+		if(totalSearch != null)
+			service.totalSearch(totalSearch, cp, model);
+		else
+			service.getAllTotal(cp, model);
 		return "search/totalSearch";
 	}
-	
+
 	@PostMapping("/datasearch/totalSearchProc")
-	public String totalSearchProc(String totalSearch, RedirectAttributes ra, Model model ) {
-		
-		//예시
-		//http://data4library.kr/api/srchBooks?authKey=8d6b32bd9b40ff27779c0cd9cd76329dd858b557eff8d78747d43e3845117641
-		//&title="하늘"&author="하늘"&pageNo=1&pageSize=10 
-		
-		 String encodedSearch="";
-		 ArrayList<BookDTO> searchResult = null;
-		 searchResult = service.totalSearch(totalSearch);
-//		try {
-//			encodedSearch = URLEncoder.encode(totalSearch, "UTF-8");
-//		} catch (UnsupportedEncodingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		//String totalParam = "&keyword="+encodedSearch;
-//		String totalParam = "&title="+encodedSearch;
-//		String totalUrl = service.reqUrlParam("srchBooks", totalParam, 1, 10);
-//		String apiResult = service.connAPI(totalUrl);
-//		if(apiResult != null) {
-//			 searchResult = service.totalXmlParse(apiResult);
-			 ra.addFlashAttribute("searchResult",searchResult);
-//			 //model.addAttribute("searchResult",searchResult);
-//		}
-		
+	public String totalSearchProc(String totalSearch, RedirectAttributes ra) {
+		ra.addAttribute("totalSearch", totalSearch);
+
 		return "redirect:/datasearch/totalSearch";
 	}
-	
+
 	@RequestMapping("/datasearch/subMenuSearch")
 	public String subMenuSearch() {
 		// TODO Auto-generated method stub
 		return "search/subMenuSearch";
 	}
-	
+
 	@GetMapping("/datasearch/searchModal")
 	public String searchModal() {
 		// TODO Auto-generated method stub
