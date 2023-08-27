@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:url var="context" value="/"/>
     <head>
-<title>하이미디어 도서관 - 마이라이브러리 : 대출/예약/연장 현황</title>
+<title>하이미디어 도서관 - 마이라이브러리 : 대출 이력 조회</title>
 
 <link href = "${context }css/main.css" rel = "stylesheet" type = "text/css">
 <link href = "${context }css/myLibrary.css" rel = "stylesheet" type = "text/css">
@@ -15,11 +15,11 @@
 		<c:import url = "/subMenuMyLibrary"/>
 			<div class = "myLibraryContent">
 				<div>
-					<h1>대출/예약/연장 현황</h1>
+					<h1>대출 이력 조회</h1>
 					<div class="mb_30 mt_20">
 						<a href="/main">HOME</a> > 
 						<a href="/adminMember">마이라이브러리</a> >
-						<a class="checked" href="/adminMember">대출/예약/연장 현황</a>
+						<a class="checked" href="/adminMember">대출 이력 조회</a>
 					</div>
 				</div>
 				<div class="RIContainer">
@@ -35,7 +35,7 @@
 							<c:when test = "${empty myLoanHistory}">
 								<tr>
 									<td colspan = 5 style = "cursor:default; color:#000;">
-										등록한 문의가 없습니다.
+										대출 이력이 없습니다.
 									</td>
 								</tr>
 							</c:when>
