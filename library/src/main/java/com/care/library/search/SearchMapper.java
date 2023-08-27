@@ -37,7 +37,7 @@ public interface SearchMapper {
 	
 	int checkRestVol(String isbn);
 	
-	
+	int updateRestVol(String isbn);
 	
 
 }

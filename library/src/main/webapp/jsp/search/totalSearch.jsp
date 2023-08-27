@@ -85,7 +85,7 @@
 									<tbody>
 										<tr>
 											<td>은평구립도서관</td>
-											<td><span class="possible">1(대출가능)</span> / ${result.vol}</td>
+											<td><span class="possible">${result.restVol}(대출가능)</span> / ${result.vol}</td>
 											<td>${result.isbn}</td>
 											<c:choose>
 												<c:when test="${empty sessionScope.id }">

@@ -7,6 +7,7 @@
 	<resultMap type="com.care.library.search.BookDTO"
 		id="bookDto"> <!-- id는 식별자일뿐 -->
 		<result column="publication_year" property="publicationYear" />
+		<result column="rest_vol" property="restVol" />
 	</resultMap>
 
 	<select id = "findMaxNum">
@@ -107,8 +108,12 @@
 	
 	<!-- isbn으로 대출한 책 권수 찾기 -->
 	<select id="checkRestVol">
-		SELECT count(rest_vol) FROM totalBook WHERE isbn=#{isbn}
+		SELECT rest_vol FROM totalBook WHERE isbn=#{isbn}
 	</select>
+	
+	<update id="updateRestVol">
+  		UPDATE totalBook SET rest_vol = rest_vol - 1 WHERE isbn = #{isbn}
+  	</update>
 </mapper>
 
 

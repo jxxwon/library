@@ -74,6 +74,7 @@ public class SearchController {
 			service.totalSearch(totalSearch, cp, model);
 		else
 			service.getAllTotal(cp, model);
+		
 		return "search/totalSearch";
 	}
 
@@ -102,6 +103,7 @@ public class SearchController {
 	    
 	    String xmlResponse = service.connAPI(detailUrl);
 	    String XmlTagName = "detail";
+	    
 	    if (xmlResponse != null) {
 	        detail = service.detailXmltoList(xmlResponse, XmlTagName);
 	        for (BookDetailDTO info : detail) {
@@ -113,6 +115,7 @@ public class SearchController {
 	        	bookDTO.setIsbn(info.getIsbn());
 	        	bookDTO.setDescription(info.getDescription());
 	        	bookDTO.setClassName(info.getClassName());
+	        	
 	        }
 	    }
 	    model.addAttribute("detail", bookDTO);

@@ -9,6 +9,7 @@ public class BookDTO {
 	private String publisher;
 	private String bookImageURL;
 	private String vol;
+	private String restVol;
 	private String isbn;
 
 	public String getNo() {
@@ -82,5 +83,13 @@ public class BookDTO {
 
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
+	}
+
+	public String getRestVol() {
+		return restVol;
+	}
+
+	public void setRestVol(String restVol) {
+		this.restVol = restVol;
 	}
 }
