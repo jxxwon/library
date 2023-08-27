@@ -17,8 +17,8 @@
 				<h1>1:1문의</h1>
 				<div class="mb_30 mt_20">
 					<a href="/main">HOME</a> > 
-					<a href="/admin/member">관리자페이지</a> >
-					<a class="checked" href="/admin/inquiry">1:1문의</a>
+					<a href="${context }admin/member">관리자페이지</a> >
+					<a class="checked" href="${context }admin/inquiry">1:1문의</a>
 				</div>
 			</div>
 			<div class="inquiryContainer">
@@ -87,13 +87,13 @@
 										<td>${inquiry.id }</td>
 										<td>${inquiry.writeDate }</td>
 									</tr>
+									<div class="inquiryPage">
+										${result }
+									</div>
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
 					</table>
-					<div class="inquiryPage">
-						${result }
-					</div>
 				</form>
 			</div>
 		</div>
