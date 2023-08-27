@@ -11,26 +11,26 @@
 	</resultMap>
 
 	<select id = "findMaxNum">
-  		SELECT MAX(book_id) FROM totalBook
+  		SELECT MAX(total_id) FROM totalBook
   	</select>
   	
 	<!-- 검색 전 모든 책 보여주기 -->
 	<select id="getTotal" resultMap="bookDto">
-		SELECT A.* FROM (SELECT * FROM totalBook ORDER BY book_id ASC)A WHERE A.book_id BETWEEN #{begin} AND #{end}
+		SELECT A.* FROM (SELECT * FROM totalBook ORDER BY total_id ASC)A WHERE A.total_id BETWEEN #{begin} AND #{end}
 	</select>
 
 
 	<insert id="popularInsert"
 		parameterType="com.care.library.search.BookDTO">
-		INSERT INTO popularBook VALUES(#{no}, #{ranking},
-		#{publicationYear},#{bookName}, #{authors}, #{publisher},
+		INSERT INTO popularBook (ranking, publication_year, bookName, authors, publisher, bookImageURL, vol, isbn)
+		VALUES(#{ranking}, #{publicationYear},#{bookName}, #{authors}, #{publisher},
 		#{bookImageURL}, #{vol, jdbcType=VARCHAR}, #{isbn})
 	</insert>
 
 	<insert id="recentInsert"
 		parameterType="com.care.library.search.BookDTO">
-		INSERT INTO recentBook VALUES(#{bookName}, #{authors},
-		#{publisher}, #{bookImageURL}, #{publicationYear}, #{vol,
+		INSERT INTO recentBook (bookName,authors, publisher, bookImageURL, publication_year, vol, isbn)
+		VALUES(#{bookName}, #{authors}, #{publisher}, #{bookImageURL}, #{publicationYear}, #{vol,
 		jdbcType=VARCHAR}, #{isbn})
 	</insert>
 
@@ -38,7 +38,7 @@
 		parameterType="com.care.library.search.BookDTO">
 		INSERT INTO totalBook (bookName, authors, publisher,
 		bookImageURL, publication_year ,vol, isbn, rest_vol) VALUES(#{bookName},#{authors},
-		#{publisher}, #{bookImageURL}, #{publicationYear}, #{vol,
+		#{publisher}, #{bookImageURL}, #{publicationYear, jdbcType=VARCHAR}, #{vol,
 		jdbcType=VARCHAR}, #{isbn}, #{vol, jdbcType=VARCHAR})
 	</insert>
 
@@ -74,7 +74,7 @@
 	</select>
 
 	<select id="checkSearchCount">
-		SELECT COUNT(A.id) FROM (SELECT book_id AS id FROM totalBook WHERE
+		SELECT COUNT(A.id) FROM (SELECT total_id AS id FROM totalBook WHERE
 		LOWER(bookName) LIKE LOWER('%'||#{search}||'%'))A
 	</select>
 
@@ -90,7 +90,7 @@
 
 	<!--통합검색 -->
 	<select id="totalSearch" resultMap="bookDto">
-  		SELECT BBB.* FROM(SELECT ROWNUM as rn, AAA.* FROM(SELECT * FROM totalBook WHERE LOWER(bookName) LIKE LOWER('%'||#{search}||'%') ORDER BY book_id ASC)AAA)BBB WHERE rn BETWEEN #{begin} AND #{end}
+  		SELECT BBB.* FROM(SELECT ROWNUM as rn, AAA.* FROM(SELECT * FROM totalBook WHERE LOWER(bookName) LIKE LOWER('%'||#{search}||'%') ORDER BY total_id ASC)AAA)BBB WHERE rn BETWEEN #{begin} AND #{end}
 	</select>
 	
 	

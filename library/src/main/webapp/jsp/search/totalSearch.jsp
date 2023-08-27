@@ -85,14 +85,29 @@
 									<tbody>
 										<tr>
 											<td>은평구립도서관</td>
-											<td><span class="possible">${result.restVol}(대출가능)</span> / ${result.vol}</td>
+											<c:choose>
+												<c:when test="${result.restVol > 0 }">
+													<td><span class="possible">${result.restVol}(대출
+															가능)</span> / ${result.vol}</td>
+												</c:when>
+												<c:otherwise>
+													<td><span class="impossible">${result.restVol}(대출
+															불가)</span> / ${result.vol}</td>
+												</c:otherwise>
+											</c:choose>
 											<td>${result.isbn}</td>
 											<c:choose>
 												<c:when test="${empty sessionScope.id }">
-													<td>로그인 필요</td>
+													<td class="impossible" onclick="location.href='/login'">로그인
+														필요</td>
+												</c:when>
+												<c:when test="${result.restVol < 1 }">
+													<td class="bookStatus_loanBook impossible">대출 불가</td>
 												</c:when>
 												<c:otherwise>
-													<td class="bookStatus_loanBook" onclick="loanBook('${result.bookName}', '${result.isbn}')">대출 하기</td>
+													<td class="bookStatus_loanBook"
+														onclick="loanBook('${result.bookName}', '${result.isbn}')">대출
+														하기</td>
 												</c:otherwise>
 											</c:choose>
 										</tr>

@@ -39,10 +39,15 @@ public class SearchController {
 		// 공공 API를 사용하여 xml형태의 데이터 받아오기. 매월 1일에 받아오기.
 
 		// 인기도서 대출
-		String popParam = "&libCode=111042";
-		String popUrl = service.reqUrlParam("extends/loanItemSrchByLib", popParam);
+//		api 주소 자체 에러가 너무 많이남..model.
+//		String popParam = "&libCode=111042";
+//		String popUrl = service.reqUrlParam("extends/loanItemSrchByLib", popParam);
+//		String popTable = "popularBook";
+//		String popXmlTagName = "loanBooks";
+		String popParam = "&dtl_region=11120"; //은평구
+		String popUrl = service.reqUrlParam("loanItemSrch", popParam, 1, 20);
 		String popTable = "popularBook";
-		String popXmlTagName = "loanBooks";
+		String popXmlTagName = "docs"; 
 		String paintPop = service.showMainImages(popTable, model, popUrl, popXmlTagName);
 		System.out.println("paintPop : " + paintPop);
 

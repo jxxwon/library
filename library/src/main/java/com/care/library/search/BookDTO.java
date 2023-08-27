@@ -1,7 +1,6 @@
 package com.care.library.search;
 
 public class BookDTO {
-	private String no;
 	private String ranking;
 	private String publicationYear;
 	private String bookName;
@@ -12,14 +11,6 @@ public class BookDTO {
 	private String restVol;
 	private String isbn;
 
-	public String getNo() {
-		return no;
-	}
-
-	public void setNo(String no) {
-		this.no = no;
-	}
-	
 	public String getRanking() {
 		return ranking;
 	}

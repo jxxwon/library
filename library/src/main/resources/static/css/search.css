@@ -298,11 +298,19 @@ h1{margin-bottom:50px;}
 .bookStatus_Container > table .possible{
 	color:blue;
 }
+.bookStatus_Container > table .impossible{
+	color:red;
+}
 .bookStatus_Container .bookStatus_loanBook{
 	background-color: #58ACFA;
 	color:white;
 	cursor: pointer;
 }
+.bookStatus_loanBook.impossible{
+	background-color: white;
+	cursor: default;
+}
+
 /*책 상세 페이지*/
 .detail_contentBox {
 	display: flex;

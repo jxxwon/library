@@ -146,11 +146,6 @@ public class SearchService {
 				if (docNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element docElement = (Element) docNode;
 					BookDTO book = new BookDTO();
-					NodeList noNodes = docElement.getElementsByTagName("no");
-					if (noNodes != null && noNodes.getLength() > 0) {
-						String no = noNodes.item(0).getTextContent();
-						book.setNo(no);
-					}
 
 					NodeList rankingNodes = docElement.getElementsByTagName("ranking");
 					if (rankingNodes != null && rankingNodes.getLength() > 0) {
@@ -167,9 +162,6 @@ public class SearchService {
 							book.setVol(vol);
 						}
 					}
-					
-						
-					
 
 					String publicationYear = docElement.getElementsByTagName("publication_year").item(0)
 							.getTextContent();
@@ -262,13 +254,6 @@ public class SearchService {
 
 			for (BookDTO book : books) {
 				int result = 0;
-				
-//				int no;
-//				try {
-//					no = mapper.findMaxNum();
-//				} catch (Exception e) {
-//					no = 0;
-//				}
 
 				if ("popularBook".equals(tableName)) {
 					result = mapper.popularInsert(book);
