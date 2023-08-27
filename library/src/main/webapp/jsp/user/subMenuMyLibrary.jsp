@@ -18,9 +18,9 @@
 	</ul> -->
 	<ul>
 		<li class="submyLibrary_menu" id="subMyBookStatus"><a href="/myLibrary/myBookStatus">대출/예약/연장 현황</a></li>
-		<li class="submyLibrary_menu"><a>대출이력조회</a></li>
-		<li class="submyLibrary_menu"><a>대출예약 확인</a></li>
-		<li class="submyLibrary_menu"><a>희망도서신청</a></li>
+		<li class="submyLibrary_menu" id="subMyLoanHistory"><a href="/myLibrary/myLoanHistory">대출이력조회</a></li>
+		<!-- <li class="submyLibrary_menu" id="subMyBookReserve"><a>대출예약 확인</a></li>
+		<li class="submyLibrary_menu"><a>희망도서신청</a></li> -->
 		<li class="submyLibrary_menu"><a>문화행사 현황</a></li>
 		<li class="submyLibrary_menu"><a>결제 관리</a></li>
 		<li class="submyLibrary_menu" id="subMyInquiry"><a href="/myLibrary/myInquiry">1:1문의</a></li>

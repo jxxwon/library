@@ -17,6 +17,8 @@ import com.care.library.common.NotifyService;
 import com.care.library.common.PageService;
 import com.care.library.member.MailService;
 import com.care.library.member.MemberMapper;
+import com.care.library.search.BookLoanDTO;
+import com.care.library.search.SearchMapper;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -25,6 +27,7 @@ public class UserService {
 	
 	@Autowired UserMapper userMapper;
 	@Autowired NotifyService notiService;
+	@Autowired SearchMapper searchMapper;
 
 	public UserDTO getMyInfo(String id) { 
 		return userMapper.getMyInfo(id); 
@@ -230,6 +233,28 @@ public class UserService {
 		userMapper.deleteMyInquiry(no);
 	}
 	
+//	대출/예약/연장 현황(현황이니까 예약중, 대출중, 연체중 인 것 만.)
+	public void getMyBookStatus(String id, Model model) {
+		ArrayList<BookLoanDTO> myBookStatus = searchMapper.getMyBookStatus(id);
+		if(myBookStatus != null)
+			model.addAttribute("myBook", myBookStatus);
+	}
+	
+	public void getMyLoanHistory(String id, Model model) {
+		ArrayList<BookLoanDTO> myLoanHistory = searchMapper.getMyLoanHistory(id);
+		if(myLoanHistory != null)
+			model.addAttribute("myLoanHistory", myLoanHistory);
+	}
+	
+	public void extendLoan(String id, String isbn, String newEndDate, Model model) {
+		String extMsg = "";
+		int result = searchMapper.updateLoanStatus(id, isbn, newEndDate);
+		if(result != 1) {
+			extMsg = "연장 신청이 이루어지지 않았습니다.";
+		}
+		extMsg = "연장 신청이 완료되었습니다.";
+		model.addAttribute("extMsg",extMsg);
+	}
 }
 
 

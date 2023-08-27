@@ -2,32 +2,24 @@ package com.care.library.search;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
 import com.care.library.common.NotifyDTO;
 import com.care.library.common.NotifyService;
@@ -385,7 +377,7 @@ public class SearchService {
 			NotifyDTO notification = new NotifyDTO();
 			notification.setId(loanData.getUserId());
 			notification.setCategory("대출");
-			notification.setTitle("도서 대출 신청이 완료되었습니다.");
+			notification.setTitle("도서 대출 예약이 완료되었습니다.");
 			notification.setUrl("/myLibrary/loanStatus");
 			notiService.register(notification);
 			

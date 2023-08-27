@@ -107,7 +107,7 @@
 												<c:otherwise>
 													<td class="bookStatus_loanBook"
 														onclick="loanBook('${result.bookName}', '${result.isbn}')">대출
-														하기</td>
+														예약</td>
 												</c:otherwise>
 											</c:choose>
 										</tr>

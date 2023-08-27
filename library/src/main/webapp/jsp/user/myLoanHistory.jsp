@@ -7,11 +7,7 @@
 
 <link href = "${context }css/main.css" rel = "stylesheet" type = "text/css">
 <link href = "${context }css/myLibrary.css" rel = "stylesheet" type = "text/css">
-<script>
-	let extMsg = "${extMsg}";
-	if (extMsg !== "")
-		alert(extMsg);
-</script>
+
  </head>   
 <body>
 	<c:import url = "/header"/>
@@ -34,10 +30,9 @@
 							<th>빌린 날짜</th>
 							<th>반납 날짜</th>
 							<th>상태</th>
-							<th>연장 신청</th>
 						</tr>
 						<c:choose>
-							<c:when test = "${empty myBook}">
+							<c:when test = "${empty myLoanHistory}">
 								<tr>
 									<td colspan = 5 style = "cursor:default; color:#000;">
 										등록한 문의가 없습니다.
@@ -45,25 +40,14 @@
 								</tr>
 							</c:when>
 							<c:otherwise>
-								<c:forEach var="bookStatus" items = "${myBook}">
+								<c:forEach var="history" items = "${myLoanHistory}">
 									<tr <%-- onclick="location.href='inquiryContent?no=${inquiry.no}'" --%>>
-										<td>${bookStatus.bookName}</td>
-										<td>${bookStatus.startDate}</td>
-										<td>${bookStatus.endDate}</td>
-										<td>
-											<c:if test = "${bookStatus.status == 'R' }">
-												<span>예약중</span>
-											</c:if>
-											<c:if test = "${bookStatus.status == 'L' }">
-												<span>대출중</span>
-											</c:if>
-											<c:if test = "${bookStatus.status == 'O' }">
-												<span class="overDue">연체중</span>
-											</c:if>
-										</td>
-										<td >
-											<c:if test = "${bookStatus.status == 'L' }">
-												<button class="extendBtn" onclick="extend(${bookStatus.isbn},'${bookStatus.endDate}')">연장 하기</button>
+										<td>${history.bookName}</td>
+										<td>${history.startDate}</td>
+										<td>${history.endDate}</td>
+										<td> 
+											<c:if test="${history.status == 'C'}">
+												반납 완료
 											</c:if>
 										</td>
 									</tr>
@@ -75,6 +59,6 @@
 				</div>
 			</div>
 			</div>
-		<script src="${context}javaScript/myBook.js" ></script>
+		
 	<c:import url="/footer"/>
 </body>

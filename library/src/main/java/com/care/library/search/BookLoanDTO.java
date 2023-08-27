@@ -6,6 +6,7 @@ public class BookLoanDTO {
 	private String isbn;
 	private String startDate;
 	private String endDate;
+	private String status;
 
 	public String getBookName() {
 		return bookName;
@@ -45,5 +46,13 @@ public class BookLoanDTO {
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

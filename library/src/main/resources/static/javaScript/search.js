@@ -93,10 +93,10 @@ function loanBook(bookName, isbn) {
 	const endDate = futureDate.toISOString().slice(0, 10);
 
 	    
-	let message = `도서명 : ${bookName}\n대출 신청 일자 : ${startDate}\n도서 반납 일자 : ${endDate}\n\n대출 신청 하시겠습니까?`; // 메시지 구성
+	let message = `도서명 : ${bookName}\n대출 신청 일자 : ${startDate}\n도서 반납 일자 : ${endDate}\n\n대출 예약 신청 하시겠습니까?`; // 메시지 구성
 	let isConfirmed = confirm(message);
 	if (isConfirmed) {
-		let reqData = { bookName, isbn, startDate, endDate};
+		let reqData = { bookName, isbn, startDate, endDate, status : "R"}; //처음 신청하면 대출 예약으로 들어감.
 		reqData = JSON.stringify(reqData);
 		
 		loanXhr = new XMLHttpRequest();

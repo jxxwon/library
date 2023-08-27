@@ -39,5 +39,10 @@ public interface SearchMapper {
 	
 	int updateRestVol(String isbn);
 	
+	ArrayList<BookLoanDTO>getMyBookStatus(String userId);
+	
+	ArrayList<BookLoanDTO> getMyLoanHistory(String userId);
+	
+	int updateLoanStatus(String id, String isbn, String newEndDate);
 
 }

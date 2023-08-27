@@ -130,6 +130,7 @@ public class SearchController {
 	@ResponseBody // return을 jsp가 아닌 응답 데이터를 주는 것이다.
 	@RequestMapping(value = "datasearch/bookLoanProc",  produces = "application/json; charset=UTF-8")
 	public String bookDetailProc(@RequestBody(required = false) BookLoanDTO loanData) {
+		//System.out.println(loanData.getStatus());
 		String id = (String)session.getAttribute("id");
 		loanData.setUserId(id);
 		String result = service.insertLoan(loanData);
