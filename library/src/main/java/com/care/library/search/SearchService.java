@@ -29,6 +29,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import com.care.library.common.NotifyDTO;
+import com.care.library.common.NotifyService;
 import com.care.library.common.PageService;
 import com.care.library.info.NoticeDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,7 +41,7 @@ public class SearchService {
 
 	@Autowired
 	SearchMapper mapper;
-
+	@Autowired NotifyService notiService;
 	// 주기적으로 받아오는 것은 나중에하쟈...
 	// 초, 분, 시간, 일, 월, 요
 //	@Scheduled(cron = "0/1 * * * * *", zone = "Asia/Seoul")
@@ -379,6 +381,14 @@ public class SearchService {
 		int loanResult = mapper.insertLoan(loanData);
 		if (loanResult == 1) {
 			mapper.updateRestVol(isbn);
+			
+			NotifyDTO notification = new NotifyDTO();
+			notification.setId(loanData.getUserId());
+			notification.setCategory("대출");
+			notification.setTitle("도서 대출 신청이 완료되었습니다.");
+			notification.setUrl("/myLibrary/loanStatus");
+			notiService.register(notification);
+			
 			return "대출 예약이 정상적으로 이루어졌습니다.";
 		}
 		return "대출 예약 도중 오류가 발생했습니다.";
