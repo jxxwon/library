@@ -47,7 +47,7 @@
 							<div class="search_result">
 								<div class="bookImgBox" onclick="getBookDetail()">
 									<!-- span>1</span> -->
-									<div class="result_bookImg">
+									<div class="result_bookImg" onclick="location.href='/datasearch/bookDetail?isbn=${result.isbn}'">
 										<img src="${result.bookImageURL}" alt="이미지 없음" />
 									</div>
 								</div>

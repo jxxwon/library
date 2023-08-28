@@ -255,6 +255,9 @@ h1{margin-bottom:50px;}
 	cursor: pointer;
 }
 
+.bookContentBox .bookDtlButton:hover,
+.bookContentBox .bookStatusButton:hover {background-color: #58ACFA;}
+
 .totalSearchPage {
 	text-align: center;
 	margin: 40px 0;
@@ -371,8 +374,8 @@ h1{margin-bottom:50px;}
 }
 
 .detail_description>p {
-	width: 600px;
-	line-height: 140%;
+	width: 520px;
+	line-height: 156%;
 	padding-bottom:20px;
 }
 
