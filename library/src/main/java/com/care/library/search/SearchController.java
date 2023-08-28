@@ -59,7 +59,7 @@ public class SearchController {
 		String recentXmlTagName = "newBooks";
 		String paintRecent = service.showMainImages(recentTable, model, recentUrl, recentXmlTagName);
 		System.out.println("paintRecent : " + paintRecent);
-
+		
 		// 전체 도서 db만들기
 		service.checkTotalDB();
 		return "search/searchMain";

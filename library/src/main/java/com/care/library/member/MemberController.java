@@ -29,7 +29,26 @@ public class MemberController {
 	@Autowired private HttpSession session;
 	
 	@RequestMapping("header")
-	public String header() {
+	public String header(Model model) {
+		String popParam = "&dtl_region=11120"; //은평구
+		String popUrl = searchService.reqUrlParam("loanItemSrch", popParam, 1, 20);
+		String popTable = "popularBook";
+		String popXmlTagName = "docs"; 
+		String paintPop = searchService.showMainImages(popTable, model, popUrl, popXmlTagName);
+		System.out.println("paintPop : " + paintPop);
+
+		// 신착도서 대출
+		String recentParam = "&libCode=111042";
+		String recentUrl = searchService.reqUrlParam("extends/libSrch", recentParam, 1, 10);
+		System.out.println("recentUrl" + recentUrl);
+		String recentTable = "recentBook";
+		String recentXmlTagName = "newBooks";
+		String paintRecent = searchService.showMainImages(recentTable, model, recentUrl, recentXmlTagName);
+		System.out.println("paintRecent : " + paintRecent);
+		
+		// 전체 도서 db만들기
+		searchService.checkTotalDB();
+				
 		int closedRoom = reserveMapper.closeRoomStatus();
 		session.setAttribute("closedRoom", closedRoom); //닫혔다면 1이 들어갈것
 		return "default/header";

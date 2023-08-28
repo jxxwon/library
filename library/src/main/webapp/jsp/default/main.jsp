@@ -30,8 +30,8 @@
 			<div class=" inner">
 				<div class="content left">
 					<div class="popularBook">
-						<div>
-							<img src="/image/popBook.png"/>
+						<div class="iconContainer">
+							<div class="iconBox"><img src="/image/popBook.png"/></div>
 							<span>인기도서</span>
 						</div>
 						<div class="bookContainer">
@@ -46,8 +46,8 @@
 				</div>
 				<div class="content right">
 					<div class="newBook">
-						<div>
-							<img src="/image/newBook.png"/>
+						<div class="iconContainer">
+							<div class="iconBox"><img src="/image/newBook.png"/></div>
 							<span>신착도서</span>
 						</div>
 						<div class="bookContainer">
