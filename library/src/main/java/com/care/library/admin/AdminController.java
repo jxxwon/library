@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.care.library.member.MemberDTO;
+import com.care.library.reservation.ReserveDTO;
+import com.care.library.reservation.ReserveMapper;
 import com.care.library.reservation.ReserveService;
 import com.care.library.search.BookDTO;
 import com.care.library.user.InquiryDTO;
@@ -26,6 +28,7 @@ public class AdminController {
 	@Autowired HttpSession session;
 	@Autowired AdminService service;
 	@Autowired ReserveService reserveService;
+	@Autowired ReserveMapper reserveMapper;
 	
 	@RequestMapping("/admin/member")
 	public String admin() {
@@ -161,7 +164,11 @@ public class AdminController {
 
 	//열람실 관리 - 메인
 	@RequestMapping("/admin/room")
-	public String room() {
+	public String room(Model model) {
+		ArrayList<ReserveDTO> R1Seat = reserveMapper.getReservedSeat("R1");
+		ArrayList<ReserveDTO> R2Seat = reserveMapper.getReservedSeat("R2");
+		model.addAttribute("room1Seat", R1Seat.size());
+		model.addAttribute("room2Seat", R2Seat.size());
 		return "admin/room";
 	}
 	@RequestMapping("/admin/roomOpenClose")
