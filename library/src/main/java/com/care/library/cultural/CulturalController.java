@@ -25,13 +25,13 @@ public class CulturalController {
     @Autowired 
     private HttpSession session;
 
-    @RequestMapping("culturalForm")
-    public String culturalForm(
+    @RequestMapping("cullist")
+    public String cullist(
             @RequestParam(value = "currentPage", required = false) String cp,
             Model model) {
-        System.out.println("culturalForm 호출");
+        System.out.println("cullist 호출");
         service.culturalForm(cp, model, "upcoming");
-        return "cultural/culturalForm"; // 뷰 이름 설정
+        return "cultural/cullist"; // 뷰 이름 설정
     }
 
     @RequestMapping("culFormEnd")
@@ -74,9 +74,11 @@ public class CulturalController {
 	 * return "cultural/culModify"; // 뷰 페이지로 이동 }
 	 */
     
-    public String culModify(@ModelAttribute("cultural") CulturalDTO culturalDTO, Model model) {
-        model.addAttribute("cultural", culturalDTO);
-        return "culModify";
+    @RequestMapping("culModify")
+    public String culModify(@RequestParam("culId") int culId, Model model) {
+    	CulturalDTO cultural = service.culFormWrite(culId); // 데이터 가져오기
+    	model.addAttribute("cultural", cultural); // JSP로 데이터 전달
+        return "cultural/culModify";
     }
 	
 	/*

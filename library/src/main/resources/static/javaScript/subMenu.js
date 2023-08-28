@@ -32,15 +32,15 @@
 	  }
         else if (currentURL.includes("cultural")) {
         document.getElementById("cultural").classList.add("active");
-        document.getElementById("culturalForm").classList.remove("active");
+        document.getElementById("cullist").classList.remove("active");
         document.getElementById("culResult").classList.remove("active");
-      } else if (currentURL.includes("culturalForm")) {
+      } else if (currentURL.includes("cullist")) {
         document.getElementById("cultural").classList.remove("active");
-        document.getElementById("culturalForm").classList.add("active");
+        document.getElementById("cullist").classList.add("active");
         document.getElementById("culResult").classList.remove("active");
       }else if (currentURL.includes("culFormEnd")) {
         document.getElementById("cultural").classList.remove("active");
-        document.getElementById("culturalForm").classList.add("active");
+        document.getElementById("cullist").classList.add("active");
         document.getElementById("culResult").classList.remove("active");
       }
     }

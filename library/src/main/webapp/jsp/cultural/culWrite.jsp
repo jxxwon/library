@@ -81,11 +81,10 @@
 				</ul>
 			</div>
 		</div>
-		
 		<div class="applyW" id="apply" style="display:none">
 		    <ul>
-		        <li><a href="${context}culForm">수정</a></li>
-		        <li><a href="${context}culForm">삭제</a></li>
+		        <li><a href="${context}culModify?culId=${cultural.culId}">수정</a></li>
+		        <li><a href="${context}cullist">삭제</a></li>
 		    </ul>
 		</div>
 		<div align="center">
@@ -160,7 +159,8 @@
 		        </tr>
 		    </table>
 		    <div class="culBtn" align="center">
-				<input type="button" value="목록으로"	 onclick="location.href='culForm'">
+				<input type="button" value="신청하기"	 onclick="location.href='cullist'">
+				<input type="button" value="목록으로"	 onclick="location.href='cullist'">
 			</div>
 		</div>
 		
