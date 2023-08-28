@@ -128,6 +128,12 @@ public class AdminController {
 		return "admin/bookLoanRegister";
 	}
 	
+	@PostMapping("/admin/bookSearch")
+	public String bookSearch(@RequestParam(value="book", required = false)String book, Model model) {
+		service.bookSearch(book);
+		return "admin/bookLoanRegister";
+	}
+	
 	@PostMapping("/admin/loanRegisterProc")
 	public String loanRegisterProc(@RequestParam(value="loanId", required = false)String loanId, String isbn, String userId, String startDate, String endDate) {
 		service.loanRegisterProc(loanId, isbn, startDate, endDate);

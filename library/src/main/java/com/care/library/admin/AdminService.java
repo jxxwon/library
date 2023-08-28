@@ -210,9 +210,23 @@ public class AdminService {
 		model.addAttribute("book", book);
 	}
 	
+	// 대출 등록 - 책 검색
+	public void bookSearch(String book) {
+	}
+
+	
 	public void loanRegisterProc(String loanId, String isbn, String startDate, String endDate) {
 		mapper.loanRegister(loanId, startDate, endDate);
 		mapper.updateRestVol(isbn);
+		
+		BookLoanDTO result = mapper.loanRegisterSelect(loanId);
+		String id = result.getUserId();
+		NotifyDTO notification = new NotifyDTO();
+		notification.setId(id);
+		notification.setCategory("도서");
+		notification.setTitle("대출이 완료되었습니다.");
+		notification.setUrl("/myLibrary/myBookStatus");
+		notiService.register(notification);
 	}
 	
 
@@ -321,14 +335,4 @@ public class AdminService {
 		notification.setUrl("/myLibrary/myInquiry");
 		notiService.register(notification);
 	}
-
-
-
-
-
-
-
-
-
-
 }

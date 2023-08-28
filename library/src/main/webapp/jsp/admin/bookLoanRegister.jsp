@@ -73,8 +73,8 @@
 								<tr>
 									<th>도서정보</th>
 									<td>
-										<input type = "text" id = "book" name = "book" class="book" readonly="readonly" placeholder="검색 버튼으로 책 정보를 불러오세요.">
-										<input type = "button" value = "검색" class="bookBtn">
+										<input type = "text" id = "book" name = "book" class="book" placeholder="책 제목 또는 ISBN 입력"><input type = "button" value = "검색" class="bookBtn" onclick="bookSearch()">
+										<div id="bookList"></div>
 									</td>
 								</tr>
 								<tr>

@@ -192,6 +192,24 @@ function goBack() {
   history.back();
 }
 
+// 대출 등록 - 책 검색
+function bookSearch(){
+	var inputElement = document.getElementById('book');
+    var bookValue = inputElement.value;
+  
+    var url = "/admin/bookSearch?book=" + encodeURIComponent(bookValue);
+    const bookList = document.getElementById('bookList');
+    const xhr = new XMLHttpRequest();
+  
+    xhr.open('GET', url, true);
+  
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        bookList.innerHTML = xhr.responseText;
+      }
+    };
+}
+
 // 1:1문의 작성시 답변 관련
 function replyProc(){
 	var content = document.getElementById('content').value;

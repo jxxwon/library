@@ -78,7 +78,7 @@
 						<c:otherwise>
 							<c:forEach var="loan" items = "${loans}">
 								<c:choose>
-									<c:when test = "${param.loanStatusSelect == 'R' }">
+									<c:when test = "${param.loanStatusSelect == 'R' || param.loanStatusSelect == null}">
 										<tr onclick="location.href='bookLoanRegister?loanId=${loan.loanId}'">
 									</c:when>
 									<c:otherwise>
