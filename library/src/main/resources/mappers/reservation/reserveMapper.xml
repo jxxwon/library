@@ -35,7 +35,19 @@
 	 <delete id="DeleteSeatById">
 		DELETE FROM reservation WHERE user_id= #{id}
 	</delete> 
+	
+	<!-- 관리자 열람실 오픈/마감 -->
+	<insert id = "roomStatusChange" >
+  		INSERT INTO reservation (user_id, room_status) VALUES (#{id}, #{status})
+  	</insert>
   	
+  	<delete id="roomInit">
+  		DELETE FROM reservation
+  	</delete>
+  	
+  	<insert id = "roomStatusClose" >
+  		UPDATE reservation SET  status = #{status} WHERE id= #{id};
+  	</insert>  	
 </mapper>
 
 

@@ -19,4 +19,10 @@ public interface ReserveMapper {
 	ReserveDTO getSeatById(String id);
 	
 	int DeleteSeatById(String id);
+	
+	int roomInit();
+	
+	int roomStatusChange(String id, String status);
+	
+	int roomStatusClose(String id, String status);
 }

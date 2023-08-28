@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.care.library.member.MemberDTO;
+import com.care.library.reservation.ReserveService;
 import com.care.library.user.InquiryDTO;
 
 import jakarta.servlet.http.HttpSession;
@@ -20,6 +21,7 @@ import jakarta.servlet.http.HttpSession;
 public class AdminController {
 	@Autowired HttpSession session;
 	@Autowired AdminService service;
+	@Autowired ReserveService reserveService;
 	
 	@RequestMapping("/admin/member")
 	public String admin() {
@@ -126,6 +128,25 @@ public class AdminController {
 	@RequestMapping("/admin/room")
 	public String room() {
 		return "admin/room";
+	}
+	@RequestMapping("/admin/roomOpenClose")
+	public String roomOpenClose() {
+		return "admin/roomOpenClose";
+	}
+	
+	@PostMapping("/admin/roomStatusProc")
+	public String roomStatusProc(@RequestParam(required = false)String open, @RequestParam(required = false)String closed) {
+		String status="";
+		String id = (String)session.getAttribute("id");
+		if(open != null && open.equals("열람실 오픈")) {
+			status = "O";
+			reserveService.roomStatusChange(id, status);
+		}
+		if(closed != null &&closed.equals("열람실 마감")) {
+			status = "C";
+			reserveService.roomStatusChange(id, status);
+		}
+		return "redirect:/admin/room";
 	}
 
 	//결제 관리 - 메인

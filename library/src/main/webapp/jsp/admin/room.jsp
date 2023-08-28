@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			<input type="hidden" id="menuItemValue" name="category" value="">
 		</form>
 		<div class="bookContainer" style = "border-top:none; padding-top:0;">
-			<c:import url = "${context }admin/loan"/>
+			<c:import url = "${context }admin/roomOpenClose"/>
 		</div>
 	</div>
 </div>

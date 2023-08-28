@@ -87,4 +87,15 @@ public class ReserveService {
 		return "퇴실이 제대로 이루어지지 않았습니다.";
 	}
 	
+	public void roomStatusChange(String id, String status) {
+		int initResult = reserveMapper.roomInit();
+			if(status.equals("O")) {
+				System.out.println("오픈 되는건가?");
+				reserveMapper.roomStatusChange(id, status);
+			}
+			else {
+				reserveMapper.roomStatusChange(id, status);
+			}
+	}
+	
 }

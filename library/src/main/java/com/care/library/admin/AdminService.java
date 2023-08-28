@@ -10,6 +10,8 @@ import com.care.library.common.NotifyDTO;
 import com.care.library.common.NotifyService;
 import com.care.library.common.PageService;
 import com.care.library.member.MemberDTO;
+import com.care.library.reservation.ReserveMapper;
+import com.care.library.reservation.ReserveService;
 import com.care.library.user.InquiryDTO;
 
 @Service
@@ -245,9 +247,7 @@ public class AdminService {
 		notiService.register(notification);
 	}
 
-
-
-
+	
 
 
 
