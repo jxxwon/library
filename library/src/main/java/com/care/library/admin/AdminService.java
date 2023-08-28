@@ -147,7 +147,8 @@ public class AdminService {
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
 	}
-	// 도서관리
+	
+	// 도서관리 - 대출
 	public void selectLoan(String cp, String select, String loanStatusSelect, Model model) {
 		int currentPage = 1;
 		try{
@@ -242,11 +243,9 @@ public class AdminService {
 
 	public void selectLoanContent(String loanId, Model model) {
 		BookLoanDTO loan = mapper.loanRegisterSelect(loanId);
-		
 		model.addAttribute("loan", loan);
 	}
 
-	
 	//1:1문의
 	public void selectInquiryTitle(String cp, String select, String search, Model model) {
 		int currentPage = 1;
@@ -345,4 +344,5 @@ public class AdminService {
 		notification.setUrl("/myLibrary/myInquiry");
 		notiService.register(notification);
 	}
+
 }

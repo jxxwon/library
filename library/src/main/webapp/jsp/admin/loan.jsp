@@ -6,7 +6,7 @@
 <link href = "${context }css/main.css" rel = "stylesheet" type = "text/css">
 <link href = "${context }css/admin.css" rel = "stylesheet" type = "text/css">
 
-<title>하이미디어 도서관 - 관리자 페이지 : 도서관리</title>
+<title>하이미디어 도서관 - 관리자 페이지 : 대출관리</title>
 
 <body>
 	<div class = "bookContent">
@@ -45,9 +45,6 @@
 						</c:otherwise>
 					</c:choose>
 					<input type = "submit" id="loanSearchBtn" value = "검색" onclick="loanSearch()" >
-				</div>
-				<div class="loanBtn">
-					<input type = "button" value = "등록" onclick="location.href='bookLoanRegister'">
 				</div>
 				<table class="inquiry">
 					<tr>
@@ -120,6 +117,9 @@
 				</table>
 				<div class="loanPage">
 					${result}
+				</div>
+				<div class="loanBtn">
+					<input type = "button" value = "대출등록" onclick="location.href='bookLoanRegister'">
 				</div>
 			</form>
 		</div>
