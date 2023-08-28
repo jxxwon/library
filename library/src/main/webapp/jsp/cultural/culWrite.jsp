@@ -39,7 +39,6 @@
   	        xhr.send();
   	    }
   	}
-  	
 </script>
 	
 <style>

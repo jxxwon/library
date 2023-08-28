@@ -17,8 +17,6 @@
 	        applyElement.style.display = 'none'; // 그 외의 경우 숨김
 	    }
 	});
-  	
-  	
 </script>
 	
 <style>
