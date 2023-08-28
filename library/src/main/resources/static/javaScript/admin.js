@@ -165,3 +165,45 @@ function replyProc(){
 		}
 	}
 }
+
+
+//열람실 회원 관리
+function roomSearch(){
+	var memberSelect = document.getElementById('memberSelect');
+	var memSelect = document.getElementById('memberSelect').options.selectedIndex;
+	var memberOption = memberSelect.options[memSelect].value;
+	
+	var searchSelect =document.getElementById('searchSelect');
+	var seaSelect = document.getElementById('searchSelect').options.selectedIndex;
+	var searchOption = searchSelect.options[seaSelect].value;
+
+	var search = document.getElementById('search');
+	
+	if(memberOption == 'T' && searchOption == 'all'){
+		document.getElementById('memberSelect').disabled = true;
+		document.getElementById('searchSelect').disabled = true;
+		document.getElementById('search').disabled = true;
+	} else if(memberOption != 'T' && searchOption == 'all'){
+		document.getElementById('searchSelect').disabled = true;
+		document.getElementById('search').disabled = true;
+	}
+	if(memberOption == 'T' && searchOption != 'all'){
+		if(search.value == null || search.value.trim() === ''){
+			alert('검색어를 입력하세요');
+			return;
+		} else {
+			document.getElementById('memberSelect').disabled = true;
+		}
+	}
+	if(memberSelect != 'T' && searchOption != 'all'){
+		if(search.value == null || search.value.trim() === ''){
+			alert('검색어를 입력하세요');
+			return;
+		}
+	}
+	var f = document.getElementById('f');
+	f.submit();
+}
+
+
+

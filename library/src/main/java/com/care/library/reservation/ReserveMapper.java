@@ -27,4 +27,6 @@ public interface ReserveMapper {
 	int roomStatusClose(String id, String status);
 	
 	int closeRoomStatus();
+	
+	ArrayList<ReserveDTO> getAllSeat();
 }

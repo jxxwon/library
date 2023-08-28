@@ -52,6 +52,11 @@
   	 <select id="closeRoomStatus">
 		SELECT count(*) FROM reservation WHERE room_status='C'
 	</select> 
+	
+	<!-- 관리자 열람실 회원 확인 -->
+	 <select id="getAllSeat" resultMap="reserveDTO">
+		SELECT * FROM reservation
+	</select>
   	
 </mapper>
 

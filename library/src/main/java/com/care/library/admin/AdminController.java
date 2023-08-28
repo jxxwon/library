@@ -134,6 +134,19 @@ public class AdminController {
 		return "admin/roomOpenClose";
 	}
 	
+	@RequestMapping("/admin/roomStatus")
+	public String roomStatus(Model model,
+			@RequestParam(required = false)String roomSelect, 
+			@RequestParam(required = false)String searchSelect,
+			@RequestParam(required = false)String search) {
+		//아무것도 선택 안했을
+		reserveService.getAllSeat( model);
+		
+		return "admin/roomStatus";
+	}
+	
+	
+	
 	@PostMapping("/admin/roomStatusProc")
 	public String roomStatusProc(@RequestParam(required = false)String open, @RequestParam(required = false)String closed) {
 		String status="";
