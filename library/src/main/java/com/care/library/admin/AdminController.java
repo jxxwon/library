@@ -162,7 +162,7 @@ public class AdminController {
 	
 	//프로그램 관리 - 메인
 	@RequestMapping("/admin/program")
-	public String program() {
+	public String program(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="select", required = false)String select,  @RequestParam(value="loanStatusSelect", required = false)String loanStatusSelect, @RequestParam(value="search", required = false)String search, Model model) {
 		return "admin/program";
 	}
 

@@ -226,7 +226,6 @@ public class AdminService {
 		}
 		model.addAttribute("list", list);
 	}
-
 	
 	public void loanRegisterProc(String loanId, String isbn, String startDate, String endDate) {
 		mapper.loanRegister(loanId, startDate, endDate);
