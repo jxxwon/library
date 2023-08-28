@@ -23,11 +23,11 @@
 					문화교육, 전시, 독서관련 행사, 공모전, 독서캠페인 등을 진행하고 있습니다.<br>
 				</p>
 				<ul class="Route">
-					<li>HOME</li>
+					<li><a href="${context}main">HOME</a></li>
 					<li>&gt;</li>
-					<li>문화행사</li>
+					<li><a href="${context}cultural">문화행사</a></li>
 					<li>&gt;</li>
-					<li>문화행사 결과</li>
+					<li><a href="${context}cullist">문화행사 결과</a></li>
 				</ul>
 			</div>
 		</div>

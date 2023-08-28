@@ -17,6 +17,26 @@
       document.getElementById('apply').style.display = 'none'; */
     }
   });
+  	
+  	function deleteCheck() {
+  	    result = confirm('진짜로 삭제하겠습니까?');
+  	    
+  	    if (result) {
+  	        // AJAX 요청을 보냅니다.
+  	        const xhr = new XMLHttpRequest();
+  	        
+  	        xhr.onreadystatechange = function() {
+  	            if (xhr.readyState === 4 && xhr.status === 200) {
+  	                // 요청이 성공적으로 완료됐을 때 수행할 작업을 여기에 추가합니다.
+  	                // 예를 들어, 페이지를 다시 로드하거나 갱신할 수 있습니다.
+  	                window.location.href = '${context}cullist'; // 이동할 페이지 URL을 지정
+  	            }
+  	        };
+  	        
+  	        xhr.open('GET', `culturalDeleteProc?culId=${cultural.culId}`, true);
+  	        xhr.send();
+  	    }
+  	}
 </script>
 	
 <style>
@@ -73,18 +93,18 @@
 					영위할 수 있도록 학습 및 교양 프로그램을 운영하고 있습니다.
 				</p>
 				<ul class="Route">
-					<li>HOME</li>
+					<li><a href="${context}main">HOME</a></li>
 					<li>&gt;</li>
-					<li>문화행사</li>
+					<li><a href="${context}cultural">문화행사</a></li>
 					<li>&gt;</li>
-					<li>문화행사 목록</li>
+					<li><a href="${context}cullist">문화행사 목록</a></li>
 				</ul>
 			</div>
 		</div>
 		<div class="applyW" id="apply" style="display:none">
 		    <ul>
 		        <li><a href="${context}culModify?culId=${cultural.culId}">수정</a></li>
-		        <li><a href="${context}cullist">삭제</a></li>
+		        <li><a href="javascript:void(0);" onclick="deleteCheck()">삭제</a></li>
 		    </ul>
 		</div>
 		<div align="center">
