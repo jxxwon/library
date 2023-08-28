@@ -42,7 +42,8 @@
 	                <a href="${context}main"><img src="${context }image/LOGO.png"></a>
 	            </div>
 	            <div class="main_search">
-	                <form action="${context}search" method="post">
+	                <form action="datasearch/totalSearchProc"
+					method="post" accept-charset="UTF-8" >
 	                    <input type="text" name="query" placeholder="검색어를 입력하세요">
 	                    <button type="submit">
 	                        <img src="${context }image/search.png" width="25" height="25">
@@ -97,7 +98,7 @@
 						<li><a href="#" class="menu">큐레이션</a></li>
 					</ul>
 	            </li>
-	            <li class="reservation"><a href="${context}reservation/readingRoom1" class="menu">좌석예약</a>
+	            <li class="reservation" onclick="headerReseve('${sessionScope.closedRoom}')">좌석예약
 	            	<ul class="toggleBox">
 						<li><a href="${context}reservation/readingRoom1" class="menu">자율학습실1</a></li>
 						<li><a href="${context}reservation/readingRoom2" class="menu">자율학습실2</a></li>

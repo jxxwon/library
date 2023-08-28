@@ -12,16 +12,24 @@
   		<result column = "auth_date" property = "authDate"/>
   		<result column = "user_group" property = "userGroup"/>
   	</resultMap>
+  	
   	<resultMap type="com.care.library.user.InquiryDTO" id="inquiryDto">
   		<result column = "write_date" property = "writeDate"/>
   		<result column = "reply_content" property = "replyContent"/>
   	</resultMap>
+  	
   	<resultMap type="com.care.library.search.BookLoanDTO" id="bookLoanDto">
   		<result column = "loan_id" property = "loanId"/>
   		<result column = "user_id" property = "userId"/>
   		<result column = "start_date" property = "startDate"/>
   		<result column = "end_date" property = "endDate"/>
   		<result column = "reserve_date" property = "reserveDate"/>
+  	</resultMap>
+
+  	<resultMap type="com.care.library.search.BookDTO" id="bookDto">
+  		<result column = "total_id" property = "totalId"/>
+  		<result column = "publication_year" property = "publicationYear"/>
+  		<result column = "rest_vol" property = "restVol"/>
   	</resultMap>
   	
   	<select id = "count">
@@ -83,6 +91,34 @@
 	<select id="countLoanAll">
 		SELECT count(loan_id) FROM bookLoan
 	</select>
+	
+	<select id="loanRegisterSelect" resultMap="bookLoanDto">
+		SELECT * FROM bookLoan WHERE loan_id = #{loanId}
+	</select>
+	
+	<select id = "loanBookDetail" resultMap="bookDto">
+		SELECT * FROM totalBook WHERE isbn = #{isbn}
+	</select>
+	
+	<select id = "selectAllBook" resultMap="bookDto">
+		SELECT * FROM totalBook
+	</select>
+	
+	<select id = "selectBookTitle" resultMap="bookDto">
+		SELECT * FROM totalBook WHERE bookname like '%'||#{book}||'%' 
+	</select>
+
+	<select id = "selectBookIsbn" resultMap="bookDto">
+		SELECT * FROM totalBook WHERE isbn like '%'||#{book}||'%' 
+	</select>
+	
+	<update id="loanRegister">
+		UPDATE bookLoan SET start_date = #{startDate}, end_date = #{endDate}, status = 'L', reserve_date = '' WHERE loan_id = #{loanId}
+	</update>
+	
+	<update id="updateRestVol">
+  		UPDATE totalBook SET rest_vol = rest_vol - 1 WHERE isbn = #{isbn}
+  	</update>
 
 	<select id="countInquiry">
 		SELECT count(no) FROM inquiry

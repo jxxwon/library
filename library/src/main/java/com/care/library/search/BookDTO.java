@@ -10,6 +10,15 @@ public class BookDTO {
 	private String vol;
 	private String restVol;
 	private String isbn;
+	private int totalId;
+
+	public int getTotalId() {
+		return totalId;
+	}
+
+	public void setTotalId(int totalId) {
+		this.totalId = totalId;
+	}
 
 	public String getRanking() {
 		return ranking;

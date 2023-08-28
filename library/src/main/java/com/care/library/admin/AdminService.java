@@ -10,6 +10,7 @@ import com.care.library.common.NotifyDTO;
 import com.care.library.common.NotifyService;
 import com.care.library.common.PageService;
 import com.care.library.member.MemberDTO;
+import com.care.library.search.BookDTO;
 import com.care.library.search.BookLoanDTO;
 import com.care.library.user.InquiryDTO;
 
@@ -198,6 +199,53 @@ public class AdminService {
 		model.addAttribute("currentPage", currentPage);
 	}
 	
+	//대출 등록 - 예약신청 들어온 것 내역 불러오기
+	public void loanRegister(String loanId, Model model) {
+		BookLoanDTO reserve = mapper.loanRegisterSelect(loanId);
+		
+		String isbn = reserve.getIsbn();
+		BookDTO book = mapper.loanBookDetail(isbn);
+		
+		model.addAttribute("reserve", reserve);
+		model.addAttribute("book", book);
+	}
+	
+	// 대출 등록 - 책 검색
+	public void bookSearch(String book, Model model) {
+		ArrayList<BookDTO> list = new ArrayList<>();
+		if(book == null || book.equals("")) {
+			list = mapper.selectAllBook();
+		} else {
+			list = mapper.selectBookTitle(book);
+			if(list.isEmpty()) {
+				list = mapper.selectBookIsbn(book);
+			}
+		}
+		model.addAttribute("list", list);
+	}
+
+	
+	public void loanRegisterProc(String loanId, String isbn, String startDate, String endDate) {
+		mapper.loanRegister(loanId, startDate, endDate);
+		mapper.updateRestVol(isbn);
+		
+		BookLoanDTO result = mapper.loanRegisterSelect(loanId);
+		String id = result.getUserId();
+		NotifyDTO notification = new NotifyDTO();
+		notification.setId(id);
+		notification.setCategory("도서");
+		notification.setTitle("대출이 완료되었습니다.");
+		notification.setUrl("/myLibrary/myBookStatus");
+		notiService.register(notification);
+	}
+	
+
+	public void selectLoanContent(String loanId, Model model) {
+		BookLoanDTO loan = mapper.loanRegisterSelect(loanId);
+		
+		model.addAttribute("loan", loan);
+	}
+
 	
 	//1:1문의
 	public void selectInquiryTitle(String cp, String select, String search, Model model) {
@@ -298,10 +346,7 @@ public class AdminService {
 		notiService.register(notification);
 	}
 
-
-
-
-
+	
 
 
 

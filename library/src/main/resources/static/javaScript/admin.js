@@ -152,6 +152,46 @@ function memberSearch(){
 	f.submit();
 }
 
+// 대출  - 시작일자
+$(function() {
+	  $('input[name="startDate"]').daterangepicker({
+	    singleDatePicker: true,
+	    autoApply: true,
+	    showDropdowns: true,
+	    startDate: moment().format('YYYY-MM-DD'),
+	    minYear: 1940,
+	    maxYear: parseInt(moment().format('YYYY'), 10),
+	    locale: {
+	      format: 'YYYY-MM-DD'
+	    }
+	  }, function(start, end, label) {
+	    $('input[name="startDate"]').val(start.format('YYYY-MM-DD'));
+	  });
+	});
+
+// 대출  - 종료일자
+$(function() {
+	var endDate = moment().add(10, 'days').format('YYYY-MM-DD');
+	  $('input[name="endDate"]').daterangepicker({
+	    singleDatePicker: true,
+	    autoApply: true,
+	    showDropdowns: true,
+	    startDate: endDate,
+	    minYear: 1940,
+	    maxYear: parseInt(moment().format('YYYY'), 10),
+	    locale: {
+	      format: 'YYYY-MM-DD'
+	    }
+	  }, function(start, end, label) {
+	    $('input[name="endDate"]').val(start.format('YYYY-MM-DD'));
+	  });
+	});
+
+// 뒤로가기..
+function goBack() {
+  history.back();
+}
+
 // 1:1문의 작성시 답변 관련
 function replyProc(){
 	var content = document.getElementById('content').value;
@@ -165,3 +205,45 @@ function replyProc(){
 		}
 	}
 }
+
+
+//열람실 회원 관리
+function roomSearch(){
+	var memberSelect = document.getElementById('memberSelect');
+	var memSelect = document.getElementById('memberSelect').options.selectedIndex;
+	var memberOption = memberSelect.options[memSelect].value;
+	
+	var searchSelect =document.getElementById('searchSelect');
+	var seaSelect = document.getElementById('searchSelect').options.selectedIndex;
+	var searchOption = searchSelect.options[seaSelect].value;
+
+	var search = document.getElementById('search');
+	
+	if(memberOption == 'T' && searchOption == 'all'){
+		document.getElementById('memberSelect').disabled = true;
+		document.getElementById('searchSelect').disabled = true;
+		document.getElementById('search').disabled = true;
+	} else if(memberOption != 'T' && searchOption == 'all'){
+		document.getElementById('searchSelect').disabled = true;
+		document.getElementById('search').disabled = true;
+	}
+	if(memberOption == 'T' && searchOption != 'all'){
+		if(search.value == null || search.value.trim() === ''){
+			alert('검색어를 입력하세요');
+			return;
+		} else {
+			document.getElementById('memberSelect').disabled = true;
+		}
+	}
+	if(memberSelect != 'T' && searchOption != 'all'){
+		if(search.value == null || search.value.trim() === ''){
+			alert('검색어를 입력하세요');
+			return;
+		}
+	}
+	var f = document.getElementById('f');
+	f.submit();
+}
+
+
+

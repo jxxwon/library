@@ -382,8 +382,6 @@ public class SearchService {
 		
 		int loanResult = mapper.insertLoan(loanData);
 		if (loanResult == 1) {
-			mapper.updateRestVol(isbn);
-			
 			NotifyDTO notification = new NotifyDTO();
 			notification.setId(loanData.getUserId());
 			notification.setCategory("도서");
