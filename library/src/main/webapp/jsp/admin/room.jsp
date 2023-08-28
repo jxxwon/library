@@ -58,7 +58,8 @@
 										<td>${96 - room2Seat}</td>
 										<td>
 											<input type="submit" name="open" value="열람실 오픈">
-											<input type="submit" name="closed" value="열람실 마감"></td>
+											<input type="submit" name="closed" value="열람실 마감">
+										</td>
 									</tr>
 							</table>
 						</form>
