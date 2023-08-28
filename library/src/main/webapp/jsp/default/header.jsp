@@ -100,8 +100,8 @@
 	            </li>
 	            <li class="reservation" onclick="headerReseve('${sessionScope.closedRoom}')">좌석예약
 	            	<ul class="toggleBox">
-						<li><a href="${context}reservation/readingRoom1" class="menu">자율학습실1</a></li>
-						<li><a href="${context}reservation/readingRoom2" class="menu">자율학습실2</a></li>
+						<li>자율학습실1</li>
+						<li>자율학습실2</li>
 						<li>스터디룸</li>
 					</ul>
 	            </li>
