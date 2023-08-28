@@ -45,6 +45,12 @@ public interface AdminMapper {
 
 	BookLoanDTO loanRegisterSelect(String loanId);
 
+	ArrayList<BookDTO> selectAllBook();
+
+	ArrayList<BookDTO> selectBookTitle(String book);
+
+	ArrayList<BookDTO> selectBookIsbn(String book);
+
 	BookDTO loanBookDetail(String isbn);
 
 	void loanRegister(String loanId, String startDate, String endDate);
@@ -70,12 +76,6 @@ public interface AdminMapper {
 	int countInquiryWriter(String search);
 
 	ArrayList<InquiryDTO> selectInquiryWriter(String search, int begin, int end);
-
-
-
-
-
-
 
 
 

@@ -178,19 +178,23 @@ h1{margin-bottom:50px;}
 .loanRegisterFormContent{padding:50px 0 0 50px; width:1000px; min-height:600px;}
 
 .loanRegisterContainer .loanRegisterForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
-.loanRegisterContainer .loanRegisterForm tr{border-bottom:1px solid #ddd;}
+.loanRegisterContainer .loanRegisterForm tr{border-bottom:1px solid #ddd; max-height:61.5px;}
 .loanRegisterContainer .loanRegisterForm th{padding:10px; border-right:1px solid #ddd;}
 .loanRegisterContainer .loanRegisterForm th.right{border-left:1px solid #ddd;}
-.loanRegisterContainer .loanRegisterForm td{padding:10px;}
+.loanRegisterContainer .loanRegisterForm td{padding:10px; max-height:61.5px;}
 .loanRegisterContainer .loanRegisterForm td input[type="button"].bookBtn{float:right; height:30px;}
 
 .loanRegisterContainer .loanRegisterForm input[type="text"]{height:30px;}
 .loanRegisterContainer .loanRegisterForm input[type="text"].book{height:30px; width:90%}
+.loanRegisterContainer .loanRegisterForm input[type="text"].bookSearch{height:30px; width:90%}
 
 #startDate{width:100px; margin-right:10px;}
 #endDate {width:100px; margin-left:10px;}
 
 .loanBtn{text-align:right; margin:20px 0;}
+
+/*도서관리 - 대출 등록 시 검색*/
+.loanBookList{width:800px;}
 
 /*결제관리 - 목록*/
 .payContainer{text-align:center; border-top:1px solid #ddd;}

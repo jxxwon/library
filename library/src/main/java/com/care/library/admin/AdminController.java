@@ -1,6 +1,7 @@
 package com.care.library.admin;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.care.library.member.MemberDTO;
+import com.care.library.search.BookDTO;
 import com.care.library.user.InquiryDTO;
 
 import jakarta.servlet.http.HttpSession;
@@ -128,10 +132,10 @@ public class AdminController {
 		return "admin/bookLoanRegister";
 	}
 	
-	@PostMapping("/admin/bookSearch")
+	@RequestMapping("/admin/bookSearch")
 	public String bookSearch(@RequestParam(value="book", required = false)String book, Model model) {
-		service.bookSearch(book);
-		return "admin/bookLoanRegister";
+		service.bookSearch(book, model);
+		return "admin/bookSearch";
 	}
 	
 	@PostMapping("/admin/loanRegisterProc")

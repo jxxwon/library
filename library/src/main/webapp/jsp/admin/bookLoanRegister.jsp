@@ -22,6 +22,30 @@
 			f.submit();
 		}
 	}
+	
+	function loanBookSearch() {
+	    var bookSearch = document.getElementById('bookSearch').value;
+	    
+	    // 팝업 창 열기
+	    var popup = window.open("/admin/bookSearch?book=" + encodeURIComponent(bookSearch), "_blank", "width=1000, height=600");
+	    
+	    // 팝업 창이 닫힐 때의 이벤트 처리
+	    popup.onbeforeunload = function() {
+	        // 쿠키에서 선택한 책 정보 가져오기
+	        var selectedBookInfoCookie = getCookie("selectedBookInfo");
+	        if (selectedBookInfoCookie) {
+	            var selectedBookInfo = JSON.parse(decodeURIComponent(selectedBookInfoCookie));
+	            
+	            // 선택한 책 정보를 화면에 표시
+	            var bookInfo = document.getElementById('bookInfo');
+	            bookInfo.style.display = 'block';
+	            bookInfo.querySelector("span:nth-child(1)").textContent = selectedBookInfo.bookName;
+	            bookInfo.querySelector("span:nth-child(2)").textContent = selectedBookInfo.isbn;
+	            bookInfo.querySelector("span:nth-child(3)").textContent = selectedBookInfo.restVol;
+	            bookInfo.querySelector("span:nth-child(4)").textContent = selectedBookInfo.vol;
+	        }
+	    };
+	}
 </script>
 
 <title>하이미디어 도서관 - 관리자 페이지 : 대출 등록</title>
@@ -73,8 +97,14 @@
 								<tr>
 									<th>도서정보</th>
 									<td>
-										<input type = "text" id = "book" name = "book" class="book" placeholder="책 제목 또는 ISBN 입력"><input type = "button" value = "검색" class="bookBtn" onclick="bookSearch()">
-										<div id="bookList"></div>
+										<input type = "text" id = "bookSearch" name = "bookSearch" class="book" placeholder="책제목 또는 ISBN을 입력 후 검색을 눌러주세요.">
+										<input type = "button" value = "검색" class="bookBtn" onclick="loanBookSearch()">
+										<div id ="bookInfo" style = "display:none;">
+											<label>책제목</label><span>으아악</span>
+											<label>ISBN</label><span>으아악</span><br>
+											<label>잔여권수</label><span>으아악</span>
+											<label>전체권수</label><span>으아악</span>
+										</div>
 									</td>
 								</tr>
 								<tr>

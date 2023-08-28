@@ -211,7 +211,17 @@ public class AdminService {
 	}
 	
 	// 대출 등록 - 책 검색
-	public void bookSearch(String book) {
+	public void bookSearch(String book, Model model) {
+		ArrayList<BookDTO> list = new ArrayList<>();
+		if(book == null || book.equals("")) {
+			list = mapper.selectAllBook();
+		} else {
+			list = mapper.selectBookTitle(book);
+			if(list.isEmpty()) {
+				list = mapper.selectBookIsbn(book);
+			}
+		}
+		model.addAttribute("list", list);
 	}
 
 	

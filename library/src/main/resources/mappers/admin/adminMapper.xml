@@ -100,6 +100,18 @@
 		SELECT * FROM totalBook WHERE isbn = #{isbn}
 	</select>
 	
+	<select id = "selectAllBook" resultMap="bookDto">
+		SELECT * FROM totalBook
+	</select>
+	
+	<select id = "selectBookTitle" resultMap="bookDto">
+		SELECT * FROM totalBook WHERE bookname like '%'||#{book}||'%' 
+	</select>
+
+	<select id = "selectBookIsbn" resultMap="bookDto">
+		SELECT * FROM totalBook WHERE isbn like '%'||#{book}||'%' 
+	</select>
+	
 	<update id="loanRegister">
 		UPDATE bookLoan SET start_date = #{startDate}, end_date = #{endDate}, status = 'L', reserve_date = '' WHERE loan_id = #{loanId}
 	</update>
