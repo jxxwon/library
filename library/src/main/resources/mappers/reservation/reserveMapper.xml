@@ -38,7 +38,7 @@
 	
 	<!-- 관리자 열람실 오픈/마감 -->
 	<insert id = "roomStatusChange" >
-  		INSERT INTO reservation (user_id, room_status) VALUES (#{id}, #{status})
+  		INSERT INTO reservation (user_id, room_status, seat_id) VALUES (#{id}, #{status} ,'0')
   	</insert>
   	
   	<delete id="roomInit">
@@ -48,6 +48,11 @@
   	<insert id = "roomStatusClose" >
   		UPDATE reservation SET  status = #{status} WHERE id= #{id};
   	</insert>  	
+  	
+  	 <select id="closeRoomStatus">
+		SELECT count(*) FROM reservation WHERE room_status='C'
+	</select> 
+  	
 </mapper>
 
 

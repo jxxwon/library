@@ -11,16 +11,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.care.library.reservation.ReserveMapper;
+import com.care.library.reservation.ReserveService;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 @Controller
 public class MemberController {
 	@Autowired private MemberService service;
 	@Autowired private KakaoService kakaoService;
+	@Autowired private ReserveMapper reserveMapper;
 	@Autowired private HttpSession session;
 	
 	@RequestMapping("header")
 	public String header() {
+		int closedRoom = reserveMapper.closeRoomStatus();
+		session.setAttribute("closedRoom", closedRoom); //닫혔다면 1이 들어갈것
 		return "default/header";
 	}
 
@@ -43,6 +49,7 @@ public class MemberController {
 	public String main(Model model) {
 		service.mainNotice(model);
 		service.mainReadingRoom(model);
+		
 		return "default/main";
 	}
 	

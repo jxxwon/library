@@ -60,16 +60,18 @@ public class ReserveService {
 	
 	public ReserveDTO getMySeat(String id, Model model) {
 		ReserveDTO mySeat = reserveMapper.getSeatById(id);
-		if(mySeat != null) {
-			if(mySeat.getRoom().equals("R1"))
-				mySeat.setRoom("자율 학습실1");
-			if(mySeat.getRoom().equals("R2"))
-				mySeat.setRoom("자율 학습실2");
-			
-			model.addAttribute("mySeat", mySeat);
-			return mySeat;
+		 if (mySeat != null) {
+		        if ("R1".equals(mySeat.getRoom())) {
+		            mySeat.setRoom("자율 학습실1");
+		        } else if ("R2".equals(mySeat.getRoom())) {
+		            mySeat.setRoom("자율 학습실2");
+		        }
+		        
+		        model.addAttribute("mySeat", mySeat);
+		        return mySeat;
+		}else {
+			return null;
 		}
-		return null;
 	}
 
 	public String leaveProc(String id) {

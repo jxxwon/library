@@ -25,4 +25,6 @@ public interface ReserveMapper {
 	int roomStatusChange(String id, String status);
 	
 	int roomStatusClose(String id, String status);
+	
+	int closeRoomStatus();
 }

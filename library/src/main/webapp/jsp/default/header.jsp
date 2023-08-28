@@ -97,7 +97,7 @@
 						<li><a href="#" class="menu">큐레이션</a></li>
 					</ul>
 	            </li>
-	            <li class="reservation"><a href="${context}reservation/readingRoom1" class="menu">좌석예약</a>
+	            <li class="reservation" onclick="headerReseve('${sessionScope.closedRoom}')">좌석예약
 	            	<ul class="toggleBox">
 						<li><a href="${context}reservation/readingRoom1" class="menu">자율학습실1</a></li>
 						<li><a href="${context}reservation/readingRoom2" class="menu">자율학습실2</a></li>
