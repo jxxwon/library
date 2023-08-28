@@ -114,8 +114,8 @@
 				</ul>
 			</div>
 		</div>
-		<div class="applyW" id="apply" style="display:none">
-		    <ul>
+		<div class="applyW"  style="display:none">
+		    <ul id="apply">
 		        <li><a href="${context}culModify?culId=${cultural.culId}">수정</a></li>
 		        <li><a href="javascript:void(0);" onclick="deleteCheck()">삭제</a></li>
 		    </ul>
