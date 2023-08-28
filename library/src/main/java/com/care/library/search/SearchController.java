@@ -137,5 +137,12 @@ public class SearchController {
 		
 		return result ;
 	}
+	
+	@RequestMapping("/datasearch/popBooks")
+	public String popBooks() {
+		// TODO Auto-generated method stub
+		return "search/popBooks";
+	}
+	
 
 }

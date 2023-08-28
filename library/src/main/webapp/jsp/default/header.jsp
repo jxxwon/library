@@ -85,7 +85,7 @@
 	            <li><a href="${context}recom">추천자료</a>
 	            	<ul class="toggleBox">
 						<li><a href="#" class="menu">추천도서</a></li>
-						<li><a href="#" class="menu">인기자료</a></li>
+						<li><a href="${context}datasearch/popBooks" class="menu">인기자료</a></li>
 					</ul>
 	            </li>
 	            <li><a href="${context}datasearch">자료검색</a>
