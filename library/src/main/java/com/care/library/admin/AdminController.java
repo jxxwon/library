@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.care.library.member.MemberDTO;
+import com.care.library.reservation.ReserveDTO;
+import com.care.library.reservation.ReserveMapper;
 import com.care.library.reservation.ReserveService;
 import com.care.library.search.BookDTO;
 import com.care.library.user.InquiryDTO;
@@ -26,6 +29,7 @@ public class AdminController {
 	@Autowired HttpSession session;
 	@Autowired AdminService service;
 	@Autowired ReserveService reserveService;
+	@Autowired ReserveMapper reserveMapper;
 	
 	@RequestMapping("/admin/member")
 	public String admin() {
@@ -153,15 +157,26 @@ public class AdminController {
 		return "admin/bookLoanContent";
 	}
 	
+	//도서관리 - 반납
+	@RequestMapping("/admin/bookReturn")
+	public String bookReturn(@RequestParam(value="loanId", required = false)String loanId, Model model) {
+		service.bookReturn(loanId, model);
+		return "redirect:/admin/book";
+	}
+	
 	//프로그램 관리 - 메인
 	@RequestMapping("/admin/program")
-	public String program() {
+	public String program(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="select", required = false)String select,  @RequestParam(value="loanStatusSelect", required = false)String loanStatusSelect, @RequestParam(value="search", required = false)String search, Model model) {
 		return "admin/program";
 	}
 
 	//열람실 관리 - 메인
 	@RequestMapping("/admin/room")
-	public String room() {
+	public String room(Model model) {
+		ArrayList<ReserveDTO> R1Seat = reserveMapper.getReservedSeat("R1");
+		ArrayList<ReserveDTO> R2Seat = reserveMapper.getReservedSeat("R2");
+		model.addAttribute("room1Seat", R1Seat.size());
+		model.addAttribute("room2Seat", R2Seat.size());
 		return "admin/room";
 	}
 	@RequestMapping("/admin/roomOpenClose")
@@ -183,16 +198,19 @@ public class AdminController {
 	
 	
 	@PostMapping("/admin/roomStatusProc")
-	public String roomStatusProc(@RequestParam(required = false)String open, @RequestParam(required = false)String closed) {
+	public String roomStatusProc(@RequestParam(required = false)String open,
+			@RequestParam(required = false)String closed, Model model, RedirectAttributes ra) {
 		String status="";
 		String id = (String)session.getAttribute("id");
 		if(open != null && open.equals("열람실 오픈")) {
 			status = "O";
-			reserveService.roomStatusChange(id, status);
+			//reserveService.roomStatusChange(id, status, model);
+			reserveService.roomStatusChange(id, status, ra);
 		}
 		if(closed != null &&closed.equals("열람실 마감")) {
 			status = "C";
-			reserveService.roomStatusChange(id, status);
+			//reserveService.roomStatusChange(id, status, model);
+			reserveService.roomStatusChange(id, status, ra);
 		}
 		return "redirect:/admin/room";
 	}

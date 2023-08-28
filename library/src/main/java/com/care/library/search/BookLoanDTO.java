@@ -9,7 +9,16 @@ public class BookLoanDTO {
 	private String endDate;
 	private String status;
 	private String reserveDate;
+	private String returnDate;
 	
+	public String getReturnDate() {
+		return returnDate;
+	}
+
+	public void setReturnDate(String returnDate) {
+		this.returnDate = returnDate;
+	}
+
 	public String getLoanId() {
 		return loanId;
 	}
