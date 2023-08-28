@@ -11,7 +11,9 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -378,16 +380,28 @@ public class SearchService {
 		if (rest < 1) {
 			return "대출 가능한 도서가 남아있지 않습니다.";
 		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    String reserveDate = sdf.format(new Date());
+	    
+		loanData.setReserveDate(reserveDate);
+		
 		int loanResult = mapper.insertLoan(loanData);
 		if (loanResult == 1) {
 			mapper.updateRestVol(isbn);
 			
 			NotifyDTO notification = new NotifyDTO();
 			notification.setId(loanData.getUserId());
-			notification.setCategory("대출");
-			notification.setTitle("도서 대출 신청이 완료되었습니다.");
+			notification.setCategory("도서");
+			notification.setTitle("도서 대출 예약 신청이 완료되었습니다.");
 			notification.setUrl("/myLibrary/loanStatus");
 			notiService.register(notification);
+			
+			NotifyDTO adminNotification = new NotifyDTO();
+			adminNotification.setId(mapper.findAdmin().getId());
+			adminNotification.setCategory("도서");
+			adminNotification.setTitle("도서 대출 예약 신청이 있습니다.");
+			adminNotification.setUrl("/admin/book");
+			notiService.register(adminNotification);
 			
 			return "대출 예약이 정상적으로 이루어졌습니다.";
 		}

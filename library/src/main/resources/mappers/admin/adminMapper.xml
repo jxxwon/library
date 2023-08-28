@@ -16,6 +16,13 @@
   		<result column = "write_date" property = "writeDate"/>
   		<result column = "reply_content" property = "replyContent"/>
   	</resultMap>
+  	<resultMap type="com.care.library.search.BookLoanDTO" id="bookLoanDto">
+  		<result column = "loan_id" property = "loanId"/>
+  		<result column = "user_id" property = "userId"/>
+  		<result column = "start_date" property = "startDate"/>
+  		<result column = "end_date" property = "endDate"/>
+  		<result column = "reserve_date" property = "reserveDate"/>
+  	</resultMap>
   	
   	<select id = "count">
   		SELECT count(id) FROM member
@@ -60,6 +67,22 @@
 	<update id = "memberReject">
 		UPDATE member SET status = 'D', reject = #{reject} WHERE id = #{id}
 	</update>
+	
+	<select id = "searchLoan" resultMap="bookLoanDto">
+		SELECT BBB.* FROM(SELECT rownum as rn, AAA.* FROM (SELECT * FROM bookloan WHERE status = #{loanStatusSelect} ORDER BY loan_id ASC)AAA)BBB WHERE rn BETWEEN #{begin} AND #{end}
+	</select>
+
+	<select id="countLoanStatus">
+		SELECT count(loan_id) FROM bookLoan WHERE status = #{loanStatusSelect}
+	</select>
+
+	<select id = "searchLoanAll" resultMap="bookLoanDto">
+		SELECT BBB.* FROM(SELECT rownum as rn, AAA.* FROM (SELECT * FROM bookloan ORDER BY loan_id ASC)AAA)BBB WHERE rn BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="countLoanAll">
+		SELECT count(loan_id) FROM bookLoan
+	</select>
 
 	<select id="countInquiry">
 		SELECT count(no) FROM inquiry

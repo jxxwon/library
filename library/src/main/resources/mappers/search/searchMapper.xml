@@ -98,13 +98,19 @@
 		<result column="user_id" property="userId" />
 		<result column="start_date" property="startDate" />
 		<result column="end_date" property="endDate" />
+		<result column="reserve_date" property="reserveDate" />
 	</resultMap>
 	
 	<!-- 대출 신청(예약) -->
 	<insert id="insertLoan" parameterType="com.care.library.search.BookLoanDTO">
-		INSERT INTO bookLoan (user_id, bookName, isbn, status) 
-		values(#{userId}, #{bookName}, #{isbn}, 'A')
+		INSERT INTO bookLoan (user_id, bookName, isbn, status, reserve_date) 
+		values(#{userId}, #{bookName}, #{isbn}, 'R', #{reserveDate})
 	</insert>
+	
+	<!-- 알림을 위해 관리자 찾기 -->
+	<select id = "findAdmin" resultType = "com.care.library.member.MemberDTO">
+		SELECT * FROM member WHERE status = 'M'
+	</select>
 	
 	<!-- isbn으로 대출한 책 권수 찾기 -->
 	<select id="checkRestVol">
