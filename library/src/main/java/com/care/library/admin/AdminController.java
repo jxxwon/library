@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.care.library.member.MemberDTO;
 import com.care.library.reservation.ReserveDTO;
@@ -190,16 +191,19 @@ public class AdminController {
 	
 	
 	@PostMapping("/admin/roomStatusProc")
-	public String roomStatusProc(@RequestParam(required = false)String open, @RequestParam(required = false)String closed) {
+	public String roomStatusProc(@RequestParam(required = false)String open,
+			@RequestParam(required = false)String closed, Model model, RedirectAttributes ra) {
 		String status="";
 		String id = (String)session.getAttribute("id");
 		if(open != null && open.equals("열람실 오픈")) {
 			status = "O";
-			reserveService.roomStatusChange(id, status);
+			//reserveService.roomStatusChange(id, status, model);
+			reserveService.roomStatusChange(id, status, ra);
 		}
 		if(closed != null &&closed.equals("열람실 마감")) {
 			status = "C";
-			reserveService.roomStatusChange(id, status);
+			//reserveService.roomStatusChange(id, status, model);
+			reserveService.roomStatusChange(id, status, ra);
 		}
 		return "redirect:/admin/room";
 	}

@@ -9,7 +9,13 @@
 <link href="${context }css/admin.css" rel="stylesheet" type="text/css">
 
 <c:import url="/header" />
-
+<script>
+	var message = "${roomMsg}";
+	
+	if(message !== ""){
+		alert(message);
+	}
+</script>
 </head>
 <body>
 	<div class="adminContainer inner mb_30">
@@ -37,27 +43,23 @@
 									<th>남은 좌석</th>
 									<th>오픈/마감</th>
 								</tr>
-								<%-- <c:forEach var="seat" items="${allseat }">
-									<c:if test="${seat.seatId != '0'}"> --%>
-										<tr>
-											<td>자율 열람실1</td>
-											<td>96석</td>
-											<td>${room1Seat}</td>
-											<td>${96 - room1Seat}</td>
-											<td><input type="submit" name="open" value="열람실 오픈">
-												<input type="submit" name="closed" value="열람실 마감"></td>
-										</tr>
-										<tr>
-											<td>자율 열람실2</td>
-											<td>96석</td>
-											<td>${room2Seat}</td>
-											<td>${96 - room2Seat}</td>
-											<td>
-												<input type="submit" name="open" value="열람실 오픈">
-												<input type="submit" name="closed" value="열람실 마감"></td>
-										</tr>
-									<%-- </c:if>
-								</c:forEach> --%>
+									<tr>
+										<td>자율 열람실1</td>
+										<td>96석</td>
+										<td>${room1Seat}</td>
+										<td>${96 - room1Seat}</td>
+										<td><input type="submit" name="open" value="열람실 오픈">
+											<input type="submit" name="closed" value="열람실 마감"></td>
+									</tr>
+									<tr>
+										<td>자율 열람실2</td>
+										<td>96석</td>
+										<td>${room2Seat}</td>
+										<td>${96 - room2Seat}</td>
+										<td>
+											<input type="submit" name="open" value="열람실 오픈">
+											<input type="submit" name="closed" value="열람실 마감"></td>
+									</tr>
 							</table>
 						</form>
 					</div>
