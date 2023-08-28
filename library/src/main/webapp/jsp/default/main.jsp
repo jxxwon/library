@@ -28,8 +28,37 @@
 	<div class="homeContainer">
 		<div class="visual">
 			<div class=" inner">
-				<div class="content left">왼쪽</div>
-				<div class="content right">오른쪽</div>
+				<div class="content left">
+					<div class="popularBook">
+						<div>
+							<img src="/image/heart.png"/>
+							<span>인기도서</span>
+						</div>
+						<div class="bookContainer">
+							<c:forEach var="image" items="${popularBook}" varStatus="loop">
+								<c:if test="${loop.index < 4}">
+									<div class="bookImageBox"><img src="${image}"></div>
+								</c:if>
+							</c:forEach>
+						</div>
+					</div>
+					
+				</div>
+				<div class="content right">
+					<div class="newBook">
+						<div>
+							<img src="/image/book.png"/>
+							<span>신착도서</span>
+						</div>
+						<div class="bookContainer">
+							<c:forEach var="image" items="${recentBook}" varStatus="loop">
+								 <c:if test="${loop.index < 4}">
+									<div class="bookImageBox"><img src="${image}"></div>
+								</c:if>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="condition">
