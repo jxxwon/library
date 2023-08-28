@@ -7,7 +7,6 @@ public class BookLoanDTO {
 	private String startDate;
 	private String endDate;
 	private String status;
-	private String status;
 
 	public String getStatus() {
 		return status;

@@ -102,13 +102,8 @@
 	
 	<!-- 대출 신청(예약) -->
 	<insert id="insertLoan" parameterType="com.care.library.search.BookLoanDTO">
-<<<<<<< HEAD
 		INSERT INTO bookLoan (user_id, bookName, isbn, start_date, end_date, status ) 
 		values(#{userId}, #{bookName}, #{isbn}, #{startDate}, #{endDate}, #{status})
-=======
-		INSERT INTO bookLoan (user_id, bookName, isbn, status) 
-		values(#{userId}, #{bookName}, #{isbn}, 'A')
->>>>>>> refs/heads/main
 	</insert>
 	
 	<!-- isbn으로 대출한 책 권수 찾기 -->

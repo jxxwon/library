@@ -183,18 +183,4 @@ public class AdminController {
 		service.replyWrite(no, content);
 		return "redirect:/admin/inquiry";
 	}
-	
-<<<<<<< HEAD
-	//열람실 관리
-	@RequestMapping("/admin/roomManage")
-	public String roomManage() {
-		String id = (String)session.getAttribute("id");
-		String status = (String)session.getAttribute("status");
-		if(id == null || id.equals("")||status.equals("M") == false) {
-			return "redirect:main";
-		}
-		return "admin/roomManage";
-	}
-=======
->>>>>>> refs/heads/main
 }
