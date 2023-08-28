@@ -1,12 +1,30 @@
 package com.care.library.search;
 
 public class BookLoanDTO {
+	private String loanId;
 	private String userId;
 	private String bookName;
 	private String isbn;
 	private String startDate;
 	private String endDate;
 	private String status;
+	private String reserveDate;
+	
+	public String getLoanId() {
+		return loanId;
+	}
+	
+	public void setLoanId(String loanId) {
+		this.loanId = loanId;
+	}
+
+	public String getReserveDate() {
+		return reserveDate;
+	}
+
+	public void setReserveDate(String reserveDate) {
+		this.reserveDate = reserveDate;
+	}
 
 	public String getStatus() {
 		return status;

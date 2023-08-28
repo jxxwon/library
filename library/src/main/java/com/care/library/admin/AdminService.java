@@ -10,6 +10,7 @@ import com.care.library.common.NotifyDTO;
 import com.care.library.common.NotifyService;
 import com.care.library.common.PageService;
 import com.care.library.member.MemberDTO;
+import com.care.library.search.BookLoanDTO;
 import com.care.library.user.InquiryDTO;
 
 @Service
@@ -145,6 +146,58 @@ public class AdminService {
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
 	}
+	// 도서관리
+	public void selectLoan(String cp, String select, String loanStatusSelect, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		if (loanStatusSelect == null) {
+			loanStatusSelect = "R";
+		}
+		
+		ArrayList<BookLoanDTO> loans = mapper.searchLoan(loanStatusSelect, begin, end);
+		int totalCount = mapper.countLoanStatus(loanStatusSelect);
+		
+		String url = "loan?select="+select+"&loanStatusSelect="+loanStatusSelect+"&currentPage=";
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("loans", loans);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+	}
+	
+	// 도서관리 - 전체 목록 조회
+	public void selectLoanAll(String cp, String select, String loanStatusSelect, Model model) {
+		int currentPage = 1;
+		try{
+			currentPage = Integer.parseInt(cp);
+		}catch(Exception e){
+			currentPage = 1;
+		}
+		
+		int pageBlock = 5; // 한 페이지에 보일 데이터의 수 
+		int end = pageBlock * currentPage; // 테이블에서 가져올 마지막 행번호
+		int begin = end - pageBlock + 1; // 테이블에서 가져올 시작 행번호
+		
+		ArrayList<BookLoanDTO> loans = mapper.searchLoanAll(begin, end);
+		int totalCount = mapper.countLoanAll();
+		
+		String url = "loan?select="+select+"&loanStatusSelect="+loanStatusSelect+"&currentPage=";
+		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
+		
+		model.addAttribute("loans", loans);
+		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
+	}
+	
 	
 	//1:1문의
 	public void selectInquiryTitle(String cp, String select, String search, Model model) {
@@ -244,6 +297,7 @@ public class AdminService {
 		notification.setUrl("/myLibrary/myInquiry");
 		notiService.register(notification);
 	}
+
 
 
 

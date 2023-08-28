@@ -168,6 +168,11 @@ h1{margin-bottom:50px;}
 
 .loanBtn {text-align:right;}
 
+.loanPage {margin:40px 0; text-align:center;}
+.bookContainer .loanPage a{display:inline-block; width:30px; height:30px; line-height:30px; font-weight:400; border:1px solid #ddd; margin-right:5px; text-align:center;}
+.bookContainer .loanPage a:last-child{margin-right:0;}
+
+
 /*도서관리 - 대출 등록*/
 .loanRegisterFormContainer {display:flex;}
 .loanRegisterFormContent{padding:50px 0 0 50px; width:1000px;}

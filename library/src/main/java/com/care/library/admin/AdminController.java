@@ -106,7 +106,16 @@ public class AdminController {
 	
 	// 도서관리 - 대출
 	@RequestMapping("/admin/loan")
-	public String loan() {
+	public String loan(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="select", required = false)String select,  @RequestParam(value="loanStatusSelect", required = false)String loanStatusSelect, @RequestParam(value="search", required = false)String search, Model model) {
+		if(select == null && loanStatusSelect == null && search==null) {
+			service.selectLoan(cp, select, loanStatusSelect, model);
+		} else if(select.equals("status")) {
+			if(loanStatusSelect.equals("T")) {
+				service.selectLoanAll(cp, select, loanStatusSelect, model);
+			} else {
+				service.selectLoan(cp, select, loanStatusSelect, model);
+			}
+		}
 		return "admin/loan";
 	}
 	
