@@ -98,24 +98,25 @@
 		<result column="user_id" property="userId" />
 		<result column="start_date" property="startDate" />
 		<result column="end_date" property="endDate" />
+		<result column="reserve_date" property="reserveDate" />
 	</resultMap>
 	
 	<!-- 대출 신청(예약) -->
 	<insert id="insertLoan" parameterType="com.care.library.search.BookLoanDTO">
-		INSERT INTO bookLoan (user_id, bookName, isbn, start_date, end_date, status ) 
-		values(#{userId}, #{bookName}, #{isbn}, #{startDate}, #{endDate}, #{status})
+		INSERT INTO bookLoan (user_id, bookName, isbn, status, reserve_date) 
+		values(#{userId}, #{bookName}, #{isbn}, 'R', #{reserveDate})
 	</insert>
+	
+	<!-- 알림을 위해 관리자 찾기 -->
+	<select id = "findAdmin" resultType = "com.care.library.member.MemberDTO">
+		SELECT * FROM member WHERE status = 'M'
+	</select>
 	
 	<!-- isbn으로 대출한 책 권수 찾기 -->
 	<select id="checkRestVol">
 		SELECT rest_vol FROM totalBook WHERE isbn=#{isbn}
 	</select>
 	
-	<!--대출시 잔여 도서 업데이트-->
-	<update id="updateRestVol">
-  		UPDATE totalBook SET rest_vol = rest_vol - 1 WHERE isbn = #{isbn}
-  	</update>
-  	
   	<select id="getMyBookStatus" resultMap="bookLoanDto">
 	    SELECT bookLoan.bookName, bookLoan.start_date, bookLoan.end_date, bookLoan.status ,bookLoan.isbn FROM bookLoan 
 	    WHERE user_id = #{userId} AND (status='R' OR status='L' OR status='O' OR status='LE')

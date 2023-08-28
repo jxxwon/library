@@ -1,6 +1,7 @@
 package com.care.library.admin;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.care.library.member.MemberDTO;
 import com.care.library.reservation.ReserveService;
+import com.care.library.search.BookDTO;
 import com.care.library.user.InquiryDTO;
 
 import jakarta.servlet.http.HttpSession;
@@ -108,14 +112,45 @@ public class AdminController {
 	
 	// 도서관리 - 대출
 	@RequestMapping("/admin/loan")
-	public String loan() {
+	public String loan(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="select", required = false)String select,  @RequestParam(value="loanStatusSelect", required = false)String loanStatusSelect, @RequestParam(value="search", required = false)String search, Model model) {
+		if(select == null && loanStatusSelect == null && search==null) {
+			service.selectLoan(cp, select, loanStatusSelect, model);
+		} else if(select.equals("status")) {
+			if(loanStatusSelect.equals("T")) {
+				service.selectLoanAll(cp, select, loanStatusSelect, model);
+			} else {
+				service.selectLoan(cp, select, loanStatusSelect, model);
+			}
+		}
 		return "admin/loan";
 	}
 	
 	//도서관리 - 대출 등록
 	@RequestMapping("/admin/bookLoanRegister")
-	public String bookLoanRegister() {
+	public String bookLoanRegister(@RequestParam(value="loanId", required = false)String loanId, Model model) {
+		if(loanId != null) {
+			service.loanRegister(loanId, model);
+		}
 		return "admin/bookLoanRegister";
+	}
+	
+	@RequestMapping("/admin/bookSearch")
+	public String bookSearch(@RequestParam(value="book", required = false)String book, Model model) {
+		service.bookSearch(book, model);
+		return "admin/bookSearch";
+	}
+	
+	@PostMapping("/admin/loanRegisterProc")
+	public String loanRegisterProc(@RequestParam(value="loanId", required = false)String loanId, String isbn, String userId, String startDate, String endDate) {
+		service.loanRegisterProc(loanId, isbn, startDate, endDate);
+		return "redirect:/admin/book";
+	}
+	
+	//도서관리 - 대출 상세조회 화면
+	@RequestMapping("/admin/bookLoanContent")
+	public String bookLoanContent(@RequestParam(value="loanId", required = false)String loanId, Model model) {
+		service.selectLoanContent(loanId, model);
+		return "admin/bookLoanContent";
 	}
 	
 	//프로그램 관리 - 메인

@@ -152,6 +152,46 @@ function memberSearch(){
 	f.submit();
 }
 
+// 대출  - 시작일자
+$(function() {
+	  $('input[name="startDate"]').daterangepicker({
+	    singleDatePicker: true,
+	    autoApply: true,
+	    showDropdowns: true,
+	    startDate: moment().format('YYYY-MM-DD'),
+	    minYear: 1940,
+	    maxYear: parseInt(moment().format('YYYY'), 10),
+	    locale: {
+	      format: 'YYYY-MM-DD'
+	    }
+	  }, function(start, end, label) {
+	    $('input[name="startDate"]').val(start.format('YYYY-MM-DD'));
+	  });
+	});
+
+// 대출  - 종료일자
+$(function() {
+	var endDate = moment().add(10, 'days').format('YYYY-MM-DD');
+	  $('input[name="endDate"]').daterangepicker({
+	    singleDatePicker: true,
+	    autoApply: true,
+	    showDropdowns: true,
+	    startDate: endDate,
+	    minYear: 1940,
+	    maxYear: parseInt(moment().format('YYYY'), 10),
+	    locale: {
+	      format: 'YYYY-MM-DD'
+	    }
+	  }, function(start, end, label) {
+	    $('input[name="endDate"]').val(start.format('YYYY-MM-DD'));
+	  });
+	});
+
+// 뒤로가기..
+function goBack() {
+  history.back();
+}
+
 // 1:1문의 작성시 답변 관련
 function replyProc(){
 	var content = document.getElementById('content').value;

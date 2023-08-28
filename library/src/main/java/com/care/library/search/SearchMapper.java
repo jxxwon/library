@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.care.library.member.MemberDTO;
+
 @Mapper
 public interface SearchMapper {
 	
@@ -44,5 +46,7 @@ public interface SearchMapper {
 	ArrayList<BookLoanDTO> getMyLoanHistory(String userId);
 	
 	int updateLoanStatus(String id, String isbn, String newEndDate);
+	
+	MemberDTO findAdmin();
 
 }

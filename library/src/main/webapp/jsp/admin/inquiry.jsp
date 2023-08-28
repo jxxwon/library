@@ -87,13 +87,13 @@
 										<td>${inquiry.id }</td>
 										<td>${inquiry.writeDate }</td>
 									</tr>
-									<div class="inquiryPage">
-										${result }
-									</div>
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
 					</table>
+					<div class="inquiryPage">
+						${result }
+					</div>
 				</form>
 			</div>
 		</div>

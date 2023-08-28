@@ -15,15 +15,15 @@
 				<div class="bookSearch">
 					<select class="loanSelect" name = "select" id="loanSelect" onchange="searchChange()">
 						<option <c:if test="${param.select == 'status'}">selected='selected'</c:if>value="status">신청상태</option>
-						<option <c:if test="${param.select == 'id'}">selected='selected'</c:if>value="id">아이디</option>
+						<option <c:if test="${param.select == 'id'}">selected='selected'</c:if>value="id">대출자</option>
 						<option <c:if test="${param.select == 'title'}">selected='selected'</c:if>value="title">책제목</option>
 					</select>
 					<c:choose>
 					    <c:when test="${param.select == 'status' || param.select == null}">
 					        <select class="loanStatusSelect" name="loanStatusSelect" id="loanStatusSelect">
-					            <option <c:if test="${param.loanStatusSelect == 'R'}">selected='selected'</c:if>value="A">대출예약</option>
+					            <option <c:if test="${param.loanStatusSelect == 'R'}">selected='selected'</c:if>value="R">대출예약</option>
 					            <option <c:if test="${param.loanStatusSelect == 'L'}">selected='selected'</c:if>value="L">대출중</option>
-					            <option <c:if test="${param.loanStatusSelect == 'O'}">selected='selected'</c:if>value="L">연체</option>
+					            <option <c:if test="${param.loanStatusSelect == 'O'}">selected='selected'</c:if>value="O">연체</option>
 					            <option <c:if test="${param.loanStatusSelect == 'T'}">selected='selected'</c:if>value="T">전체</option>
 					        </select>
 					    </c:when>
@@ -54,11 +54,21 @@
 						<th>번호</th>
 						<th>책제목</th>
 						<th>대출자</th>
-						<th>대출시작일</th>
-						<th>반납예정일</th>
+						<c:choose>
+							<c:when test="${param.select == null || (param.select == 'status' && param.loanStatusSelect == 'R')}">
+								<th>대출예약일</th>
+							</c:when>
+							<c:when test = "${param.select ==  'status' && param.loanStatusSelect == 'T'}">
+								<th>상태</th>
+							</c:when>
+							<c:otherwise>
+								<th>대출시작일</th>
+								<th>반납예정일</th>
+							</c:otherwise>
+						</c:choose>
 					</tr>
 					<c:choose>
-						<c:when test = "${empty inquiries}">
+						<c:when test = "${empty loans}">
 							<tr>
 								<td colspan = 5 style = "cursor:default; color:#000;">
 									예약 신청 중인 도서가 없습니다.
@@ -66,27 +76,50 @@
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach var="inquiry" items = "${inquiries}">
-								<tr onclick="location.href='inquiryContent?no=${inquiry.no}'">
-									<td>${inquiry.no}</td>
-									<td>${inquiry.title }</td>
-									<td>
-										<c:if test = "${inquiry.reply == 'N' }">
-											미답변
-										</c:if>
-										<c:if test = "${inquiry.reply == 'Y' }">
-											답변완료
-										</c:if>
-									</td>
-									<td>${inquiry.id }</td>
-									<td>${inquiry.writeDate }</td>
+							<c:forEach var="loan" items = "${loans}">
+								<c:choose>
+									<c:when test = "${param.loanStatusSelect == 'R' || param.loanStatusSelect == null}">
+										<tr onclick="location.href='bookLoanRegister?loanId=${loan.loanId}'">
+									</c:when>
+									<c:otherwise>
+										<tr onclick="location.href='bookLoanContent?loanId=${loan.loanId}'">
+									</c:otherwise>
+								</c:choose>
+									<td>${loan.loanId}</td>
+									<td>${loan.bookName }</td>
+									<td>${loan.userId}</td>
+									<c:choose>
+										<c:when test="${param.select == null || (param.select == 'status' && param.loanStatusSelect == 'R')}">
+											<td>${loan.reserveDate}</td>
+										</c:when>
+										<c:when test = "${param.select ==  'status' && param.loanStatusSelect == 'T'}">
+											<td>
+												<c:if test ="${loan.status == 'R'}">
+													예약중
+												</c:if>
+												<c:if test ="${loan.status == 'L'}">
+													대출중
+												</c:if>
+												<c:if test ="${loan.status == 'LE'}">
+													대출중(연장)
+												</c:if>
+												<c:if test ="${loan.status == 'O'}">
+													연체중
+												</c:if>
+											</td>
+										</c:when>
+										<c:otherwise>
+											<td>${loan.startDate }</td>
+											<td>${loan.endDate }</td>
+										</c:otherwise>
+									</c:choose>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
 				</table>
-				<div class="inquiryPage">
-					${result }
+				<div class="loanPage">
+					${result}
 				</div>
 			</form>
 		</div>
