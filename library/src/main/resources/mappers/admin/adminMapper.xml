@@ -24,6 +24,7 @@
   		<result column = "start_date" property = "startDate"/>
   		<result column = "end_date" property = "endDate"/>
   		<result column = "reserve_date" property = "reserveDate"/>
+  		<result column = "return_date" property = "returnDate"/>
   	</resultMap>
 
   	<resultMap type="com.care.library.search.BookDTO" id="bookDto">
@@ -118,6 +119,14 @@
 	
 	<update id="updateRestVol">
   		UPDATE totalBook SET rest_vol = rest_vol - 1 WHERE isbn = #{isbn}
+  	</update>
+  	
+  	<update id = "bookReturn">
+		UPDATE bookLoan SET status = 'C', return_date = #{returnDate} WHERE loan_id = #{loanId}
+  	</update>
+
+  	<update id = "updateRestVolReturn">
+		UPDATE totalBook SET rest_vol = rest_vol + 1 WHERE isbn = #{isbn}
   	</update>
 
 	<select id="countInquiry">

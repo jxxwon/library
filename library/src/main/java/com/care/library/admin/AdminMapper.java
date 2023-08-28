@@ -57,6 +57,10 @@ public interface AdminMapper {
 	
 	void updateRestVol(String isbn);
 
+	void bookReturn(String loanId, String returnDate);
+
+	void updateRestVolReturn(String isbn);
+
 	ArrayList<InquiryDTO> selectInquiry(int begin, int end);
 
 	int countInquiry();
@@ -76,8 +80,5 @@ public interface AdminMapper {
 	int countInquiryWriter(String search);
 
 	ArrayList<InquiryDTO> selectInquiryWriter(String search, int begin, int end);
-
-
-
 
 }

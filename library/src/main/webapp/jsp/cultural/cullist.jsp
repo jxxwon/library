@@ -9,52 +9,14 @@
   	document.addEventListener('DOMContentLoaded', function() {	
   		//JavaScript 코드가 DOM이 로드되기 전에 실행되면 해당 요소를 찾을 수 없기 때문에 오류가 발생할 수 있음
   		//DOMContentLoaded 이벤트가 발생할 때까지 스크립트가 실행되지 않고, DOM이 완전히 로드된 이후에 실행
-    var id = "${sessionScope.id}"; // 세션에 저장된 id 값을 가져와서 id 변수에 할당
-    if (id === 'admin') {
+    var status = "${sessionScope.status}"; // 세션에 저장된 id 값을 가져와서 id 변수에 할당
+    if (status === 'M') {
       document.getElementById('apply').style.display = 'block';
     } else {
-      document.getElementById('apply').style.display = 'block';/* 
-      document.getElementById('apply').style.display = 'none'; */
+      document.getElementById('apply').style.display = 'none';
     }
   });
   	
-  /* //탭 클릭 시 active 추가
-  	document.addEventListener('DOMContentLoaded', function() {
-  		const subMenuItems = document.querySelectorAll('.menu-item');
-  	    subMenuItems[0].classList.add('active');
-
-  	    subMenuItems.forEach(item => {
-  	        item.addEventListener('click', function() {
-  	            subMenuItems.forEach(item => {
-  	                item.classList.remove('active');
-  	            });
-
-  	            this.classList.add('active');
-
-  	            var value = this.getAttribute("value");
-
-  	            // Remove the existing content and update with new content
-  	            var contentBox = document.querySelector('.contentBox');
-  	            contentBox.innerHTML = ''; // Clear existing content
-
-  	            var xhr = new XMLHttpRequest();
-  	            xhr.onreadystatechange = function() {
-  	                if (xhr.readyState === XMLHttpRequest.DONE) {
-  	                    if (xhr.status === 200) {
-  	                        contentBox.innerHTML = xhr.responseText; // Update with new content
-  	                    } else {
-  	                        console.log("Error:", xhr.status);
-  	                    }
-  	                }
-  	            };
-
-  	            xhr.open('POST', '/cultural/culFormEnd', true);
-  	            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  	            xhr.send("category=" + encodeURIComponent(value));
-  	        });
-  	    });
-  	}); */
-
 </script>
 	
 <style>
@@ -65,7 +27,6 @@
   	}
   	.subMenu .active{background-color:#338cfa;}
 	.subMenu .active a{color:#fff;}
-	
 	
 </style>
 
@@ -96,7 +57,7 @@
 		
  		<div class="top-menu">
 		    <ul>
-		        <li class="menu-item active" id="menu1"><a href="${context}culturalForm"><span>접수중 / 예정행사</span></a></li>
+		        <li class="menu-item active" id="menu1"><a href="${context}cullist"><span>접수중 / 예정행사</span></a></li>
 		        <li class="menu-item" id="menu2"><a href="${context}culFormEnd"><span>접수마감된 행사</span></a></li>
 		    </ul>
 		</div>

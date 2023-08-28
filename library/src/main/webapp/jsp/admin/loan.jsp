@@ -24,6 +24,7 @@
 					            <option <c:if test="${param.loanStatusSelect == 'R'}">selected='selected'</c:if>value="R">대출예약</option>
 					            <option <c:if test="${param.loanStatusSelect == 'L'}">selected='selected'</c:if>value="L">대출중</option>
 					            <option <c:if test="${param.loanStatusSelect == 'O'}">selected='selected'</c:if>value="O">연체</option>
+					            <option <c:if test="${param.loanStatusSelect == 'C'}">selected='selected'</c:if>value="C">반납</option>
 					            <option <c:if test="${param.loanStatusSelect == 'T'}">selected='selected'</c:if>value="T">전체</option>
 					        </select>
 					    </c:when>
@@ -32,6 +33,7 @@
 					            <option value="R">대출예약</option>
 					            <option value="L">대출중</option>
 					            <option value="O">연체</option>
+					            <option value="C">반납</option>
 					            <option value="T">전체</option>
 					        </select>
 					    </c:otherwise>
@@ -54,6 +56,9 @@
 						<c:choose>
 							<c:when test="${param.select == null || (param.select == 'status' && param.loanStatusSelect == 'R')}">
 								<th>대출예약일</th>
+							</c:when>
+							<c:when test = "${param.select == 'status' && param.loanStatusSelect == 'C' }">
+								<th>반납일</th>
 							</c:when>
 							<c:when test = "${param.select ==  'status' && param.loanStatusSelect == 'T'}">
 								<th>상태</th>
@@ -103,7 +108,13 @@
 												<c:if test ="${loan.status == 'O'}">
 													연체중
 												</c:if>
+												<c:if test ="${loan.status == 'C'}">
+													반납완료
+												</c:if>
 											</td>
+										</c:when>
+										<c:when test = "${param.select == 'status' && param.loanStatusSelect == 'C'}">
+											<td>${loan.returnDate}</td>
 										</c:when>
 										<c:otherwise>
 											<td>${loan.startDate }</td>

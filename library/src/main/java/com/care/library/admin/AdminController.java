@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.care.library.member.MemberDTO;
+import com.care.library.reservation.ReserveService;
 import com.care.library.search.BookDTO;
 import com.care.library.user.InquiryDTO;
 
@@ -24,6 +25,7 @@ import jakarta.servlet.http.HttpSession;
 public class AdminController {
 	@Autowired HttpSession session;
 	@Autowired AdminService service;
+	@Autowired ReserveService reserveService;
 	
 	@RequestMapping("/admin/member")
 	public String admin() {
@@ -151,6 +153,13 @@ public class AdminController {
 		return "admin/bookLoanContent";
 	}
 	
+	//도서관리 - 반납
+	@RequestMapping("/admin/bookReturn")
+	public String bookReturn(@RequestParam(value="loanId", required = false)String loanId, Model model) {
+		service.bookReturn(loanId, model);
+		return "redirect:/admin/book";
+	}
+	
 	//프로그램 관리 - 메인
 	@RequestMapping("/admin/program")
 	public String program() {
@@ -161,6 +170,38 @@ public class AdminController {
 	@RequestMapping("/admin/room")
 	public String room() {
 		return "admin/room";
+	}
+	@RequestMapping("/admin/roomOpenClose")
+	public String roomOpenClose() {
+		return "admin/roomOpenClose";
+	}
+	
+	@RequestMapping("/admin/roomStatus")
+	public String roomStatus(Model model,
+			@RequestParam(required = false)String roomSelect, 
+			@RequestParam(required = false)String searchSelect,
+			@RequestParam(required = false)String search) {
+		//아무것도 선택 안했을
+		reserveService.getAllSeat( model);
+		
+		return "admin/roomStatus";
+	}
+	
+	
+	
+	@PostMapping("/admin/roomStatusProc")
+	public String roomStatusProc(@RequestParam(required = false)String open, @RequestParam(required = false)String closed) {
+		String status="";
+		String id = (String)session.getAttribute("id");
+		if(open != null && open.equals("열람실 오픈")) {
+			status = "O";
+			reserveService.roomStatusChange(id, status);
+		}
+		if(closed != null &&closed.equals("열람실 마감")) {
+			status = "C";
+			reserveService.roomStatusChange(id, status);
+		}
+		return "redirect:/admin/room";
 	}
 
 	//결제 관리 - 메인

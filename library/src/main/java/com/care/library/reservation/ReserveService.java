@@ -9,6 +9,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.care.library.common.NotifyDTO;
 import com.care.library.common.NotifyService;
+import com.care.library.common.PageService;
+import com.care.library.member.MemberDTO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -19,7 +21,8 @@ public class ReserveService {
 	ReserveMapper reserveMapper;
 	@Autowired
 	HttpSession session;
-	@Autowired NotifyService notiService;
+	@Autowired
+	NotifyService notiService;
 
 	public String userCheck(String id) {
 		int usingUser = reserveMapper.usingUser(id);
@@ -30,17 +33,17 @@ public class ReserveService {
 
 	public String reservation(ReserveDTO resevedData) {
 		int result = reserveMapper.reservation(resevedData);
-		
+
 		if (result == 1) {
-			String msg = resevedData.getSeatId()+"번 좌석이 예약되었습니다.";
+			String msg = resevedData.getSeatId() + "번 좌석이 예약되었습니다.";
 			NotifyDTO notification = new NotifyDTO();
-			//String msg = resevedData.getRoom()
+			// String msg = resevedData.getRoom()
 			notification.setId(resevedData.getUserId());
 			notification.setCategory("열람실");
 			notification.setTitle(msg);
-			if(resevedData.getRoom().equals("R1"))
+			if (resevedData.getRoom().equals("R1"))
 				notification.setUrl("/reservation/readingRoom1");
-			if(resevedData.getRoom().equals("R2"))
+			if (resevedData.getRoom().equals("R2"))
 				notification.setUrl("/reservation/readingRoom2");
 			notiService.register(notification);
 			return "예약이 완료되었습니다.";
@@ -57,26 +60,28 @@ public class ReserveService {
 //		System.out.println();
 		return reservedSeat;
 	}
-	
+
 	public ReserveDTO getMySeat(String id, Model model) {
 		ReserveDTO mySeat = reserveMapper.getSeatById(id);
-		if(mySeat != null) {
-			if(mySeat.getRoom().equals("R1"))
+		if (mySeat != null) {
+			if ("R1".equals(mySeat.getRoom())) {
 				mySeat.setRoom("자율 학습실1");
-			if(mySeat.getRoom().equals("R2"))
+			} else if ("R2".equals(mySeat.getRoom())) {
 				mySeat.setRoom("자율 학습실2");
-			
+			}
+
 			model.addAttribute("mySeat", mySeat);
 			return mySeat;
+		} else {
+			return null;
 		}
-		return null;
 	}
 
 	public String leaveProc(String id) {
 		int leaveResult = reserveMapper.DeleteSeatById(id);
-		if(leaveResult == 1) {
+		if (leaveResult == 1) {
 			NotifyDTO notification = new NotifyDTO();
-			//String msg = resevedData.getRoom()
+			// String msg = resevedData.getRoom()
 			notification.setId(id);
 			notification.setCategory("열람실");
 			notification.setTitle("퇴실이 완료 되었습니다.");
@@ -86,5 +91,22 @@ public class ReserveService {
 		}
 		return "퇴실이 제대로 이루어지지 않았습니다.";
 	}
-	
+
+	public void roomStatusChange(String id, String status) {
+		int initResult = reserveMapper.roomInit();
+		if (status.equals("O")) {
+			System.out.println("오픈 되는건가?");
+			reserveMapper.roomStatusChange(id, status);
+		} else {
+			reserveMapper.roomStatusChange(id, status);
+		}
+	}
+
+	public void getAllSeat(Model model) {
+
+		ArrayList<ReserveDTO> allSeat = reserveMapper.getAllSeat();
+		model.addAttribute("allseat", allSeat);
+		return;
+	}
+
 }

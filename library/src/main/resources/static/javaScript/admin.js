@@ -192,6 +192,15 @@ function goBack() {
   history.back();
 }
 
+// 반납
+function returnProc(){
+	if(confirm('해당 도서를 반납처리 하시겠습니까?') == true){
+		alert('반납이 등록되었습니다.');
+		var f = document.getElementById('f');
+			f.submit();
+	}
+}
+
 // 1:1문의 작성시 답변 관련
 function replyProc(){
 	var content = document.getElementById('content').value;
@@ -205,3 +214,45 @@ function replyProc(){
 		}
 	}
 }
+
+
+//열람실 회원 관리
+function roomSearch(){
+	var memberSelect = document.getElementById('memberSelect');
+	var memSelect = document.getElementById('memberSelect').options.selectedIndex;
+	var memberOption = memberSelect.options[memSelect].value;
+	
+	var searchSelect =document.getElementById('searchSelect');
+	var seaSelect = document.getElementById('searchSelect').options.selectedIndex;
+	var searchOption = searchSelect.options[seaSelect].value;
+
+	var search = document.getElementById('search');
+	
+	if(memberOption == 'T' && searchOption == 'all'){
+		document.getElementById('memberSelect').disabled = true;
+		document.getElementById('searchSelect').disabled = true;
+		document.getElementById('search').disabled = true;
+	} else if(memberOption != 'T' && searchOption == 'all'){
+		document.getElementById('searchSelect').disabled = true;
+		document.getElementById('search').disabled = true;
+	}
+	if(memberOption == 'T' && searchOption != 'all'){
+		if(search.value == null || search.value.trim() === ''){
+			alert('검색어를 입력하세요');
+			return;
+		} else {
+			document.getElementById('memberSelect').disabled = true;
+		}
+	}
+	if(memberSelect != 'T' && searchOption != 'all'){
+		if(search.value == null || search.value.trim() === ''){
+			alert('검색어를 입력하세요');
+			return;
+		}
+	}
+	var f = document.getElementById('f');
+	f.submit();
+}
+
+
+

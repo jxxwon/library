@@ -243,3 +243,7 @@ h1{margin-bottom:50px;}
 .inquiryContainer .inquiryContentForm th{padding:10px; border-right:1px solid #ddd;}
 .inquiryContainer .inquiryContentForm th.right{border-left:1px solid #ddd;}
 .inquiryContainer .inquiryContentForm td{padding:10px;}
+
+/*열람실 관리*/
+#room_menu li.active a{color:white;}
+#room_menu li a:hover{cursor:pointer; color:white;}
