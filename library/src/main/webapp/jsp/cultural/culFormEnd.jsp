@@ -58,7 +58,7 @@
 		
  		<div class="top-menu">
 		    <ul>
-		        <li class="menu-item" id="menu1"><a href="${context}culturalForm"><span>접수중 / 예정행사</span></a></li>
+		        <li class="menu-item" id="menu1"><a href="${context}cullist"><span>접수중 / 예정행사</span></a></li>
 		        <li class="menu-item  active" id="menu2"><a href="${context}culFormEnd"><span>접수마감된 행사</span></a></li>
 		    </ul>
 		</div>

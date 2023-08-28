@@ -1,6 +1,8 @@
 package com.care.library.admin;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -147,7 +149,8 @@ public class AdminService {
 		model.addAttribute("result", result);
 		model.addAttribute("currentPage", currentPage);
 	}
-	// 도서관리
+	
+	// 도서관리 - 대출
 	public void selectLoan(String cp, String select, String loanStatusSelect, Model model) {
 		int currentPage = 1;
 		try{
@@ -191,7 +194,7 @@ public class AdminService {
 		ArrayList<BookLoanDTO> loans = mapper.searchLoanAll(begin, end);
 		int totalCount = mapper.countLoanAll();
 		
-		String url = "loan?select="+select+"&loanStatusSelect="+loanStatusSelect+"&currentPage=";
+		String url = "book?select="+select+"&loanStatusSelect="+loanStatusSelect+"&currentPage=";
 		String result = PageService.printPage(url, currentPage, totalCount, pageBlock);
 		
 		model.addAttribute("loans", loans);
@@ -223,7 +226,6 @@ public class AdminService {
 		}
 		model.addAttribute("list", list);
 	}
-
 	
 	public void loanRegisterProc(String loanId, String isbn, String startDate, String endDate) {
 		mapper.loanRegister(loanId, startDate, endDate);
@@ -242,10 +244,28 @@ public class AdminService {
 
 	public void selectLoanContent(String loanId, Model model) {
 		BookLoanDTO loan = mapper.loanRegisterSelect(loanId);
-		
 		model.addAttribute("loan", loan);
 	}
+	
+	//도서관리 - 반납
+	public void bookReturn(String loanId, Model model) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String returnDate = sdf.format(new Date());
+		
+		mapper.bookReturn(loanId, returnDate);
 
+		BookLoanDTO loan = mapper.loanRegisterSelect(loanId);
+		String isbn = loan.getIsbn();
+		mapper.updateRestVolReturn(isbn);
+		
+		String id = loan.getUserId();
+		NotifyDTO notification = new NotifyDTO();
+		notification.setId(id);
+		notification.setCategory("도서");
+		notification.setTitle("반납이 완료되었습니다.");
+		notification.setUrl("/myLibrary/myBookStatus");
+		notiService.register(notification);
+	}
 	
 	//1:1문의
 	public void selectInquiryTitle(String cp, String select, String search, Model model) {
@@ -345,9 +365,5 @@ public class AdminService {
 		notification.setUrl("/myLibrary/myInquiry");
 		notiService.register(notification);
 	}
-
-	
-
-
 
 }

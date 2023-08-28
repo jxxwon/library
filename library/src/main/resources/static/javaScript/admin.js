@@ -192,6 +192,15 @@ function goBack() {
   history.back();
 }
 
+// 반납
+function returnProc(){
+	if(confirm('해당 도서를 반납처리 하시겠습니까?') == true){
+		alert('반납이 등록되었습니다.');
+		var f = document.getElementById('f');
+			f.submit();
+	}
+}
+
 // 1:1문의 작성시 답변 관련
 function replyProc(){
 	var content = document.getElementById('content').value;

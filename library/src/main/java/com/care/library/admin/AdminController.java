@@ -157,9 +157,16 @@ public class AdminController {
 		return "admin/bookLoanContent";
 	}
 	
+	//도서관리 - 반납
+	@RequestMapping("/admin/bookReturn")
+	public String bookReturn(@RequestParam(value="loanId", required = false)String loanId, Model model) {
+		service.bookReturn(loanId, model);
+		return "redirect:/admin/book";
+	}
+	
 	//프로그램 관리 - 메인
 	@RequestMapping("/admin/program")
-	public String program() {
+	public String program(@RequestParam(value="currentPage", required = false)String cp, @RequestParam(value="select", required = false)String select,  @RequestParam(value="loanStatusSelect", required = false)String loanStatusSelect, @RequestParam(value="search", required = false)String search, Model model) {
 		return "admin/program";
 	}
 

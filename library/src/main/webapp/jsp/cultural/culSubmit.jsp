@@ -161,7 +161,7 @@
 					</table>
 					<div class="culBtn" align="center">
 						<input type="submit" value="신청"> 
-						<input type="button" value="취소"	 onclick="location.href='culForm'">
+						<input type="button" value="취소"	 onclick="location.href='cullist'">
 					</div>
 				</form>
 			</div>
