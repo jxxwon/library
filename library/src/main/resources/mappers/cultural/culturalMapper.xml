@@ -109,6 +109,7 @@
 	<!-- culId랑 일치하는 데이터 보여주는 DB -->
 	<select id="culFormWrite" resultMap="culturalDto">
 	   SELECT
+	   		cul_id,
 			image_path,
 			title,
 			lecture_start,
@@ -131,7 +132,7 @@
 	</select>
 	
 	<!-- 수정하여 업데이트하는 쿼리 -->
-	<update id="updateCultural" parameterType="com.care.library.cultural.CulturalDTO">
+	<update id="updateCulturalProc" parameterType="com.care.library.cultural.CulturalDTO">
 	    UPDATE cultural
 	    SET
 	        title = #{title},
@@ -152,4 +153,8 @@
 	    WHERE
 	        cul_id = #{culId}
 	</update>
+	
+	<delete id="culturalDeleteProc">	
+		DELETE FROM cultural WHERE cul_id=#{culId}
+	</delete>
 </mapper>

@@ -89,26 +89,26 @@
 				String culId = request.getParameter("culId");
 			%> --%>
 			<div class="inquiryContainer" align="center">
-				<form action="culFormWriteProc" method='post' enctype="multipart/form-data">
+				<form action="updateCulturalProc?culId=${cultural.culId}" method='post' enctype="multipart/form-data">
 					<table class="table inquiryWriteForm">
 						<tr>
 							<th width="100px">제목</th>
-							<td><input style="width: 100%; height: 30px" type="text" name="title"></td>
+							<td><input style="width: 100%; height: 30px" type="text" name="title" value="${cultural.title}"></td>
 						</tr>
 						<tr>
 						    <th>강의기간</th>
 						    <td class="calender">
-						        <input style="width: 100px; height: 30px;" class="lecture start-date" name="lectureStart">
+						        <input style="width: 100px; height: 30px;" class="lecture start-date" name="lectureStart" value="${cultural.lectureStart}">
 						        &nbsp;&nbsp;~&nbsp;&nbsp;
-						        <input style="width: 100px; height: 30px;" class="lecture end-date" name="lectureEnd">
+						        <input style="width: 100px; height: 30px;" class="lecture end-date" name="lectureEnd" value="${cultural.lectureEnd}">
 						    </td>
 						</tr>
 						<tr>
 						    <th>접수기간</th>
 						    <td class="calender">
-						        <input style="width: 100px; height: 30px;" class="registration start-date" name="registrationStart">
+						        <input style="width: 100px; height: 30px;" class="registration start-date" name="registrationStart" value="${cultural.registrationStart}">
 						        &nbsp;&nbsp;~&nbsp;&nbsp;
-						        <input style="width: 100px; height: 30px;" class="registration end-date" name="registrationEnd">
+						        <input style="width: 100px; height: 30px;" class="registration end-date" name="registrationEnd" value="${cultural.registrationEnd}">
 						    </td>
 						</tr>
 
@@ -117,44 +117,45 @@
 						    <th>대&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상</th>
 						    <!-- appearance: auto; -webkit-appearance: auto; 글씨 크기에 맞게 아래방향 화살표 -->
 						    <td>
-						        <select class="select2" style="width: 100px; height: 30px; appearance: auto; -webkit-appearance: auto;" name="target">
-								    <option value="전체">전체</option>
-								    <option value="어린이">어린이</option>
-								    <option value="청소년">청소년</option>
-								    <option value="성인">성인</option>
-								    <option value="어르신">어르신</option><!-- 65세이상 -->
+						        <select class="select2" style="width: 100px; height: 30px; appearance: auto; -webkit-appearance: auto;" name="target" >
+								    <option value="전체" ${cultural.target == '전체' ? 'selected' : ''}>전체</option>
+								    <option value="어린이" ${cultural.target == '어린이' ? 'selected' : ''}>어린이</option>
+								    <option value="청소년" ${cultural.target == '청소년' ? 'selected' : ''}>청소년</option>
+								    <option value="성인" ${cultural.target == '성인' ? 'selected' : ''}>성인</option>
+								    <option value="어르신" ${cultural.target == '어르신' ? 'selected' : ''}>어르신</option>
+								</select>
 								</select>
 						    </td>
 						</tr>
 						<tr>
 							<th width="100px">강의시간</th>
-							<td><input style="width: 100%; height: 30px" type="text" name="LectureTime" placeholder="10:00 - 12:00"></td>
+							<td><input style="width: 100%; height: 30px" type="text" name="LectureTime" value="${cultural.lectureTime}"></td>
 						</tr>
 						<tr>
 							<th width="100px">강의장소</th>
-							<td><input style="width: 100%; height: 30px" type="text" name="LecturePlace" placeholder="하이미디어 도서관"></td>
+							<td><input style="width: 100%; height: 30px" type="text" name="LecturePlace" value="${cultural.lecturePlace}"></td>
 						</tr>
 						<tr>
 							<th width="100px">강의요일</th>
-							<td><input style="width: 100%; height: 30px" type="text" name="LectureDay" vlule="월, 화, 수, 목, 금"></td>
+							<td><input style="width: 100%; height: 30px" type="text" name="LectureDay" value="${cultural.lectureDay}"></td>
 						</tr>
 						<tr>
 							<th width="100px">강사명</th>
-							<td><input style="width: 100%; height: 30px" type="text" name="LectureName"></td>
+							<td><input style="width: 100%; height: 30px" type="text" name="LectureName" value="${cultural.lectureName}"></td>
 						</tr>
 						<tr>
 							<th width="100px">준비물</th>
-							<td><input style="width: 100%; height: 30px" type="text" name="Cost" placeholder="없음"></td>
+							<td><input style="width: 100%; height: 30px" type="text" name="Cost" value="${cultural.cost}"></td>
 						</tr>
 						<tr>
 							<th width="100px">설명 내용</th>
-							<td><textarea style="width: 100%; height: 200px; resize: none;" name="LectureText"></textarea></td>
+							<td><textarea style="width: 100%; height: 200px; resize: none;" name="LectureText">${cultural.lectureText}</textarea></td>
 						</tr>
 						<tr>
 							<th class="picture">사진&nbsp;첨부</th>
 							<td>
 								<!-- 실제 파일 첨부 input 요소 -->
-								<input type="file" name="upfile" id="fileInput" class="file-upload-input" onchange="showFileName()" name="ImagePath">
+								<input type="file" name="upfile" id="fileInput" class="file-upload-input" onchange="showFileName()" name="ImagePath""> 
 								<!-- 파일명을 보여주는 요소 -->
 								<span id="fileNameDisplay">첨부된 파일이 없음</span>
 								<!-- 파일첨부 버튼 -->
@@ -163,7 +164,7 @@
 						</tr>
 					</table>
 					<div class="culBtn" align="center">
-						<input type="submit" value="신청"> 
+						<input type="submit" value="수정" > 
 						<input type="button" value="취소"	 onclick="location.href='cullist'">
 					</div>
 				</form>

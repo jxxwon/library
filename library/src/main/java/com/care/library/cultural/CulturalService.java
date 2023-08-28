@@ -14,10 +14,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.care.library.cultural.CulturalDTO;
 import com.care.library.cultural.CulturalMapper;
+import com.care.library.info.NoticeDTO;
+
 import ch.qos.logback.core.net.SyslogOutputStream;
 import jakarta.servlet.http.HttpSession;
 
@@ -211,79 +214,57 @@ public class CulturalService {
     public CulturalDTO culFormWrite(int culId) {
         System.out.println("culFormWrite 실행");
         CulturalDTO cultural = culturalMapper.culFormWrite(culId); // 해당 ID에 해당하는 데이터 가져오기
+        System.out.println("culId : " + culId);
         System.out.println("culFormWrite 종료");
-        return culturalMapper.culFormWrite(culId);
+        return cultural;
     }
     
     //culModify 목록값 업데이트
-    public String updateCultural(int culId, MultipartHttpServletRequest multi){
-    	System.out.println("updateCultural실행");
-    	
-    	CulturalDTO cultural = culturalMapper.culFormWrite(culId);
-        String title = multi.getParameter("title");
+    public void updateCulturalProc(@RequestParam("culId") int culId, MultipartHttpServletRequest multi) {
+        CulturalDTO cultural = culturalMapper.culFormWrite(culId); // 기존 데이터 가져오기
         
-        if (title == null || title.isEmpty()) {
-            return "제목을 입력하세요.";
-        }
-    	// 서버로 전송할 데이터 생성
-	    cultural.setTitle(multi.getParameter("title"));
-	    cultural.setLectureStart(multi.getParameter("lectureStart"));
-	    cultural.setLectureEnd(multi.getParameter("lectureEnd"));
-	    cultural.setRegistrationStart(multi.getParameter("registrationStart"));
-	    cultural.setRegistrationEnd(multi.getParameter("registrationEnd"));
-	    cultural.setLectureTime(multi.getParameter("LectureTime"));
-	    cultural.setLecturePlace(multi.getParameter("LecturePlace"));
-	    cultural.setLectureDay(multi.getParameter("LectureDay"));
-	    cultural.setLectureName(multi.getParameter("LectureName"));
-	    cultural.setCost(multi.getParameter("Cost"));
-	    cultural.setLectureText(multi.getParameter("LectureText"));
-	    cultural.setImagePath(multi.getParameter("ImagePath"));
-	    cultural.setTarget(multi.getParameter("target"));
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        cultural.setTitle(multi.getParameter("title"));
+        cultural.setLectureStart(multi.getParameter("lectureStart"));
+        cultural.setLectureEnd(multi.getParameter("lectureEnd"));
+        cultural.setRegistrationStart(multi.getParameter("registrationStart"));
+        cultural.setRegistrationEnd(multi.getParameter("registrationEnd"));
+        cultural.setTarget(multi.getParameter("target"));
+        cultural.setLectureTime(multi.getParameter("LectureTime"));
+        cultural.setLecturePlace(multi.getParameter("LecturePlace"));
+        cultural.setLectureDay(multi.getParameter("LectureDay"));
+        cultural.setLectureName(multi.getParameter("LectureName"));
+        cultural.setCost(multi.getParameter("Cost"));
+        cultural.setLectureText(multi.getParameter("LectureText"));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
 		cultural.setWriteDate(sdf.format(new Date()));
-	    System.out.println("WriteDate : " + sdf.format(new Date()));
-	    System.out.println("ImagePath : " + multi.getParameter("ImagePath"));
-	    System.out.println("title : " + multi.getParameter("title"));
-		
-		/*
-		 * if(multi.getParameter("title") == null ||
-		 * multi.getParameter("title").isEmpty()) { return "제목을 입력하세요."; }
-		 */
-		
-		MultipartFile file = multi.getFile("upfile");
-		String fileName = file.getOriginalFilename();
-		
-		if (file.getSize() != 0) {
-		    // 파일의 중복을 해결하기 위해 시간의 데이터를 파일이름으로 구성함.
-		    sdf = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss-");
-		    Calendar cal = Calendar.getInstance();
-		    fileName = sdf.format(cal.getTime()) + fileName;
-		    cultural.setImagePath(fileName);
-		    
-		    // 업로드 파일 저장 경로
-		    String fileLocation = "C:/javas/library/image/";
-		    File save = new File(fileLocation + fileName);
-		    
-		    //사진경로전체 DB에 넣기
-		    cultural.setImagePath(fileLocation + fileName);
-		    System.out.println("Save Image Path: " + cultural.getImagePath());
-	        
-		    // 디렉토리가 없는 경우 생성
-		    File directory = new File(fileLocation);
-		    if (!directory.exists()) {
-		        directory.mkdirs();
-		    }
-		    
-		    try {
-		        // 서버가 저장한 업로드 파일은 임시저장경로에 있는데 개발자가 원하는 경로로 이동
-		        file.transferTo(save);
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		    }
-		}
-		culturalMapper.culFormWriteProc(cultural);
-		System.out.println("updateCultural종료");
-		return "게시글 작성 완료";
-	}
-    
+        
+        MultipartFile file = multi.getFile("upfile");
+        String fileName = file.getOriginalFilename();
+        
+        if (file.getSize() != 0) {
+            sdf = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss-");
+            Calendar cal = Calendar.getInstance();
+            fileName = sdf.format(cal.getTime()) + fileName;
+            cultural.setImagePath(fileName);
+            
+            String fileLocation = "C:/javas/library/image/";
+            File save = new File(fileLocation + fileName);
+            
+            cultural.setImagePath(fileLocation + fileName); // DB에 파일 경로 저장
+            System.out.println("Save Image Path: " + cultural.getImagePath());
+
+            File directory = new File(fileLocation);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            
+            try {
+                file.transferTo(save);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        culturalMapper.updateCulturalProc(cultural); // 업데이트
+    }
 }

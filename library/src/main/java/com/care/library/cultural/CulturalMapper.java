@@ -25,5 +25,7 @@ public interface CulturalMapper {
 
 	int countAfterDate(String today); 
 
-	void updateCultural(int culId, CulturalDTO cultural); 
+	void updateCulturalProc(CulturalDTO cultural); 
+	
+	void culturalDeleteProc(int culId);
 }
