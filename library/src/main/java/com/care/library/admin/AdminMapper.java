@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.care.library.member.MemberDTO;
+import com.care.library.search.BookDTO;
 import com.care.library.search.BookLoanDTO;
 import com.care.library.user.InquiryDTO;
 
@@ -42,6 +43,14 @@ public interface AdminMapper {
 
 	int countLoanAll();
 
+	BookLoanDTO loanRegisterSelect(String loanId);
+
+	BookDTO loanBookDetail(String isbn);
+
+	void loanRegister(String loanId, String startDate, String endDate);
+	
+	void updateRestVol(String isbn);
+
 	ArrayList<InquiryDTO> selectInquiry(int begin, int end);
 
 	int countInquiry();
@@ -61,6 +70,9 @@ public interface AdminMapper {
 	int countInquiryWriter(String search);
 
 	ArrayList<InquiryDTO> selectInquiryWriter(String search, int begin, int end);
+
+
+
 
 
 

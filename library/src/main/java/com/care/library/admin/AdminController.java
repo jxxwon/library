@@ -121,8 +121,24 @@ public class AdminController {
 	
 	//도서관리 - 대출 등록
 	@RequestMapping("/admin/bookLoanRegister")
-	public String bookLoanRegister() {
+	public String bookLoanRegister(@RequestParam(value="loanId", required = false)String loanId, Model model) {
+		if(loanId != null) {
+			service.loanRegister(loanId, model);
+		}
 		return "admin/bookLoanRegister";
+	}
+	
+	@PostMapping("/admin/loanRegisterProc")
+	public String loanRegisterProc(@RequestParam(value="loanId", required = false)String loanId, String isbn, String userId, String startDate, String endDate) {
+		service.loanRegisterProc(loanId, isbn, startDate, endDate);
+		return "redirect:/admin/book";
+	}
+	
+	//도서관리 - 대출 상세조회 화면
+	@RequestMapping("/admin/bookLoanContent")
+	public String bookLoanContent(@RequestParam(value="loanId", required = false)String loanId, Model model) {
+		service.selectLoanContent(loanId, model);
+		return "admin/bookLoanContent";
 	}
 	
 	//프로그램 관리 - 메인

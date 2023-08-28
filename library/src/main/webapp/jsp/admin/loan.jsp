@@ -15,7 +15,7 @@
 				<div class="bookSearch">
 					<select class="loanSelect" name = "select" id="loanSelect" onchange="searchChange()">
 						<option <c:if test="${param.select == 'status'}">selected='selected'</c:if>value="status">신청상태</option>
-						<option <c:if test="${param.select == 'id'}">selected='selected'</c:if>value="id">아이디</option>
+						<option <c:if test="${param.select == 'id'}">selected='selected'</c:if>value="id">대출자</option>
 						<option <c:if test="${param.select == 'title'}">selected='selected'</c:if>value="title">책제목</option>
 					</select>
 					<c:choose>
@@ -77,7 +77,14 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="loan" items = "${loans}">
-								<tr onclick="location.href='loanContent?no=${loan.loanId}'">
+								<c:choose>
+									<c:when test = "${param.loanStatusSelect == 'R' }">
+										<tr onclick="location.href='bookLoanRegister?loanId=${loan.loanId}'">
+									</c:when>
+									<c:otherwise>
+										<tr onclick="location.href='bookLoanContent?loanId=${loan.loanId}'">
+									</c:otherwise>
+								</c:choose>
 									<td>${loan.loanId}</td>
 									<td>${loan.bookName }</td>
 									<td>${loan.userId}</td>

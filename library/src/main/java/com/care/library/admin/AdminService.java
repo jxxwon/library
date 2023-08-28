@@ -10,6 +10,7 @@ import com.care.library.common.NotifyDTO;
 import com.care.library.common.NotifyService;
 import com.care.library.common.PageService;
 import com.care.library.member.MemberDTO;
+import com.care.library.search.BookDTO;
 import com.care.library.search.BookLoanDTO;
 import com.care.library.user.InquiryDTO;
 
@@ -198,6 +199,29 @@ public class AdminService {
 		model.addAttribute("currentPage", currentPage);
 	}
 	
+	//대출 등록 - 예약신청 들어온 것 내역 불러오기
+	public void loanRegister(String loanId, Model model) {
+		BookLoanDTO reserve = mapper.loanRegisterSelect(loanId);
+		
+		String isbn = reserve.getIsbn();
+		BookDTO book = mapper.loanBookDetail(isbn);
+		
+		model.addAttribute("reserve", reserve);
+		model.addAttribute("book", book);
+	}
+	
+	public void loanRegisterProc(String loanId, String isbn, String startDate, String endDate) {
+		mapper.loanRegister(loanId, startDate, endDate);
+		mapper.updateRestVol(isbn);
+	}
+	
+
+	public void selectLoanContent(String loanId, Model model) {
+		BookLoanDTO loan = mapper.loanRegisterSelect(loanId);
+		
+		model.addAttribute("loan", loan);
+	}
+
 	
 	//1:1문의
 	public void selectInquiryTitle(String cp, String select, String search, Model model) {
@@ -297,6 +321,8 @@ public class AdminService {
 		notification.setUrl("/myLibrary/myInquiry");
 		notiService.register(notification);
 	}
+
+
 
 
 

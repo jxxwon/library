@@ -117,11 +117,6 @@
 		SELECT rest_vol FROM totalBook WHERE isbn=#{isbn}
 	</select>
 	
-	<!--대출시 잔여 도서 업데이트-->
-	<update id="updateRestVol">
-  		UPDATE totalBook SET rest_vol = rest_vol - 1 WHERE isbn = #{isbn}
-  	</update>
-  	
   	<select id="getMyBookStatus" resultMap="bookLoanDto">
 	    SELECT bookLoan.bookName, bookLoan.start_date, bookLoan.end_date, bookLoan.status ,bookLoan.isbn FROM bookLoan 
 	    WHERE user_id = #{userId} AND (status='R' OR status='L' OR status='O' OR status='LE')
