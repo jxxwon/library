@@ -42,7 +42,8 @@
 	                <a href="${context}main"><img src="${context }image/LOGO.png"></a>
 	            </div>
 	            <div class="main_search">
-	                <form action="${context}search" method="post">
+	                <form action="datasearch/totalSearchProc"
+					method="post" accept-charset="UTF-8" >
 	                    <input type="text" name="query" placeholder="검색어를 입력하세요">
 	                    <button type="submit">
 	                        <img src="${context }image/search.png" width="25" height="25">
