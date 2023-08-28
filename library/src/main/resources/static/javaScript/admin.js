@@ -7,12 +7,24 @@ function getCurrentURL() {
 function setButtonColorByURL() {
   var currentURL = getCurrentURL();
   var subMemberElement = document.getElementById("subMember");
+  var subBookElement = document.getElementById("subBook");
+  var subProgramElement = document.getElementById("subProgram");
+  var subRoomElement = document.getElementById("subRoom");
+  var subPayElement = document.getElementById("subPay");
   var subInquiryElement = document.getElementById("subInquiry");
   
   // 원하는 URL 패턴에 따라 버튼 색상을 변경합니다.
   if (currentURL.includes("member") && subMemberElement) {
       subMemberElement.classList.add("active");
-  } else if(currentURL.includes("inquiry") && subInquiryElement){
+  }else if(currentURL.includes("book")&&subBookElement){
+	  subBookElement.classList.add("active");
+  }else if(currentURL.includes("program")&&subProgramElement){
+	  subProgramElement.classList.add("active");
+  }else if(currentURL.includes("room")&&subRoomElement){
+	  subRoomElement.classList.add("active");
+  }else if(currentURL.includes("pay")&&subPayElement){
+	  subPayElement.classList.add("active");
+  }else if(currentURL.includes("inquiry") && subInquiryElement){
 	  subInquiryElement.classList.add("active");
   }
 

@@ -7,6 +7,15 @@ public class BookLoanDTO {
 	private String startDate;
 	private String endDate;
 	private String status;
+	private String status;
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public String getBookName() {
 		return bookName;
@@ -46,13 +55,5 @@ public class BookLoanDTO {
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 }

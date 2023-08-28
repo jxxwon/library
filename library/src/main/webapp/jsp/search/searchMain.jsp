@@ -13,7 +13,7 @@
 		<div class = "searchContainer pageContent_mt">
 			<div class="condition">
 				<div class="inner">
-					<form class="search_area" action="totalSearchProc"
+					<form class="search_area" action="datasearch/totalSearchProc"
 					method="post" accept-charset="UTF-8">
 						<input class="searchInput" name="totalSearch"  placeholder="검색어를 입력하세요.">
 						 <input type="hidden" name="gotoSearchMain" value="1">

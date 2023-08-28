@@ -98,6 +98,42 @@ public class AdminController {
 		return "redirect:/admin/member";
 	}
 	
+	// 도서관리
+	@RequestMapping("/admin/book")
+	public String book() {
+		return "admin/book";
+	}
+	
+	// 도서관리 - 대출
+	@RequestMapping("/admin/loan")
+	public String loan() {
+		return "admin/loan";
+	}
+	
+	//도서관리 - 대출 등록
+	@RequestMapping("/admin/bookLoanRegister")
+	public String bookLoanRegister() {
+		return "admin/bookLoanRegister";
+	}
+	
+	//프로그램 관리 - 메인
+	@RequestMapping("/admin/program")
+	public String program() {
+		return "admin/program";
+	}
+
+	//열람실 관리 - 메인
+	@RequestMapping("/admin/room")
+	public String room() {
+		return "admin/room";
+	}
+
+	//결제 관리 - 메인
+	@RequestMapping("/admin/pay")
+	public String pay() {
+		return "admin/pay";
+	}
+	
 	// 1:1문의 - 목록
 	@RequestMapping("/admin/inquiry")
 	public String inquiryList(@RequestParam(value="currentPage", required = false)String cp, 
@@ -148,6 +184,7 @@ public class AdminController {
 		return "redirect:/admin/inquiry";
 	}
 	
+<<<<<<< HEAD
 	//열람실 관리
 	@RequestMapping("/admin/roomManage")
 	public String roomManage() {
@@ -158,4 +195,6 @@ public class AdminController {
 		}
 		return "admin/roomManage";
 	}
+=======
+>>>>>>> refs/heads/main
 }
