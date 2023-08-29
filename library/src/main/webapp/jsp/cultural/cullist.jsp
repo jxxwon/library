@@ -3,20 +3,20 @@
 <%@ page import="com.care.library.common.PageService" %>
 <title>하이디미어 도서관 - 문화행사</title>
 <c:url var="context" value="/" />
+<link href="${context }css/main.css" rel="stylesheet" type="text/css">
 <link href="${context }css/cultural.css" rel="stylesheet" type="text/css">
 
 <script>
-  	document.addEventListener('DOMContentLoaded', function() {	
-  		//JavaScript 코드가 DOM이 로드되기 전에 실행되면 해당 요소를 찾을 수 없기 때문에 오류가 발생할 수 있음
-  		//DOMContentLoaded 이벤트가 발생할 때까지 스크립트가 실행되지 않고, DOM이 완전히 로드된 이후에 실행
-    var status = "${sessionScope.status}"; // 세션에 저장된 id 값을 가져와서 id 변수에 할당
-    if (status === 'M') {
-      document.getElementById('apply').style.display = 'block';
-    } else {
-      document.getElementById('apply').style.display = 'none';
-    }
-  });
-  	
+	document.addEventListener('DOMContentLoaded', function() {	
+	    var status = "${sessionScope.status}"; // 세션에 저장된 id 값을 가져와서 status 변수에 할당
+	    var applyElement = document.getElementById('apply'); // apply 요소를 가져옵니다.
+	
+	    if (status === 'M') {
+	        applyElement.style.display = 'block'; // status가 'M'일 때 표시
+	    } else {
+	        applyElement.style.display = 'none'; // 그 외의 경우 숨김
+	    }
+	});
 </script>
 	
 <style>
@@ -27,6 +27,18 @@
   	}
   	.subMenu .active{background-color:#338cfa;}
 	.subMenu .active a{color:#fff;}
+	
+	input[type="button"] {
+       /*  padding: 8px 15px;
+        background-color: #338cfa;
+        color: white;
+        border: none; */
+        cursor: pointer;	/*hover시 마우스 손모양*/
+    }
+
+    input[type="button"]:hover {
+        /* background-color: #256aaa; */
+    }
 	
 </style>
 
@@ -46,11 +58,11 @@
 					영위할 수 있도록 학습 및 교양 프로그램을 운영하고 있습니다.
 				</p>
 				<ul class="Route">
-					<li>HOME</li>
+					<li><a href="${context}main">HOME</a></li>
 					<li>&gt;</li>
-					<li>문화행사</li>
+					<li><a href="${context}cultural">문화행사</a></li>
 					<li>&gt;</li>
-					<li>문화행사 목록</li>
+					<li><a href="${context}cullist">문화행사 목록</a></li>
 				</ul>
 			</div>
 		</div>
@@ -61,26 +73,47 @@
 		        <li class="menu-item" id="menu2"><a href="${context}culFormEnd"><span>접수마감된 행사</span></a></li>
 		    </ul>
 		</div>
-	
+
 		<div class="apply" id="apply" style="display:none">
-		    <ul>
-		        <li><a href="${context}culSubmit">신청하기</a></li>
-		    </ul>
+			<input type = "button" value = "신청하기" onclick="location.href='${context}culSubmit'">
 		</div>
 		
-		<div class="cul-list">
+		<table class="notice">
+			<tr>
+				<th>제목</th>
+				<th>강의기간</th>
+				<th>접수기간</th>
+				<th>대상</th>
+			</tr>
+			<c:choose>
+				<c:when test = "${empty upcomingCulturalList}">
+					<tr>
+						<td colspan = 4 style = "cursor:default; color:#000;">
+							현재 신청 가능한 문화 행사가 없습니다.
+						</td>
+					</tr>
+				</c:when>
+				<c:otherwise>
+					<c:forEach var="cultural" items = "${upcomingCulturalList}">
+						<tr onclick="location.href='${context}culWrite?culId=${cultural.culId}'">
+							<td style="width: 35%;">${cultural.title}</td>
+						    <td style="width: 25%;">${cultural.lectureStart} ~ ${cultural.lectureEnd}</td>
+						    <td style="width: 25%;">${cultural.registrationStart} ~ ${cultural.registrationEnd}</td>
+						    <td style="width: 15%;">${cultural.target}</td>
+						</tr>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</table>
+		
+	<%-- 	<div class="cul-list">
 			<ul class="teach_list">
 	            <c:forEach var="cultural" items="${upcomingCulturalList}">
 	                <li class="ever_one">
-	                    <div class="thumb">
-	                        <a href="${context}culWrite?culId=${cultural.culId}">
-	                            <img url="${cultural.imagePath}" alt="image" class="teach_img" style="width:280px; height: 385px;">
-	                        </a>
-	                    </div>
 	                    <div class="list_area">
 	                        <div class="title_area">
 	                            <a href="${context}culWrite?culId=${cultural.culId}">
-	                           <%--  <a href="${context}culWrite/${cultural.culId}"> --%>
+	                            <a href="${context}culWrite/${cultural.culId}">
 	                                <b class="title">${cultural.title}</b>
 	                            </a>
 	                        </div>
@@ -93,7 +126,7 @@
 	                </li>
 	            </c:forEach>
 			</ul>
-	    </div>
+	    </div> --%>
 		<div class="paging">	
             ${result}
         </div>

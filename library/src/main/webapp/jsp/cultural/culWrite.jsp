@@ -6,17 +6,39 @@
 <link href="/css/cultural.css" rel="stylesheet" type="text/css">
 
 <script>
-  	document.addEventListener('DOMContentLoaded', function() {	
-  		//JavaScript 코드가 DOM이 로드되기 전에 실행되면 해당 요소를 찾을 수 없기 때문에 오류가 발생할 수 있음
-  		//DOMContentLoaded 이벤트가 발생할 때까지 스크립트가 실행되지 않고, DOM이 완전히 로드된 이후에 실행
-    var id = "${sessionScope.id}"; // 세션에 저장된 id 값을 가져와서 id 변수에 할당
-    if (id === 'admin') {
-      document.getElementById('apply').style.display = 'block';
-    } else {
-      document.getElementById('apply').style.display = 'block';/* 
-      document.getElementById('apply').style.display = 'none'; */
-    }
-  });
+	document.addEventListener('DOMContentLoaded', function() {
+	    var status = "${sessionScope.status}"; // 세션에 저장된 id 값을 가져와서 status 변수에 할당
+	    var applyElement = document.getElementById('apply'); // apply 요소를 가져옵니다.
+	    var inquiryContainerElement = document.getElementById('inquiryContainer'); // inquiryContainer 요소를 가져옵니다.
+	
+	    if (status === 'M') {
+	        applyElement.style.display = 'block';
+	        inquiryContainerElement.style.marginTop = '0'; // status가 'M'일 때는 marginTop을 0으로 설정
+	    } else {
+	        applyElement.style.display = 'none';
+	        inquiryContainerElement.style.marginTop = '30px'; // 그 외의 경우 marginTop을 20px로 설정
+	    }
+	});
+  	
+  	function deleteCheck() {
+  	    result = confirm('진짜로 삭제하겠습니까?');
+  	    
+  	    if (result) {
+  	        // AJAX 요청을 보냅니다.
+  	        const xhr = new XMLHttpRequest();
+  	        
+  	        xhr.onreadystatechange = function() {
+  	            if (xhr.readyState === 4 && xhr.status === 200) {
+  	                // 요청이 성공적으로 완료됐을 때 수행할 작업을 여기에 추가합니다.
+  	                // 예를 들어, 페이지를 다시 로드하거나 갱신할 수 있습니다.
+  	                window.location.href = '${context}cullist'; // 이동할 페이지 URL을 지정
+  	            }
+  	        };
+  	        
+  	        xhr.open('GET', `culturalDeleteProc?culId=${cultural.culId}`, true);
+  	        xhr.send();
+  	    }
+  	}
 </script>
 	
 <style>
@@ -73,22 +95,22 @@
 					영위할 수 있도록 학습 및 교양 프로그램을 운영하고 있습니다.
 				</p>
 				<ul class="Route">
-					<li>HOME</li>
+					<li><a href="${context}main">HOME</a></li>
 					<li>&gt;</li>
-					<li>문화행사</li>
+					<li><a href="${context}cultural">문화행사</a></li>
 					<li>&gt;</li>
-					<li>문화행사 목록</li>
+					<li><a href="${context}cullist">문화행사 목록</a></li>
 				</ul>
 			</div>
 		</div>
-		<div class="applyW" id="apply" style="display:none">
+		<div class="applyW" id="apply"style="display:none">
 		    <ul>
 		        <li><a href="${context}culModify?culId=${cultural.culId}">수정</a></li>
-		        <li><a href="${context}cullist">삭제</a></li>
+		        <li><a href="javascript:void(0);" onclick="deleteCheck()">삭제</a></li>
 		    </ul>
 		</div>
 		<div align="center">
-		    <table class="inquiryContainer">
+		    <table class="inquiryContainer" id="inquiryContainer">
 		        <tr>
 		            <td colspan="2" class="inquiryWriteForm">
 		                <table width="850px">

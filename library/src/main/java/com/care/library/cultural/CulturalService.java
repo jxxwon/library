@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Random;
 
 import org.apache.catalina.mapper.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.care.library.cultural.CulturalDTO;
 import com.care.library.cultural.CulturalMapper;
 import com.care.library.info.NoticeDTO;
+import com.care.library.member.MemberDTO;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
 import jakarta.servlet.http.HttpSession;
@@ -267,4 +270,11 @@ public class CulturalService {
         
         culturalMapper.updateCulturalProc(cultural); // 업데이트
     }
+
+	public void culturalDeleteProc(int culId) {
+    // 여기에 데이터베이스에서 해당 culId에 해당하는 문화 행사 데이터를 삭제하는 코드를 작성합니다.
+    // 삭제 작업을 구현하고, 필요한 경우 예외 처리 등을 추가하세요.
+    culturalMapper.culturalDeleteProc(culId);
+	}
+    
 }

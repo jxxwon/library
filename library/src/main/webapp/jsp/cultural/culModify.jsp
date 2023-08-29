@@ -75,13 +75,13 @@
 					<p>
 						
 					</p>
-					<ul class="Route">
-						<li>HOME</li>
-						<li> &gt; </li>
-						<li>문화행사</li>
-						<li> &gt; </li>
-						<li>문화행사 신청</li>
-					</ul>
+				<ul class="Route">
+					<li><a href="${context}main">HOME</a></li>
+					<li>&gt;</li>
+					<li><a href="${context}cultural">문화행사</a></li>
+					<li>&gt;</li>
+					<li><a href="${context}cullist">문화행사 신청</a></li>
+				</ul>
 				</div>
 			</div>
 <%-- 			<%

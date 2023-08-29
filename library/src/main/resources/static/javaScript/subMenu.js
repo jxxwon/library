@@ -42,6 +42,14 @@
         document.getElementById("cultural").classList.remove("active");
         document.getElementById("cullist").classList.add("active");
         document.getElementById("culResult").classList.remove("active");
+      }else if (currentURL.includes("culWrite")) {
+        document.getElementById("cultural").classList.remove("active");
+        document.getElementById("cullist").classList.add("active");
+        document.getElementById("culResult").classList.remove("active");
+      }else if (currentURL.includes("culModify")) {
+        document.getElementById("cultural").classList.remove("active");
+        document.getElementById("cullist").classList.add("active");
+        document.getElementById("culResult").classList.remove("active");
       }
     }
 
