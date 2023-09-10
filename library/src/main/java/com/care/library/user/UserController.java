@@ -48,6 +48,13 @@ public class UserController {
 		return "user/myBookStatus";
 	}
 	
+	// 대출 예약 취소
+	@RequestMapping("myLibrary/reserveCancel")
+	public String reserveCancel(String loanId) {
+		service.reserveCancel(loanId);
+		return "redirect:myBookStatus";
+	}
+	
 	// 대출 이력 조회
 	@RequestMapping("myLibrary/myLoanHistory")
 	public String myLoanHistory(Model model) {
