@@ -261,6 +261,16 @@ public class UserService {
 		searchMapper.reserveCancel(loanId);
 	}
 
+	public void getMyProgram(String id, Model model) {
+		// 프로그램 내역 가져오기 만들어야 됨
+	}
+
+
+	public void getMyPay(String id, Model model) {
+		// 결제내역 가져오기 만들어야 됨
+		
+	}
+
 }
 
 
