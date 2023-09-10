@@ -30,8 +30,8 @@
 			<div class=" inner">
 				<div class="content left">
 					<div class="popularBook">
-						<div>
-							<img src="/image/popBook.png"/>
+						<div class="iconContainer">
+							<div class="iconBox"><img src="/image/popBook.png"/></div>
 							<span>인기도서</span>
 						</div>
 						<div class="bookContainer">
@@ -46,8 +46,8 @@
 				</div>
 				<div class="content right">
 					<div class="newBook">
-						<div>
-							<img src="/image/newBook.png"/>
+						<div class="iconContainer">
+							<div class="iconBox"><img src="/image/newBook.png"/></div>
 							<span>신착도서</span>
 						</div>
 						<div class="bookContainer">
@@ -124,18 +124,18 @@
 					</div>
 					<div class="roomStatus">
 						<ul>
-							<li><a href="${context}reservation/readingRoom1">
+							<li onclick="headerReseve('${sessionScope.closedRoom}')">
 								<span>1열람실</span>
 								<div>${R1Seat}석</div>
-							</a></li>
-							<li><a href="${context}reservation/readingRoom1">
+							</li>
+							<li onclick="headerReseve('${sessionScope.closedRoom}')">
 								<span>2열람실</span>
 								<div>${R2Seat}석</div>
-							</a></li>
-							<li><a href="#">
+							</li>
+							<li onclick="headerReseve('${sessionScope.closedRoom}')">
 								<span>스터디룸</span>
 								<div>0석</div>
-							</a></li>
+							</li>
 						</ul>
 					</div>
 				</div>

@@ -9,7 +9,13 @@
 <link href="${context }css/admin.css" rel="stylesheet" type="text/css">
 
 <c:import url="/header" />
-
+<script>
+	var message = "${roomMsg}";
+	
+	if(message !== ""){
+		alert(message);
+	}
+</script>
 </head>
 <body>
 	<div class="adminContainer inner mb_30">
@@ -21,24 +27,43 @@
 				<a href="/main">HOME</a> > <a href="${context }admin/member">관리자페이지</a>
 				> <a class="checked" href="${context }admin/room">열람실관리</a>
 			</div>
-			<form id="f" action="" method="post">
-				<div class="subMenu_book" id="subMenu_info">
-					<ul id="room_menu">
-						<li class="info_menu active" value="bookLoan"><a
-							href="${context}admin/room">오픈/마감</a></li>
-						<li class="info_menu" id="memberListMenu" value="bookManage"><a
-							href="${context}admin/roomStatus">열람실현황</a></li>
-					</ul>
-				</div>
-				<input type="hidden" id="menuItemValue" name="category" value="">
-			</form>
 			<div class="bookContainer" style="border-top: none; padding-top: 0;">
-				<div class="adminContent">
-					<form action="roomStatusProc" id="f" class="bookContainer"
-						method="post">
-						<input type="submit" name="open" value="열람실 오픈"> <input
-							type="submit" name="closed" value="열람실 마감">
-					</form>
+				<div class="adminContent room">
+					<div class="contentBox room">
+						<form action="roomStatusProc" id="f" class="bookContainer"
+							method="post">
+							<!-- <input type="submit" name="open" value="열람실 오픈"> <input
+								type="submit" name="closed" value="열람실 마감"> -->
+
+							<table class="selectMember room">
+								<tr>
+									<th>열람실</th>
+									<th>전체 좌석</th>
+									<th>사용중</th>
+									<th>남은 좌석</th>
+									<th>오픈/마감</th>
+								</tr>
+									<tr>
+										<td>자율 열람실1</td>
+										<td>96석</td>
+										<td>${room1Seat}</td>
+										<td>${96 - room1Seat}</td>
+										<td><input type="submit" name="open" value="열람실 오픈">
+											<input type="submit" name="closed" value="열람실 마감"></td>
+									</tr>
+									<tr>
+										<td>자율 열람실2</td>
+										<td>96석</td>
+										<td>${room2Seat}</td>
+										<td>${96 - room2Seat}</td>
+										<td>
+											<input type="submit" name="open" value="열람실 오픈">
+											<input type="submit" name="closed" value="열람실 마감">
+										</td>
+									</tr>
+							</table>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>

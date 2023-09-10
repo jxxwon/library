@@ -50,7 +50,6 @@ public class SearchService {
 	public void checkTotalDB() {
 		int numberOftotal = mapper.checkTotalDB();
 		if (numberOftotal < 40) {
-			"recentBook".equals("totalBook");
 			ArrayList<BookDTO> popData = mapper.getTable("popularBook");
 			ArrayList<BookDTO> recentData = mapper.getTable("recentBook");
 			if (popData != null && recentData != null) {
@@ -283,13 +282,16 @@ public class SearchService {
 			return "이미지 가져오기 실패";
 		}
 		model.addAttribute(modelName, bookImages);
+		model.addAttribute(modelName+"Num", bookImages.size());
 		return "이미지 가져오기 완료";
 	}
 
 	public String showMainImages(String whichTable, Model model, String url, String xmlTagName) {
 		String dbResult = getBookImages(model, whichTable);
 		String Msg = "";
-
+		if (dbResult.equals("이미지 가져오기 완료")) {
+			return "데이터 베이스에 이미 저장 되어있습니다.";
+		}
 		if (dbResult.equals("이미지 가져오기 실패")) {
 			String apiResult = connAPI(url);
 			if (apiResult != null) {
@@ -299,22 +301,16 @@ public class SearchService {
 					if (insertResult.equals("모든 데이터가 입력되었습니다.")) {
 						getBookImages(model, whichTable);
 						// 전체 테이블에 넣기(비동기적으로...는 언젠가 해보자)
-
 						Msg = "모든 데이터가 입력되었습니다.";
 					}
-
 				} else {
 					Msg = "xml파일을 리스트화 시키지 못했습니다.";
 				}
 			} else {
-
 				Msg = "api 연결이 제대로 이루어 지지 않았습니다.";
 			}
-
 		}
-//		checkTotalDB();
 		// 도서관 전체 정보(일단 50권만 넣을 예정)
-
 		return Msg;
 	}
 

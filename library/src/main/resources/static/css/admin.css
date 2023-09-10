@@ -247,3 +247,10 @@ h1{margin-bottom:50px;}
 /*열람실 관리*/
 #room_menu li.active a{color:white;}
 #room_menu li a:hover{cursor:pointer; color:white;}
+.selectMember.room{width: 90%;}
+
+.selectMember.room input{ padding: 8px 15px; background-color: #338cfa; border: transparent; 
+color: white; font-size: 15px; border-radius: 5px; cursor: pointer;}
+.selectMember.room input:first-child{margin-right:10px;}
+.contentBox .room{padding:0px;}
+.adminContent .room{padding-top:0px;}

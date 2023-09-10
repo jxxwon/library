@@ -92,14 +92,22 @@ public class ReserveService {
 		return "퇴실이 제대로 이루어지지 않았습니다.";
 	}
 
-	public void roomStatusChange(String id, String status) {
+	public void roomStatusChange(String id, String status, RedirectAttributes ra) {
 		int initResult = reserveMapper.roomInit();
+		String roomMsg = "";
 		if (status.equals("O")) {
-			System.out.println("오픈 되는건가?");
-			reserveMapper.roomStatusChange(id, status);
+			int result = reserveMapper.roomStatusChange(id, status);
+			if (result == 1) {
+				roomMsg = "열람실 예약이 오픈되었습니다.";
+			}
 		} else {
-			reserveMapper.roomStatusChange(id, status);
+			int result = reserveMapper.roomStatusChange(id, status);
+			if (result == 1) {
+				roomMsg = "열람실 예약이 마감되었습니다.";
+			}
 		}
+		//model.addAttribute("roomMsg", roomMsg); // 수정된 부분
+		ra.addFlashAttribute("roomMsg", roomMsg); // 수정된 부분
 	}
 
 	public void getAllSeat(Model model) {

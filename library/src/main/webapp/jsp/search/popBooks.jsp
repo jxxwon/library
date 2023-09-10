@@ -47,7 +47,7 @@
 							<div class="search_result">
 								<div class="bookImgBox" onclick="getBookDetail()">
 									<!-- span>1</span> -->
-									<div class="result_bookImg" onclick="location.href='/datasearch/bookDetail?isbn=${result.isbn}'">
+									<div class="result_bookImg">
 										<img src="${result.bookImageURL}" alt="이미지 없음" />
 									</div>
 								</div>
@@ -98,7 +98,7 @@
 											<td>${result.isbn}</td>
 											<c:choose>
 												<c:when test="${empty sessionScope.id }">
-													<td class="impossible" onclick="location.href='${context}login'">로그인
+													<td class="impossible" onclick="location.href='/login'">로그인
 														필요</td>
 												</c:when>
 												<c:when test="${result.restVol < 1 }">

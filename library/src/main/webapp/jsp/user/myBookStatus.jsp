@@ -40,7 +40,7 @@
 							<c:when test = "${empty myBook}">
 								<tr>
 									<td colspan = 5 style = "cursor:default; color:#000;">
-										등록한 문의가 없습니다.
+										현재 대출중인 도서가 없습니다.
 									</td>
 								</tr>
 							</c:when>

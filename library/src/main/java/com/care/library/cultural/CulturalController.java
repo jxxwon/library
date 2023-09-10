@@ -140,5 +140,10 @@ public class CulturalController {
 		return "cultural/culSubmit";
 	}
     
-    
+    //삭제
+    @RequestMapping("culturalDeleteProc")
+    public String culturalDeleteProc(@RequestParam("culId") int culId) {
+        service.culturalDeleteProc(culId);
+        return "cultural/cullist"; 
+    }
 }

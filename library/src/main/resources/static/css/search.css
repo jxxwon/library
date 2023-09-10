@@ -107,7 +107,9 @@ h1 {
 }
 
 .searchContainer .visual .content.right {
-	width: 35%;
+	display: flex;
+	flex-direction: column-reverse;
+	width: 42%;
 }
 
 .visual .content.left .popularBook,
@@ -141,6 +143,9 @@ h1 {
 	height: 100%;
 }
 
+.iconContainer{display: flex; align-items: center;}
+.iconBox{width:50px; height: 50px;}
+.iconBox > img{width:100%;}
 /*통합검색*/
 
 .search_totalContainer {display:flex;}
@@ -249,6 +254,9 @@ h1{margin-bottom:50px;}
 	margin-right: 10px;
 	cursor: pointer;
 }
+
+.bookContentBox .bookDtlButton:hover,
+.bookContentBox .bookStatusButton:hover {background-color: #58ACFA;}
 
 .totalSearchPage {
 	text-align: center;
@@ -366,8 +374,8 @@ h1{margin-bottom:50px;}
 }
 
 .detail_description>p {
-	width: 600px;
-	line-height: 140%;
+	width: 520px;
+	line-height: 156%;
 	padding-bottom:20px;
 }
 
