@@ -40,14 +40,14 @@
 						<th>첨부파일</th>
 							<c:choose>
 								<c:when test = "${notice.fileName == '첨부파일 없음' }">
-									<td width="500">첨부파일이 없습니다.</td>
+									<td>첨부파일이 없습니다.</td>
 								</c:when>
 								<c:otherwise>
-									<td width="500" onclick="location.href='noticeFileDownload?no=${notice.no}'" style="cursor:pointer">${notice.fileName }</td>
+									<td onclick="location.href='noticeFileDownload?no=${notice.no}'" style="cursor:pointer">${notice.fileName }</td>
 								</c:otherwise>
 							</c:choose>
-						<th class="reply">작성일</th>
-						<td width="400">${notice.writeDate}</td>
+						<th class="right">작성일</th>
+						<td width="200">${notice.writeDate}</td>
 					</tr>
 					<tr>
 						<th>내용</th>

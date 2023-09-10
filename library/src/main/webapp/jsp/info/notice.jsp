@@ -27,7 +27,7 @@
 			<div class="noticeContainer">
 				<form action="" id="f">
 					<div class="condition">
-						<select class="noticeSelect" name = "select" id="noticeSelect" onchange="searchChange()">
+						<select class="noticeSelect" name = "select" id="noticeSelect">
 							<option <c:if test="${param.select == 'title'}">selected='selected'</c:if>value="title">제목</option>
 							<option <c:if test="${param.select == 'no'}">selected='selected'</c:if>value="no">글번호</option>
 						</select>

@@ -114,6 +114,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="/javaScript/reservation.js"></script>
+	<script src="${context }javaScript/reservation.js"></script>
 	<c:import url="/footer" />
 </body>

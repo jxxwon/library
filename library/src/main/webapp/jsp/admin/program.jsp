@@ -61,29 +61,18 @@
 				<table class="inquiry">
 					<tr>
 						<th>번호</th>
-						<th>책제목</th>
-						<th>대출자</th>
-						<c:choose>
-							<c:when test="${param.select == null || (param.select == 'status' && param.loanStatusSelect == 'R')}">
-								<th>대출예약일</th>
-							</c:when>
-							<c:when test = "${param.select == 'status' && param.loanStatusSelect == 'C' }">
-								<th>반납일</th>
-							</c:when>
-							<c:when test = "${param.select ==  'status' && param.loanStatusSelect == 'T'}">
-								<th>상태</th>
-							</c:when>
-							<c:otherwise>
-								<th>대출시작일</th>
-								<th>반납예정일</th>
-							</c:otherwise>
-						</c:choose>
+						<th>프로그램명</th>
+						<th>모집인원</th>
+						<th>대기인원</th>
+						<th>접수기간</th>
+						<th>행사일자</th>
+						<th>상태</th>
 					</tr>
 					<c:choose>
 						<c:when test = "${empty loans}">
 							<tr>
-								<td colspan = 5 style = "cursor:default; color:#000;">
-									예약 신청 중인 도서가 없습니다.
+								<td colspan = 7 style = "cursor:default; color:#000;">
+									현재 접수중인 프로그램이 없습니다.
 								</td>
 							</tr>
 						</c:when>

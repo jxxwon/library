@@ -63,7 +63,8 @@ h1{margin-bottom:50px;}
 .noticeContainer .noticeContentForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555; margin:50px 0;}
 .noticeContainer .noticeContentForm tr{border-bottom:1px solid #ddd;}
 .noticeContainer .noticeContentForm th{padding:10px; border-right:1px solid #ddd;}
-.noticeContainer .noticeContentForm td{padding:10px;}
+.noticeContainer .noticeContentForm td{padding:10px; line-height:145%;}
+.right{border-left:1px solid #ddd;}
 
 /*공지사항 수정*/
 .noticeContainer .noticeUpdateForm{width:100%; border-top:2px solid #555; border-bottom:2px solid #555;}
