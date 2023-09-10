@@ -130,8 +130,7 @@
 	</select>
 	
 	<select id="getMyLoanHistory" resultMap="bookLoanDto">
-	    SELECT bookLoan.bookName, bookLoan.start_date, bookLoan.end_date, bookLoan.status FROM bookLoan 
-	    WHERE user_id = #{userId} AND status='C'
+	    SELECT * FROM bookLoan WHERE user_id = #{userId}
 	</select>
 	
 	<!-- 대출 연장하기 -->

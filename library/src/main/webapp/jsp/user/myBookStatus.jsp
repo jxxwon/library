@@ -54,7 +54,7 @@
 											<c:if test = "${bookStatus.status == 'R' }">
 												<span>예약중</span>
 											</c:if>
-											<c:if test = "${bookStatus.status == 'L' }">
+											<c:if test = "${bookStatus.status == 'L' || bookStatus.status == 'LE' }">
 												<span>대출중</span>
 											</c:if>
 											<c:if test = "${bookStatus.status == 'O' }">
