@@ -180,12 +180,12 @@ function resProcIdChk(){
 }
 
 function changePwCheck(){
-	let regExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,12}$/;
+	let regExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,12}$/
 	var changePw = document.getElementById('changePw');
  	var confirmChangePw = document.getElementById('confirmChangePw');
   	label = document.getElementById('confirmResult');
   	if(regExp.test(changePw.value)==false){
-		label.innerHTML = '5~20자의&nbsp;영문&nbsp;소문자,&nbsp;숫자와&nbsp;특수기호(_),(-)만&nbsp;사용&nbsp;가능합니다.';
+		label.innerHTML = "비밀번호는 8 ~ 12자리이며, 반드시 영문자와 숫자를 혼합하여 입력하세요.(특수문자 제외)";
 	  } else {
 			if (changePw.value == confirmChangePw.value) {
 				label.innerHTML = '두 비밀번호가 일치합니다.';
